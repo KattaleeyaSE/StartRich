@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Requests;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -9,8 +9,18 @@ use App\Http\Requests\UserStoreCrudRequest as StoreRequest;
 use App\Http\Requests\UserUpdateCrudRequest as UpdateRequest;
 use Illuminate\Http\Request;
 
+//Service Container
+use App\IRepositories\IUserRepository;
+
 class UserCrudController extends CrudController
 {
+
+    public function __construct(IUserRepository $userRepository)
+    {
+        parent::__construct();
+        dd($userRepository);
+    }
+    
     public function setup()
     {
         $this->crud->setModel(config('backpack.permissionmanager.user_model'));

@@ -23,6 +23,10 @@ class IOCServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        //Register for IOC Here
+        $this->app->bind(
+            'App\IRepositories\IUserRepository',
+            'App\Repositories\UserRepository'
+        );        
     }
 }
