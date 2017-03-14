@@ -16,3 +16,9 @@ bootstrap/cache/
 bower_components/
 debug.log
 npm-debug.log
+.idea/deployment.xml
+.idea/modules.xml
+.idea/StartRich.iml
+.idea/vcs.xml
+.idea/webResources.xml
+.idea/workspace.xml
