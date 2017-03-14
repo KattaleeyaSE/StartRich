@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'StarRich',
 
     /*
     |--------------------------------------------------------------------------
@@ -167,7 +167,12 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Backpack\Base\BaseServiceProvider::class,
 
+        /*
+         * Helper Class...
+         */ 
+            
         /*
          * Application Service Providers...
          */
