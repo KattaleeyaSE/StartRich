@@ -174,7 +174,12 @@ return [
         /*
          * Helper Class...
          */ 
-            
+
+        /*
+         * Custom Service Providers...
+         */ 
+        App\Providers\IOCServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
