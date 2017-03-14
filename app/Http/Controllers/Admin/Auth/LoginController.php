@@ -31,12 +31,12 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // if not logged in redirect to
-    protected $loginPath = 'admin/login';
     // after you've logged in redirect to
-    protected $redirectTo = 'admin/dashboard';
-    // after you've logged out redirect to
-    protected $redirectAfterLogout = 'admin';
+    protected $redirectTo = 'admin/dashboard';     
+    // // if not logged in redirect to
+    // protected $loginPath = 'admin/login';
+    // // after you've logged out redirect to
+    // protected $redirectAfterLogout = 'admin';
 
     /**
      * Create a new controller instance.
