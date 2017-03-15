@@ -48,16 +48,18 @@
                                 </div>
                             </div>
                         </div>
-
+                  
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ trans('backpack::base.login') }}
                                 </button>
-
+                                {{--
                                 <a class="btn btn-link" href="{{ url(config('backpack.base.route_prefix', 'admin').'/password/reset') }}">{{ trans('backpack::base.forgot_your_password') }}</a>
+                                --}}
                             </div>
                         </div>
+             
                     </form>
                 </div>
             </div>
