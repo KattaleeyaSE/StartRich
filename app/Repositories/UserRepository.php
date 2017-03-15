@@ -3,8 +3,8 @@
 namespace App\Repositories;
 
 use App\IRepositories\IUserRepository;
-use App\Http\Requests\UserStoreCrudRequest;
-use App\Http\Requests\UserUpdateCrudRequest;
+
+
 use App\User;
 
 use Illuminate\Http\Request;
@@ -27,14 +27,14 @@ class UserRepository implements IUserRepository
         return $this->user->find($id);
     }
 
-    public function create(UserStoreCrudRequest $request)
+    public function create(Request $request)
     {
-        return $this->user->create($request);
+        return $this->user->create($request->all());
     }
 
-    public function update($id, UserUpdateCrudRequest $request)
+    public function update($id, Request $request)
     {
-        return $this->user->update($id,$request);
+        return $this->user->update($id,$request->all());
     }
 
     public function delete($id)

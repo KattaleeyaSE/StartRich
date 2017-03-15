@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class AMCStoreRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
+class AMCStoreCrudRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,10 @@ class AMCStoreRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function rules()
     {
         return [
+            'company_name' => 'required',
             'username' => 'required|min:6|unique:users',
             'password' => 'required|min:6|confirmed',
             'phone_number' => 'required|min:10',
-            // 'address' => 'max:255',
             'email' => 'required|email|unique:users',
         ];
     }
@@ -41,7 +41,11 @@ class AMCStoreRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function attributes()
     {
         return [
-            //
+            'company_name' => 'company name',
+            'username' => 'username',
+            'password' => 'password',
+            'phone_number' => 'phone number',
+            'email' => 'email',
         ];
     }
 
@@ -53,7 +57,10 @@ class AMCStoreRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function messages()
     {
         return [
-            //
+            'required' => 'Text field is required.',
+            'min' => 'Please enter :attribute at least :min characteristic.',
+            'unique' => ':attribute is duplicate with the database.',
+            'email' => 'Please enter a valid email address.',
         ];
     }
 }

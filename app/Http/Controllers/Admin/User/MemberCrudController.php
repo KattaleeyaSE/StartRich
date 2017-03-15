@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\MemberStoreRequest as StoreRequest;
-use App\Http\Requests\MemberUpdateRequest as UpdateRequest;
+use App\Http\Requests\MemberStoreCrudRequest as StoreRequest;
+use App\Http\Requests\MemberUpdateCrudRequest as UpdateRequest;
 
 //Service Container
 use App\IRepositories\IMemberRepository;

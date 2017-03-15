@@ -4,8 +4,7 @@ namespace App\Repositories;
 
 use App\IRepositories\IAMCRepository;
 use App\IRepositories\IUserRepository;
-use App\Http\Requests\AMCStoreCrudRequest;
-use App\Http\Requests\AMCUpdateCrudRequest;
+
 use App\Models\AMC;
 
 use Illuminate\Http\Request;
@@ -30,14 +29,17 @@ class AMCRepository implements IAMCRepository
         return $this->amc->find($id);
     }
 
-    public function create(AMCStoreCrudRequest $request)
+    public function create(Request $request)
     {
-        return $this->amc->create($request);
+        $user = $this->userRepository->create($request);
+        $request->offsetSet('user_id',$user->id);
+        
+        return $this->amc->create($request->all());
     }
 
-    public function update($id, AMCUpdateCrudRequest $request)
+    public function update($id, Request $request)
     {
-        return $this->amc->update($id,$request);
+        return $this->amc->update($id,$request->all());
     }
 
     public function delete($id)

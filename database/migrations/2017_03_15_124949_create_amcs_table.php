@@ -17,7 +17,7 @@ class CreateAMCsTable extends Migration
             $table->increments('id');
             $table->string('company_name'); 
             $table->string('phone_number');           
-            $table->string('address');           
+            $table->string('address')->nullable();           
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')

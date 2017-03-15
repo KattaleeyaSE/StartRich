@@ -3,14 +3,20 @@
 namespace App\IRepositories;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\AMCStoreCrudRequest;
-use App\Http\Requests\AMCUpdateCrudRequest;
+
 interface IAMCRepository
 {
     public function all();
     public function find($id);
-    public function create(AMCStoreCrudRequest $request);
-    public function update($id, AMCUpdateCrudRequest $request);
+
+    /**
+     * @param Illuminate\Http\Request $request
+     *
+     * @return AMC Object
+    **/ 
+    public function create(Request $request);
+
+    public function update($id, Request $request);
     
     /**
     * @param int id

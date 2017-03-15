@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
-use App\Http\Requests\AMCStoreRequest as StoreRequest;
-use App\Http\Requests\AMCUpdateRequest as UpdateRequest;
+use App\Http\Requests\AMCStoreCrudRequest as StoreRequest;
+use App\Http\Requests\AMCUpdateCrudRequest as UpdateRequest;
 
 //Service Container
 use App\IRepositories\IAMCRepository;
@@ -61,8 +61,8 @@ class AMCCrudController extends CrudController
         ]);
 
         // ------ CRUD ACCESS
-        $this->crud->allowAccess(['list', 'create', 'update', 'reorder', 'delete', 'show']);
-        // $this->crud->denyAccess(['list', 'create', 'update', 'reorder', 'delete']);
+        $this->crud->allowAccess(['list', 'create', 'delete', 'show']);
+        $this->crud->denyAccess([ 'update', 'reorder']);
     }
 
     /**
@@ -148,45 +148,32 @@ class AMCCrudController extends CrudController
 
 	public function store(StoreRequest $request)
 	{
-		// your additional operations before save here
-        $redirect_location = parent::storeCrud();
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        $this->crud->hasAccessOrFail('create');
+
+        // fallback to global request instance
+        if (is_null($request)) {
+            $request = \Request::instance();
+        }
+
+        // replace empty values with NULL, so that it will work with MySQL strict mode on
+        foreach ($request->input() as $key => $value) {
+            if (empty($value) && $value !== '0') {
+                $request->request->set($key, null);
+            }
+        }
+
+        // insert item in the db
+        $item = $this->amcRepository->create($request);
+
+        // show a success message
+        \Alert::success(trans('backpack::crud.insert_success'))->flash();
+
+        // save the redirect choice for next time
+        $this->setSaveAction();
+
+        return $this->performSaveAction($item->getKey());
 	}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function edit($id)
-    {
-        $this->crud->hasAccessOrFail('update');
-
-        // get the info for that entry
-        $this->data['entry'] = $this->crud->getEntry($id);
-        $this->data['crud'] = $this->crud;
-        $this->data['saveAction'] = $this->getSaveAction();
-        $this->data['fields'] = $this->crud->getUpdateFields($id);
-        $this->data['title'] = trans('backpack::crud.edit').' '.$this->crud->entity_name;
-
-        $this->data['id'] = $id;
-
-        // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
-        return view($this->crud->getEditView(), $this->data);
-    }
-
-	public function update(UpdateRequest $request)
-	{
-		// your additional operations before save here
-        $redirect_location = parent::updateCrud();
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
-	}
     /**
      * Display the specified resource.
      *
@@ -197,6 +184,53 @@ class AMCCrudController extends CrudController
     public function show($id)
     {
         $this->crud->hasAccessOrFail('show');
+
+        $amc = $this->amcRepository->find($id);
+
+        //Set Field to Show
+        $this->crud->addFields(
+        [ 
+            [
+                'name'  => 'company_name',
+                'label' => 'Company Name',
+                'type'  => 'text',  
+                'value' => $amc->company_name   
+            ],
+            [
+                'name'  => 'username',
+                'label' => 'Username',
+                'type'  => 'text',
+                'value' => $amc->user->username
+            ],
+            // [
+            //     'name'  => 'password',
+            //     'label' => 'Password',
+            //     'type'  => 'password'
+            // ],
+            // [
+            //     "name" => "password_confirmation",
+            //     "label" => "Password Confirmation", 
+            //     "type" => "password", 
+            // ],
+            [
+                'name'  => 'phone_number',
+                'label' => 'Phone Number',
+                'type'  => 'text',
+                'value' => $amc->phone_number                
+            ],            
+            [
+                'name'  => 'email',
+                'label' => 'Email',
+                'type'  => 'text',
+                'value' => $amc->user->email                
+            ],
+            [
+                'name'  => 'address',
+                'label' => 'Address',
+                'type'  => 'textarea',
+                'value' => $amc->address              
+            ]
+        ], 'update');
 
         // get the info for that entry
         $this->data['entry'] = $this->crud->getEntry($id);
