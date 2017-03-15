@@ -20,6 +20,13 @@
           <!-- ==== Recommended place for admin menu items ==== -->
           <!-- ================================================ -->
           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/dashboard') }}"><i class="fa fa-dashboard"></i> <span>{{ trans('backpack::base.dashboard') }}</span></a></li>
+
+          
+          <!-- ======================================= -->
+          <li class="header">{{ trans('backpack::base.user') }}</li>
+              
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/member') }}"><i class="fa fa-user"></i> <span>Members</span></a></li>
+              <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/amc') }}"><i class="fa fa-group"></i> <span>AMC</span></a></li>
           
           {{--
               <!-- Users, Roles Permissions -->
@@ -32,9 +39,7 @@
                 </ul>
               </li>
           --}}
-          
-          <!-- ======================================= -->
-          <li class="header">{{ trans('backpack::base.user') }}</li>
+          <li class="header"></li>
           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/logout') }}"><i class="fa fa-sign-out"></i> <span>{{ trans('backpack::base.logout') }}</span></a></li>
         </ul>
       </section>

@@ -27,7 +27,27 @@
           </h3>
 	    </div>
 	    <div class="box-body">
-	      {{ dump($entry) }}
+ 						@foreach ($crud->getFields('update', $entry->getKey()) as $field)
+            <!-- load the view from the application if it exists, otherwise load the one in the package --> 
+               <div @include('crud::inc.field_wrapper_attributes') >
+                    @if($field['type'] != 'hidden')
+                    <label>{!! isset($field['label']) ? $field['label'] : ""  !!}</label> 
+                    <div> 
+										
+											 @if($field['type'] =='checkbox')
+											 				{{ isset($field['value']) && $field['value'] == true ? 'Yes' : 'No' }}
+											 
+											 @elseif($field['type'] =='number' && ( isset($field['isPriceFormat']) && $field['isPriceFormat'] == true))
+											 				{!! isset($field['value']) ? number_format( $field['value'],2) : ""  !!}
+											 
+											 @else
+                       		  {!! isset($field['value']) ? $field['value'] : ""  !!}
+											 @endif
+
+                    </div>
+                    @endif
+            </div>
+         @endforeach 
 	    </div><!-- /.box-body -->
 	  </div><!-- /.box -->
 

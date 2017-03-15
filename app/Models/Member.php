@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Backpack\CRUD\CrudTrait;
 use App\User;
 class Member extends User
 {
+    use CrudTrait;	
      /*
 	|--------------------------------------------------------------------------
 	| GLOBAL VARIABLES
@@ -31,7 +33,7 @@ class Member extends User
 	| FUNCTIONS
 	|--------------------------------------------------------------------------
 	*/ 
-
+	
 	/*
 	|--------------------------------------------------------------------------
 	| RELATIONS

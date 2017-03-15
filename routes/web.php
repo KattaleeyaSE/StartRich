@@ -37,6 +37,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/reset', 'Admin\Auth\ResetPasswordController@reset');
     });
 
-    //resource user with AJAX   
-    \CRUD::resource('/user','Admin\User\UserCrudController'); 
+    // //resource user with AJAX   
+    // \CRUD::resource('/user','Admin\User\UserCrudController'); 
+
+    //resource member with AJAX   
+     \CRUD::resource('/member','Admin\User\MemberCrudController'); 
+    //resource AMC with AJAX   
+     \CRUD::resource('/amc','Admin\User\AMCCrudController'); 
 }); 

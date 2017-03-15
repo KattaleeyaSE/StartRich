@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Backpack\CRUD\CrudTrait;
 use App\User;
 class Admin extends User
 {
+	use CrudTrait;
      /*
 	|--------------------------------------------------------------------------
 	| GLOBAL VARIABLES

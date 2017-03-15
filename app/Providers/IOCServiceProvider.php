@@ -28,5 +28,13 @@ class IOCServiceProvider extends ServiceProvider
             'App\IRepositories\IUserRepository',
             'App\Repositories\UserRepository'
         );        
+        $this->app->bind(
+            'App\IRepositories\IMemberRepository',
+            'App\Repositories\MemberRepository'
+        );        
+        $this->app->bind(
+            'App\IRepositories\IAMCRepository',
+            'App\Repositories\AMCRepository'
+        );        
     }
 }

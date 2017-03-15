@@ -15,10 +15,11 @@ use App\IRepositories\IUserRepository;
 class UserCrudController extends CrudController
 {
 
+    private $userRepository;
     public function __construct(IUserRepository $userRepository)
     {
+        $this->userRepository = $userRepository;
         parent::__construct();
-        dd($userRepository);
     }
     
     public function setup()
