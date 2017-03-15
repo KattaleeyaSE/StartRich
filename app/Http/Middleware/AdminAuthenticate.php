@@ -24,7 +24,10 @@ class AdminAuthenticate
             } else {
                 return redirect()->guest(config('backpack.base.route_prefix', 'admin').'/login');
             }
-        }
+        }else if(Auth::check() && !is_null(Auth::user()->member))
+        {
+            return redirect()->intended('/');
+        } 
 
         return $next($request);
     }
