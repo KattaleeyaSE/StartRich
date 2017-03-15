@@ -51,9 +51,20 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+        Route::group([
+            'middleware' => 'web',
+            'namespace' => $this->namespace,
+        ], function ($router) { 
+            // in Laravel 5.4
+            if (method_exists($router, 'aliasMiddleware')) {
+                $router->aliasMiddleware('admin', \App\Http\Middleware\AdminAuthenticate::class);
+            }
+            // in Laravel 5.3 and below
+            else {
+                $router->middleware('admin', \App\Http\Middleware\AdminAuthenticate::class);
+            }
+            require base_path('routes/web.php');
+        }); 
     }
 
     /**
