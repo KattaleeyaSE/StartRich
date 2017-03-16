@@ -25,17 +25,17 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/login','Admin\Auth\LoginController@login'); 
     Route::get('/logout','Admin\Auth\LoginController@logout'); 
 
-    //admin reset password
-    Route::group(['prefix'=>'password'],function(){
+    // //admin reset password
+    // Route::group(['prefix'=>'password'],function(){
 
-        // Password reset link request routes...
-        Route::get('/reset', 'Admin\Auth\ForgotPasswordController@showLinkRequestForm');
-        Route::post('/email', 'Admin\Auth\ForgotPasswordController@sendResetLinkEmail');
+    //     // Password reset link request routes...
+    //     Route::get('/reset', 'Admin\Auth\ForgotPasswordController@showLinkRequestForm');
+    //     Route::post('/email', 'Admin\Auth\ForgotPasswordController@sendResetLinkEmail');
 
-        // Password reset routes...
-        Route::get('/reset/{token}', 'Admin\Auth\ResetPasswordController@showResetForm');
-        Route::post('/reset', 'Admin\Auth\ResetPasswordController@reset');
-    });
+    //     // Password reset routes...
+    //     Route::get('/reset/{token}', 'Admin\Auth\ResetPasswordController@showResetForm');
+    //     Route::post('/reset', 'Admin\Auth\ResetPasswordController@reset');
+    // });
 
     // //resource user with AJAX   
     // \CRUD::resource('/user','Admin\User\UserCrudController'); 
