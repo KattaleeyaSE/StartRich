@@ -17,15 +17,19 @@ Route::get('/', function () {
 
 
 
-// Admin Routes
-Route::group(['prefix' => 'admin'], function () {
- 
-    //admin auth backend 
-    Route::get('/login','Admin\Auth\LoginController@showLoginForm'); 
-    Route::post('/login','Admin\Auth\LoginController@login'); 
-    Route::get('/logout','Admin\Auth\LoginController@logout'); 
+// Backoffice Routes
+Route::group(['prefix' => 'backoffice'], function () {
 
-    // //admin reset password
+    Route::get('/', 'Backoffice\AdminController@redirect');
+    Route::get('/dashboard','Backoffice\AdminController@dashboard'); 
+
+    //Backoffice auth backend 
+    Route::get('/login','Backoffice\Auth\LoginController@showLoginForm'); 
+    Route::post('/login','Backoffice\Auth\LoginController@login'); 
+    Route::get('/logout','Backoffice\Auth\LoginController@logout'); 
+
+  
+    // //Backoffice reset password
     // Route::group(['prefix'=>'password'],function(){
 
     //     // Password reset link request routes...
@@ -41,7 +45,7 @@ Route::group(['prefix' => 'admin'], function () {
     // \CRUD::resource('/user','Admin\User\UserCrudController'); 
 
     //resource member with AJAX   
-     \CRUD::resource('/member','Admin\User\MemberCrudController'); 
+     \CRUD::resource('/member','Backoffice\User\MemberCrudController'); 
     //resource AMC with AJAX   
-     \CRUD::resource('/amc','Admin\User\AMCCrudController'); 
+     \CRUD::resource('/amc','Backoffice\User\AMCCrudController'); 
 }); 
