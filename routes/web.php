@@ -18,12 +18,12 @@ Route::get('/', function () {
 
 
 // Backoffice Routes
-Route::group(['prefix' => 'backoffice'], function () {
+Route::group(['prefix' => 'admin'], function () {
 
     //Backoffice auth backend 
-    Route::get('/login','Backoffice\Auth\LoginController@showLoginForm'); 
-    Route::post('/login','Backoffice\Auth\LoginController@login'); 
-    Route::get('/logout','Backoffice\Auth\LoginController@logout'); 
+    Route::get('/login','Admin\Auth\LoginController@showLoginForm'); 
+    Route::post('/login','Admin\Auth\LoginController@login'); 
+    Route::get('/logout','Admin\Auth\LoginController@logout'); 
 
   
     // //Backoffice reset password
@@ -42,11 +42,8 @@ Route::group(['prefix' => 'backoffice'], function () {
     // \CRUD::resource('/user','Admin\User\UserCrudController'); 
 
     //resource member with AJAX   
-     \CRUD::resource('/member','Backoffice\User\MemberCrudController'); 
+     \CRUD::resource('/member','Admin\User\MemberCrudController'); 
     //resource AMC with AJAX   
-     \CRUD::resource('/amc','Backoffice\User\AMCCrudController'); 
+     \CRUD::resource('/amc','Admin\User\AMCCrudController'); 
 
-     //Specifice route for amc here
-     Route::group(['prefix' => 'amc'], function () {
-     });
 }); 
