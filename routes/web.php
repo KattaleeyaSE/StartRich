@@ -20,9 +20,6 @@ Route::get('/', function () {
 // Backoffice Routes
 Route::group(['prefix' => 'backoffice'], function () {
 
-    Route::get('/', 'Backoffice\AdminController@redirect');
-    Route::get('/dashboard','Backoffice\AdminController@dashboard'); 
-
     //Backoffice auth backend 
     Route::get('/login','Backoffice\Auth\LoginController@showLoginForm'); 
     Route::post('/login','Backoffice\Auth\LoginController@login'); 
@@ -48,4 +45,8 @@ Route::group(['prefix' => 'backoffice'], function () {
      \CRUD::resource('/member','Backoffice\User\MemberCrudController'); 
     //resource AMC with AJAX   
      \CRUD::resource('/amc','Backoffice\User\AMCCrudController'); 
+
+     //Specifice route for amc here
+     Route::group(['prefix' => 'amc'], function () {
+     });
 }); 
