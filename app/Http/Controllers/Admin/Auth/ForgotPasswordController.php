@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backoffice\Auth; 
+namespace App\Http\Controllers\Admin\Auth; 
 
 use Backpack\Base\app\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;

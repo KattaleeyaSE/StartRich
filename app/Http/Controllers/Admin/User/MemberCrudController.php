@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backoffice\User;
+namespace App\Http\Controllers\Admin\User;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 

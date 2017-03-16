@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backoffice\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use Illuminate\Http\Request;
 
