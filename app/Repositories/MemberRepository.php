@@ -37,7 +37,8 @@ class MemberRepository implements IMemberRepository
 
     public function update($id, Request $request)
     {
-        return $this->member->update($id,$request->all());
+        $member = $this->find($id);
+        return $member->update($request->all());
     }
 
     public function delete($id)

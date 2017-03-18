@@ -34,7 +34,8 @@ class UserRepository implements IUserRepository
 
     public function update($id, Request $request)
     {
-        return $this->user->update($id,$request->all());
+        $user = $this->find($id);
+        return $user->update($request->all());
     }
 
     public function delete($id)

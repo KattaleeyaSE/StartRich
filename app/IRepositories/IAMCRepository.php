@@ -16,6 +16,12 @@ interface IAMCRepository
     **/ 
     public function create(Request $request);
 
+    /**
+     * @param Illuminate\Http\Request $request
+     * @param int id
+     *
+     * @return AMC Object
+    **/ 
     public function update($id, Request $request);
     
     /**

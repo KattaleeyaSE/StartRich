@@ -25,7 +25,11 @@ class AMCUpdateCrudRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'company_name' => 'required',
+            'username' => 'required|min:6|unique:users,id,'.$this->request->get('id'),
+            'password' => 'required|min:6|confirmed',
+            'phone_number' => 'required|min:10',
+            'email' => 'required|email|unique:users,id,'.$this->request->get('id'),
         ];
     }
 
@@ -37,7 +41,11 @@ class AMCUpdateCrudRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function attributes()
     {
         return [
-            //
+            'company_name' => 'company name',
+            'username' => 'username',
+            'password' => 'password',
+            'phone_number' => 'phone number',
+            'email' => 'email',
         ];
     }
 
@@ -49,7 +57,10 @@ class AMCUpdateCrudRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function messages()
     {
         return [
-            //
+            'required' => 'Text field is required.',
+            'min' => 'Please enter :attribute at least :min characteristic.',
+            'unique' => ':attribute is duplicate with the database.',
+            'email' => 'Please enter a valid email address.',
         ];
     }
 }

@@ -39,7 +39,11 @@ class AMCRepository implements IAMCRepository
 
     public function update($id, Request $request)
     {
-        return $this->amc->update($id,$request->all());
+
+        $amc = $this->find($id);
+        $updatedUser = $this->userRepository->update($amc->user->id,$request);
+
+        return $amc->update($request->all());
     }
 
     public function delete($id)

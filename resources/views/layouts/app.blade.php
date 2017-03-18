@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>AMC Start Rich</title>
+    <title>Start Rich</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -88,14 +88,16 @@
                         <li><a href="#">Login</a></li>
                         <li><a href="#">Register</a></li>
                     @else
-
-
-
                         <li   class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                Username:   {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->username }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{url('amc/profile')}}">
+                                        Edit Profile
+                                    </a>
+                                <li>
                                 <li>
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

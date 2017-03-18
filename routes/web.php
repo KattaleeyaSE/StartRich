@@ -11,12 +11,19 @@
 |
 */
 
+Route::Auth();
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-
-
+// AMC Routes
+Route::group(['prefix' => 'amc'], function () {
+    
+    Route::get('/profile','AMC\AMCController@show'); 
+    Route::get('/profile/edit','AMC\AMCController@edit'); 
+    Route::patch('/profile','AMC\AMCController@update'); 
+});
 // Backoffice Routes
 Route::group(['prefix' => 'admin'], function () {
 
@@ -43,7 +50,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     //resource member with AJAX   
      \CRUD::resource('/member','Admin\User\MemberCrudController'); 
-    //resource AMC with AJAX   
-     \CRUD::resource('/amc','Admin\User\AMCCrudController'); 
 
+    //resource AMC with AJAX   
+     \CRUD::resource('/amc','Admin\User\AMCCrudController');
 }); 

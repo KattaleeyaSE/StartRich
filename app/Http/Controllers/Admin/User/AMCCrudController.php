@@ -233,7 +233,7 @@ class AMCCrudController extends CrudController
         ], 'update');
 
         // get the info for that entry
-        $this->data['entry'] = $this->crud->getEntry($id);
+        $this->data['entry'] = $amc;
         $this->data['crud'] = $this->crud;
         $this->data['title'] = trans('backpack::crud.preview').' '.$this->crud->entity_name;
 
@@ -254,5 +254,5 @@ class AMCCrudController extends CrudController
 
         return \Response::json($this->amcRepository->delete($id));
     }
-
+    
 }
