@@ -39,16 +39,17 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> {{ trans('backpack::base.remember_me') }}
-                                    </label>
+                        {{--
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="remember"> {{ trans('backpack::base.remember_me') }}
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                  
+                        --}}
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
