@@ -11,10 +11,15 @@
 |
 */
 
-Route::Auth();
-
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::Auth();
+
+// AMC Routes
+Route::group(['prefix' => 'member'], function () {
+
 });
 
 // AMC Routes
@@ -24,6 +29,7 @@ Route::group(['prefix' => 'amc'], function () {
     Route::get('/profile/edit','AMC\AMCController@edit'); 
     Route::patch('/profile','AMC\AMCController@update'); 
 });
+
 // Backoffice Routes
 Route::group(['prefix' => 'admin'], function () {
 

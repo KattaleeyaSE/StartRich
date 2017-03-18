@@ -110,7 +110,7 @@ class AMCController extends Controller
         {
             $amc = $this->amcRepository->find(\Auth::user()->amc->id);
 
-            return view('AMC.profile.edit', 
+            return view('AMC.edit', 
                 [
                     'amc' => $amc,
                 ]
@@ -163,7 +163,7 @@ class AMCController extends Controller
         {
             $amc = $this->amcRepository->find(\Auth::user()->amc->id);
 
-            return view('AMC.profile.show', $amc);
+            return view('AMC.show', $amc);
         }
 
         return \Redirect('/');
