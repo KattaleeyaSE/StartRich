@@ -48,6 +48,48 @@ class LoginController extends Controller
     }
 
     /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     */
+    protected function validateLogin(Request $request)
+    {
+        
+        $this->validate($request, 
+            [
+                $this->username() => 'required',
+                'password' => 'required',
+            ],
+            [
+                'required' => 'Text field is required.',
+            ]
+        );
+    }
+
+    /**
+     * Get the failed login response instance.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        $errors = [
+                $this->username() => trans('auth.failed'),
+                'password' => trans('auth.failed')
+            ];
+
+        if ($request->expectsJson()) {
+            return response()->json($errors, 422);
+        }
+
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors($errors);
+    }
+
+    /**
      * Show the application's login form.
      *
      * @return \Illuminate\Http\Response
