@@ -17,9 +17,12 @@ Route::get('/', function () {
 
 Route::Auth();
 
-// AMC Routes
+// Member Routes
 Route::group(['prefix' => 'member'], function () {
-
+    
+    Route::get('/profile','Member\MemberController@show'); 
+    Route::get('/profile/edit','Member\MemberController@edit'); 
+    Route::patch('/profile','Member\MemberController@update'); 
 });
 
 // AMC Routes

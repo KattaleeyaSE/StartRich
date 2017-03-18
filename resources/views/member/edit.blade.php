@@ -5,14 +5,14 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Edit AMC Profile : {{Auth::user()->username}}</div>
+                <div class="panel-heading">Edit Member Profile : {{Auth::user()->username}}</div>
 
                 <div class="panel-body"> 
-                    <form action="{{url('amc/profile')}}" method="post"  class="form-horizontal">
+                    <form action="{{url('member/profile')}}" method="post"  class="form-horizontal">
                         {!!csrf_field()!!}
                         {!! method_field('patch') !!}
                         <input type="hidden" name="id" value="{{Auth::user()->id}}"/>
-                        @include('AMC.partials.form', ['amc'=> $amc ,'submit_text' => 'Edit'])
+                        @include('member.partials.form', ['member'=> $member ,'submit_text' => 'Edit'])
                     </from> 
                 </div>
 

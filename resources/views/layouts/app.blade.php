@@ -93,11 +93,19 @@
                                 {{ Auth::user()->username }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
+                                @if(!is_null(Auth::user()->amc))
                                 <li>
                                     <a href="{{url('amc/profile')}}">
                                         Edit Profile
                                     </a>
                                 <li>
+                                @elseif(!is_null(Auth::user()->member))
+                                <li>
+                                    <a href="{{url('member/profile')}}">
+                                        Edit Profile
+                                    </a>
+                                <li>                                
+                                @endif
                                 <li>
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

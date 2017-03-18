@@ -26,10 +26,10 @@ class AMCUpdateCrudRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     {
         return [
             'company_name' => 'required',
-            'username' => 'required|min:6|unique:users,id,'.$this->request->get('id'),
+            'username' => 'required|min:6|unique:users,username,'.$this->request->get('id'),
             'password' => 'required|min:6|confirmed',
             'phone_number' => 'required|min:10',
-            'email' => 'required|email|unique:users,id,'.$this->request->get('id'),
+            'email' => 'required|email|unique:users,email,'.$this->request->get('id'),
         ];
     }
 
