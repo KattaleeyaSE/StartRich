@@ -66,6 +66,16 @@ class LoginController extends Controller
 
 
     /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'username';
+    }
+
+    /**
      * Handle a login request to the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -85,8 +95,14 @@ class LoginController extends Controller
         }
 
         $credentials = $this->credentials($request);
-
         if ($this->guard()->attempt($credentials, $request->has('remember'))) {
+
+            if(is_null($this->guard()->user()->admin))
+            {
+                 $this->guard()->logout();
+                 return $this->sendFailedLoginResponse($request);
+            }
+
             return $this->sendLoginResponse($request);
         }
 
@@ -97,4 +113,22 @@ class LoginController extends Controller
 
         return $this->sendFailedLoginResponse($request);
     } 
+
+ 
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        return redirect('/admin');
+    }   
 }
