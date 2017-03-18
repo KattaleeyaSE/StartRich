@@ -12,7 +12,7 @@
                         {!!csrf_field()!!}
                         {!! method_field('patch') !!}
                         <input type="hidden" name="id" value="{{Auth::user()->amc->id}}"/>
-                        @include('AMC.profile.partials.form', ['amc'=> $amc ,'submit_text' => 'Edit'])
+                        @include('AMC.partials.form', ['amc'=> $amc ,'submit_text' => 'Edit'])
                     </from> 
                 </div>
 

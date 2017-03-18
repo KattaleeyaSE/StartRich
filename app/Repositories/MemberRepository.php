@@ -32,6 +32,9 @@ class MemberRepository implements IMemberRepository
 
     public function create(Request $request)
     {
+        $user = $this->userRepository->create($request);
+        $request->offsetSet('user_id',$user->id);
+                
         return $this->member->create($request->all());
     }
 
