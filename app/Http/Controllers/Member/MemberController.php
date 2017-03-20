@@ -16,6 +16,7 @@ class MemberController extends Controller
     private $memberRepository;
     public function __construct(IMemberRepository $memberRepository)
     {
+        $this->middleware('auth.member');
         $this->memberRepository = $memberRepository;
     }
     
@@ -105,18 +106,13 @@ class MemberController extends Controller
      */
     public function edit()
     {
-        if(\Auth::check() && !is_null(\Auth::user()->member))
-        {
-            $member = $this->memberRepository->find(\Auth::user()->member->id);
+        $member = $this->memberRepository->find(\Auth::user()->member->id);
 
-            return view('member.edit', 
-                [
-                    'member' => $member,
-                ]
-            );
-        }
-
-        return \Redirect('/');
+        return view('member.edit', 
+            [
+                'member' => $member,
+            ]
+        );
     }
 
     /**
@@ -128,26 +124,21 @@ class MemberController extends Controller
      */
     public function update(UpdateRequest $request)
     {
-        if(\Auth::check() && !is_null(\Auth::user()->member))
-        {
-            // fallback to global request instance
-            if (is_null($request)) {
-                $request = \Request::instance();
-            }
-
-            // replace empty values with NULL, so that it will work with MySQL strict mode on
-            foreach ($request->input() as $key => $value) {
-                if (empty($value) && $value !== '0') {
-                    $request->request->set($key, null);
-                }
-            }
-
-            // update the row in the db
-            $item = $this->memberRepository->update(\Auth::user()->member->id,$request);
-            return \Redirect('member/profile');            
+        // fallback to global request instance
+        if (is_null($request)) {
+            $request = \Request::instance();
         }
-        
-        return \Redirect('/');
+
+        // replace empty values with NULL, so that it will work with MySQL strict mode on
+        foreach ($request->input() as $key => $value) {
+            if (empty($value) && $value !== '0') {
+                $request->request->set($key, null);
+            }
+        }
+
+        // update the row in the db
+        $item = $this->memberRepository->update(\Auth::user()->member->id,$request);
+        return \Redirect('member/profile');      
     }
 
     /**
@@ -158,14 +149,9 @@ class MemberController extends Controller
      */
     public function show()
     {
-        if(\Auth::check() && !is_null(\Auth::user()->member))
-        {
-            $member = $this->memberRepository->find(\Auth::user()->member->id);
+        $member = $this->memberRepository->find(\Auth::user()->member->id);
 
-            return view('member.show', $member);
-        }
-
-        return \Redirect('/');
+        return view('member.show', $member);
     }
 
     // /**

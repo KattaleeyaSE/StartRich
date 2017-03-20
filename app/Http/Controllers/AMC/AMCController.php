@@ -17,6 +17,7 @@ class AMCController extends Controller
     private $amcRepository;
     public function __construct(IAMCRepository $amcRepository)
     {
+        $this->middleware('auth.amc');        
         $this->amcRepository = $amcRepository;
     }
     
@@ -106,18 +107,13 @@ class AMCController extends Controller
      */
     public function edit()
     {
-        if(\Auth::check() && !is_null(\Auth::user()->amc))
-        {
-            $amc = $this->amcRepository->find(\Auth::user()->amc->id);
+        $amc = $this->amcRepository->find(\Auth::user()->amc->id);
 
-            return view('AMC.edit', 
-                [
-                    'amc' => $amc,
-                ]
-            );
-        }
-
-        return \Redirect('/');
+        return view('AMC.edit', 
+            [
+                'amc' => $amc,
+            ]
+        );
     }
 
     /**
@@ -129,26 +125,21 @@ class AMCController extends Controller
      */
     public function update(UpdateRequest $request)
     {
-        if(\Auth::check() && !is_null(\Auth::user()->amc))
-        {
-            // fallback to global request instance
-            if (is_null($request)) {
-                $request = \Request::instance();
-            }
-
-            // replace empty values with NULL, so that it will work with MySQL strict mode on
-            foreach ($request->input() as $key => $value) {
-                if (empty($value) && $value !== '0') {
-                    $request->request->set($key, null);
-                }
-            }
-
-            // update the row in the db
-            $item = $this->amcRepository->update(\Auth::user()->amc->id,$request);
-            return \Redirect('amc/profile');            
+        // fallback to global request instance
+        if (is_null($request)) {
+            $request = \Request::instance();
         }
-        
-        return \Redirect('/');
+
+        // replace empty values with NULL, so that it will work with MySQL strict mode on
+        foreach ($request->input() as $key => $value) {
+            if (empty($value) && $value !== '0') {
+                $request->request->set($key, null);
+            }
+        }
+
+        // update the row in the db
+        $item = $this->amcRepository->update(\Auth::user()->amc->id,$request);
+        return \Redirect('amc/profile');
     }
 
     /**
@@ -159,14 +150,9 @@ class AMCController extends Controller
      */
     public function show()
     {
-        if(\Auth::check() && !is_null(\Auth::user()->amc))
-        {
-            $amc = $this->amcRepository->find(\Auth::user()->amc->id);
+        $amc = $this->amcRepository->find(\Auth::user()->amc->id);
 
-            return view('AMC.show', $amc);
-        }
-
-        return \Redirect('/');
+        return view('AMC.show', $amc);
     }
 
     // /**
