@@ -12,7 +12,7 @@ use App\IRepositories\ISuitabilityTestRepository;
 use App\Http\Requests\SuitablityTestStoreCrudRequest as StoreRequest;
 use App\Http\Requests\SuitablityTestUpdateCrudRequest as UpdateRequest;
 
-class SuitabilityTestController extends Controller
+class SuitabilityTestAMCController extends Controller
 {
     private $suitabilityTestRepository;
 
@@ -28,22 +28,16 @@ class SuitabilityTestController extends Controller
      */
     public function index()
     {
-        if(\Auth::check())
-        {
-            if(!is_null(\Auth::user()->member))
-            {
+        if(\Auth::check() && !is_null(\Auth::user()->amc))
+        { 
 
-            }
-            else if(!is_null(\Auth::user()->amc)){
+            $suitabilityTests = $this->suitabilityTestRepository->all_by_amc_id_pagination(\Auth::user()->amc->id,15);
 
-                $suitabilityTests = $this->suitabilityTestRepository->all_by_amc_id_pagination(\Auth::user()->amc->id,15);
-
-                return view('suitability_test.amc.index', 
-                    [
-                        'suitabilityTests' => $suitabilityTests,
-                    ]
-                );
-            }
+            return view('suitability_test.amc.index', 
+                [
+                    'suitabilityTests' => $suitabilityTests,
+                ]
+            ); 
 
         }
 

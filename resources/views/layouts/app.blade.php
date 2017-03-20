@@ -80,13 +80,13 @@
                         <li><a href="#">Menu1</a></li>
                         <li><a href="#">Menu2</a></li>
                         <li><a href="#">Menu3</a></li>
-                        <li><a href="{{url('suitabilitytest/index')}}">Suitability Test</a></li>
+                        <li><a href="{{url('suitabilitytest/amc/index')}}">Suitability Test</a></li>
                     @elseif(!is_null(Auth::user()->member))
                         {{--member menu--}}
                         <li><a href="#">Menu1</a></li>
                         <li><a href="#">Menu2</a></li>
                         <li><a href="#">Menu3</a></li>
-                        <li><a href="{{url('suitabilitytest/index')}}">Suitability Test</a></li>
+                        <li><a href="{{url('suitabilitytest/member/index')}}">Suitability Test</a></li>
                     @else
                         {{--admin menu--}}
                         <li><a href="#">Menu1</a></li>

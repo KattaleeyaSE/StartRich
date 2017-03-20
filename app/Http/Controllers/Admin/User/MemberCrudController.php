@@ -18,6 +18,7 @@ class MemberCrudController extends CrudController
     public function __construct(IMemberRepository $memberRepository)
     {
         $this->memberRepository = $memberRepository;
+        $this->middleware('admin');
         parent::__construct();
     }
 

@@ -19,8 +19,11 @@ Route::Auth();
 
 // Suitability Test Routes
 Route::group(['prefix' => 'suitabilitytest'], function () {
-    
-    Route::get('/index','SuitabilityTest\SuitabilityTestController@index'); 
+    // AMC Suitability Test Routes
+    Route::group(['prefix' => 'amc'], function () { 
+        Route::get('/index','SuitabilityTest\SuitabilityTestAMCController@index'); 
+        Route::get('/create','SuitabilityTest\SuitabilityTestAMCController@create'); 
+    }); 
 });
 
 // Member Routes

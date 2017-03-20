@@ -19,6 +19,7 @@ class UserCrudController extends CrudController
     public function __construct(IUserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
+        $this->middleware('admin');
         parent::__construct();
     }
     

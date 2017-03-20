@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">AMC : Suitability Test</div> 
                 <div class="panel-body">
-                    <a href="{{url('')}}" class="btn btn-success">Create</a>
+                    <a href="{{url('suitabilitytest/create')}}" class="btn btn-success">Create</a>
                 </div>
                 <div class="panel-body">  
                 <div class="table-responsive">

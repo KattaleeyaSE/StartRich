@@ -18,6 +18,7 @@ class AMCCrudController extends CrudController
     public function __construct(IAMCRepository $amcRepository)
     {
         $this->amcRepository = $amcRepository;
+        $this->middleware('admin');
         parent::__construct();
     }
     
