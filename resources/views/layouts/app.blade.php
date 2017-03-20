@@ -13,6 +13,8 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
 
+    @yield('style')
+
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -71,12 +73,25 @@
                             </ul>
                         </li>
 
-
                     @endif
+
+                    @if(!is_null(Auth::user()->amc))
+                        {{--amc menu--}}
                         <li><a href="#">Menu1</a></li>
                         <li><a href="#">Menu2</a></li>
                         <li><a href="#">Menu3</a></li>
-                        <li><a href="#">Menu4</a></li>
+                        <li><a href="{{url('suitabilitytest/index')}}">Suitability Test</a></li>
+                    @elseif(!is_null(Auth::user()->member))
+                        {{--member menu--}}
+                        <li><a href="#">Menu1</a></li>
+                        <li><a href="#">Menu2</a></li>
+                        <li><a href="#">Menu3</a></li>
+                        <li><a href="{{url('suitabilitytest/index')}}">Suitability Test</a></li>
+                    @else
+                        {{--admin menu--}}
+                        <li><a href="#">Menu1</a></li>
+                    @endif
+
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -130,5 +145,8 @@
 
 <!-- Scripts -->
 <script src="/js/app.js"></script>
+
+@yield('script')
+
 </body>
 </html>

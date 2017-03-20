@@ -10,10 +10,20 @@ interface ISuitabilityTestRepository
 
     /**
      * Display all rows in the database for this entity.
+     * 
      *
      * @return Collection
      */        
     public function all();
+
+    /**
+     * Display all rows in the database for this entity.
+     *
+     * @param int amc_id
+     *
+     * @return Collection
+     */        
+    public function all_by_amc_id($amc_id);
 
     /**
      * @param int id

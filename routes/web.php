@@ -17,6 +17,12 @@ Route::get('/', function () {
 
 Route::Auth();
 
+// Suitability Test Routes
+Route::group(['prefix' => 'suitabilitytest'], function () {
+    
+    Route::get('/index','SuitabilityTest\SuitabilityTestController@index'); 
+});
+
 // Member Routes
 Route::group(['prefix' => 'member'], function () {
     

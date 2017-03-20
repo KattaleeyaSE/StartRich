@@ -19,7 +19,12 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
 
     public function all()
     {
-        return $this->suitabilityTest->all();
+        return $this->suitabilityTest->all();;
+    }
+
+    public function all_by_amc_id($amc_id)
+    {
+        return $this->suitabilityTest->where('amc_id', $amc_id)->get();;
     }
 
     public function find($id)
