@@ -18,6 +18,7 @@ class SuitabilityTestAMCController extends Controller
 
     public function __construct(ISuitabilityTestRepository $suitabilityTestRepository)
     {
+        $this->middleware('auth.amc');
         $this->suitabilityTestRepository = $suitabilityTestRepository;
     }
 
@@ -44,24 +45,15 @@ class SuitabilityTestAMCController extends Controller
         return \Redirect('/');
     }
 
-    // /**
-    //  * Show the form for creating inserting a new row.
-    //  *
-    //  * @return Response
-    //  */
-    // public function create()
-    // {
-    //     $this->crud->hasAccessOrFail('create');
-
-    //     // prepare the fields you need to show
-    //     $this->data['crud'] = $this->crud;
-    //     $this->data['saveAction'] = $this->getSaveAction();
-    //     $this->data['fields'] = $this->crud->getCreateFields();
-    //     $this->data['title'] = trans('backpack::crud.add').' '.$this->crud->entity_name;
-
-    //     // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
-    //     return view($this->crud->getCreateView(), $this->data);
-    // }
+    /**
+     * Show the form for creating inserting a new row.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        return view('suitability_test.amc.create');
+    }
 
     // /**
     //  * Store a newly created resource in the database.
