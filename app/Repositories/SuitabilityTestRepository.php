@@ -5,13 +5,16 @@ namespace App\Repositories;
 use App\IRepositories\ISuitabilityTestRepository;
 
 use App\Models\SuitabilityTest;
+use App\Models\SuitabilityTestResult;
 use Illuminate\Http\Request;
 class SuitabilityTestRepository implements ISuitabilityTestRepository
 {
     private $suitabilityTest;
-    public function __construct(SuitabilityTest $suitabilityTest)
+    private $suitabilityTestResult;
+    public function __construct(SuitabilityTest $suitabilityTest,SuitabilityTestResult $suitabilityTestResult)
     {
         $this->suitabilityTest = $suitabilityTest;
+        $this->suitabilityTestResult = $suitabilityTestResult;
     }
 
     public function all()
@@ -41,6 +44,33 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
         if (is_null($suitabilityTest)) {
             return false;
         }
-        return $suitabilityTest->delete($member->user->id);
+        return $suitabilityTest->delete();
     }
+
+    public function find_result($id)
+    {
+        return $this->suitabilityTestResult->find($id);
+    }
+
+    public function create_result($id, Request $request)
+    {
+        $suitabilityTest = $this->find($id); 
+        return $suitabilityTest->suitability_test_results()->save($request->all());          
+    }
+
+    public function update_result($id, Request $request)
+    {
+        $suitabilityTest = $this->find($id); 
+        return $suitabilityTest->suitability_test_results()->update($request->all()); 
+    }
+    
+    public function delete_result($id)
+    {
+        $suitabilityTestResult = $this->find_result($id);
+        if (is_null($suitabilityTestResult)) {
+            return false;
+        }
+        return $suitabilityTestResult->delete();
+    }
+
 }

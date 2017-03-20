@@ -43,4 +43,34 @@ interface ISuitabilityTestRepository
     * @return boolean
     **/
     public function delete($id);
+    
+    /**
+     * @param int id
+     *
+     * @return SuitabilityTestResult Object
+    **/     
+    public function find_result($id);
+
+    /**
+     * @param Illuminate\Http\Request $request
+     * @param int id
+     *
+     * @return SuitabilityTestResult Object
+    **/    
+    public function create_result($id, Request $request);
+
+    /**
+     * @param Illuminate\Http\Request $request
+     * @param int id
+     *
+     * @return SuitabilityTestResult Object
+    **/    
+    public function update_result($id, Request $request);
+
+    /**
+    * @param int id
+    *
+    * @return boolean
+    **/
+    public function delete_result($id);   
 }
