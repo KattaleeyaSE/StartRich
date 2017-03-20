@@ -14,12 +14,12 @@ use App\Http\Requests\SuitablityTestUpdateCrudRequest as UpdateRequest;
 
 class SuitabilityTestController extends Controller
 {
-  private $suitabilityTestRepository;
+    private $suitabilityTestRepository;
+
     public function __construct(ISuitabilityTestRepository $suitabilityTestRepository)
     {
         $this->suitabilityTestRepository = $suitabilityTestRepository;
     }
-    
 
     /**
      * Display all rows in the database for this entity.
@@ -36,7 +36,7 @@ class SuitabilityTestController extends Controller
             }
             else if(!is_null(\Auth::user()->amc)){
 
-                $suitabilityTests = $this->suitabilityTestRepository->all_by_amc_id(\Auth::user()->amc->id);
+                $suitabilityTests = $this->suitabilityTestRepository->all_by_amc_id_pagination(\Auth::user()->amc->id,15);
 
                 return view('suitability_test.amc.index', 
                     [

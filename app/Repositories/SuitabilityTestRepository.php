@@ -22,9 +22,9 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
         return $this->suitabilityTest->all();;
     }
 
-    public function all_by_amc_id($amc_id)
+    public function all_by_amc_id_pagination($amc_id,$paging)
     {
-        return $this->suitabilityTest->where('amc_id', $amc_id)->get();;
+        return $this->suitabilityTest->where('amc_id', $amc_id)->paginate($paging);
     }
 
     public function find($id)

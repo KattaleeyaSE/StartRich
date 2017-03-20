@@ -14,12 +14,12 @@ class CreateSuitabilityTestResultsTable extends Migration
     public function up()
     {
         Schema::create('suitability_test_results', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id');            
             $table->integer('max_score')->unsigned();
             $table->integer('min_range')->unsigned();
             $table->string('type_of_investors')->nullable();
             $table->integer('suitability_test_id')->unsigned();
-             $table->foreign('suitability_test_id')
+            $table->foreign('suitability_test_id')
                 ->references('id')
                 ->on('suitability_tests')
                 ->onDelete('cascade')

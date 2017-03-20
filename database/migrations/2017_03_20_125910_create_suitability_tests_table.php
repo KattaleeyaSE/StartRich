@@ -15,6 +15,7 @@ class CreateSuitabilityTestsTable extends Migration
     {
         Schema::create('suitability_tests', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->string('description');
             $table->integer('amc_id')->unsigned();
             $table->foreign('amc_id')

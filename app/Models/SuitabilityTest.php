@@ -17,8 +17,9 @@ class SuitabilityTest extends Model
         // public $timestamps = false;
         // protected $guarded = ['id'];
         protected $fillable = [
+            'name',
             'description',
-            'user_id',
+            'amc_id',
         ];
 
         // protected $hidden = [];

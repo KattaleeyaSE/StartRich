@@ -21,9 +21,9 @@ interface ISuitabilityTestRepository
      *
      * @param int amc_id
      *
-     * @return Collection
+     * @return array
      */        
-    public function all_by_amc_id($amc_id);
+    public function all_by_amc_id_pagination($amc_id,$paging);
 
     /**
      * @param int id
