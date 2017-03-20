@@ -36,5 +36,9 @@ class IOCServiceProvider extends ServiceProvider
             'App\IRepositories\IAMCRepository',
             'App\Repositories\AMCRepository'
         );        
+        $this->app->bind(
+            'App\IRepositories\ISuitabilityTestRepository',
+            'App\Repositories\SuitabilityTestRepository'
+        );        
     }
 }
