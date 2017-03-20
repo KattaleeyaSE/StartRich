@@ -24,7 +24,7 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
 
     public function all_by_amc_id_pagination($amc_id,$paging)
     {
-        return $this->suitabilityTest->where('amc_id', $amc_id)->paginate($paging);
+        return $this->suitabilityTest->where('amc_id', $amc_id)->with('amc')->paginate($paging);
     }
 
     public function find($id)

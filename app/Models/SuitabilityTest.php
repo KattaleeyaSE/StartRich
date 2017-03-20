@@ -36,6 +36,11 @@ class SuitabilityTest extends Model
 	| RELATIONS
 	|--------------------------------------------------------------------------
 	*/
+		public function amc()
+		{
+            return $this->belongsTo('App\Models\AMC');
+		}
+
 		public function suitability_test_results()
 		{
 			return $this->hasMany('App\Models\SuitabilityTestResult');
