@@ -23,7 +23,7 @@
     </script>
 
 </head>
-<body>
+<body ng-app="app">
 <div id="app">
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
@@ -145,7 +145,8 @@
 
 <!-- Scripts -->
 <script src="/js/app.js"></script>
-
+<script src="/js/angular/app.js"></script> 
+<!-- assests --> 
 @yield('script')
 
 </body>

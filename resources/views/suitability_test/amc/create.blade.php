@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" ng-controller="createSuitabilityTestController">
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -15,4 +15,8 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+    <script src="/js/angular/suitability_test/resource.js"></script> 
+    <script src="/js/angular/suitability_test/create.controller.js"></script> 
 @endsection
