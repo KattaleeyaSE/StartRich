@@ -16,6 +16,9 @@ class CreateInvestmentsTable extends Migration
         Schema::create('investments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('amc_id')->unsigned();
+            $table->integer('risklevel');
+            $table->date('registered_date');
+
             $table->string('investment_name');
             $table->string('investment_description');
 $table->integer('invest_type');
