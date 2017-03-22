@@ -18,7 +18,7 @@ class SuitabilityTestResult extends Model
         // protected $guarded = ['id'];
         protected $fillable = [
             'max_score',
-            'min_range',
+            'min_score',
             'type_of_investors',
             'suitability_test_id',
         ];
