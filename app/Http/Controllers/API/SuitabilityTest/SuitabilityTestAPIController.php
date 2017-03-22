@@ -50,27 +50,35 @@ class SuitabilityTestAPIController extends Controller
      */
     public function store(Request $request)
     { 
-        // fallback to global request instance
-        if (is_null($request)) {
+        try
+        {
+            // fallback to global request instance
+            if (is_null($request)) {
+                return \Response::Json("Fail",404);
+            }
+
+            // // replace empty values with NULL, so that it will work with MySQL strict mode on
+            // foreach ($request->input() as $key => $value) {
+            //     if (empty($value) && $value !== '0') {
+            //         $request->request->set($key, null);
+            //     }
+            // }
+
+            $test  = $this->ISuitabilityTestService->create_test($request);
+
+            if(!is_null($test))
+            {
+                return \Response::Json("Success",200);
+
+            }else{
+                return \Response::Json("Fail",404);
+            } 
+        }
+        catch(\Exception $e)
+        {
             return \Response::Json("Fail",404);
         }
 
-        // // replace empty values with NULL, so that it will work with MySQL strict mode on
-        // foreach ($request->input() as $key => $value) {
-        //     if (empty($value) && $value !== '0') {
-        //         $request->request->set($key, null);
-        //     }
-        // }
-
-       $test  = $this->ISuitabilityTestService->create_test($request);
-
-       if(!is_null($test))
-       {
-            return \Response::Json("Success",200);
-
-       }else{
-            return \Response::Json("Fail",404);
-       } 
      
     }
 
