@@ -24,7 +24,7 @@
 
 </head>
 <body ng-app="app">
-<div id="app">
+<div>
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
