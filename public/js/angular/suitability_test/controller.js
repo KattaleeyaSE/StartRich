@@ -1,6 +1,7 @@
-app.controller('suitabilityTestController', function($scope) {
+app.controller('suitabilityTestController', ['$scope', function($scope) {
     
     $scope.suitabilityTest = {
+        id : 0,
         question_name :"",
         description :"",
         results :[],
@@ -59,4 +60,10 @@ app.controller('suitabilityTestController', function($scope) {
         $scope.suitabilityTest.show_create_result = true;
         $scope.suitabilityTest.show_add_question = false; 
     }
-});
+
+    $scope.submit = function()
+    {
+
+    }
+
+}]);

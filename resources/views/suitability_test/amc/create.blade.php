@@ -27,7 +27,7 @@
 
                         {{--suit-result-group--}}
                         <div class="suit-result-group" ng-show="suitabilityTest.show_create_result">
-
+                          
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Create Result</label> 
                                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -36,7 +36,7 @@
                             </div>
 
                             <div class="results" ng-repeat="result in suitabilityTest.results">
-
+                                  <hr>
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Result <%$index+1%></label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12"> 
@@ -67,7 +67,7 @@
                             </div> 
                         </div>
                         {{--suit-result-group--}}
-
+                        
                         {{--suit-question-group--}}
                         <div class="suit-question-group" ng-show="suitabilityTest.show_add_question">
 
@@ -79,7 +79,7 @@
                             </div>
 
                             <div class="results" ng-repeat="question in suitabilityTest.questions">
-
+                                <hr>
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Question <%$index+1%></label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12"> 
@@ -92,7 +92,7 @@
                                         <input type="text" name="questions[]" value="<%question.question%>" class="form-control col-md-7 col-xs-12" /> 
                                     </div> 
                                 </div>
-                                          
+                             <hr>  
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Create Answer</label> 
                                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -101,7 +101,7 @@
                             </div>
 
                             <div class="results" ng-repeat="answer in question.answers">
-
+                                <hr>
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Answer <%$index+1%></label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12"> 
@@ -129,7 +129,7 @@
                             </div> 
                         </div>
                         {{--suit-question-group--}}
-
+                        <hr>
                         <div class="form-group" ng-show="suitabilityTest.show_create_result">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12"></label> 
                             <div class="col-md-6 col-sm-6 col-xs-12"> 
