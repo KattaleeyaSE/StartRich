@@ -19,7 +19,7 @@ class SuitabilityQuestionAnswer extends Model
         protected $fillable = [
             'answer',
             'score',
-            'suitability_test_id',
+            'suitability_question_id',
         ];
 
         // protected $hidden = [];

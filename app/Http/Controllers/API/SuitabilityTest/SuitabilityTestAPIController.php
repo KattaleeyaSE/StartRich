@@ -64,27 +64,58 @@ class SuitabilityTestAPIController extends Controller
 
         // insert item in the db
         $suitabilityTest = $this->suitabilityTestRepository->create($newRequest); 
-
-        if(!is_null($request->results))
+        if(!is_null($suitabilityTest))
         {
-            foreach($request->results as $result)
+            if(!is_null($request->results))
             {
-                //Adjust Data
-                $newRequest = new Request(); 
-                $newRequest->offsetSet('max_score',$result['max_score']);
-                $newRequest->offsetSet('min_score',$result['min_score']);
-                $newRequest->offsetSet('type_of_investors',$result['type_of_investors']);                
-                $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);            
+                foreach($request->results as $result)
+                {
+                    //Adjust Data
+                    $newRequest = new Request(); 
+                    $newRequest->offsetSet('max_score',$result['max_score']);
+                    $newRequest->offsetSet('min_score',$result['min_score']);
+                    $newRequest->offsetSet('type_of_investors',$result['type_of_investors']);                
+                    $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);            
 
-                $suitabilityTestResult = $this->suitabilityTestRepository->create_result($suitabilityTest->id,$newRequest); 
+                    $suitabilityTestResult = $this->suitabilityTestRepository->create_result($newRequest); 
+
+                }
 
             }
 
-        }
-   
-        dd($suitabilityTest->suitability_test_results);
+            if(!is_null($request->questions))
+            {
+                foreach($request->questions as $question)
+                {
+                    //Adjust Data
+                    $newRequest = new Request(); 
+                    $newRequest->offsetSet('question',$question['question']);               
+                    $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);            
 
-        return \Response::Json("Hello",200);
+                    $suitabilityTestQuestion = $this->suitabilityTestRepository->create_question($newRequest); 
+
+                    if(!is_null($question['answers']) && !is_null($suitabilityTestQuestion))
+                    {
+                            foreach($question['answers'] as $answer)
+                            {
+
+                                //Adjust Data
+                                $newRequest = new Request(); 
+                                $newRequest->offsetSet('answer',$answer['answer']);               
+                                $newRequest->offsetSet('score',$answer['score']);               
+                                $newRequest->offsetSet('suitability_question_id', $suitabilityTestQuestion->id);            
+
+                                $suitabilityTestAnswer = $this->suitabilityTestRepository->create_answer($newRequest); 
+                            }
+                    }
+
+                }
+
+            }   
+        }
+        
+
+        return \Response::Json("Success",200);
     }
 
     /**
