@@ -67,7 +67,10 @@ function($scope,SuitabilityTestResource) {
     {
         $scope.suitabilityTest.amc_id = id;
         SuitabilityTestResource.Create($scope.suitabilityTest).then(function(resp){
-            console.log(resp);
+            if(resp.status == 200 && resp.data == "Success")
+            {
+                location.href = "/suitabilitytest/amc/index";
+            } 
         });
     }
 

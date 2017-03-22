@@ -7,14 +7,20 @@ use App\Http\Controllers\Controller;
 
 //Service Container
 use App\IRepositories\ISuitabilityTestRepository;
+use App\IServices\ISuitabilityTestService;
 
 class SuitabilityTestAPIController extends Controller
 {
     private $suitabilityTestRepository;
+    private $suitabilityTestService;
 
-    public function __construct(ISuitabilityTestRepository $suitabilityTestRepository)
+    public function __construct(
+            ISuitabilityTestRepository $suitabilityTestRepository,
+            ISuitabilityTestService $suitabilityTestService
+        )
     { 
         $this->suitabilityTestRepository = $suitabilityTestRepository;
+        $this->ISuitabilityTestService = $suitabilityTestService;
     }    
     /**
      * Display a listing of the resource.
@@ -46,76 +52,26 @@ class SuitabilityTestAPIController extends Controller
     { 
         // fallback to global request instance
         if (is_null($request)) {
-            $request = \Request::instance();
+            return \Response::Json("Fail",404);
         }
 
-        // replace empty values with NULL, so that it will work with MySQL strict mode on
-        foreach ($request->input() as $key => $value) {
-            if (empty($value) && $value !== '0') {
-                $request->request->set($key, null);
-            }
-        }
+        // // replace empty values with NULL, so that it will work with MySQL strict mode on
+        // foreach ($request->input() as $key => $value) {
+        //     if (empty($value) && $value !== '0') {
+        //         $request->request->set($key, null);
+        //     }
+        // }
 
-        //Adjust Data
-        $newRequest = new Request();
-        $newRequest->offsetSet('name',$request->question_name);
-        $newRequest->offsetSet('description',$request->description);
-        $newRequest->offsetSet('amc_id',$request->amc_id);
+       $test  = $this->ISuitabilityTestService->create_test($request);
 
-        // insert item in the db
-        $suitabilityTest = $this->suitabilityTestRepository->create($newRequest); 
-        if(!is_null($suitabilityTest))
-        {
-            if(!is_null($request->results))
-            {
-                foreach($request->results as $result)
-                {
-                    //Adjust Data
-                    $newRequest = new Request(); 
-                    $newRequest->offsetSet('max_score',$result['max_score']);
-                    $newRequest->offsetSet('min_score',$result['min_score']);
-                    $newRequest->offsetSet('type_of_investors',$result['type_of_investors']);                
-                    $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);            
+       if(!is_null($test))
+       {
+            return \Response::Json("Success",200);
 
-                    $suitabilityTestResult = $this->suitabilityTestRepository->create_result($newRequest); 
-
-                }
-
-            }
-
-            if(!is_null($request->questions))
-            {
-                foreach($request->questions as $question)
-                {
-                    //Adjust Data
-                    $newRequest = new Request(); 
-                    $newRequest->offsetSet('question',$question['question']);               
-                    $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);            
-
-                    $suitabilityTestQuestion = $this->suitabilityTestRepository->create_question($newRequest); 
-
-                    if(!is_null($question['answers']) && !is_null($suitabilityTestQuestion))
-                    {
-                            foreach($question['answers'] as $answer)
-                            {
-
-                                //Adjust Data
-                                $newRequest = new Request(); 
-                                $newRequest->offsetSet('answer',$answer['answer']);               
-                                $newRequest->offsetSet('score',$answer['score']);               
-                                $newRequest->offsetSet('suitability_question_id', $suitabilityTestQuestion->id);            
-
-                                $suitabilityTestAnswer = $this->suitabilityTestRepository->create_answer($newRequest); 
-                            }
-                    }
-
-                }
-
-            }   
-        }
-        
-
-        return \Response::Json("Success",200);
+       }else{
+            return \Response::Json("Fail",404);
+       } 
+     
     }
 
     /**
