@@ -13,14 +13,14 @@
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="question_name">Question Name</label> 
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" name="question_name" value="" class="form-control col-md-7 col-xs-12" /> 
+                                <input type="text" name="question_name" ng-model="suitabilityTest.question_name" class="form-control col-md-7 col-xs-12" /> 
                             </div> 
                         </div>
 
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Description</label> 
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <textarea name="description" class="form-control col-md-7 col-xs-12" /></textarea>
+                                <textarea name="description" class="form-control col-md-7 col-xs-12" ng-model="suitabilityTest.description"/></textarea>
                             </div> 
                         </div>
 
@@ -47,21 +47,21 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Max Score</label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="number" name="max_score[]" value="<%result.max_score%>" class="form-control col-md-7 col-xs-12" /> 
+                                        <input type="number" name="max_score[]" ng-model="result.max_score" class="form-control col-md-7 col-xs-12" /> 
                                     </div> 
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Min Score</label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="number" name="min_score[]" value="<%result.min_score%>" class="form-control col-md-7 col-xs-12" /> 
+                                        <input type="number" name="min_score[]" ng-model="result.min_score" class="form-control col-md-7 col-xs-12" /> 
                                     </div> 
                                 </div>
                                                         
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Type of Investor</label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <textarea name="type_of_investors[]" class="form-control col-md-7 col-xs-12" /><%result.type_of_investors%></textarea>
+                                        <textarea name="type_of_investors[]" class="form-control col-md-7 col-xs-12" ng-model="result.type_of_investors"/></textarea>
                                     </div> 
                                 </div>
                             </div> 
@@ -89,7 +89,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Question</label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="questions[]" value="<%question.question%>" class="form-control col-md-7 col-xs-12" /> 
+                                        <input type="text" name="questions[]" ng-model="question.question" class="form-control col-md-7 col-xs-12" /> 
                                     </div> 
                                 </div>
                              <hr>  
@@ -112,14 +112,14 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Answer Score</label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="number" name="answer_score[]" value="<%answer.score%>" class="form-control col-md-7 col-xs-12" /> 
+                                        <input type="number" name="answer_score[]" ng-model="answer.score" class="form-control col-md-7 col-xs-12" /> 
                                     </div> 
                                 </div> 
 
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Answer</label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="answer[]" value="<%answer.answer%>" class="form-control col-md-7 col-xs-12" /> 
+                                        <input type="text" name="answer[]" ng-model="answer.answer" class="form-control col-md-7 col-xs-12" /> 
                                     </div> 
                                 </div> 
                                 
@@ -141,7 +141,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12"></label> 
                             <div class="col-md-6 col-sm-6 col-xs-12"> 
                                 <button type="button" class="btn btn-default" ng-click="showAddResultSection();">Back</button>
-                                <button type="button" class="btn btn-success pull-right" ng-click="submit();">Submit</button>
+                                <button type="button" class="btn btn-success pull-right" ng-click="create();">Submit</button>
                             </div> 
                         </div> 
 

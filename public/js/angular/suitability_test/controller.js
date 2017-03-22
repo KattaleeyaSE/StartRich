@@ -1,6 +1,7 @@
-app.controller('suitabilityTestController', ['$scope', function($scope) {
+app.controller('suitabilityTestController', ['$scope','SuitabilityTestResource',
+function($scope,SuitabilityTestResource) {
     
-    $scope.suitabilityTest = {
+    $scope.suitabilityTest = { 
         id : 0,
         question_name :"",
         description :"",
@@ -61,9 +62,11 @@ app.controller('suitabilityTestController', ['$scope', function($scope) {
         $scope.suitabilityTest.show_add_question = false; 
     }
 
-    $scope.submit = function()
+    $scope.create = function()
     {
-
+        SuitabilityTestResource.Create($scope.suitabilityTest).then(function(resp){
+            console.log(resp);
+        });
     }
 
 }]);
