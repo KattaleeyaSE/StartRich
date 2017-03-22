@@ -43,9 +43,48 @@ class SuitabilityTestAPIController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-        dd($request);
+    { 
+        // fallback to global request instance
+        if (is_null($request)) {
+            $request = \Request::instance();
+        }
+
+        // replace empty values with NULL, so that it will work with MySQL strict mode on
+        foreach ($request->input() as $key => $value) {
+            if (empty($value) && $value !== '0') {
+                $request->request->set($key, null);
+            }
+        }
+
+        //Adjust Data
+        $newRequest = new Request();
+        $newRequest->offsetSet('name',$request->question_name);
+        $newRequest->offsetSet('description',$request->description);
+        $newRequest->offsetSet('amc_id',$request->amc_id);
+
+        // insert item in the db
+        $suitabilityTest = $this->suitabilityTestRepository->create($newRequest); 
+
+        if(!is_null($request->results))
+        {
+            foreach($request->results as $result)
+            {
+                //Adjust Data
+                $newRequest = new Request(); 
+                $newRequest->offsetSet('max_score',$result['max_score']);
+                $newRequest->offsetSet('min_score',$result['min_score']);
+                $newRequest->offsetSet('type_of_investors',$result['type_of_investors']);                
+                $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);            
+
+                $suitabilityTestResult = $this->suitabilityTestRepository->create_result($suitabilityTest->id,$newRequest); 
+
+            }
+
+        }
+   
+        dd($suitabilityTest->suitability_test_results);
+
+        return \Response::Json("Hello",200);
     }
 
     /**

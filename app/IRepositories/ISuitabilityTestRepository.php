@@ -9,7 +9,7 @@ interface ISuitabilityTestRepository
 {
 
     /**
-     * Display all rows in the database for this entity.
+     * Display all rows in the requestbase for this entity.
      * 
      *
      * @return Collection
@@ -17,11 +17,11 @@ interface ISuitabilityTestRepository
     public function all();
 
     /**
-     * Display all rows in the database for this entity.
+     * Display all rows in the requestbase for this entity.
      *
      * @param int amc_id
      *
-     * @return array
+     * @return Request
      */        
     public function all_by_amc_id_pagination($amc_id,$paging);
 
@@ -63,11 +63,10 @@ interface ISuitabilityTestRepository
 
     /**
      * @param Illuminate\Http\Request $request
-     * @param int id
      *
      * @return SuitabilityTestResult Object
     **/    
-    public function create_result($id, Request $request);
+    public function create_result(Request $request);
 
     /**
      * @param Illuminate\Http\Request $request
@@ -75,7 +74,7 @@ interface ISuitabilityTestRepository
      *
      * @return SuitabilityTestResult Object
     **/    
-    public function update_result($id, Request $request);
+    public function update_result($id,Request $request);
 
     /**
     * @param int id
@@ -83,4 +82,62 @@ interface ISuitabilityTestRepository
     * @return boolean
     **/
     public function delete_result($id);   
+    
+    /**
+     * @param int id
+     *
+     * @return SuitabilityTestQuestion Object
+    **/     
+    public function find_question($id);
+
+    /**
+     * @param Illuminate\Http\Request $request
+     *
+     * @return SuitabilityTestQuestion Object
+    **/    
+    public function create_question(Request $request);
+
+    /**
+     * @param Illuminate\Http\Request $request
+     * @param int id
+     *
+     * @return SuitabilityTestQuestion Object
+    **/    
+    public function update_question($id,Request $request);
+
+    /**
+    * @param int id
+    *
+    * @return boolean
+    **/
+    public function delete_question($id);   
+    
+    /**
+     * @param int id
+     *
+     * @return SuitabilityQuestionAnswer Object
+    **/     
+    public function find_answer($id);
+
+    /**
+     * @param Illuminate\Http\Request $request
+     *
+     * @return SuitabilityQuestionAnswer Object
+    **/    
+    public function create_answer(Request $request);
+
+    /**
+     * @param Illuminate\Http\Request $request
+     * @param int id
+     *
+     * @return SuitabilityQuestionAnswer Object
+    **/    
+    public function update_answer($id,Request $request);
+
+    /**
+    * @param int id
+    *
+    * @return boolean
+    **/
+    public function delete_answer($id);   
 }

@@ -6,15 +6,26 @@ use App\IRepositories\ISuitabilityTestRepository;
 
 use App\Models\SuitabilityTest;
 use App\Models\SuitabilityTestResult;
+use App\Models\SuitabilityQuestion;
+use App\Models\SuitabilityQuestionAnswer;
 use Illuminate\Http\Request;
 class SuitabilityTestRepository implements ISuitabilityTestRepository
 {
     private $suitabilityTest;
     private $suitabilityTestResult;
-    public function __construct(SuitabilityTest $suitabilityTest,SuitabilityTestResult $suitabilityTestResult)
+    private $suitabilityTestQuestion;
+    private $suitabilityTestAnswer;
+    public function __construct(
+            SuitabilityTest $suitabilityTest,
+            SuitabilityTestResult $suitabilityTestResult,
+            SuitabilityQuestion $suitabilityTestQuestion,
+            SuitabilityQuestionAnswer $suitabilityTestAnswer
+        )
     {
         $this->suitabilityTest = $suitabilityTest;
         $this->suitabilityTestResult = $suitabilityTestResult;
+        $this->suitabilityTestQuestion = $suitabilityTestQuestion;
+        $this->suitabilityTestAnswer = $suitabilityTestAnswer;
     }
 
     public function all()
@@ -33,7 +44,7 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
     }
 
     public function create(Request $request)
-    {  
+    {
         return $this->suitabilityTest->create($request->all());
     }
 
@@ -57,16 +68,15 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
         return $this->suitabilityTestResult->find($id);
     }
 
-    public function create_result($id, Request $request)
+    public function create_result(Request $request)
     {
-        $suitabilityTest = $this->find($id); 
-        return $suitabilityTest->suitability_test_results()->save($request->all());          
+        return $this->suitabilityTestResult->create($request->all());          
     }
 
-    public function update_result($id, Request $request)
+    public function update_result($id,Request $request)
     {
-        $suitabilityTest = $this->find($id); 
-        return $suitabilityTest->suitability_test_results()->update($request->all()); 
+        $suitabilityTestResult = $this->find_result($id);  
+        return $suitabilityTestResult->update($request->all()); 
     }
     
     public function delete_result($id)
@@ -77,5 +87,54 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
         }
         return $suitabilityTestResult->delete();
     }
+ 
+    public function find_question($id)
+    {
+        return $this->suitabilityTestQuestion->find($id);
+    }  
 
+    public function create_question(Request $request)
+    {
+        return $this->suitabilityTestQuestion->create($request->all());        
+    }  
+
+    public function update_question($id,Request $request)
+    {
+        $suitabilityTestQuestion = $this->find_question($id);  
+        return $suitabilityTestQuestion->update($request->all()); 
+    }  
+
+    public function delete_question($id)
+    {
+        $suitabilityTestQuestion = $this->find_question($id);  
+        if (is_null($suitabilityTestQuestion)) {
+            return false;
+        }
+        return $suitabilityTestQuestion->delete();
+    }  
+
+    public function find_answer($id)
+    {
+        return $this->suitabilityTestAnswer->find($id);
+    }  
+
+    public function create_answer(Request $request)
+    {
+        return $this->suitabilityTestAnswer->create($request->all());        
+    }  
+    
+    public function update_answer($id,Request $request)
+    {
+        $suitabilityTestAnswer = $this->find_answer($id);  
+        return $suitabilityTestAnswer->update($request->all()); 
+    }
+ 
+    public function delete_answer($id)
+    {
+        $suitabilityTestAnswer = $this->find_answer($id);  
+        if (is_null($suitabilityTestAnswer)) {
+            return false;
+        }
+        return $suitabilityTestAnswer->delete();
+    }
 }

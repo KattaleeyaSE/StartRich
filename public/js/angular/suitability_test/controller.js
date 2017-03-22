@@ -3,6 +3,7 @@ function($scope,SuitabilityTestResource) {
     
     $scope.suitabilityTest = { 
         id : 0,
+        amc_id : 0,
         question_name :"",
         description :"",
         results :[],
@@ -62,8 +63,9 @@ function($scope,SuitabilityTestResource) {
         $scope.suitabilityTest.show_add_question = false; 
     }
 
-    $scope.create = function()
+    $scope.create = function(id)
     {
+        $scope.suitabilityTest.amc_id = id;
         SuitabilityTestResource.Create($scope.suitabilityTest).then(function(resp){
             console.log(resp);
         });
