@@ -20,7 +20,7 @@ class SuitabilityTestAPIController extends Controller
         )
     { 
         $this->suitabilityTestRepository = $suitabilityTestRepository;
-        $this->ISuitabilityTestService = $suitabilityTestService;
+        $this->suitabilityTestService = $suitabilityTestService;
     }    
     /**
      * Display a listing of the resource.
@@ -64,7 +64,7 @@ class SuitabilityTestAPIController extends Controller
             //     }
             // }
 
-            $test  = $this->ISuitabilityTestService->create_test($request);
+            $test  = $this->suitabilityTestService->create_test($request);
 
             if(!is_null($test))
             {
