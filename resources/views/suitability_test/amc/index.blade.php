@@ -31,7 +31,7 @@
                                     <td class="text-center">{{$item->created_at}}</td> 
                                     <td class="text-center">{{$item->updated_at}}</td> 
                                     <td class="text-center">
-                                        <a href="{{url(''.$item->id)}}" class="btn btn-primary">View</a> | <a href="{{url('/suitabilitytest/amc/edit/'.$item->id)}}" class="btn btn-warning">Edit</a> | <a href="{{url('/suitabilitytest/amc/delete/'.$item->id)}}" data-button-type="delete" class="btn btn-danger">Delete</a>
+                                        <a href="{{url('/suitabilitytest/amc/show/'.$item->id)}}" class="btn btn-primary">View</a> | <a href="{{url('/suitabilitytest/amc/edit/'.$item->id)}}" class="btn btn-warning">Edit</a> | <a href="{{url('/suitabilitytest/amc/delete/'.$item->id)}}" data-button-type="delete" class="btn btn-danger">Delete</a>
                                     </td> 
                                 </tr> 
                             @endforeach

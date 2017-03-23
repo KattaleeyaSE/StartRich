@@ -29,20 +29,13 @@ class SuitabilityTestAMCController extends Controller
      */
     public function index()
     {
-        if(\Auth::check() && !is_null(\Auth::user()->amc))
-        { 
+        $suitabilityTests = $this->suitabilityTestRepository->all_by_amc_id_pagination(\Auth::user()->amc->id,15);
 
-            $suitabilityTests = $this->suitabilityTestRepository->all_by_amc_id_pagination(\Auth::user()->amc->id,15);
-
-            return view('suitability_test.amc.index', 
-                [
-                    'suitabilityTests' => $suitabilityTests,
-                ]
-            ); 
-
-        }
-
-        return \Redirect('/');
+        return view('suitability_test.amc.index', 
+            [
+                'suitabilityTests' => $suitabilityTests,
+            ]
+        ); 
     }
 
     /**
@@ -136,23 +129,17 @@ class SuitabilityTestAMCController extends Controller
     //     return \Redirect('/');
     // }
 
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  *
-    //  * @return Response
-    //  */
-    // public function show()
-    // {
-    //     if(\Auth::check() && !is_null(\Auth::user()->member))
-    //     {
-    //         $member = $this->memberRepository->find(\Auth::user()->member->id);
+    /**
+     * Display the specified resource.
+     * @param int $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $test = $this->suitabilityTestRepository->find($id);
 
-    //         return view('member.show', $member);
-    //     }
-
-    //     return \Redirect('/');
-    // }
+        return view('suitability_test.amc.show', ["test" => $test]);
+    }
 
     /**
      * Remove the specified resource from storage.

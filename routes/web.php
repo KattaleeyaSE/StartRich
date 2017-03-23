@@ -24,6 +24,7 @@ Route::group(['prefix' => 'suitabilitytest'], function () {
         Route::get('/index','SuitabilityTest\SuitabilityTestAMCController@index'); 
         Route::get('/create','SuitabilityTest\SuitabilityTestAMCController@create'); 
         Route::get('/edit/{id}','SuitabilityTest\SuitabilityTestAMCController@edit'); 
+        Route::get('/show/{id}','SuitabilityTest\SuitabilityTestAMCController@show'); 
         Route::delete('/delete/{id}','SuitabilityTest\SuitabilityTestAMCController@destroy'); 
     }); 
 });
