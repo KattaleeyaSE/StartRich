@@ -64,6 +64,6 @@ class SuitabilityTestMemberController extends Controller
     {
         $test = $this->suitabilityTestRepository->find($id);
 
-        return view('suitability_test.amc.show', ["test" => $test]);
+        return view('suitability_test.member.take_test', ["test" => $test]);
     }
 }

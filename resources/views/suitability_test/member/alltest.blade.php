@@ -29,7 +29,7 @@
                                     <td class="text-center">{{$item->created_at}}</td> 
                                     <td class="text-center">{{$item->updated_at}}</td> 
                                     <td class="text-center">
-                                        <a href="{{url('/suitabilitytest/amc/show/'.$item->id)}}" class="btn btn-primary">Take</a>
+                                        <a href="{{url('/suitabilitytest/member/take/'.$item->id)}}" class="btn btn-primary">Take</a>
                                     </td> 
                                 </tr> 
                             @endforeach

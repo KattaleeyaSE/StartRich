@@ -32,7 +32,7 @@ Route::group(['prefix' => 'suitabilitytest'], function () {
     Route::group(['prefix' => 'member'], function () { 
         Route::get('/index','SuitabilityTest\SuitabilityTestMemberController@index'); 
         Route::get('/alltest','SuitabilityTest\SuitabilityTestMemberController@all_test'); 
-        Route::get('/take/{id}','SuitabilityTest\SuitabilityTestAMCController@take_test'); 
+        Route::get('/take/{id}','SuitabilityTest\SuitabilityTestMemberController@take_test'); 
         // Route::get('/show/{id}','SuitabilityTest\SuitabilityTestAMCController@show'); 
         // Route::delete('/delete/{id}','SuitabilityTest\SuitabilityTestAMCController@destroy'); 
     }); 
