@@ -162,6 +162,8 @@ class AMCCrudController extends CrudController
                 $request->request->set($key, null);
             }
         }
+        
+        $request->offsetSet('password',bcrypt($request->password));
 
         // insert item in the db
         $item = $this->amcRepository->create($request);

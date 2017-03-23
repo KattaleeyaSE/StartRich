@@ -136,7 +136,12 @@ class AMCController extends Controller
                 $request->request->set($key, null);
             }
         }
-
+        
+        if(!is_null($request->password))
+        {
+            $request->offsetSet('password',bcrypt($request->password));
+        }
+        
         // update the row in the db
         $item = $this->amcRepository->update(\Auth::user()->amc->id,$request);
         return \Redirect('amc/profile');

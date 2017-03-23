@@ -44,7 +44,7 @@ class SuitabilityTestMemberController extends Controller
      *
      * @return Response
      */
-    public function alltest()
+    public function all_test()
     {
         $suitabilityTests = $this->suitabilityTestRepository->all_pagination(15);
 
@@ -54,4 +54,16 @@ class SuitabilityTestMemberController extends Controller
             ]
         ); 
     }    
+
+    /**
+     * Display the specified resource.
+     * @param int $id
+     * @return Response
+     */
+    public function take_test($id)
+    {
+        $test = $this->suitabilityTestRepository->find($id);
+
+        return view('suitability_test.amc.show', ["test" => $test]);
+    }
 }
