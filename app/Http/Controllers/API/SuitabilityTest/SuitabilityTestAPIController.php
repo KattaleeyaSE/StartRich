@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 //Service Container
 use App\IRepositories\ISuitabilityTestRepository;
 use App\IServices\ISuitabilityTestService;
-
+ 
 class SuitabilityTestAPIController extends Controller
 {
     private $suitabilityTestRepository;
@@ -46,7 +46,7 @@ class SuitabilityTestAPIController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Json
      */
     public function store(Request $request)
     { 
@@ -76,7 +76,7 @@ class SuitabilityTestAPIController extends Controller
         }
         catch(\Exception $e)
         {
-            return \Response::Json("Fail",404);
+            return \Response::Json("Fail : ".$e->getMessage(),404);
         }
 
      
@@ -97,23 +97,126 @@ class SuitabilityTestAPIController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Json
      */
     public function edit($id)
     {
         //
+        try
+        {
+            // fallback to global request instance
+            if ($id == 0) {
+                return \Response::Json("Fail",404);
+            }
+
+            // // replace empty values with NULL, so that it will work with MySQL strict mode on
+            // foreach ($request->input() as $key => $value) {
+            //     if (empty($value) && $value !== '0') {
+            //         $request->request->set($key, null);
+            //     }
+            // }
+
+            $test  = $this->suitabilityTestRepository->find($id);
+
+            if(!is_null($test))
+            { 
+                $results = [];
+                foreach($test->suitability_test_results as $result)
+                {
+                    array_push($results,
+                        [
+                            "id" => $result->id,
+                            "max_score" => $result->max_score,
+                            "min_score" => $result->min_score,
+                            "type_of_investors" => $result->type_of_investors,
+                        ]);
+                }
+                
+                $questions = [];
+                foreach($test->suitability_test_questions as $question)
+                {
+                    $answers = [];
+                    foreach($question->suitability_answers as $answer)
+                    {
+                        array_push( $answers,
+                            [
+                                "id" => $answer->id,
+                                "answer" => $answer->answer,
+                                "score" => $answer->score,
+                            ]);
+                    }
+
+                    array_push($questions,
+                        [
+                            "id" => $question->id,
+                            "question" => $question->question,
+                            "answers" => $answers,
+                        ]);
+                }
+
+                $msg = [
+                    "msg" => "Success",
+                    "test" => 
+                    [
+                        "id"  =>  $test->id,
+                        "amc_id"  => $test->amc_id,
+                        "question_name"  => $test->name,
+                        "description"  => $test->description,
+                        "results"  => $results,
+                        "questions"  => $questions,
+                        "show_create_result"  => true, 
+                        "show_add_question"  => false, 
+                    ],
+                ];
+
+                return \Response::Json($msg,200);
+
+            }else{
+                return \Response::Json("Fail",404);
+            } 
+        }
+        catch(\Exception $e)
+        {
+            return \Response::Json("Fail : ".$e->getMessage(),404);
+        }       
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Json
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        try
+        {
+            // fallback to global request instance
+            if (is_null($request)) {
+                return \Response::Json("Fail",404);
+            }
+
+            // // replace empty values with NULL, so that it will work with MySQL strict mode on
+            // foreach ($request->input() as $key => $value) {
+            //     if (empty($value) && $value !== '0') {
+            //         $request->request->set($key, null);
+            //     }
+            // }
+
+            $test  = $this->suitabilityTestService->update_test($request);
+
+            if(!is_null($test))
+            {
+                return \Response::Json("Success",200);
+
+            }else{
+                return \Response::Json("Fail",404);
+            } 
+        }
+        catch(\Exception $e)
+        {
+            return \Response::Json("Fail : ".$e->getMessage(),404);
+        }
     }
 
     /**

@@ -91,28 +91,19 @@ class SuitabilityTestAMCController extends Controller
     //     return $this->performSaveAction($item->getKey());
     // }
 
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param int $id
-    //  *
-    //  * @return Response
-    //  */
-    // public function edit()
-    // {
-    //     if(\Auth::check() && !is_null(\Auth::user()->member))
-    //     {
-    //         $member = $this->memberRepository->find(\Auth::user()->member->id);
-
-    //         return view('member.edit', 
-    //             [
-    //                 'member' => $member,
-    //             ]
-    //         );
-    //     }
-
-    //     return \Redirect('/');
-    // }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function edit($id)
+    {
+        return view('suitability_test.amc.edit',[
+            'id' => $id
+        ]);
+    }
 
     // /**
     //  * Update the specified resource in the database.

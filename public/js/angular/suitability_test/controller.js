@@ -12,9 +12,26 @@ function($scope,SuitabilityTestResource) {
         show_add_question :false, 
     }; 
 
+    $scope.removeResult = [];
+    $scope.removeQuestion = [];
+    $scope.removeAnswer = [];
+
+    $scope.initUpdate = function (id)
+    {
+        SuitabilityTestResource.Edit(id).then(function(resp){
+            if(resp.data.msg == "Success")
+            {
+                $scope.suitabilityTest = resp.data.test;
+                console.log( $scope.suitabilityTest);
+            } 
+        });        
+    }
+
+
     $scope.addResultGroup = function ()
     {
         $scope.suitabilityTest.results.push({
+            id : 0,
             max_score : 0,
             min_score : 0,
             type_of_investors : "",
@@ -24,6 +41,7 @@ function($scope,SuitabilityTestResource) {
     $scope.addQuestionGroup = function ()
     {
         $scope.suitabilityTest.questions.push({
+            id : 0,
             question : "",
             answers : [], 
         });
@@ -31,23 +49,44 @@ function($scope,SuitabilityTestResource) {
     $scope.addAnswerGroup = function (question)
     {
         question.answers.push({
+            id : 0,
             answer : "",
             score :0, 
         });
     }
 
-    $scope.removeResultGroup = function (index)
+    $scope.removeResultGroup = function (index,resultId)
     {
+        if(resultId > 0)
+        {
+                $scope.removeResult.push({
+                        id : resultId, 
+                });
+        }
+
         $scope.suitabilityTest.results.splice(index, 1);     
     }
 
-    $scope.removeQuestionGroup = function (index)
+    $scope.removeQuestionGroup = function (index,questionId)
     {
+        if(questionId > 0)
+        {
+                $scope.removeQuestion.push({
+                        id : questionId, 
+                });
+        }        
+
         $scope.suitabilityTest.questions.splice(index, 1);     
     }
 
-    $scope.removeAnswerGroup = function (question,index)
+    $scope.removeAnswerGroup = function (question,index,answerId)
     {
+        if(answerId > 0)
+        {
+                $scope.removeAnswer.push({
+                        id : answerId, 
+                });
+        }         
         question.answers.splice(index, 1);     
     }
 
@@ -67,6 +106,28 @@ function($scope,SuitabilityTestResource) {
     {
         $scope.suitabilityTest.amc_id = id;
         SuitabilityTestResource.Create($scope.suitabilityTest).then(function(resp){
+            if(resp.status == 200 && resp.data == "Success")
+            {
+                location.href = "/suitabilitytest/amc/index";
+            } 
+        });
+    }
+
+    $scope.update = function()
+    {
+        if($scope.removeResult && $scope.removeResult.length > 0)
+        {
+            $scope.suitabilityTest.removeResult = $scope.removeResult; 
+        }
+        if($scope.removeQuestion && $scope.removeQuestion.length > 0)
+        { 
+            $scope.suitabilityTest.removeQuestion = $scope.removeQuestion; 
+        }
+        if($scope.removeAnswer && $scope.removeAnswer.length > 0)
+        {  
+            $scope.suitabilityTest.removeAnswer = $scope.removeAnswer;
+        }
+        SuitabilityTestResource.Update($scope.suitabilityTest).then(function(resp){
             if(resp.status == 200 && resp.data == "Success")
             {
                 location.href = "/suitabilitytest/amc/index";

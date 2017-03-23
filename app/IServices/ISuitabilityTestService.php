@@ -32,4 +32,27 @@ interface ISuitabilityTestService
     **/     
     public function create_question_answer(Request $request,SuitabilityTest $suitabilityTest);
 
+    /**
+     * @param Illuminate\Http\Request $request
+     *
+     * @return SuitabilityTest Object
+    **/     
+    public function update_test(Request $request);
+
+    /**
+     * @param Illuminate\Http\Request $request
+     * @param SuitabilityTest $suitabilityTest
+     *
+     * @return SuitabilityTestResult Collection
+    **/     
+    public function update_result(Request $request,SuitabilityTest $suitabilityTest);
+
+    /**
+     * @param Illuminate\Http\Request $request
+     * @param SuitabilityTest $suitabilityTest
+     *
+     * @return SuitabilityTestQuestion Collection
+    **/     
+    public function update_question_answer(Request $request,SuitabilityTest $suitabilityTest);
+
 }

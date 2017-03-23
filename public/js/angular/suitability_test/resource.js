@@ -6,6 +6,16 @@ app.factory('SuitabilityTestResource', function ($http) {
                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+        },
+        Edit : function (id) {
+            return $http.get("/api/suitability/edit/"+id);
+        },
+        Update: function (data) {
+            return $http.post("/api/suitability/update",data,{ 
+                headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
         }
     };
 });

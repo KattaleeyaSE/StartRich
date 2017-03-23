@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="container" ng-controller="suitabilityTestController" ng-cloak>
-    <div class="row">
+    <div class="row" ng-init="initUpdate({{$id}})">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">AMC : Create Suitability Test</div> 
+                <div class="panel-heading">AMC : Edit Suitability Test</div> 
                 
                 <div class="panel-body"> 
-                    <form class="form-horizontal" name="createform">
+                    <form class="form-horizontal" name="updateform">
 
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="question_name">Question Name</label> 
@@ -133,7 +133,7 @@
                         <div class="form-group" ng-show="suitabilityTest.show_create_result">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12"></label> 
                             <div class="col-md-6 col-sm-6 col-xs-12"> 
-                                <button type="button" class="btn btn-default pull-right" ng-click="createform.$valid && showAddQuestionSection();">Next</button>
+                                <button type="button" class="btn btn-default pull-right" ng-click="updateform.$valid && showAddQuestionSection();">Next</button>
                             </div> 
                         </div> 
 
@@ -141,7 +141,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12"></label> 
                             <div class="col-md-6 col-sm-6 col-xs-12"> 
                                 <button type="button" class="btn btn-default" ng-click="showAddResultSection();">Back</button>
-                                <button type="button" class="btn btn-success pull-right" ng-click="createform.$valid && create({{\Auth::user()->amc->id}});">Submit</button>
+                                <button type="button" class="btn btn-success pull-right" ng-click="updateform.$valid && update();">Submit</button>
                             </div> 
                         </div> 
 
