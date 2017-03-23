@@ -163,18 +163,18 @@ class SuitabilityTestAMCController extends Controller
     //     return \Redirect('/');
     // }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param int $id
-    //  *
-    //  * @return string
-    //  */
-    // public function destroy($id)
-    // {
-    //     $this->crud->hasAccessOrFail('delete');
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return string
+     */
+    public function destroy($id)
+    { 
+        $this->suitabilityTestRepository->delete($id);
 
-    //     return $this->crud->delete($id);
-    // }
+        return \Redirect('/suitabilitytest/amc/index'); 
+    }
 
 }
