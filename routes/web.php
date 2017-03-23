@@ -33,6 +33,7 @@ Route::group(['prefix' => 'suitabilitytest'], function () {
         Route::get('/index','SuitabilityTest\SuitabilityTestMemberController@index'); 
         Route::get('/alltest','SuitabilityTest\SuitabilityTestMemberController@all_test'); 
         Route::get('/take/{id}','SuitabilityTest\SuitabilityTestMemberController@take_test'); 
+        Route::post('/storetest','SuitabilityTest\SuitabilityTestMemberController@store_test'); 
         // Route::get('/show/{id}','SuitabilityTest\SuitabilityTestAMCController@show'); 
         // Route::delete('/delete/{id}','SuitabilityTest\SuitabilityTestAMCController@destroy'); 
     }); 

@@ -8,7 +8,7 @@
                 <div class="panel-heading">Take Suitability Test</div> 
                 
                 <div class="panel-body"> 
-                     <form class="form-horizontal">
+                     <form class="form-horizontal" action="{{url('suitabilitytest/member/storetest')}}" method="POST">
 
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="question_name">Question Name</label> 
@@ -58,7 +58,7 @@
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                                     @foreach($question->suitability_answers as $akey => $answer)
                                                         <label class="radio-inline">
-                                                            <input type="radio" name="q_{{$qkey+1}}" value="{{$answer->id}}">{{$answer->answer}}
+                                                            <input type="radio" name="q_{{$qkey+1}}" value="{{$answer->id}}" required>{{$answer->answer}}
                                                         </label> 
                                                      @endforeach
                                                 </div>  

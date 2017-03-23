@@ -55,4 +55,11 @@ interface ISuitabilityTestService
     **/     
     public function update_question_answer(Request $request,SuitabilityTest $suitabilityTest);
 
+    /**
+     * @param Illuminate\Http\Request $request
+     *
+     * @return SuitabilityTestQuestion Collection
+    **/     
+    public function calculation(Request $request);
+
 }

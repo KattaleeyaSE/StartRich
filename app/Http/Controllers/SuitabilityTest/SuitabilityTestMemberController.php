@@ -66,4 +66,16 @@ class SuitabilityTestMemberController extends Controller
 
         return view('suitability_test.member.take_test', ["test" => $test]);
     }
+
+    /**
+     * Store a newly created resource in the database.
+     *
+     * @param StoreRequest $request - type injection used for validation using Requests
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store_test(Request $request)
+    {
+ 
+    }   
 }
