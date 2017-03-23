@@ -95,6 +95,8 @@ class RegisterController extends Controller
      */
     public function register(StoreRequest $request)
     {
+        $request->offsetSet('password',bcrypt($request->password));
+        
         $member = $this->memberRepository->create($request);
         
         return \Redirect('\login');

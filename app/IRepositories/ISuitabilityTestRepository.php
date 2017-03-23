@@ -23,6 +23,15 @@ interface ISuitabilityTestRepository
      *
      * @return Request
      */        
+    public function all_pagination($paging);
+
+    /**
+     * Display all rows in the requestbase for this entity.
+     *
+     * @param int amc_id
+     *
+     * @return Request
+     */        
     public function all_by_amc_id_pagination($amc_id,$paging);
 
     /**

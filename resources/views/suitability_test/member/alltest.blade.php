@@ -5,10 +5,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Member : Suitability Test</div>
-                <div class="panel-body">
-                    <a href="{{url('suitabilitytest/member/alltest')}}" class="btn btn-success">Take a Suitability Test</a>
-                </div>
+                <div class="panel-heading">Take Suitability Test</div> 
+ 
                 <div class="panel-body">  
                 <div class="table-responsive">
                     <table class="table">
@@ -31,7 +29,7 @@
                                     <td class="text-center">{{$item->created_at}}</td> 
                                     <td class="text-center">{{$item->updated_at}}</td> 
                                     <td class="text-center">
-                                        <a href="{{url(''.$item->id)}}" class="btn btn-primary">View</a> | <a href="" class="btn btn-warning">Edit</a> | <a href="" class="btn btn-danger">Delete</a>
+                                        <a href="{{url('/suitabilitytest/amc/show/'.$item->id)}}" class="btn btn-primary">Take</a>
                                     </td> 
                                 </tr> 
                             @endforeach
@@ -39,11 +37,12 @@
                         </table>  
                     </div>
                       <div class="text-center">
-                        {{-- $suitabilityTests->links() --}}
+                        {{ $suitabilityTests->links() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection

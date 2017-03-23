@@ -33,6 +33,11 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
         return $this->suitabilityTest->all();;
     }
 
+    public function all_pagination($paging)
+    {
+        return $this->suitabilityTest->paginate($paging);
+    }
+
     public function all_by_amc_id_pagination($amc_id,$paging)
     {
         return $this->suitabilityTest->where('amc_id', $amc_id)->with('amc')->paginate($paging);
