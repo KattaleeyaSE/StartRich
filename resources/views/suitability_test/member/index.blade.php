@@ -27,7 +27,7 @@
                                     <td class="text-center">{{$item->name}}</td>  
                                     <td class="text-center">{{$item->created_at}}</td>  
                                     <td class="text-center">
-                                        <a href="{{url('suitabilitytest/member/show/'.$item->id)}}" class="btn btn-primary">View</a> | <a href="" class="btn btn-danger">Delete</a>
+                                        <a href="{{url('suitabilitytest/member/show/'.$item->id)}}" class="btn btn-primary">View</a> | <a href="{{url('/suitabilitytest/member/delete/'.$item->id)}}" class="btn btn-danger" data-button-type="delete">Delete</a>
                                     </td> 
                                 </tr> 
                             @endforeach
@@ -42,4 +42,24 @@
         </div>
     </div>
 </div>
+
+{{--Delete Form--}}
+<form action="" method="post" id="deleteform">
+    {{ csrf_field() }}
+    {{ method_field('DELETE') }}
+</form>
+@endsection
+@section('script')
+<script>
+   $("[data-button-type=delete]").click(function(e) {
+          e.preventDefault();
+          var delete_button = $(this);
+          var delete_url = $(this).attr('href');
+
+          if (confirm("{{ trans('backpack::crud.delete_confirm') }}") == true) {
+                $('#deleteform').attr('action',delete_url);
+                $('#deleteform').submit();
+            }
+      });
+</script>      
 @endsection

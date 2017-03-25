@@ -35,9 +35,8 @@ Route::group(['prefix' => 'suitabilitytest'], function () {
         Route::get('/recordtest','SuitabilityTest\SuitabilityTestMemberController@record_test'); 
         Route::get('/show/{id}','SuitabilityTest\SuitabilityTestMemberController@show_record'); 
         Route::get('/take/{id}','SuitabilityTest\SuitabilityTestMemberController@take_test'); 
-        Route::post('/storetest','SuitabilityTest\SuitabilityTestMemberController@store_test'); 
-        // Route::get('/show/{id}','SuitabilityTest\SuitabilityTestAMCController@show'); 
-        // Route::delete('/delete/{id}','SuitabilityTest\SuitabilityTestAMCController@destroy'); 
+        Route::post('/storetest','SuitabilityTest\SuitabilityTestMemberController@store_test');  
+        Route::delete('/delete/{id}','SuitabilityTest\SuitabilityTestMemberController@destroy'); 
     }); 
 });
 

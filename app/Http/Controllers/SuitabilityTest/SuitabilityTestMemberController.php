@@ -154,5 +154,19 @@ class SuitabilityTestMemberController extends Controller
             return \Redirect('suitabilitytest/member/alltest');
         }
 
-    }   
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return string
+     */
+    public function destroy($id)
+    { 
+        $this->suitabilityTestMemberRepository->delete($id);
+
+        return \Redirect('/suitabilitytest/member/index'); 
+    }       
 }
