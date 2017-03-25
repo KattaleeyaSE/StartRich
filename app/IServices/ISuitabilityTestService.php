@@ -56,10 +56,24 @@ interface ISuitabilityTestService
     public function update_question_answer(Request $request,SuitabilityTest $suitabilityTest);
 
     /**
+     * @param Array $request
+     *
+     * @return SuitabilityTestMember
+    **/     
+    public function create_take_test(array $data);
+
+    /**
+     * @param int id
+     *
+     * @return SuitabilityTestResult
+    **/     
+    public function get_test_result($id);
+    
+    /**
      * @param Illuminate\Http\Request $request
      *
-     * @return SuitabilityTestQuestion Collection
+     * @return SuitabilityTestResult
     **/     
-    public function calculation(Request $request);
+    public function get_temporary_test_result(Request $request);
 
 }

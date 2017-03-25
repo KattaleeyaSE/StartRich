@@ -14,8 +14,6 @@
                             <tr>
                                 <th class="text-center">AMC name</th>
                                 <th class="text-center">Name</th>
-                                <th class="text-center">Description</th>
-                                <th class="text-center">Created Date</th>
                                 <th class="text-center">Updated Date</th>
                                 <th class="text-center">Action</th>
                             </tr>
@@ -25,8 +23,6 @@
                                 <tr>
                                     <td class="text-center">{{$item->amc->company_name}}</td>
                                     <td class="text-center">{{$item->name}}</td> 
-                                    <td class="text-center">{{$item->description}}</td> 
-                                    <td class="text-center">{{$item->created_at}}</td> 
                                     <td class="text-center">{{$item->updated_at}}</td> 
                                     <td class="text-center">
                                         <a href="{{url('/suitabilitytest/member/take/'.$item->id)}}" class="btn btn-primary">Take</a>

@@ -15,7 +15,7 @@ class CreateSuitabilityTestMembersTable extends Migration
     {
         Schema::create('suitability_test_members', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('score');
+            $table->integer('score'); 
 
             $table->integer('member_id')->unsigned();
             $table->foreign('member_id')
@@ -29,8 +29,8 @@ class CreateSuitabilityTestMembersTable extends Migration
                 ->references('id')
                 ->on('suitability_tests')
                 ->onDelete('cascade')
-                ->onUpdate('cascade'); 
-                                   
+                ->onUpdate('cascade');  
+                
             $table->timestamps();
         });
     }

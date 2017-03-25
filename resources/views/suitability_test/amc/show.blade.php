@@ -11,7 +11,7 @@
                     <div class="form-horizontal">
 
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="question_name">Question Name</label> 
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="question_name">Name</label> 
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-control-static col-md-7 col-xs-12"> 
                                     {{$test->name}}
@@ -56,6 +56,15 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                          <div class="form-control-static col-md-7 col-xs-12"> 
                                             {{$result->min_score}}
+                                        </div> 
+                                    </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Risk Level</label> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                         <div class="form-control-static col-md-7 col-xs-12"> 
+                                            {{$result->risk_level}}
                                         </div> 
                                     </div> 
                                 </div>

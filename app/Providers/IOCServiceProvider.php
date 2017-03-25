@@ -40,6 +40,10 @@ class IOCServiceProvider extends ServiceProvider
             'App\IRepositories\ISuitabilityTestRepository',
             'App\Repositories\SuitabilityTestRepository'
         );        
+        $this->app->bind(
+            'App\IRepositories\ISuitabilityTestMemberRepository',
+            'App\Repositories\SuitabilityTestMemberRepository'
+        );        
 
         $this->app->bind(
             'App\IServices\ISuitabilityTestService',

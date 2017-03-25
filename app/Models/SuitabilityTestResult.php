@@ -19,6 +19,7 @@ class SuitabilityTestResult extends Model
         protected $fillable = [
             'max_score',
             'min_score',
+            'risk_level',
             'type_of_investors',
             'suitability_test_id',
         ];

@@ -12,14 +12,13 @@ class SuitabilityTestMemberAnswer extends Model
 	|--------------------------------------------------------------------------
 	*/
 
-        protected $table = 'suitability_test_members';
+        protected $table = 'suitability_test_member_answers';
         protected $primaryKey = 'id';
         // public $timestamps = false;
         // protected $guarded = ['id'];
         protected $fillable = [
-            'score',
-            'member_id',
-            'suitability_test_id',
+            'suit_member_answer_id',
+            'suit_test_member_id',
         ];
 
         // protected $hidden = [];

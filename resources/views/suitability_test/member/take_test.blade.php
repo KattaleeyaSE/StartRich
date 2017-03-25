@@ -5,11 +5,13 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Take Suitability Test</div> 
+                <div class="panel-heading"> Member : Take Suitability Test</div> 
                 
                 <div class="panel-body"> 
                      <form class="form-horizontal" action="{{url('suitabilitytest/member/storetest')}}" method="POST">
-
+                        {{csrf_field()}}
+                        <input type="hidden" name="test_id" value="{{$test->id}}">
+                        <input type="hidden" name="test_member_id" value="{{Auth::user()->member->id}}">
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="question_name">Question Name</label> 
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -24,6 +26,15 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-control-static col-md-7 col-xs-12"> 
                                     {{$test->description}}
+                                </div> 
+                            </div> 
+                        </div> 
+                        
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Update Date</label> 
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-control-static col-md-7 col-xs-12"> 
+                                    {{$test->updated_at}}
                                 </div> 
                             </div> 
                         </div> 

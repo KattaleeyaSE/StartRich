@@ -7,14 +7,20 @@ use App\Models\SuitabilityTest;
 use App\IServices\ISuitabilityTestService;
 //Service Container
 use App\IRepositories\ISuitabilityTestRepository;
+use App\IRepositories\ISuitabilityTestMemberRepository;
 class SuitabilityTestService implements ISuitabilityTestService
 {
 
     private $suitabilityTestRepository;
+    private $suitabilityTestMemberRepository;
 
-    public function __construct(ISuitabilityTestRepository $suitabilityTestRepository)
+    public function __construct(
+            ISuitabilityTestRepository $suitabilityTestRepository,
+            ISuitabilityTestMemberRepository $suitabilityTestMemberRepository
+        )
     { 
         $this->suitabilityTestRepository = $suitabilityTestRepository;
+        $this->suitabilityTestMemberRepository = $suitabilityTestMemberRepository;
     }    
 
     public function create_test(Request $request)
@@ -51,6 +57,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                 $newRequest = new Request(); 
                 $newRequest->offsetSet('max_score',$result['max_score']);
                 $newRequest->offsetSet('min_score',$result['min_score']);
+                $newRequest->offsetSet('risk_level',$result['risk_level']);
                 $newRequest->offsetSet('type_of_investors',$result['type_of_investors']);                
                 $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);            
 
@@ -147,6 +154,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                     $newRequest = new Request(); 
                     $newRequest->offsetSet('max_score',$result['max_score']);
                     $newRequest->offsetSet('min_score',$result['min_score']);
+                    $newRequest->offsetSet('risk_level',$result['risk_level']);
                     $newRequest->offsetSet('type_of_investors',$result['type_of_investors']);      
 
                     $suitabilityTestResult = $this->suitabilityTestRepository->update_result($result['id'],$newRequest); 
@@ -158,6 +166,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                     $newRequest = new Request(); 
                     $newRequest->offsetSet('max_score',$result['max_score']);
                     $newRequest->offsetSet('min_score',$result['min_score']);
+                    $newRequest->offsetSet('risk_level',$result['risk_level']);
                     $newRequest->offsetSet('type_of_investors',$result['type_of_investors']);                
                     $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);            
 
@@ -263,4 +272,107 @@ class SuitabilityTestService implements ISuitabilityTestService
         }   
         return $questions;
     }
+  
+    public function create_take_test(array $data)
+    {
+        $test = $this->suitabilityTestRepository->find($data['test_id']);
+        $suit_member = null;
+        if(!is_null($test))
+        {
+            $score = 0;
+
+            $suit_member_request = new Request(); 
+            $suit_member_request->offsetSet('score', $score);
+            $suit_member_request->offsetSet('suitability_test_id', $data['test_id']);
+            $suit_member_request->offsetSet('member_id', $data['test_member_id']);
+
+            $suit_member = $this->suitabilityTestMemberRepository->create($suit_member_request);
+
+            foreach($test->suitability_test_questions as $key => $question)
+            {
+                $answer_id = $data['q_'.$question->id];
+                $suit_member_answer_request = new Request();
+                $suit_member_answer_request->offsetSet('suit_member_answer_id', $answer_id);
+                $suit_member_answer_request->offsetSet('suit_test_member_id', $suit_member->id);
+
+                $answer =  $this->suitabilityTestRepository->find_answer($answer_id); 
+
+                $score  += $answer->score; 
+
+                $suit_member_answer = $this->suitabilityTestMemberRepository->create_answer($suit_member_answer_request);
+            } 
+
+            $suit_member_request = new Request();
+            $suit_member_request->offsetSet('score',  $score); 
+ 
+            $this->suitabilityTestMemberRepository->update($suit_member->id,$suit_member_request);
+        }
+
+        return $suit_member ;
+    }
+
+     public function get_test_result($id)
+     {        
+         $suit_member = $this->suitabilityTestMemberRepository->find($id);
+         $suit_test = $this->suitabilityTestRepository->find($suit_member->suitability_test_id);
+         $result = null;
+         
+         if(
+             $suit_test != null 
+             && $suit_member->score > 0 
+             && sizeof($suit_test->suitability_test_results) > 0
+            )
+         {
+            foreach($suit_test->suitability_test_results as $key => $item)
+            { 
+               if($suit_member->score >= $item->min_score && $suit_member->score <= $item->max_score )
+               {
+                    $result = $item;
+                    break;
+               }
+            }
+         }
+
+         return $result;
+     }
+
+
+     public function get_temporary_test_result(Request $request)
+     {        
+        $test = $this->suitabilityTestRepository->find($request->test_id);
+        $suit_member = null;
+        $result = null;
+        if(!is_null($test))
+        {
+            $score = 0; 
+            
+            foreach($test->suitability_test_questions as $key => $question)
+            {
+                $answer_id = $request['q_'.$question->id]; 
+
+                $answer =  $this->suitabilityTestRepository->find_answer($answer_id); 
+
+                $score  += $answer->score;  
+            }  
+         
+            if( 
+                $score > 0 
+                && sizeof($test->suitability_test_results) > 0
+                )
+            {
+                foreach($test->suitability_test_results as $key => $item)
+                { 
+                    if($score >= $item->min_score && $score <= $item->max_score )
+                    {
+
+                            $result = $item;
+                            $result->offsetSet('score', $score);
+                            break;
+                    }
+                }
+            } 
+        }
+         return $result;
+     }
+    
 }

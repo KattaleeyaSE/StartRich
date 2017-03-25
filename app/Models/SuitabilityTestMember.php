@@ -38,7 +38,7 @@ class SuitabilityTestMember extends Model
 	*/
 		public function suitability_test()
 		{
-            return $this->hasOne('App\Models\SuitabilityTest');
+            return $this->belongsTo('App\Models\SuitabilityTest');
 		}
 
 		public function member()
