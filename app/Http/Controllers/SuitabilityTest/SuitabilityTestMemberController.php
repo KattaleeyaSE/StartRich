@@ -142,13 +142,12 @@ class SuitabilityTestMemberController extends Controller
         {  
             $stored_test = $this->suitabilityTestService->create_take_test( $test_result);
  
-            $result = $this->suitabilityTestService->get_test_result( $stored_test->id);
+            // $result = $this->suitabilityTestService->get_test_result( $stored_test->id);
             
-            $result->offsetSet('score',$stored_test->score);
+            // $result->offsetSet('score',$stored_test->score);
 
-            return view('suitability_test.member.result', [
-                    "test_result" => $result
-                ]);
+            return \Redirect('suitabilitytest/member/show/'.$stored_test->id);
+
         }else
         {
             return \Redirect('suitabilitytest/member/alltest');
