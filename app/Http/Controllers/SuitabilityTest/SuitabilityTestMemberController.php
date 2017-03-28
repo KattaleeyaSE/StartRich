@@ -100,7 +100,7 @@ class SuitabilityTestMemberController extends Controller
     public function take_test($id)
     {
         $test = $this->suitabilityTestRepository->find($id);
-
+        $test =   $test->orderByDesc('updated_at');
         return view('suitability_test.member.take_test', ["test" => $test]);
     }
 
