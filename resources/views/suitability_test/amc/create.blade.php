@@ -27,7 +27,31 @@
 
                         {{--suit-result-group--}}
                         <div class="suit-result-group" ng-show="suitabilityTest.show_create_result">
-                          
+
+                            {{--Asset--}}
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Create Asset Allocation</label> 
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                <button type="button" class="btn btn-default" ng-click="addAssetGroup();">Create</button>
+                                </div> 
+                            </div> 
+                            <div ng-repeat="asset in suitabilityTest.assets">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Asset <%$index+1%></label> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12"> 
+                                        <button type="button" class="btn btn-danger pull-right" ng-click="removeAssetGroup($index,asset.id);">Remove</button>
+                                    </div> 
+                                </div>  
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Asset</label> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="assets[]" ng-model="asset.name" class="form-control col-md-7 col-xs-12"  ng-required="true" /> 
+                                    </div> 
+                                </div>
+                            </div> 
+                            {{--Asset--}}
+
+
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Create Result</label> 
                                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -71,6 +95,16 @@
                                         <textarea name="type_of_investors[]" class="form-control col-md-7 col-xs-12" ng-model="result.type_of_investors"/></textarea>
                                     </div> 
                                 </div>
+
+                                <div ng-repeat="asset in suitabilityTest.assets">
+                                    <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"><%asset.name%> Allocation</label> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="risk_level[]" ng-model="result.asset[$index].allocate" class="form-control col-md-7 col-xs-12" /> 
+                                    </div> 
+                                </div>
+                                </div>
+
                             </div> 
                         </div>
                         {{--suit-result-group--}}

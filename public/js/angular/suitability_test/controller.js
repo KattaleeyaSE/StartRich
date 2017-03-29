@@ -7,6 +7,7 @@ function($scope,SuitabilityTestResource) {
         question_name :"",
         description :"",
         results :[],
+        assets :[],
         questions :[],
         show_create_result :true, 
         show_add_question :false, 
@@ -39,6 +40,16 @@ function($scope,SuitabilityTestResource) {
 
         });
     }
+
+    $scope.addAssetGroup = function ()
+    {
+        $scope.suitabilityTest.assets.push({
+            id : 0,
+            name : '', 
+
+        });
+    }
+
     $scope.addQuestionGroup = function ()
     {
         $scope.suitabilityTest.questions.push({
@@ -68,6 +79,18 @@ function($scope,SuitabilityTestResource) {
         $scope.suitabilityTest.results.splice(index, 1);     
     }
 
+    $scope.removeAssetGroup = function (index,assetId)
+    {
+        if(assetId > 0)
+        {
+                // $scope.removeResult.push({
+                //         id : resultId, 
+                // });
+        }
+
+         $scope.suitabilityTest.assets.splice(index, 1);       
+    }
+
     $scope.removeQuestionGroup = function (index,questionId)
     {
         if(questionId > 0)
@@ -93,6 +116,7 @@ function($scope,SuitabilityTestResource) {
 
     $scope.showAddQuestionSection= function ()
     {
+        console.log($scope);
         $scope.suitabilityTest.show_create_result = false;
         $scope.suitabilityTest.show_add_question = true; 
     }
