@@ -149,4 +149,34 @@ interface ISuitabilityTestRepository
     * @return boolean
     **/
     public function delete_answer($id);   
+
+    
+    /**
+     * @param int id
+     *
+     * @return SuitabilityAsset Object
+    **/     
+    public function find_asset($id);
+
+    /**
+     * @param Illuminate\Http\Request $request
+     *
+     * @return SuitabilityAsset Object
+    **/    
+    public function create_asset(Request $request);
+
+    /**
+     * @param Illuminate\Http\Request $request
+     * @param int id
+     *
+     * @return SuitabilityAsset Object
+    **/    
+    public function update_asset($id,Request $request);
+
+    /**
+    * @param int id
+    *
+    * @return boolean
+    **/
+    public function delete_asset($id);       
 }
