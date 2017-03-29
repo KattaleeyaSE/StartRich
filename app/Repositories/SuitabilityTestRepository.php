@@ -8,6 +8,7 @@ use App\Models\SuitabilityTest;
 use App\Models\SuitabilityTestResult;
 use App\Models\SuitabilityQuestion;
 use App\Models\SuitabilityQuestionAnswer;
+use App\Models\SuitabilityAsset;
 use Illuminate\Http\Request;
 class SuitabilityTestRepository implements ISuitabilityTestRepository
 {
@@ -15,17 +16,20 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
     private $suitabilityTestResult;
     private $suitabilityTestQuestion;
     private $suitabilityTestAnswer;
+    private $suitabilityAsset;
     public function __construct(
             SuitabilityTest $suitabilityTest,
             SuitabilityTestResult $suitabilityTestResult,
             SuitabilityQuestion $suitabilityTestQuestion,
-            SuitabilityQuestionAnswer $suitabilityTestAnswer
+            SuitabilityQuestionAnswer $suitabilityTestAnswer,
+            SuitabilityAsset $suitabilityAsset
         )
     {
         $this->suitabilityTest = $suitabilityTest;
         $this->suitabilityTestResult = $suitabilityTestResult;
         $this->suitabilityTestQuestion = $suitabilityTestQuestion;
         $this->suitabilityTestAnswer = $suitabilityTestAnswer;
+        $this->suitabilityAsset = $suitabilityAsset;
     }
 
     public function all()
@@ -141,5 +145,30 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
             return false;
         }
         return $suitabilityTestAnswer->delete();
+    }
+
+    public function find_asset($id)
+    {
+        return $this->suitabilityAsset->find($id);
+    }  
+
+    public function create_asset(Request $request)
+    {
+        return $this->suitabilityAsset->create($request->all());        
+    }  
+    
+    public function update_asset($id,Request $request)
+    {
+        $suitabilityAsset = $this->find_asset($id);  
+        return $suitabilityAsset->update($request->all()); 
+    }
+ 
+    public function delete_asset($id)
+    {
+        $suitabilityAsset = $this->find_asset($id);  
+        if (is_null($suitabilityAsset)) {
+            return false;
+        }
+        return $suitabilityAsset->delete();
     }
 }
