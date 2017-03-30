@@ -28,6 +28,28 @@
                             </div> 
                         </div>
 
+                        @if(sizeof($test->suitability_test_assets) > 0)
+
+                          @foreach($test->suitability_test_assets as $key => $asset)
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Asset {{$key +1 }}</label> 
+                                <div class="col-md-6 col-sm-6 col-xs-12"> 
+                                    
+                                </div> 
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Asset</label> 
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-control-static col-md-7 col-xs-12"> 
+                                        {{$asset->name}}
+                                    </div> 
+                                </div> 
+                            </div> 
+                            @endforeach
+                            
+                        @endif
+
                         @if(sizeof($test->suitability_test_results) > 0)
                         {{--suit-result-group--}}
                         <div class="suit-result-group">
@@ -77,6 +99,21 @@
                                         </div> 
                                     </div> 
                                 </div>
+
+                                @if(sizeof($result->suitability_asset_test) > 0)
+
+                                    @foreach($result->suitability_asset_test as $key => $asset) 
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">{{$asset->name}} Allocation</label> 
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-control-static col-md-7 col-xs-12"> 
+                                                    {{$asset->pivot->percent}}
+                                                </div> 
+                                            </div> 
+                                        </div> 
+                                    @endforeach
+                                    
+                                @endif
 
                             </div>
                             @endforeach
