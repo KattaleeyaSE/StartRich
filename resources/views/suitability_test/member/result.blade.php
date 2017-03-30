@@ -75,6 +75,20 @@
                             </div> 
                         </div>
 
+                        @if(sizeof($test_result->suitability_asset_test) > 0)
+
+                            @foreach($test_result->suitability_asset_test as $key => $asset) 
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{$asset->name}} Allocation</label> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-control-static col-md-7 col-xs-12"> 
+                                            {{$asset->pivot->percent}}
+                                        </div> 
+                                    </div> 
+                                </div> 
+                            @endforeach
+                            
+                        @endif
                         {{--Appropriate mutual fund--}}
                          <hr>                              
                         <div class="form-group">
