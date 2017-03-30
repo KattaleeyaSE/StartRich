@@ -9,6 +9,7 @@ use App\Models\SuitabilityTestResult;
 use App\Models\SuitabilityQuestion;
 use App\Models\SuitabilityQuestionAnswer;
 use App\Models\SuitabilityAsset;
+use App\Models\SuitabilityAssetTest;
 use Illuminate\Http\Request;
 class SuitabilityTestRepository implements ISuitabilityTestRepository
 {
@@ -17,12 +18,14 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
     private $suitabilityTestQuestion;
     private $suitabilityTestAnswer;
     private $suitabilityAsset;
+    private $suitabilityAssetTest;
     public function __construct(
             SuitabilityTest $suitabilityTest,
             SuitabilityTestResult $suitabilityTestResult,
             SuitabilityQuestion $suitabilityTestQuestion,
             SuitabilityQuestionAnswer $suitabilityTestAnswer,
-            SuitabilityAsset $suitabilityAsset
+            SuitabilityAsset $suitabilityAsset,
+            SuitabilityAssetTest $suitabilityAssetTest
         )
     {
         $this->suitabilityTest = $suitabilityTest;
@@ -30,6 +33,7 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
         $this->suitabilityTestQuestion = $suitabilityTestQuestion;
         $this->suitabilityTestAnswer = $suitabilityTestAnswer;
         $this->suitabilityAsset = $suitabilityAsset;
+        $this->suitabilityAssetTest = $suitabilityAssetTest;
     }
 
     public function all()
@@ -171,4 +175,51 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
         }
         return $suitabilityAsset->delete();
     }
+
+    public function find_asset_test($id)
+    {
+        return $this->suitabilityAssetTest->find($id);
+    }  
+
+    public function get_asset_test($asset_id = 0,$result_id = 0)
+    {
+        if($asset_id == 0 &&$result_id == 0)
+        {
+             return $this->suitabilityAssetTest->all();
+        }
+        else if($asset_id > 0 &&$result_id == 0)
+        {
+            return $this->suitabilityAssetTest
+                ->where('suitability_asset_id','=',$asset_id) 
+                ->get();
+        }
+        else if($asset_id == 0 &&$result_id > 0)
+        {
+            return $this->suitabilityAssetTest
+                ->where('suitability_result_id','=',$result_id) 
+                ->get();
+        }
+        else
+        {
+            return $this->suitabilityAssetTest
+                ->where('suitability_asset_id','=',$asset_id)
+                ->where('suitability_result_id','=',$result_id)
+                ->get();
+        }
+
+    }  
+
+    public function create_asset_test(Request $request)
+    {
+        return $this->suitabilityAssetTest->create($request->all());        
+    }    
+
+     public function delete_asset_test($id)
+    {
+        $suitabilityAssetTest = $this->find_asset_test($id);  
+        if (is_null($suitabilityAssetTest)) {
+            return false;
+        }
+        return $suitabilityAssetTest->delete();
+    }     
 }

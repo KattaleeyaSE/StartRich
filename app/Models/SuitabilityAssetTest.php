@@ -18,6 +18,8 @@ class SuitabilityAssetTest extends Model
         // protected $guarded = ['id'];
         protected $fillable = [
             'percent',
+            'suitability_asset_id',
+            'suitability_result_id',
             
         ];
 

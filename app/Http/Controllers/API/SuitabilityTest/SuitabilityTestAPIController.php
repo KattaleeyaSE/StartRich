@@ -120,9 +120,30 @@ class SuitabilityTestAPIController extends Controller
 
             if(!is_null($test))
             { 
+                $assets = [];
                 $results = [];
+                foreach($test->suitability_test_assets as $asset)
+                {
+                    array_push($assets,
+                        [
+                            "id" => $asset->id,
+                            "name" => $asset->name, 
+                        ]);
+                }
+
                 foreach($test->suitability_test_results as $result)
                 {
+                    $asset = [];
+                    foreach($test->suitability_test_assets as $item)
+                    {   
+                        $assetItems = $this->suitabilityTestRepository->get_asset_test($item->id,$result->id);
+ 
+                        array_push($asset,
+                                [
+                                    "id" => $assetItems[0]->id,
+                                    "allocate" => $assetItems[0]->percent, 
+                                ]);
+                    }  
                     array_push($results,
                         [
                             "id" => $result->id,
@@ -130,6 +151,7 @@ class SuitabilityTestAPIController extends Controller
                             "min_score" => $result->min_score,
                             "risk_level" => $result->risk_level,
                             "type_of_investors" => $result->type_of_investors,
+                            "asset" => $asset,
                         ]);
                 }
                 
@@ -164,6 +186,7 @@ class SuitabilityTestAPIController extends Controller
                         "question_name"  => $test->name,
                         "description"  => $test->description,
                         "results"  => $results,
+                        "assets"  => $assets,
                         "questions"  => $questions,
                         "show_create_result"  => true, 
                         "show_add_question"  => false, 

@@ -42,6 +42,12 @@ class SuitabilityTestResult extends Model
 		{
             return $this->belongsTo('App\Models\SuitabilityTest');
 		}
+
+		public function suitability_asset_test()
+		{
+            return $this->belongsToMany('App\Models\SuitabilityAsset', 'suitability_asset_tests', 'suitability_asset_id', 'suitability_result_id')
+			->withPivot('id','percent');
+		}
 	/*
 	|--------------------------------------------------------------------------
 	| SCOPES

@@ -13,6 +13,7 @@ function($scope,SuitabilityTestResource) {
         show_add_question :false, 
     }; 
 
+    $scope.removeAsset = [];
     $scope.removeResult = [];
     $scope.removeQuestion = [];
     $scope.removeAnswer = [];
@@ -22,8 +23,7 @@ function($scope,SuitabilityTestResource) {
         SuitabilityTestResource.Edit(id).then(function(resp){
             if(resp.data.msg == "Success")
             {
-                $scope.suitabilityTest = resp.data.test;
-                console.log( $scope.suitabilityTest);
+                $scope.suitabilityTest = resp.data.test; 
             } 
         });        
     }
@@ -83,9 +83,9 @@ function($scope,SuitabilityTestResource) {
     {
         if(assetId > 0)
         {
-                // $scope.removeResult.push({
-                //         id : resultId, 
-                // });
+            $scope.removeAsset.push({
+                    id : assetId, 
+            });
         }
 
          $scope.suitabilityTest.assets.splice(index, 1);       
@@ -115,8 +115,7 @@ function($scope,SuitabilityTestResource) {
     }
 
     $scope.showAddQuestionSection= function ()
-    {
-        console.log($scope);
+    { 
         $scope.suitabilityTest.show_create_result = false;
         $scope.suitabilityTest.show_add_question = true; 
     }
@@ -151,6 +150,10 @@ function($scope,SuitabilityTestResource) {
         if($scope.removeAnswer && $scope.removeAnswer.length > 0)
         {  
             $scope.suitabilityTest.removeAnswer = $scope.removeAnswer;
+        }
+        if($scope.removeAsset && $scope.removeAsset.length > 0)
+        {  
+            $scope.suitabilityTest.removeAsset = $scope.removeAsset;
         }
         SuitabilityTestResource.Update($scope.suitabilityTest).then(function(resp){
             if(resp.status == 200 && resp.data == "Success")

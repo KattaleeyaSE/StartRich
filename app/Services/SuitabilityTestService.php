@@ -51,6 +51,17 @@ class SuitabilityTestService implements ISuitabilityTestService
         $results = collect();
         if(!is_null($request->results) && !is_null($suitabilityTest))
         {
+            if(!is_null($request->assets))
+            {
+                foreach($request->assets as $asset)
+                {
+                    $newRequest = new Request(); 
+                    $newRequest->offsetSet('name',$asset['name']);
+                    $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);
+                    $this->suitabilityTestRepository->create_asset($newRequest);
+                }
+            }
+
             foreach($request->results as $result)
             {
                 //Adjust Data
@@ -63,6 +74,18 @@ class SuitabilityTestService implements ISuitabilityTestService
 
                 $suitabilityTestResult = $this->suitabilityTestRepository->create_result($newRequest); 
 
+                if(!is_null($result['asset']))
+                {
+                    foreach($result['asset'] as  $key => $item)
+                    {  
+                        $suit_test = $suitabilityTest->suitability_test_assets; 
+                        $newRequest = new Request(); 
+                        $newRequest->offsetSet('suitability_result_id',$suitabilityTestResult->id);
+                        $newRequest->offsetSet('suitability_asset_id',$suit_test[$key]->id);
+                        $newRequest->offsetSet('percent',$item['allocate']);
+                        $this->suitabilityTestRepository->create_asset_test($newRequest); 
+                    }
+                }    
             }
 
             $result = $suitabilityTest->suitability_test_results();
@@ -135,6 +158,14 @@ class SuitabilityTestService implements ISuitabilityTestService
     {
         $results = collect();
 
+        if(isset($request->removeAsset) && !is_null($request->removeAsset))
+        {
+            foreach($request->removeAsset as $asset)
+            {
+                 $this->suitabilityTestRepository->delete_asset($asset['id']); 
+            }  
+        }
+
         if(isset($request->removeResult) && !is_null($request->removeResult))
         {
             foreach($request->removeResult as $result)
@@ -143,11 +174,33 @@ class SuitabilityTestService implements ISuitabilityTestService
             }  
         }
 
+        if(!is_null($request->assets))
+        {
+            foreach($request->assets as $asset)
+            {
+                if($asset['id'] == 0)
+                {
+                    $newRequest = new Request(); 
+                    $newRequest->offsetSet('name',$asset['name']);
+                    $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);
+                    $this->suitabilityTestRepository->create_asset($newRequest);
+                }
+                else{
+                    
+                    $newRequest = new Request();  
+                    $newRequest->offsetSet('name',$asset['name']);
+                    $this->suitabilityTestRepository->update_asset($asset['id'],$newRequest);
+                }
+            }
+        }
+
         if(!is_null($request->results) && !is_null($suitabilityTest))
         {
 
             foreach($request->results as $result)
-            {
+            { 
+                $suitabilityTestResult;
+                
                 if($result['id'] > 0)
                 {
                     //Adjust Data
@@ -157,7 +210,8 @@ class SuitabilityTestService implements ISuitabilityTestService
                     $newRequest->offsetSet('risk_level',$result['risk_level']);
                     $newRequest->offsetSet('type_of_investors',$result['type_of_investors']);      
 
-                    $suitabilityTestResult = $this->suitabilityTestRepository->update_result($result['id'],$newRequest); 
+                   $this->suitabilityTestRepository->update_result($result['id'],$newRequest); 
+                   $suitabilityTestResult = $this->suitabilityTestRepository->find_result($result['id']); 
 
                 }
                 else
@@ -172,11 +226,30 @@ class SuitabilityTestService implements ISuitabilityTestService
 
                     $suitabilityTestResult = $this->suitabilityTestRepository->create_result($newRequest); 
 
-                }
+                } 
 
+                if(!is_null($result['asset']))
+                {   
+  
+                    foreach( $this->suitabilityTestRepository->get_asset_test(0,$suitabilityTestResult->id) as $item)
+                    {
+                        $this->suitabilityTestRepository->delete_asset_test($item->id); 
+                    }
+
+                    foreach($result['asset'] as  $key => $item)
+                    {  
+                        $suit_test = $suitabilityTest->suitability_test_assets;    
+                        $newRequest = new Request(); 
+                        $newRequest->offsetSet('suitability_result_id',$suitabilityTestResult->id);
+                        $newRequest->offsetSet('suitability_asset_id',$suit_test[$key]->id);
+                        $newRequest->offsetSet('percent',$item['allocate']); 
+                        $this->suitabilityTestRepository->create_asset_test($newRequest); 
+                    }
+                }
+               
             }
 
-            $result = $suitabilityTest->suitability_test_results();
+            $result = $suitabilityTest->suitability_test_results;
         }
 
         return $results;

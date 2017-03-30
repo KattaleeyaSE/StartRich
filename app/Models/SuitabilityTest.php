@@ -50,6 +50,11 @@ class SuitabilityTest extends Model
 		{
 			return $this->hasMany('App\Models\SuitabilityQuestion');
 		}
+
+		public function suitability_test_assets()
+		{
+			return $this->hasMany('App\Models\SuitabilityAsset');
+		}
 	/*
 	|--------------------------------------------------------------------------
 	| SCOPES
