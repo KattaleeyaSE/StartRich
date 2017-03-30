@@ -43,7 +43,7 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
 
     public function all_pagination($paging)
     {
-        return $this->suitabilityTest->paginate($paging);
+        return $this->suitabilityTest->orderBy('updated_at','DESC')->paginate($paging);
     }
 
     public function all_by_amc_id_pagination($amc_id,$paging)
