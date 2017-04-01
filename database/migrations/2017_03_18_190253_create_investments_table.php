@@ -18,10 +18,14 @@ class CreateInvestmentsTable extends Migration
             $table->integer('amc_id')->unsigned();
             $table->integer('risklevel');
             $table->date('registered_date');
+            $table->string('Investment_policy');
 $table->integer("unit");
             $table->string('name');
             $table->string('desc');
+            $table->string('company_name');
+            $table->boolean('paymentpolicy');
 $table->integer('type');
+$table->integer('aimcfundtype');
             $table->foreign('amc_id')
                 ->references('id')
                 ->on('users')

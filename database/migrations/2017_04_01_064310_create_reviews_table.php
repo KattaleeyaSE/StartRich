@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNavsTable extends Migration
+class CreateReviewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,24 @@ class CreateNavsTable extends Migration
      */
     public function up()
     {
-        Schema::create('navs', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
+
             $table->integer('fund_id')->unsigned();
-            $table->float('standard');
-            $table->float('bid');
-            $table->float('offer');
-            $table->date('update_date');
+            $table->text('review');
+            $table->integer('score');
             $table->foreign('fund_id')
                 ->references('id')
                 ->on('investments')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
@@ -36,6 +42,6 @@ class CreateNavsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('navs');
+        Schema::dropIfExists('reviews');
     }
 }
