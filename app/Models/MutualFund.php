@@ -43,9 +43,13 @@ class MutualFund extends investment
     {
         return $this->belongsTo('App\Models\AMC');
     }
-    public function getPrice(){
+    public function nav(){
         return $this->hasMany('App\Models\Nav');
     }
+    public function devidenHistory(){
+        return $this->hasMany('App\devidendhistory');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

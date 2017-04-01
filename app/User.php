@@ -67,6 +67,9 @@ class User extends Authenticatable
 		{
 			return $this->hasOne('App\Models\Member');
 		}
+		public function favorite(){
+		    return $this->hasMany('App\user_favorite');
+        }
 	/*
 	|--------------------------------------------------------------------------
 	| SCOPES
