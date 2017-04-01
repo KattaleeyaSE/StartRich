@@ -45,7 +45,6 @@ $table->string('period');
 
 
 
-
             $table->foreign('amc_id')
                 ->references('id')
                 ->on('users')
