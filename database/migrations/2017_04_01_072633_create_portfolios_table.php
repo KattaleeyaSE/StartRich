@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNavsTable extends Migration
+class CreatePortfoliosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,17 @@ class CreateNavsTable extends Migration
      */
     public function up()
     {
-        Schema::create('navs', function (Blueprint $table) {
+        Schema::create('portfolios', function (Blueprint $table) {
             $table->increments('id');
-
-            $table->float('standard');
-            $table->float('bid');
-            $table->float('offer');
-            $table->date('update_date');
+            $table->timestamps();
             $table->integer('fund_id')->unsigned();
             $table->foreign('fund_id')
                 ->references('id')
                 ->on('investments')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->timestamps();
+            $table->string('name');
+            $table->float('percentage');
         });
     }
 
@@ -37,6 +34,6 @@ class CreateNavsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('navs');
+        Schema::dropIfExists('portfolios');
     }
 }
