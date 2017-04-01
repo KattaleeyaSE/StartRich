@@ -18,10 +18,10 @@ class CreateInvestmentsTable extends Migration
             $table->integer('amc_id')->unsigned();
             $table->integer('risklevel');
             $table->date('registered_date');
-
-            $table->string('investment_name');
-            $table->string('investment_description');
-$table->integer('invest_type');
+$table->integer("unit");
+            $table->string('name');
+            $table->string('desc');
+$table->integer('type');
             $table->foreign('amc_id')
                 ->references('id')
                 ->on('users')
