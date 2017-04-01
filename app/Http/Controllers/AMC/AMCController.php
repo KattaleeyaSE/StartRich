@@ -164,6 +164,10 @@ class AMCController extends Controller
 
         return view('AMC.fund.index');
     }
+    public function fundadd(){
+
+        return view('AMC.fund.add');
+    }
 
     // /**
     //  * Remove the specified resource from storage.
