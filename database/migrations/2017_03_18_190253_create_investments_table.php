@@ -40,7 +40,7 @@ $table->string('period');
             $table->string('bond');
             $table->string('cash');
             $table->string('assetother');
-
+$table->integer('age');
 
 
 
