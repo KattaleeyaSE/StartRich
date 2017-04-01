@@ -20,13 +20,3 @@
     {{--Delete Form--}}
 
 @endsection
-@section('script')
-    <script src="/js/angular/fund/controller.js"></script>
-@endsection
-@section('style')
-    <style>
-        input.ng-invalid-required {
-            border-color: red;
-        }
-    </style>
-@endsection

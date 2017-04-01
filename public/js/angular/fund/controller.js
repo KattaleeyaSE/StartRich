@@ -1,162 +1,205 @@
 app.controller('fundController', ['$scope',
-    function($scope,SuitabilityTestResource) {
+    function($scope) {
 
+    $scope.normaltype=[
+        {
+            name:'Equity fund',
+            value:'1',
+
+        },{
+            name:'General fixed income fund',
+            value:'2',
+
+        },{
+            name:'Long-term fixed income fund',
+            value:'3',
+
+        },{
+            name:'Short-term fixed income fund',
+            value:'4',
+
+        },{
+            name:'Balanced fund',
+            value:'5',
+
+        },{
+            name:'Flexible portfolio fund',
+            value:'6',
+
+        },{
+            name:'Fund of funds',
+            value:'7',
+
+        },{
+            name:'Warrant fund',
+            value:'8',
+
+        },{
+            name:'Sector fund',
+            value:'9',
+
+        },{
+            name:'Money market fund',
+            value:'10',
+
+        }
+        ];
       $scope.fundtype=[
           {
               name:'EQSM',
               value:'1',
+
+          },{
+              name:'EQLARGE',
+              value:'2',
+
+          },{
+              name:'EQGEN',
+              value:'3',
+
+          },{
+              name:'EQUS',
+              value:'4',
+
+          },{
+              name:'EQJP',
+              value:'5',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'EQEU',
+              value:'6',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'EQCH',
+              value:'7',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'EQGL',
+              value:'8',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'EQGEM',
+              value:'9',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'EQASxJP',
+              value:'10',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'EQIN',
+              value:'11',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'EQASEAN',
+              value:'12',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'EQHEALTH',
+              value:'13',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'EQENERGY',
+              value:'14',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'EQSET50',
+              value:'15',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'FIXGOV',
+              value:'16',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'FIXGEN',
+              value:'17',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'FIXMIDGEN',
+              value:'18',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'FIXLONGGEN',
+              value:'19',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'FIXMMGOV',
+              value:'20',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'FIXMMGEN',
+              value:'21',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'FIXEMH',
+              value:'22',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'FIXEMDISC',
+              value:'23',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'FIXGLH',
+              value:'24',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'FIXGLDISC',
+              value:'25',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'MIXAGG',
+              value:'26',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'MIXMOD',
+              value:'27',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'MIXCONS',
+              value:'28',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'MIX2FI',
+              value:'29',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'PRFREE',
+              value:'30',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'PRMIX',
+              value:'31',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'PRFOPTH',
+              value:'32',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'PRFOPMIX',
+              value:'33',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'PRFOPGL',
+              value:'34',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'COMINDEX',
+              value:'35',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'COMENG',
+              value:'36',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'COMPM',
+              value:'37',
               detail:''
           },{
-              name:'',
-              value:'',
+              name:'COMAGR',
+              value:'38',
               detail:''
           },{
-              name:'',
-              value:'',
-              detail:''
-          },{
-              name:'',
-              value:'',
-              detail:''
-          },{
-              name:'',
-              value:'',
-              detail:''
-          },{
-              name:'',
-              value:'',
-              detail:''
-          },{
-              name:'',
-              value:'',
+              name:'MISC',
+              value:'39',
               detail:''
           },
       ];
