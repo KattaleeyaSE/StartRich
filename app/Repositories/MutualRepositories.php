@@ -12,16 +12,16 @@ namespace App\Repositories;
 use App\IRepositories\Collection;
 use App\IRepositories\id;
 use App\IRepositories\Illuminate;
-use App\IRepositories\INAVRepository;
+use App\IRepositories\IMutualFundRepository;
 use App\IRepositories\Member;
 use App\Models\Nav;
 use Illuminate\Http\Request;
 
-class NAVRepositories  implements INAVRepository
+class MutualRepositories  implements IMutualFundRepository
 {
     private $NavRepository;
     private $nav;
-    public function __construct(INAVRepository $NavRepository,Nav $nav)
+    public function __construct(IMutualFundRepository $NavRepository, Nav $nav)
     {
 
         $this->NavRepository = $NavRepository;
