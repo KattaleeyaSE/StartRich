@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 use App\investment;
-class Nav extends investment
+class MutualFund extends investment
 {
     use CrudTrait;
     /*

@@ -14,14 +14,14 @@ use App\IRepositories\id;
 use App\IRepositories\Illuminate;
 use App\IRepositories\IMutualFundRepository;
 use App\IRepositories\Member;
-use App\Models\Nav;
+use App\Models\MutualFund;
 use Illuminate\Http\Request;
 
 class MutualRepositories  implements IMutualFundRepository
 {
     private $NavRepository;
     private $nav;
-    public function __construct(IMutualFundRepository $NavRepository, Nav $nav)
+    public function __construct(IMutualFundRepository $NavRepository, MutualFund $nav)
     {
 
         $this->NavRepository = $NavRepository;
