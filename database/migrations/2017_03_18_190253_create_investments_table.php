@@ -19,7 +19,7 @@ class CreateInvestmentsTable extends Migration
             $table->integer('risklevel');
             $table->date('registered_date');
             $table->string('Investment_policy');
-$table->integer('unit');
+$table->integer('assetvalue');
 $table->string('trustee');
 $table->string('frequency');
 
