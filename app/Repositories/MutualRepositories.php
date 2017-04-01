@@ -21,12 +21,7 @@ class MutualRepositories  implements IMutualFundRepository
 {
     private $NavRepository;
     private $nav;
-    public function __construct(IMutualFundRepository $NavRepository, MutualFund $nav)
-    {
 
-        $this->NavRepository = $NavRepository;
-        $this->nav=$nav;
-    }
 
     public function all()
     {
