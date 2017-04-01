@@ -36,11 +36,12 @@ $table->string('period');
 
             $table->string('investertype');
             $table->string('benchmarkdetail');
-            $table->string('stock');
-            $table->string('bond');
-            $table->string('cash');
-            $table->string('assetother');
-$table->integer('age');
+            $table->float('stock');
+            $table->float('bond');
+            $table->float('cash');
+            $table->float('assetother');
+$table->date('fund_start');
+$table->date('fund_end');
 
 
 

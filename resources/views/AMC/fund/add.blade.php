@@ -18,7 +18,7 @@
 
                             <label>Trustee:</label>
                             <input ng-model="fund.truestee" type="text" class="form-control" />
-                            <label>Fequency:</label>
+                            <label>Frequency:</label>
                             <input ng-model="fund.frequency" type="text" class="form-control" />
                             <label> Strategy</label>
                             <textarea style="width: 100%" ng-model="fund.strategy"></textarea>
