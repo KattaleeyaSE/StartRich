@@ -11,13 +11,23 @@
                         <div>
                             <label>Name:</label>
                             <input ng-model="fund.name" type="text" class="form-control" />
-
+                            <label> Strategy</label>
+                            <textarea style="width: 100%" ng-model="fund.strategy"></textarea>
                             <hr>
+                              </div>
+                        <div class="form-inline">
+                            <label>Asset Value:</label>
+                            <input style="margin-right: 10px" ng-model="fund.asset" type="number" class="form-control" />
+
                             <label>Pay Policy</label>
                             <select>
                                 <option>Have</option>
                                 <option>Not Have</option>
                             </select>
+<hr>
+                            <label>Registered Date</label>
+                            <input type="date" ng-model="fund.registered">
+
                         </div>
                         <hr>
                         <div class="form-inline">
@@ -38,6 +48,8 @@
                                 </option>
                             </select>
                         </div>
+                        <hr>
+                        <button class="btn btn-primary" ng-click="next()">Next</button>
                     </div>
 
                 </div>
