@@ -40,14 +40,11 @@ $table->string('period');
             $table->string('bond');
             $table->string('cash');
             $table->string('assetother');
-            $table->float('return8'); // till start 8 type of past performance return
-$table->float('return1'); // 1 day
-$table->float('return2'); //1 month
-$table->float('return3'); //3 month
-$table->float('return4'); //6 month
-$table->float('return5'); //1 year
-$table->float('return6'); //3 year
-$table->float('return7'); //5 year
+
+
+
+
+
 
             $table->foreign('amc_id')
                 ->references('id')
