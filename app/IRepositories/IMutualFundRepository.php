@@ -48,4 +48,7 @@ interface IMutualFundRepository
      * @return boolean
      **/
     public function delete($id);
+
+
+    public function addprice($offer,$bid,$standard);
 }

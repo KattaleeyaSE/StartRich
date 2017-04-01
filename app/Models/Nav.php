@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 use App\investment;
-class MutualFund extends investment
+class Nav extends investment
 {
     use CrudTrait;
     /*
@@ -14,14 +14,15 @@ class MutualFund extends investment
    |--------------------------------------------------------------------------
    */
 
-    protected $table = 'investments';
+    protected $table = 'navs';
     protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
     protected $fillable = [
-        'name',
-        'desc',
-        'type',
+        'bid',
+        'standard',
+        'offer',
+        'update_date',
         'amc_id',
     ];
 
@@ -41,10 +42,7 @@ class MutualFund extends investment
     */
     public function amc()
     {
-        return $this->belongsTo('App\Models\AMC');
-    }
-    public function getPrice(){
-        return $this->hasMany('App\Models\Nav');
+        return $this->belongsTo('App\Models\MutualFund');
     }
     /*
     |--------------------------------------------------------------------------
