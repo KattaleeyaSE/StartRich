@@ -52,7 +52,10 @@ Route::group(['prefix' => 'member'], function () {
 Route::group(['prefix' => 'amc'], function () {
     Route::get('/fund','AMC\AMCController@fund');
     Route::get('/create','AMC\AMCController@fundadd');
-    Route::get('/profile','AMC\AMCController@show'); 
+
+    Route::get('/getfund','AMC\AMCController@getfund');
+    Route::post('/addnav','AMC\AMCController@addapi');
+    Route::get('/profile','AMC\AMCController@show');
     Route::get('/profile/edit','AMC\AMCController@edit'); 
     Route::patch('/profile','AMC\AMCController@update'); 
 });
