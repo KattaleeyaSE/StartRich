@@ -444,7 +444,7 @@ class SuitabilityTestService implements ISuitabilityTestService
         if(!is_null($test))
         {
             $score = 0; 
-            
+          
             foreach($test->suitability_test_questions as $key => $question)
             {
                 $answer_id = $request['q_'.$question->id]; 
@@ -454,10 +454,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                 $score  += $answer->score;  
             }  
          
-            if( 
-                $score > 0 
-                && sizeof($test->suitability_test_results) > 0
-                )
+            if( $score > 0 && sizeof($test->suitability_test_results) > 0)
             {
                 foreach($test->suitability_test_results as $key => $item)
                 { 
@@ -471,6 +468,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                 }
             } 
         }
+
          return $result;
      }
     

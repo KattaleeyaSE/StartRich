@@ -113,12 +113,12 @@ class SuitabilityTestMemberController extends Controller
     public function store_test(Request $request)
     {
          $test_result = $this->suitabilityTestService->get_temporary_test_result( $request);
-         
+       
         if(!is_null($test_result))
-        { 
+        {  
             \Session::put('suitability_test', $request->all());
             return view('suitability_test.member.temp_result', [
-                    "test_result" => $test_result
+                    "test_result" => $test_result,
                 ]);
         }else
         {

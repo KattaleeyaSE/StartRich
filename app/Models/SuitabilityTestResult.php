@@ -44,7 +44,7 @@ class SuitabilityTestResult extends Model
 
 		public function suitability_asset_test()
 		{
-            return $this->belongsToMany('App\Models\SuitabilityAsset', 'suitability_asset_tests', 'suitability_asset_id', 'suitability_result_id')
+            return $this->belongsToMany('App\Models\SuitabilityAsset', 'suitability_asset_tests', 'suitability_result_id', 'suitability_asset_id')
 			->withPivot('id','percent');
 		}
 
