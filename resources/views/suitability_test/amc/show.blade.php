@@ -81,16 +81,22 @@
                                         </div> 
                                     </div> 
                                 </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Risk Level</label> 
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                         <div class="form-control-static col-md-7 col-xs-12"> 
-                                            {{$result->risk_level}}
+                                
+                                @if(sizeof($result->suitability_fund) > 0)
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Mutual fund</label> 
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-control-static col-md-7 col-xs-12"> 
+                                                <ul>
+                                                    @foreach($result->suitability_fund as $fund)
+                                                        <li><a href="">{{$fund->name}}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            </div> 
                                         </div> 
-                                    </div> 
-                                </div>
-                                                        
+                                    </div>
+                                @endif        
+
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Type of Investor</label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
