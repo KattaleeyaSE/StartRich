@@ -31,7 +31,7 @@
 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email</label> 
     <div class="col-md-6 col-sm-6 col-xs-12">
-        <input type="email" name="email" value="{{isset($amc) ? $amc->user->email : old('email')}}" class="form-control col-md-7 col-xs-12" /> 
+        <input type="text" name="email" value="{{isset($amc) ? $amc->user->email : old('email')}}" class="form-control col-md-7 col-xs-12" /> 
     </div>
     @if ($errors->has('email'))
         <div class="row">
