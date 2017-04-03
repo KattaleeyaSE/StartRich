@@ -51,7 +51,7 @@ class SuitabilityTestService implements ISuitabilityTestService
         $results = collect();
         if(!is_null($request->results) && !is_null($suitabilityTest))
         {
-            if(!is_null($request->assets))
+            if(isset($request->assets) && !is_null($request->assets))
             {
                 foreach($request->assets as $asset)
                 {
@@ -74,7 +74,7 @@ class SuitabilityTestService implements ISuitabilityTestService
 
                 $suitabilityTestResult = $this->suitabilityTestRepository->create_result($newRequest); 
 
-                if(!is_null($result['asset']))
+                if(isset($result['asset']) && !is_null($result['asset']))
                 {
                     foreach($result['asset'] as  $key => $item)
                     {  
@@ -147,7 +147,7 @@ class SuitabilityTestService implements ISuitabilityTestService
         {
 
             $results = $this->update_result($request, $suitabilityTest);
-            $questions = $this->update_question_answer($request, $suitabilityTest);
+            $questions = $this->update_question_answer($request, $suitabilityTest); 
             
         }
 
@@ -174,7 +174,7 @@ class SuitabilityTestService implements ISuitabilityTestService
             }  
         }
 
-        if(!is_null($request->assets))
+        if(isset($request->assets) && !is_null($request->assets))
         {
             foreach($request->assets as $asset)
             {
@@ -228,7 +228,7 @@ class SuitabilityTestService implements ISuitabilityTestService
 
                 } 
 
-                if(!is_null($result['asset']))
+                if(isset($result['asset']) && !is_null($result['asset']))
                 {   
   
                     foreach( $this->suitabilityTestRepository->get_asset_test(0,$suitabilityTestResult->id) as $item)
@@ -283,9 +283,11 @@ class SuitabilityTestService implements ISuitabilityTestService
                 {
                     //Adjust Data
                     $newRequest = new Request(); 
-                    $newRequest->offsetSet('question',$question['question']);                     
+                    $newRequest->offsetSet('question',$question['question']);            
 
-                    $suitabilityTestQuestion = $this->suitabilityTestRepository->update_question($question['id'],$newRequest); 
+                    $suitabilityTestQuestion = $this->suitabilityTestRepository->find_question($question['id']);
+
+                    $this->suitabilityTestRepository->update_question($question['id'],$newRequest); 
 
                     if(!is_null($question['answers']) && !is_null($suitabilityTestQuestion))
                     {
@@ -298,15 +300,15 @@ class SuitabilityTestService implements ISuitabilityTestService
                                     $newRequest->offsetSet('answer',$answer['answer']);               
                                     $newRequest->offsetSet('score',$answer['score']);
 
-                                    $suitabilityTestAnswer = $this->suitabilityTestRepository->update_answer($answer['id'],$newRequest);
+                                    $this->suitabilityTestRepository->update_answer($answer['id'],$newRequest);
                                 }
                                 else
                                 {
                                     //Adjust Data
                                     $newRequest = new Request(); 
                                     $newRequest->offsetSet('answer',$answer['answer']);               
-                                    $newRequest->offsetSet('score',$answer['score']);               
-                                    $newRequest->offsetSet('suitability_question_id', $suitabilityTestQuestion->id);            
+                                    $newRequest->offsetSet('score',$answer['score']);
+                                    $newRequest->offsetSet('suitability_question_id', $suitabilityTestQuestion->id);    
 
                                     $suitabilityTestAnswer = $this->suitabilityTestRepository->create_answer($newRequest); 
                                 }
@@ -340,7 +342,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                 }
             }
 
-            $questions  = $suitabilityTest->suitability_test_questions();
+            $questions  = $suitabilityTest->suitability_test_questions;
 
         }   
         return $questions;
