@@ -45,17 +45,7 @@ class SuitabilityTestAPIController extends Controller
         {
             return \Response::Json("Fail : ".$e->getMessage(),404);
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    } 
 
     /**
      * Store a newly created resource in storage.
@@ -98,17 +88,6 @@ class SuitabilityTestAPIController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -148,7 +127,7 @@ class SuitabilityTestAPIController extends Controller
 
                 foreach($test->suitability_test_results as $result)
                 {
-                    $asset = [];
+                    $asset = []; 
                     foreach($test->suitability_test_assets as $item)
                     {   
                         $assetItems = $this->suitabilityTestRepository->get_asset_test($item->id,$result->id);
@@ -166,6 +145,7 @@ class SuitabilityTestAPIController extends Controller
                             "min_score" => $result->min_score,
                             "type_of_investors" => $result->type_of_investors,
                             "asset" => $asset,
+                            "funds" =>$result->suitability_fund,
                         ]);
                 }
                 
@@ -255,16 +235,5 @@ class SuitabilityTestAPIController extends Controller
         {
             return \Response::Json("Fail : ".$e->getMessage(),404);
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    } 
 }

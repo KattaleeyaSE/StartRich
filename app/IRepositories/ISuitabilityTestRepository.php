@@ -208,4 +208,32 @@ interface ISuitabilityTestRepository
     * @return boolean
     **/
     public function delete_asset_test($id);      
+
+    /**
+     * @param int id
+     *
+     * @return SuitabilityTestFund Object
+    **/     
+    public function find_fund_test($id);
+
+    /**
+     * @param int id
+     *
+     * @return SuitabilityTestFund Collection
+    **/     
+    public function find_fund_test_by_result_id($id);
+
+    /**
+     * @param Illuminate\Http\Request $request
+     *
+     * @return SuitabilityTestFund Object
+    **/    
+    public function create_fund_test(Request $request);    
+ 
+    /**
+    * @param int id
+    *
+    * @return boolean
+    **/
+    public function delete_fund_test($id);      
 }

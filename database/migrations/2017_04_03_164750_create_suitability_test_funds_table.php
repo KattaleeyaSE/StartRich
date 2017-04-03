@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSuitabilityAssetsTestTable extends Migration
+class CreateSuitabilityTestFundsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateSuitabilityAssetsTestTable extends Migration
      */
     public function up()
     {
-        Schema::create('suitability_asset_tests', function (Blueprint $table) {
+        Schema::create('suitability_test_funds', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('percent')->default(0);
 
-            $table->integer('suitability_asset_id')->unsigned();
-            $table->foreign('suitability_asset_id')
+            $table->integer('invest_id')->unsigned();
+            $table->foreign('invest_id')
                 ->references('id')
-                ->on('suitability_assets')
+                ->on('investments')
                 ->onDelete('cascade')
                 ->onUpdate('cascade'); 
 
@@ -29,7 +28,8 @@ class CreateSuitabilityAssetsTestTable extends Migration
                 ->references('id')
                 ->on('suitability_test_results')
                 ->onDelete('cascade')
-                ->onUpdate('cascade');  
+                ->onUpdate('cascade');       
+
             $table->timestamps();
         });
     }
@@ -41,6 +41,6 @@ class CreateSuitabilityAssetsTestTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('suitability_asset_tests');
+        Schema::dropIfExists('suitability_test_funds');
     }
 }

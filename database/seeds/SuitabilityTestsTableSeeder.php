@@ -14,7 +14,7 @@ class SuitabilityTestsTableSeeder extends Seeder
 
         DB::table('investments')->insert([
             [ 
-                'name' => 'firstname',
+                'name' => 'funds 1',
                 'desc' => 'lastname',
                 'risklevel' => 1, 
                 'amc_id' => 1, 
@@ -43,7 +43,7 @@ class SuitabilityTestsTableSeeder extends Seeder
                 'updated_at' => new DateTime               
             ],                                      
             [ 
-                'name' => 'firstname',
+                'name' => 'funds 2',
                 'desc' => 'lastname',
                 'risklevel' =>2, 
                 'amc_id' => 1, 
@@ -72,7 +72,7 @@ class SuitabilityTestsTableSeeder extends Seeder
                 'updated_at' => new DateTime               
             ],                                      
             [ 
-                'name' => 'firstname',
+                'name' => 'funds 3',
                 'desc' => 'lastname',
                 'risklevel' =>3, 
                 'amc_id' => 1, 
@@ -101,7 +101,7 @@ class SuitabilityTestsTableSeeder extends Seeder
                 'updated_at' => new DateTime               
             ],                                      
             [ 
-                'name' => 'firstname',
+                'name' => 'funds 4',
                 'desc' => 'lastname',
                 'risklevel' =>4, 
                 'amc_id' => 1, 

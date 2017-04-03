@@ -1,5 +1,5 @@
-app.controller('suitabilityTestController', ['$scope','SuitabilityTestResource',
-function($scope,SuitabilityTestResource) {
+app.controller('suitabilityTestController', ['$scope','SuitabilityTestResource','$sce',
+function($scope,SuitabilityTestResource,$sce) {
     
     $scope.suitabilityTest = { 
         id : 0,
@@ -18,15 +18,27 @@ function($scope,SuitabilityTestResource) {
     $scope.removeQuestion = [];
     $scope.removeAnswer = [];
 
+    $scope.funds = [];
+
     $scope.init = function ()
     {
+        $scope.initFunds();
+    } 
+
+    $scope.initFunds = function()
+    {
         SuitabilityTestResource.AllFunds().then(function(resp){
-            console.log(resp);
-        });        
+            $scope.funds = resp.data;
+        }); 
+    }
+    $scope.bindHtml = function (item)
+    {
+        return $sce.trustAsHtml(item); 
     }
 
     $scope.initUpdate = function (id)
     {
+        $scope.initFunds();
         SuitabilityTestResource.Edit(id).then(function(resp){
             if(resp.data.msg == "Success")
             {
@@ -43,6 +55,7 @@ function($scope,SuitabilityTestResource) {
             max_score : 0,
             min_score : 0,
             type_of_investors : "",
+            funds : [],
 
         });
     }

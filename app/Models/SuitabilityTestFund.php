@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SuitabilityTestResult extends Model
+class SuitabilityTestFund extends Model
 {
  /*
 	|--------------------------------------------------------------------------
@@ -12,15 +12,14 @@ class SuitabilityTestResult extends Model
 	|--------------------------------------------------------------------------
 	*/
 
-        protected $table = 'suitability_test_results';
+        protected $table = 'suitability_test_funds';
         protected $primaryKey = 'id';
         // public $timestamps = false;
         // protected $guarded = ['id'];
         protected $fillable = [
-            'max_score',
-            'min_score',
-            'type_of_investors',
-            'suitability_test_id',
+            'invest_id',
+            'suitability_result_id', 
+            
         ];
 
         // protected $hidden = [];
@@ -37,21 +36,17 @@ class SuitabilityTestResult extends Model
 	| RELATIONS
 	|--------------------------------------------------------------------------
 	*/
-		public function suitability_test()
+
+		public function mutual_fund()
 		{
-            return $this->belongsTo('App\Models\SuitabilityTest');
+			return $this->belongsTo('App\Models\MutualFund');
 		}
 
-		public function suitability_asset_test()
+		public function suitability_result()
 		{
-            return $this->belongsToMany('App\Models\SuitabilityAsset', 'suitability_asset_tests', 'suitability_asset_id', 'suitability_result_id')
-			->withPivot('id','percent');
+			return $this->belongsTo('App\Models\SuitabilityTestResult');
 		}
-
-		public function suitability_fund()
-		{
-            return $this->belongsToMany('App\Models\MutualFund', 'suitability_test_funds', 'suitability_result_id', 'invest_id');
-		}
+        
 	/*
 	|--------------------------------------------------------------------------
 	| SCOPES
