@@ -35,7 +35,6 @@ function($scope,SuitabilityTestResource) {
             id : 0,
             max_score : 0,
             min_score : 0,
-            risk_level : "",
             type_of_investors : "",
 
         });

@@ -17,6 +17,8 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
-    "angular": "^1.6.3"
+    "angular": "^1.6.3",
+    "angular-sanitize": "^1.6.4",
+    "ui-select": "^0.19.6"
   }
 }

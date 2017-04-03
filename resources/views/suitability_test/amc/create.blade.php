@@ -81,13 +81,7 @@
                                         <input type="number" name="min_score[]" ng-model="result.min_score" class="form-control col-md-7 col-xs-12" /> 
                                     </div> 
                                 </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Risk Level</label> 
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="risk_level[]" ng-model="result.risk_level" class="form-control col-md-7 col-xs-12" /> 
-                                    </div> 
-                                </div>
+ 
                                                         
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Type of Investor</label> 
@@ -100,9 +94,12 @@
                                     <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12"><%asset.name%> Allocation</label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="risk_level[]" ng-model="result.asset[$index].allocate" class="form-control col-md-7 col-xs-12"  ng-required="true" /> 
+                                        <input type="text" name="allocate[]" ng-model="result.asset[$index].allocate" class="form-control col-md-7 col-xs-12"  ng-required="true" /> 
                                     </div> 
                                 </div>
+                                
+
+
                                 </div>
 
                             </div> 

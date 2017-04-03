@@ -68,7 +68,6 @@ class SuitabilityTestService implements ISuitabilityTestService
                 $newRequest = new Request(); 
                 $newRequest->offsetSet('max_score',$result['max_score']);
                 $newRequest->offsetSet('min_score',$result['min_score']);
-                $newRequest->offsetSet('risk_level',$result['risk_level']);
                 $newRequest->offsetSet('type_of_investors',$result['type_of_investors']);                
                 $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);            
 
@@ -207,7 +206,6 @@ class SuitabilityTestService implements ISuitabilityTestService
                     $newRequest = new Request(); 
                     $newRequest->offsetSet('max_score',$result['max_score']);
                     $newRequest->offsetSet('min_score',$result['min_score']);
-                    $newRequest->offsetSet('risk_level',$result['risk_level']);
                     $newRequest->offsetSet('type_of_investors',$result['type_of_investors']);      
 
                    $this->suitabilityTestRepository->update_result($result['id'],$newRequest); 
@@ -220,7 +218,6 @@ class SuitabilityTestService implements ISuitabilityTestService
                     $newRequest = new Request(); 
                     $newRequest->offsetSet('max_score',$result['max_score']);
                     $newRequest->offsetSet('min_score',$result['min_score']);
-                    $newRequest->offsetSet('risk_level',$result['risk_level']);
                     $newRequest->offsetSet('type_of_investors',$result['type_of_investors']);                
                     $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);            
 

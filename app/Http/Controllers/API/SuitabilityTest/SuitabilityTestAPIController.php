@@ -13,23 +13,24 @@ class SuitabilityTestAPIController extends Controller
 {
     private $suitabilityTestRepository;
     private $suitabilityTestService;
+    private $mutualFundRepository;
 
     public function __construct(
             ISuitabilityTestRepository $suitabilityTestRepository,
-            ISuitabilityTestService $suitabilityTestService
+            ISuitabilityTestService $suitabilityTestService,
+            IMutualFundRepository $mutualFundRepository
         )
     { 
         $this->suitabilityTestRepository = $suitabilityTestRepository;
         $this->suitabilityTestService = $suitabilityTestService;
+        $this->mutualFundRepository = $mutualFundRepository;
     }    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+
+    public function getFunds()
     {
         //
+        
     }
 
     /**
@@ -149,7 +150,6 @@ class SuitabilityTestAPIController extends Controller
                             "id" => $result->id,
                             "max_score" => $result->max_score,
                             "min_score" => $result->min_score,
-                            "risk_level" => $result->risk_level,
                             "type_of_investors" => $result->type_of_investors,
                             "asset" => $asset,
                         ]);

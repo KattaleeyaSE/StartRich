@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/libs/select.min.css" rel="stylesheet">
 
     @yield('style')
 
@@ -141,6 +142,8 @@
 
 <!-- Scripts -->
 <script src="/js/app.js"></script>
+<script src="/js/angular/libs/angular-sanitize.min.js"></script> 
+<script src="/js/angular/libs/select.min.js"></script> 
 <script src="/js/angular/app.js"></script> 
 <!-- assests --> 
 @yield('script')

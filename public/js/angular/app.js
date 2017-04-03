@@ -1,6 +1,6 @@
-var app = angular.module('app', [], function($interpolateProvider) {
-
-        $interpolateProvider.startSymbol('<%');
-        $interpolateProvider.endSymbol('%>');
-        
-    });
+var app = angular.module('app', ['ui.select', 'ngSanitize'],
+function($interpolateProvider) { 
+    $interpolateProvider.startSymbol('<%');
+    $interpolateProvider.endSymbol('%>');
+    
+});

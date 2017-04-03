@@ -16,8 +16,7 @@ class CreateSuitabilityTestResultsTable extends Migration
         Schema::create('suitability_test_results', function (Blueprint $table) {
             $table->increments('id');            
             $table->integer('max_score')->unsigned();
-            $table->integer('min_score')->unsigned();
-            $table->string('risk_level')->nullable();
+            $table->integer('min_score')->unsigned(); 
             $table->string('type_of_investors')->nullable();
             $table->integer('suitability_test_id')->unsigned();
             $table->foreign('suitability_test_id')
