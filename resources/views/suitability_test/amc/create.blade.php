@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container" ng-controller="suitabilityTestController" ng-cloak>
-    <div class="row">
+    <div class="row"  ng-init="init()">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">AMC : Create Suitability Test</div> 

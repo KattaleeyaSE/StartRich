@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 //Service Container
 use App\IRepositories\ISuitabilityTestRepository;
+use App\IRepositories\IMutualFundRepository;
 use App\IServices\ISuitabilityTestService;
  
 class SuitabilityTestAPIController extends Controller

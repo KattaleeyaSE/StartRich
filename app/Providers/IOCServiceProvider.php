@@ -51,8 +51,8 @@ class IOCServiceProvider extends ServiceProvider
         );        
 
         $this->app->bind(
-            'App\IServices\IMutualFundRepository',
-            'App\Services\MutualFundRepository'
+            'App\IRepositories\IMutualFundRepository',
+            'App\Repositories\MutualFundRepository'
         );        
     }
 }

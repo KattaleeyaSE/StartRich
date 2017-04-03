@@ -21,4 +21,5 @@ Route::group(['prefix' => 'suitability'], function () {
      Route::post('/create','API\SuitabilityTest\SuitabilityTestAPIController@store'); 
      Route::post('/update','API\SuitabilityTest\SuitabilityTestAPIController@update'); 
      Route::get('/edit/{id}','API\SuitabilityTest\SuitabilityTestAPIController@edit'); 
+     Route::get('/allfunds','API\SuitabilityTest\SuitabilityTestAPIController@getFunds'); 
 });

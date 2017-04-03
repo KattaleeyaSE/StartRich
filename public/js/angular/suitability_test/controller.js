@@ -18,6 +18,13 @@ function($scope,SuitabilityTestResource) {
     $scope.removeQuestion = [];
     $scope.removeAnswer = [];
 
+    $scope.init = function ()
+    {
+        SuitabilityTestResource.AllFunds().then(function(resp){
+            console.log(resp);
+        });        
+    }
+
     $scope.initUpdate = function (id)
     {
         SuitabilityTestResource.Edit(id).then(function(resp){

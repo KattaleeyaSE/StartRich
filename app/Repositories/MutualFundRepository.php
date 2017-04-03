@@ -17,7 +17,7 @@ use App\IRepositories\Member;
 use App\Models\MutualFund;
 use Illuminate\Http\Request;
 
-class MutualRepositories  implements IMutualFundRepository
+class MutualFundRepository  implements IMutualFundRepository
 { 
     private $nav; 
 
@@ -66,5 +66,10 @@ class MutualRepositories  implements IMutualFundRepository
         }
         $result = $temp->delete();
         return $result;
+    }
+
+    public function addprice($offer,$bid,$standard)
+    {
+        // TODO: Implement delete() method.
     }
 }
