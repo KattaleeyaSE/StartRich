@@ -49,5 +49,10 @@ class IOCServiceProvider extends ServiceProvider
             'App\IServices\ISuitabilityTestService',
             'App\Services\SuitabilityTestService'
         );        
+
+        $this->app->bind(
+            'App\IServices\IMutualFundRepository',
+            'App\Services\MutualFundRepository'
+        );        
     }
 }

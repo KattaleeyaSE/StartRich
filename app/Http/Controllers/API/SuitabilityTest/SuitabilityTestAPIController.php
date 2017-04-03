@@ -30,7 +30,20 @@ class SuitabilityTestAPIController extends Controller
     public function getFunds()
     {
         //
-        
+        try
+        { 
+
+            $funds  = $this->mutualFundRepository->all(); 
+            $msg= [
+                'msg' => 'Success',
+                'data' =>   $funds
+            ];
+            return \Response::Json( $funds ,200); 
+        }
+        catch(\Exception $e)
+        {
+            return \Response::Json("Fail : ".$e->getMessage(),404);
+        }
     }
 
     /**

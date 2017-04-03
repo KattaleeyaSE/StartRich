@@ -18,10 +18,13 @@ use App\Models\MutualFund;
 use Illuminate\Http\Request;
 
 class MutualRepositories  implements IMutualFundRepository
-{
-    private $NavRepository;
-    private $nav;
+{ 
+    private $nav; 
 
+    public function __construct(MutualFund $nav)
+    { 
+        $this->nav = $nav;
+    }
 
     public function all()
     {
