@@ -169,7 +169,7 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Backpack\Base\BaseServiceProvider::class,
         Backpack\CRUD\CrudServiceProvider::class,
-
+        Orangehill\Iseed\IseedServiceProvider::class,
         /*
          * Helper Class...
          */ 
