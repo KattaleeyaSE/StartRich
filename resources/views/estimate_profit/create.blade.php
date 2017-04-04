@@ -10,7 +10,7 @@
                 <div class="panel-body"> 
                     <form action="{{url('estimateprofit/store')}}" method="post"  class="form-horizontal">
                         {!!csrf_field()!!}
-                        @include('member.partials.form', ['submit_text' => 'Register'])
+                        @include('estimate_profit.partials.form', ['submit_text' => 'Submit'])
                     </from> 
                 </div>
 
