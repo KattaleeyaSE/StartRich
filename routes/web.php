@@ -38,6 +38,13 @@ Route::group(['prefix' => 'suitabilitytest'], function () {
         Route::post('/storetest','SuitabilityTest\SuitabilityTestMemberController@store_test');  
         Route::delete('/delete/{id}','SuitabilityTest\SuitabilityTestMemberController@destroy'); 
     }); 
+
+}); 
+
+
+// Suitability Test Routes
+Route::group(['prefix' => 'simulator'], function () {  
+    Route::get('/index','Simulator\SimulatorMemberController@index');   
 });
 
 // Member Routes
