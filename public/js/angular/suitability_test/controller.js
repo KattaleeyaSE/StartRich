@@ -1,5 +1,5 @@
-app.controller('suitabilityTestController', ['$scope','SuitabilityTestResource','$sce',
-function($scope,SuitabilityTestResource,$sce) {
+app.controller('suitabilityTestController', ['$scope','$sce','SuitabilityTestResource',
+function($scope,$sce,SuitabilityTestResource) {
     
     $scope.suitabilityTest = { 
         id : 0,
