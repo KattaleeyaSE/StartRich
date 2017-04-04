@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Simulator;
+namespace App\Http\Controllers\EstimateProfit;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SimulatorMemberController extends Controller
+class EstimateProfitMemberController extends Controller
 {
     public function __construct()
     {

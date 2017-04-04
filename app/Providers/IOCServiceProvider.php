@@ -54,5 +54,10 @@ class IOCServiceProvider extends ServiceProvider
             'App\IRepositories\IMutualFundRepository',
             'App\Repositories\MutualFundRepository'
         );        
+
+        $this->app->bind(
+            'App\IRepositories\IEstimateProfileRepository',
+            'App\Repositories\EstimateProfileRepository'
+        );        
     }
 }

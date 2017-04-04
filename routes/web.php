@@ -43,8 +43,8 @@ Route::group(['prefix' => 'suitabilitytest'], function () {
 
 
 // Suitability Test Routes
-Route::group(['prefix' => 'simulator'], function () {  
-    Route::get('/index','Simulator\SimulatorMemberController@index');   
+Route::group(['prefix' => 'estimateprofit'], function () {  
+    Route::get('/index','EstimateProfit\EstimateProfitMemberController@index');   
 });
 
 // Member Routes
