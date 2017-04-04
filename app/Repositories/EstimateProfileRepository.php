@@ -6,6 +6,7 @@ use App\IRepositories\IEstimateProfileRepository;
 
 use App\Models\EstimateProfit; 
 
+use Illuminate\Http\Request;
 class EstimateProfileRepository implements IEstimateProfileRepository
 {
     private $estimateProfit;
@@ -18,6 +19,11 @@ class EstimateProfileRepository implements IEstimateProfileRepository
     public function all()
     {
         return $this->estimateProfit->all();
+    }
+
+    public function all_by_member_id($id)
+    {
+        return $this->estimateProfit->where('member_id','=',$id)->get();
     }
 
     public function find($id)

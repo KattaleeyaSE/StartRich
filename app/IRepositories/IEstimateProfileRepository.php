@@ -14,6 +14,15 @@ interface IEstimateProfileRepository
      */    
     public function all();
 
+    /**
+     * Display all rows in the database for this entity.
+     *
+     * @param int $id
+     *
+     * @return Collection
+     */    
+    public function all_by_member_id($id);
+
      /**
      * @param int id
      *

@@ -45,6 +45,8 @@ Route::group(['prefix' => 'suitabilitytest'], function () {
 // Suitability Test Routes
 Route::group(['prefix' => 'estimateprofit'], function () {  
     Route::get('/index','EstimateProfit\EstimateProfitMemberController@index');   
+    Route::get('/create','EstimateProfit\EstimateProfitMemberController@create');   
+    Route::post('/store','EstimateProfit\EstimateProfitMemberController@store');   
 });
 
 // Member Routes

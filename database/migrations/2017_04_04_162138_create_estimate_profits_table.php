@@ -17,6 +17,14 @@ class CreateEstimateProfitsTable extends Migration
             $table->increments('id');
             $table->date('effective_date');
             $table->float('balance_of_investment')->default(0);
+
+            $table->integer('member_id')->unsigned();
+            $table->foreign('member_id')
+                ->references('id')
+                ->on('members')
+                ->onDelete('cascade')
+                ->onUpdate('cascade'); 
+
             $table->integer('invest_id')->unsigned();
             $table->foreign('invest_id')
                 ->references('id')
