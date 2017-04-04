@@ -142,6 +142,7 @@
 
 <!-- Scripts -->
 <script src="/js/app.js"></script>
+<script src="/js/libs/moment-with-locales.min.js"></script>
 <script src="/js/angular/libs/angular-sanitize.min.js"></script> 
 <script src="/js/angular/libs/select.min.js"></script> 
 <script src="/js/angular/app.js"></script> 
