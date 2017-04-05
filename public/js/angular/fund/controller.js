@@ -7,6 +7,8 @@ $scope.next=function () {
 $scope.back=function(){
     $scope.page--;
 }
+
+
     $scope.normaltype=[
         {
             name:'Equity fund',
