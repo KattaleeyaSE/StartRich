@@ -33,7 +33,6 @@ $table->string('period');
             $table->string('assetinvest');
             $table->string('strategy');
             $table->string('factorimpact');
-
             $table->string('investertype');
             $table->string('benchmarkdetail');
             $table->float('stock');
@@ -42,10 +41,6 @@ $table->string('period');
             $table->float('assetother');
 $table->date('fund_start');
 $table->date('fund_end');
-
-
-
-
             $table->foreign('amc_id')
                 ->references('id')
                 ->on('users')

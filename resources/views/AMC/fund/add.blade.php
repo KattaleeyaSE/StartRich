@@ -20,8 +20,18 @@
                             <input ng-model="fund.truestee" type="text" class="form-control" />
                             <label>Frequency:</label>
                             <input ng-model="fund.frequency" type="text" class="form-control" />
+
+                            <label>Period:</label>
+                            <input ng-model="fund.period" type="text" class="form-control" />
+
+
+
                             <label> Strategy</label>
                             <textarea style="width: 100%" ng-model="fund.strategy"></textarea>
+                            <hr>
+
+                            <label> Invesment Policy</label>
+                            <textarea style="width: 100%" ng-model="fund.invesmentpolicy"></textarea>
                             <hr>
                         </div>
                         <div class="form-inline">
