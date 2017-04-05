@@ -4,6 +4,9 @@ $scope.page=1;
 $scope.next=function () {
     $scope.page++;
 }
+$scope.back=function(){
+    $scope.page--;
+}
     $scope.normaltype=[
         {
             name:'Equity fund',
