@@ -24,6 +24,9 @@
                                 <label> Strategy</label>
                                 <textarea style="width: 100%" ng-model="fund.strategy"></textarea>
                                 <hr>
+                                <label> Invesment Policy</label>
+                                <textarea style="width: 100%" ng-model="fund.investmentpolicy"></textarea>
+                                <hr>
                             </div>
                             <div class="form-inline">
                                 <label>Asset Value:</label>
