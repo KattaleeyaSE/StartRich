@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\AMC;
 
+use App\Models\MutualFund;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -159,6 +160,11 @@ class AMCController extends Controller
 
         return view('AMC.show', $amc);
     }
+    public function getfund(){
+
+return MutualFund::all();
+
+}
 
     public function fund(){
 
