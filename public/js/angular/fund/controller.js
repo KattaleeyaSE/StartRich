@@ -1,5 +1,5 @@
-app.controller('fundController', ['$scope',
-    function($scope) {
+app.controller('fundController', ['$scope','$http',
+    function($scope,$http) {
         $scope.page=1;
         $scope.next=function () {
             $scope.page++;
@@ -7,7 +7,19 @@ app.controller('fundController', ['$scope',
         $scope.back=function(){
             $scope.page--;
         }
+$scope.now=new Date();
 
+$scope.fund=[];
+
+        $http({
+            method: 'GET',
+            url: 'getfund',
+            headers: {}
+        }).then(function(data){
+          $scope.fund=data.data;
+          console.log($scope.fund);
+        });
+           
 
         $scope.normaltype=[
             {
