@@ -50,7 +50,7 @@
                             </tr>
 
                                 <tr ng-repeat="item in fund">
-                                    <td><%fund.name%></td>
+                                    <td><%item.name%></td>
                                     <td> 0.000</td>
                                     <td>  <table style="text-align: center;width:100%" border="1">
                                             <tr>
@@ -59,7 +59,7 @@
                                             </tr>
 
                                         </table></td>
-                                    <td>480,171,022 THB</td>
+                                    <td><% item.assetvalue.toLocaleString() %> THB</td>
                                     <td><% now %></td>
                                 </tr>
 
