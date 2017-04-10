@@ -44,7 +44,7 @@ class MutualFund extends investment
         return $this->belongsTo('App\Models\AMC');
     }
     public function nav(){
-        return $this->hasMany('App\Models\Nav');
+        return $this->hasMany('App\Models\Nav','fund_id');
     }
     public function devidenHistory(){
         return $this->hasMany('App\devidendhistory');

@@ -24,8 +24,13 @@ class EstimateProfitAPIController extends Controller
     {
         try
         { 
-            
+
             $funds  = $this->mutualFundRepository->all(); 
+
+            foreach($funds as $key => $fund)
+            {
+                $fund->nav;
+            }
             $msg= [
                 'msg' => 'Success',
                 'data' =>   $funds
