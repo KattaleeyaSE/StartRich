@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <script>
+        angular.module("app").constant("CSRF_TOKEN", '{{ csrf_token() }}');
+    </script>
     <div class="container" ng-controller="fundController" >
         <div class="row">
             <div class="col-md-12">

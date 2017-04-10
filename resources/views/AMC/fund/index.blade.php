@@ -48,8 +48,9 @@
                                 <th style="text-align: center">Asset Value</th>
                                 <th style="text-align: center">Last Updates</th>
                             </tr>
-                            <div ng-repeat="item in fund">   <tr>
-                                    <td><% fund.name %></td>
+
+                                <tr ng-repeat="item in fund">
+                                    <td><%fund.name%></td>
                                     <td> 0.000</td>
                                     <td>  <table style="text-align: center;width:100%" border="1">
                                             <tr>
@@ -60,7 +61,8 @@
                                         </table></td>
                                     <td>480,171,022 THB</td>
                                     <td><% now %></td>
-                                </tr></div>
+                                </tr>
+
 
 
                         </table>
