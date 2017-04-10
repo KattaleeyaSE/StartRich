@@ -23,3 +23,7 @@ Route::group(['prefix' => 'suitability'], function () {
      Route::get('/edit/{id}','API\SuitabilityTest\SuitabilityTestAPIController@edit'); 
      Route::get('/allfunds','API\SuitabilityTest\SuitabilityTestAPIController@getFunds'); 
 });
+
+Route::group(['prefix' => 'estimateprofit'], function () {
+     Route::get('/allfunds','API\EstimateProfit\EstimateProfitAPIController@allFunds');  
+});

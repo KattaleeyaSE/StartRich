@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "angular": "^1.6.3",
+    "angular-filter": "^0.5.16",
     "angular-moment-picker": "^0.9.10",
     "angular-sanitize": "^1.6.4",
     "chart.js": "^2.5.0",

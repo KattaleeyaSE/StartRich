@@ -1,10 +1,7 @@
 app.factory('EstimateProfitResource', function ($http) {
-    return {
-        Edit : function (id) {
-            return $http.get("/api/suitability/edit/"+id);
-        },
+    return { 
         AllFunds : function () {
-            return $http.get("/api/suitability/allfunds/");
+            return $http.get("/api/estimateprofit/allfunds/");
         },
     };
 });

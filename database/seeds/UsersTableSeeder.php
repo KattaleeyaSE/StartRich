@@ -36,6 +36,22 @@ class UsersTableSeeder extends Seeder
                 'created_at' => new DateTime, 
                 'updated_at' => new DateTime
             ],                                          
+            [ 
+                'id' => 4,
+                'username' => 'amc2',
+                'email' => 'amc2@example.com',
+                'password' => bcrypt('secret'), 
+                'created_at' => new DateTime, 
+                'updated_at' => new DateTime
+            ],                                          
+            [ 
+                'id' => 5,
+                'username' => 'amc3',
+                'email' => 'amc3@example.com',
+                'password' => bcrypt('secret'), 
+                'created_at' => new DateTime, 
+                'updated_at' => new DateTime
+            ],                                          
         ]);
 
         DB::table('admins')->insert([
@@ -66,6 +82,24 @@ class UsersTableSeeder extends Seeder
                 'address' => 'address',
                 'phone_number' => '+66123456789', 
                 'user_id' => 3,
+                'created_at' => new DateTime, 
+                'updated_at' => new DateTime 
+            ],                                           
+            [ 
+                'id' => 2,
+                'company_name' => 'company_name2',
+                'address' => 'address',
+                'phone_number' => '+66123456789', 
+                'user_id' => 4,
+                'created_at' => new DateTime, 
+                'updated_at' => new DateTime 
+            ],                                           
+            [ 
+                'id' => 3,
+                'company_name' => 'company_name3',
+                'address' => 'address',
+                'phone_number' => '+66123456789', 
+                'user_id' => 5,
                 'created_at' => new DateTime, 
                 'updated_at' => new DateTime 
             ],                                           
