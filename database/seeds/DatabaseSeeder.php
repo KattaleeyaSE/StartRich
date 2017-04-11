@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SuitabilityAssetsTableSeeder::class);
         $this->call(SuitabilityAssetTestsTableSeeder::class);
         $this->call(SuitabilityTestFundsTableSeeder::class);
+        $this->call(NavsTableSeeder::class);
     }
 }

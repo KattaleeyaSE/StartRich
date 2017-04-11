@@ -20,6 +20,8 @@ class EstimateProfit extends Model
             'effective_date',
             'balance_of_investment',
             'invest_id',
+            'nav_id',
+            'member_id',
         ];
 
         // protected $hidden = [];
