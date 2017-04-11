@@ -40,7 +40,12 @@ class EstimateProfit extends Model
 	*/
  		public function fund()
 		{
-			return $this->belongsTo('App\Models\MutualFund');
+			return $this->belongsTo('App\Models\MutualFund','invest_id');
+		}
+
+ 		public function nav()
+		{
+			return $this->belongsTo('App\Models\Nav','nav_id');
 		}
 	/*
 	|--------------------------------------------------------------------------

@@ -170,9 +170,6 @@ return [
         Backpack\Base\BaseServiceProvider::class,
         Backpack\CRUD\CrudServiceProvider::class,
         Orangehill\Iseed\IseedServiceProvider::class,
-        /*
-         * Helper Class...
-         */ 
 
         /*
          * Custom Service Providers...
@@ -237,6 +234,11 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+
+        /*
+         * Helper Class...
+         */ 
+         'TypeConverter' => App\Helpers\TypeConverter::class,
     ],
 
 ];

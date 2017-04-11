@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SuitabilityAssetTestsTableSeeder::class);
         $this->call(SuitabilityTestFundsTableSeeder::class);
         $this->call(NavsTableSeeder::class);
+        $this->call(EstimateProfitsTableSeeder::class);
     }
 }
