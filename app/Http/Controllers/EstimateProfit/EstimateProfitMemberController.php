@@ -41,5 +41,11 @@ class EstimateProfitMemberController extends Controller
     { 
         return view('estimate_profit.create');
     }
+ 
+    public function destroy($id)
+    { 
+        $this->estimateProfileRepository->delete($id);
 
+        return \Redirect('/estimateprofit/index'); 
+    }       
 }

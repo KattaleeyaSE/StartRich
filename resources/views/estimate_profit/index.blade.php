@@ -37,7 +37,7 @@
                                     <td class="text-center">{{$item->nav->offer}}</td>   
                                     <td class="text-center">Added</td> 
                                     <td class="text-center">
-                                        <a href="" class="btn btn-warning">Edit</a> | <a href="" data-button-type="delete" class="btn btn-danger">Delete</a>
+                                        <a href="" class="btn btn-warning">Edit</a> | <a href="{{url('/estimateprofit/delete/'.$item->id)}}" data-button-type="delete" class="btn btn-danger">Delete</a>
                                     </td> 
                                 </tr> 
                             @endforeach
@@ -46,7 +46,7 @@
                     </div>
                     {{-- Paging --}}
                       <div class="text-center">
-              
+                          <a href="" class="btn btn-default">Calculate</a>
                     </div>
 
                 </div>
