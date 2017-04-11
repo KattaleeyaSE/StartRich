@@ -67,6 +67,7 @@ Route::group(['prefix' => 'member'], function () {
     Route::post('/passperformance','AMC\AMCController@updateperformance');
     Route::post('/updatehistory','AMC\AMCController@updatedevidenhistory');
         Route::post('/updatefee','AMC\AMCController@updatefee');
+        Route::post('/purchasedetailadd','AMC\AMCController@purchasedetailadd');
 
 
     Route::get('/profile','AMC\AMCController@show');

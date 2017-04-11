@@ -7,6 +7,7 @@ use App\Models\MutualFund;
 use App\Models\Nav;
 use App\passperformance;
 use App\portfolio;
+use App\purchasedetail;
 use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -218,16 +219,21 @@ redirect('/');
     public function updatefee(){
         $temp=new fee();
         $temp->fund_id=request('fund_id');
-
-
         $temp->subscribe_period=request('subscribe_period');
         $temp->subscribe_minimum=request('subscribe_minimum');
         $temp->redemtion_period=request('redemtion_period');
         $temp->redemtion_minimum=request('redemtion_minimum');
         $temp->minimum_balance=request('minimum_balance');
         $temp->settlement_period=request('settlement_period');
-    }
+        $temp->save();
 
+
+    }
+public function purchasedetailadd(){
+    $temp=new purchasedetail();
+    $temp->fund_id=request('fund_id');
+
+}
 //Route::post('/addshareholder','AMC\AMCController@shareholder');
 //Route::post('/passperformance','AMC\AMCController@updateperformance');
 //Route::post('/updatehistory','AMC\AMCController@updatedevidenhistory');
