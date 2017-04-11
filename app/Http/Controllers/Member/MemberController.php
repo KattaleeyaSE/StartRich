@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Member;
 
+use App\user_favorite;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -11,6 +12,8 @@ use App\IRepositories\IMemberRepository;
 //Request Validation
 use App\Http\Requests\MemberStoreCrudRequest as StoreRequest;
 use App\Http\Requests\MemberUpdateCrudRequest as UpdateRequest;
+use function Symfony\Component\VarDumper\Tests\Caster\reflectionParameterFixture;
+
 class MemberController extends Controller
 {
     private $memberRepository;
@@ -115,6 +118,14 @@ class MemberController extends Controller
         );
     }
 
+    public function fav(){
+        $member = $this->memberRepository->find(\Auth::user()->member->id);
+$temp= new user_favorite();
+$temp->user_id=$member->id;
+$temp->invest_id=request('invest_id');
+$temp->save();
+
+    }
     /**
      * Update the specified resource in the database.
      *

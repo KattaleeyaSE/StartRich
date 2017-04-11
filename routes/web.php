@@ -54,7 +54,8 @@ Route::group(['prefix' => 'member'], function () {
     
     Route::get('/profile','Member\MemberController@show'); 
     Route::get('/profile/edit','Member\MemberController@edit'); 
-    Route::patch('/profile','Member\MemberController@update'); 
+    Route::patch('/profile','Member\MemberController@update');
+    Route::post('/fav/','Member\MemberController@fav');
 });
 
 // AMC Routes

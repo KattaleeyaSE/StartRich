@@ -215,28 +215,7 @@ redirect('/');
         $temp->paydate=request('paydate');
  $temp->save();
     }
-/*
- *   $table->float('frontendfee');
-            $table->float('actualfrontendfee');
-            $table->float('backendfee');
-            $table->float('actualbackendfee');
 
-            $table->float('switchfee');
-            $table->float('totalexpense');
-            $table->float('managefee');
-            $table->float('actualmanagefee');
-
-            $table->float('trusteefee');
-            $table->float('actualtrusteefee');
-            $table->float('registrafee');
-            $table->float('actualregistrafee');
-
-            $table->float('initial');
-            $table->float('addition');
-
-            $table->string('other');
-
- */
     public function updatefee(){
         $temp=new fee();
         $temp->fund_id=request('frontendfee');
@@ -257,8 +236,6 @@ redirect('/');
         $temp->settlement_period=request('addition');
         $temp->settlement_period=request('other');
         $temp->save();
-
-
     }
 public function purchasedetailadd(){
     $temp=new purchasedetail();
@@ -270,12 +247,8 @@ public function purchasedetailadd(){
     $temp->minimum_balance=request('minimum_balance');
     $temp->settlement_period=request('settlement_period');
     $temp->save();
-
-
 }
-//Route::post('/addshareholder','AMC\AMCController@shareholder');
-//Route::post('/passperformance','AMC\AMCController@updateperformance');
-//Route::post('/updatehistory','AMC\AMCController@updatedevidenhistory');
+
 
     public function fund(){
 
