@@ -46,6 +46,7 @@ Route::group(['prefix' => 'suitabilitytest'], function () {
 Route::group(['prefix' => 'estimateprofit'], function () {  
     Route::get('/index','EstimateProfit\EstimateProfitMemberController@index');   
     Route::get('/create','EstimateProfit\EstimateProfitMemberController@create');   
+    Route::get('/edit/{id}','EstimateProfit\EstimateProfitMemberController@edit');   
     Route::delete('/delete/{id}','EstimateProfit\EstimateProfitMemberController@destroy');   
 });
 

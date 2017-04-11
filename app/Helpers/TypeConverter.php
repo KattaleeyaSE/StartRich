@@ -10,6 +10,18 @@ class TypeConverter
         return $aimcType[$id-1];
     }
 
+    public static function mapNormalType($id)
+    { 
+        $type = TypeConverter::getNormalType(); 
+        return $type[$id-1];
+    }
+
+
+    private static function getNormalType()
+    {
+        return [ 'Equity fund','General fixed income fund','Long-term fixed income fund','Short-term fixed income fund','Balanced fund','Flexible portfolio fund','Fund of funds',
+                'Warrant fund','Sector fund','Money market fund'];
+    }
 
     private static function getAIMCType()
     {

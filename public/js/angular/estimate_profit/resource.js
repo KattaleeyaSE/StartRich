@@ -10,5 +10,12 @@ app.factory('EstimateProfitResource', function ($http) {
                 }
             });
         },
+        Update: function (data) {
+            return $http.post("/api/estimateprofit/update",data,{ 
+                headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        }
     };
 });

@@ -79,4 +79,24 @@ class EstimateProfitAPIController extends Controller
             return \Response::Json("Fail : ".$e->getMessage(),404);
         }
     }
+
+    public function update(Request $request)
+    {
+        try
+        { 
+           
+            $this->estimateProfileRepository->update($request->id,$request); 
+
+            $msg= [
+                'msg' => 'Success', 
+            ];
+
+            return \Response::Json( $msg ,200);     
+
+        }
+        catch(\Exception $e)
+        {
+            return \Response::Json("Fail : ".$e->getMessage(),404);
+        }
+    }
 }

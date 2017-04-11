@@ -220,6 +220,36 @@ function($scope,$sce,EstimateProfitResource) {
         });
     };
 
+    $scope.initUpdate = function (fundId,effective_date,balance)
+    { 
+        EstimateProfitResource.AllFunds().then(function(resp){
+            $scope.funds = resp.data;
+            $scope.balance_of_investment = balance;
+            $scope.buyDate = moment(effective_date); 
+            var mutualFund = $scope.funds.filter(function(fund){
+                                            return fund.id == fundId;
+                                            
+                                        }); 
+             $scope.selected.mutualFund = mutualFund[0];
+             if(
+                $scope.selected.mutualFund 
+                && $scope.selected.mutualFund.nav 
+                && $scope.selected.mutualFund.nav.length > 0 
+            )
+            {                     
+                var nav =  $scope.selected.mutualFund.nav.filter(function(nav){
+                                return nav.update_date == effective_date;
+                                
+                            });  
+                
+                if(nav && nav.length > 0)
+                {
+                    $scope.offAtBuyDate = nav[0]; 
+                }          
+            }          
+        });                                    
+    };
+
     $scope.bindHtml = function (item)
     {
         return $sce.trustAsHtml(item); 
@@ -276,6 +306,33 @@ function($scope,$sce,EstimateProfitResource) {
             };
 
             EstimateProfitResource.Create($scope.createEstmateProfit).then(function(resp){
+                    if(resp.status == 200 && resp.data.msg == "Success")
+                    {
+                        location.href = "/estimateprofit/index";
+                    }
+                    else
+                    {
+                        $scope.errorMsg = resp.data.msg;
+                    }
+                },
+                function(resp) { 
+                    // Handle error here
+                    $scope.errorMsg = resp.data.msg;
+                });
+        } 
+    };
+
+    $scope.update = function (id)
+    {   
+        if( $scope.offAtBuyDate)
+        {
+            $scope.updateEstmateProfit ={
+                'effective_date' : $scope.offAtBuyDate.update_date,
+                'balance_of_investment' : $scope.balance_of_investment,
+                'id' :  id,
+            };
+
+            EstimateProfitResource.Update($scope.updateEstmateProfit).then(function(resp){
                     if(resp.status == 200 && resp.data.msg == "Success")
                     {
                         location.href = "/estimateprofit/index";
