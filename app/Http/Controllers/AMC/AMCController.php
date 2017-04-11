@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\AMC;
 
+use App\devidendhistory;
 use App\Models\MutualFund;
 use App\Models\Nav;
+use App\passperformance;
 use App\portfolio;
 use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
@@ -186,8 +188,45 @@ redirect('/');
     $share->name=request('name');
     $share->percentage=\request('percentage');
         $share->save();
+
     }
 
+    public function updateperformance(){
+        $temp =new passperformance();
+        $temp->fund_id=request('fund_id');
+        $temp->return1('return1');
+        $temp->return2('return2');
+        $temp->return3('return3');
+        $temp->return4('return4');
+        $temp->return5('return5');
+        $temp->return6('return6');
+        $temp->return7('return7');
+        $temp->return8('return8');
+      $temp->save();
+
+    }
+
+    public function updatedevidenhistory(){
+        $temp=new devidendhistory();
+        $temp->fund_id=request('fund_id');
+        $temp->time=request('time');
+        $temp->dprice=request('dprice');
+        $temp->paydate=request('paydate');
+ $temp->save();
+    }
+
+    public function updatefee(){
+        $temp=new fee();
+        $temp->fund_id=request('fund_id');
+
+
+        $temp->subscribe_period=request('subscribe_period');
+        $temp->subscribe_minimum=request('subscribe_minimum');
+        $temp->redemtion_period=request('redemtion_period');
+        $temp->redemtion_minimum=request('redemtion_minimum');
+        $temp->minimum_balance=request('minimum_balance');
+        $temp->settlement_period=request('settlement_period');
+    }
 
 //Route::post('/addshareholder','AMC\AMCController@shareholder');
 //Route::post('/passperformance','AMC\AMCController@updateperformance');
