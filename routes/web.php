@@ -58,13 +58,14 @@ Route::group(['prefix' => 'member'], function () {
 });
 
 // AMC Routes
-Route::group(['prefix' => 'amc'], function () {
+    Route::group(['prefix' => 'amc'], function () {
     Route::get('/fund','AMC\AMCController@fund');
     Route::get('/create','AMC\AMCController@fundadd');
     Route::get('/getfund','AMC\AMCController@getfund');
     Route::post('/addnav','AMC\AMCController@addapi');
-
-
+    Route::post('/addshareholder','AMC\AMCController@shareholder');
+    Route::post('/passperformance','AMC\AMCController@updateperformance');
+    Route::post('/updatehistory','AMC\AMCController@updatedevidenhistory');
 
     Route::get('/profile','AMC\AMCController@show');
     Route::get('/profile/edit','AMC\AMCController@edit'); 

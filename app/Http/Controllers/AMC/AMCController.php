@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\AMC;
 
 use App\Models\MutualFund;
+use App\Models\Nav;
+use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -165,6 +167,16 @@ class AMCController extends Controller
 return MutualFund::all();
 
 }
+
+public function addnav(){
+$nav =new Nav();
+    $nav->fund_id=request('fund_id');
+    $nav->bid=request('bid');
+    $nav->standard=request('standard');
+    $nav->offer=request('offer');
+$nav->save();
+redirect('/');
+    }
 
     public function fund(){
 
