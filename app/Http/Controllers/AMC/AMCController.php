@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AMC;
 
 use App\Models\MutualFund;
 use App\Models\Nav;
+use App\portfolio;
 use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -177,6 +178,20 @@ $nav =new Nav();
 $nav->save();
 redirect('/');
     }
+
+    public function shareholder(){
+    $share=new portfolio();
+
+    $share->fund_id=request('fund_id');
+    $share->name=request('name');
+    $share->percentage=\request('percentage');
+        $share->save();
+    }
+
+
+//Route::post('/addshareholder','AMC\AMCController@shareholder');
+//Route::post('/passperformance','AMC\AMCController@updateperformance');
+//Route::post('/updatehistory','AMC\AMCController@updatedevidenhistory');
 
     public function fund(){
 
