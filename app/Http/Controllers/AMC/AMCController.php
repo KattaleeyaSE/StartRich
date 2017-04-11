@@ -215,16 +215,47 @@ redirect('/');
         $temp->paydate=request('paydate');
  $temp->save();
     }
+/*
+ *   $table->float('frontendfee');
+            $table->float('actualfrontendfee');
+            $table->float('backendfee');
+            $table->float('actualbackendfee');
 
+            $table->float('switchfee');
+            $table->float('totalexpense');
+            $table->float('managefee');
+            $table->float('actualmanagefee');
+
+            $table->float('trusteefee');
+            $table->float('actualtrusteefee');
+            $table->float('registrafee');
+            $table->float('actualregistrafee');
+
+            $table->float('initial');
+            $table->float('addition');
+
+            $table->string('other');
+
+ */
     public function updatefee(){
         $temp=new fee();
-        $temp->fund_id=request('fund_id');
-        $temp->subscribe_period=request('subscribe_period');
-        $temp->subscribe_minimum=request('subscribe_minimum');
-        $temp->redemtion_period=request('redemtion_period');
-        $temp->redemtion_minimum=request('redemtion_minimum');
-        $temp->minimum_balance=request('minimum_balance');
-        $temp->settlement_period=request('settlement_period');
+        $temp->fund_id=request('frontendfee');
+        $temp->subscribe_period=request('backendfee');
+        $temp->subscribe_minimum=request('actualbackendfee');
+
+        $temp->redemtion_period=request('switchfee');
+        $temp->redemtion_minimum=request('totalexpense');
+        $temp->minimum_balance=request('managefee');
+        $temp->subscribe_period=request('actualmanagefee');
+
+        $temp->subscribe_minimum=request('trusteefee');
+        $temp->redemtion_period=request('actualtrusteefee');
+        $temp->redemtion_minimum=request('registrafee');
+        $temp->minimum_balance=request('actualregistrafee');
+
+        $temp->settlement_period=request('initial');
+        $temp->settlement_period=request('addition');
+        $temp->settlement_period=request('other');
         $temp->save();
 
 
@@ -232,6 +263,13 @@ redirect('/');
 public function purchasedetailadd(){
     $temp=new purchasedetail();
     $temp->fund_id=request('fund_id');
+    $temp->subscribe_period=request('subscribe_period');
+    $temp->subscribe_minimum=request('subscribe_minimum');
+    $temp->redemtion_period=request('redemtion_period');
+    $temp->redemtion_minimum=request('redemtion_minimum');
+    $temp->minimum_balance=request('minimum_balance');
+    $temp->settlement_period=request('settlement_period');
+
 
 }
 //Route::post('/addshareholder','AMC\AMCController@shareholder');
