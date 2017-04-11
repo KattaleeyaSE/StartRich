@@ -269,6 +269,7 @@ public function purchasedetailadd(){
     $temp->redemtion_minimum=request('redemtion_minimum');
     $temp->minimum_balance=request('minimum_balance');
     $temp->settlement_period=request('settlement_period');
+    $temp->save();
 
 
 }
