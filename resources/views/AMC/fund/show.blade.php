@@ -24,7 +24,7 @@
                           <!-- Tab panes -->
                           <div class="tab-content">
                             @include('AMC.fund.tabs.fund-detail')
-                            <div role="tabpanel" class="tab-pane" id="nav-daily">nav-daily</div>
+                            @include('AMC.fund.tabs.nav-daily')
                             <div role="tabpanel" class="tab-pane" id="investment-policy">investment-policy</div>
                             <div role="tabpanel" class="tab-pane" id="types-of-investor">types-of-investor</div>
                             <div role="tabpanel" class="tab-pane" id="major-risk-factor">major-risk-factor</div>

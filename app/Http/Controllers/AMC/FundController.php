@@ -62,8 +62,13 @@ class FundController extends Controller
     public function show($id)
     {
         $fund = $this->mutualFundRepository->find($id);
+        $navs = [];
 
-        return view('AMC.fund.show', ['fund' => $fund]);
+        foreach ($fund->nav as $nav) {
+            array_push($navs, [$nav->update_date, $nav->bid]);
+        }
+
+        return view('AMC.fund.show', ['fund' => $fund, 'navs' => $navs]);
     }
 
     /**
