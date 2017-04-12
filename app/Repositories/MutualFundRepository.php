@@ -72,4 +72,9 @@ class MutualFundRepository  implements IMutualFundRepository
     {
         // TODO: Implement delete() method.
     }
+
+    public function by_amc_id($id)
+    {
+        return $this->nav->where('amc_id', $id)->get();
+    }
 }
