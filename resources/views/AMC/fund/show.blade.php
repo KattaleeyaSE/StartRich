@@ -25,15 +25,15 @@
                           <div class="tab-content">
                             @include('AMC.fund.tabs.fund-detail')
                             @include('AMC.fund.tabs.nav-daily')
-                            <div role="tabpanel" class="tab-pane" id="investment-policy">investment-policy</div>
-                            <div role="tabpanel" class="tab-pane" id="types-of-investor">types-of-investor</div>
-                            <div role="tabpanel" class="tab-pane" id="major-risk-factor">major-risk-factor</div>
-                            <div role="tabpanel" class="tab-pane" id="lists-of-the-fund-manager">lists-of-the-fund-manager</div>
-                            <div role="tabpanel" class="tab-pane" id="subscription-and-redemption-detail">subscription-and-redemption-detail</div>
-                            <div role="tabpanel" class="tab-pane" id="past-performance">past-performance</div>
-                            <div role="tabpanel" class="tab-pane" id="historical-dividend-payment">historical-dividend-payment</div>
-                            <div role="tabpanel" class="tab-pane" id="fee-charge">fee-charge</div>
-                            <div role="tabpanel" class="tab-pane" id="portfolio">portfolio</div>
+                            @include('AMC.fund.tabs.investment-policy')
+                            @include('AMC.fund.tabs.types-of-investor')
+                            @include('AMC.fund.tabs.major-risk-factor')
+                            @include('AMC.fund.tabs.lists-of-the-fund-manager')
+                            @include('AMC.fund.tabs.subscription-and-redemption-detail')
+                            @include('AMC.fund.tabs.past-performance')
+                            @include('AMC.fund.tabs.historical-dividend-payment')
+                            @include('AMC.fund.tabs.fee-charge')
+                            @include('AMC.fund.tabs.portfolio')
                           </div>
 
 
