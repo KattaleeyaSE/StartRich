@@ -14,32 +14,39 @@
                     <table class="table">
                             <thead>
                             <tr> 
-                                <th class="text-center">Name</th>
-                                <th class="text-center">Description</th>
-                                <th class="text-center">Created Date</th>
-                                <th class="text-center">Updated Date</th>
+                                <th class="text-center">Buy Date</th> 
+                                <th class="text-center">Fund Name</th> 
+                                <th class="text-center">Company Name</th>  
+                                <th class="text-center">Balance of Investment</th>  
+                                <th class="text-center">NAV Offer</th>  
+                                <th class="text-center">Status</th>
                                 <th class="text-center">Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($estimate_profits as $item)
-                                {{-- <tr>
-                                    <td class="text-center">{{$item->amc->company_name}}</td>
-                                    <td class="text-center">{{$item->name}}</td> 
-                                    <td class="text-center">{{$item->description}}</td> 
-                                    <td class="text-center">{{$item->created_at}}</td> 
-                                    <td class="text-center">{{$item->updated_at}}</td> 
+                                <tr> 
+                                    <td class="text-center">{{$item->effective_date}}</td>  
                                     <td class="text-center">
-                                        <a href="{{url('/suitabilitytest/amc/show/'.$item->id)}}" class="btn btn-primary">View</a> | <a href="{{url('/suitabilitytest/amc/edit/'.$item->id)}}" class="btn btn-warning">Edit</a> | <a href="{{url('/suitabilitytest/amc/delete/'.$item->id)}}" data-button-type="delete" class="btn btn-danger">Delete</a>
+                                        <strong>{{TypeConverter::mapAIMCType($item->fund->aimcfundtype)}}</strong>
+                                        <br>
+                                        {{$item->fund->name}}
+                                    </td>  
+                                    <td class="text-center">{{$item->fund->company_name}}</td>   
+                                    <td class="text-center">{{$item->balance_of_investment}}</td>   
+                                    <td class="text-center">{{$item->nav->offer}}</td>   
+                                    <td class="text-center">Added</td> 
+                                    <td class="text-center">
+                                        <a href="{{url('/estimateprofit/edit/'.$item->id)}}" class="btn btn-warning">Edit</a> | <a href="{{url('/estimateprofit/delete/'.$item->id)}}" data-button-type="delete" class="btn btn-danger">Delete</a>
                                     </td> 
-                                </tr>  --}}
+                                </tr> 
                             @endforeach
                             </tbody>
                         </table>  
                     </div>
                     {{-- Paging --}}
                       <div class="text-center">
-              
+                          <a href="" class="btn btn-default">Calculate</a>
                     </div>
 
                 </div>
@@ -65,6 +72,6 @@
                 $('#deleteform').attr('action',delete_url);
                 $('#deleteform').submit();
             }
-      });
+      }); 
 </script>      
 @endsection

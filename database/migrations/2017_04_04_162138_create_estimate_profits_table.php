@@ -32,6 +32,13 @@ class CreateEstimateProfitsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade'); 
 
+            $table->integer('nav_id')->unsigned();
+            $table->foreign('nav_id')
+                ->references('id')
+                ->on('navs')
+                ->onDelete('cascade')
+                ->onUpdate('cascade'); 
+
             $table->timestamps();
         });
     }

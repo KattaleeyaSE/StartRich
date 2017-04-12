@@ -26,4 +26,6 @@ Route::group(['prefix' => 'suitability'], function () {
 
 Route::group(['prefix' => 'estimateprofit'], function () {
      Route::get('/allfunds','API\EstimateProfit\EstimateProfitAPIController@allFunds');  
+     Route::post('/create','API\EstimateProfit\EstimateProfitAPIController@store');  
+     Route::post('/update','API\EstimateProfit\EstimateProfitAPIController@update');  
 });

@@ -2,58 +2,34 @@
 
 @section('content')
 <div class="container" ng-controller="estimateProfitController">
-    <div class="row" ng-init="init()">
+    <div class="row" ng-init="initUpdate({{$estimate_profit->fund->id}},'{{$estimate_profit->effective_date}}',{{$estimate_profit->balance_of_investment}})">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Member : Create Estimate Profit</div>
 
                 <div class="panel-body"> 
-
-                    <div class="alert alert-danger" ng-show="errorMsg">
-                        <%errorMsg%>
-                    </div>
-                    <form method="post"  class="form-horizontal" name="createform">
+ 
+                    <form method="post"  class="form-horizontal" name="editform">
                         
                         {!!csrf_field()!!}
                         <div class="form-group"> 
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_name">Company name</label> 
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <ui-select ng-model="selected.company" theme="bootstrap" on-select="onSelectedCompany()">
-                                    <ui-select-match>
-                                            <div ng-bind-html="bindHtml(selected.company.company_name)"></div>
-                                    </ui-select-match>
-                                    <ui-select-choices repeat="fund in (funds  | unique:'company_name'| filter: $select.search) track by fund.id"> 
-                                            <div ng-bind-html="fund.company_name | highlight: $select.search"></div>
-                                    </ui-select-choices>
-                                </ui-select>
+                                    {{$estimate_profit->fund->company_name}}
                             </div> 
                         </div>  
  
                         <div class="form-group">                     
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mutual_fund_type">Type of mutual fund</label> 
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <ui-select ng-model="selected.mutualFundType" theme="bootstrap"  on-select="onSelectedMutualFundType()">
-                                <ui-select-match>
-                                        <div ng-bind-html="bindHtml(getNormalFund(selected.mutualFundType.type).name)"></div>
-                                </ui-select-match>
-                                <ui-select-choices ui-disable-choice="!selected.company" repeat="fund in (funds | filter: {company_name : selected.company.company_name }:true )| unique:'type' track by fund.id"> 
-                                        <div ng-hide="!selected.company" ng-bind-html="getNormalFund(fund.type).name | highlight: $select.search"></div>
-                                </ui-select-choices>
-                            </ui-select>
+                                  {{TypeConverter::mapNormalType($estimate_profit->fund->type)}}
                         </div> 
                     </div>
  
                         <div class="form-group">                     
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mutual_fund">Mutual fund</label> 
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <ui-select ng-model="selected.mutualFund" theme="bootstrap">
-                                <ui-select-match>
-                                        <div ng-bind-html="bindHtml(selected.mutualFund.name)"></div>
-                                </ui-select-match>
-                                <ui-select-choices ui-disable-choice="!selected.mutualFundType" repeat="fund in (funds | filter: {company_name : selected.mutualFundType.company_name, type : selected.mutualFundType.type  }:true )  track by fund.id"> 
-                                        <div ng-hide="!selected.mutualFundType" ng-bind-html="fund.name | highlight: $select.search"></div>
-                                </ui-select-choices>
-                            </ui-select>
+                                     {{$estimate_profit->fund->name}}
                         </div> 
                     </div>
  
@@ -68,7 +44,7 @@
                             class="form-control" 
                             change="onBuyDateChange(newValue, oldValue)"
                             ng-required="true" 
-                            disable="!selected.mutualFundType.id"
+                            disable="!selected.mutualFund"
                         >
                     </div> 
                 </div>
@@ -107,7 +83,7 @@
                                 <button 
                                     type="button" 
                                     class="btn btn-primary"
-                                    ng-click="createform.$valid && create({{\Auth::user()->member->id}});"
+                                    ng-click="editform.$valid && update({{$estimate_profit->id}});"
                                 >Submit</button>
                             </div>
                         </div>

@@ -41,5 +41,20 @@ class EstimateProfitMemberController extends Controller
     { 
         return view('estimate_profit.create');
     }
+ 
 
+    public function edit($id)
+    { 
+        $estimate_profit =  $this->estimateProfileRepository->find($id);
+        return view('estimate_profit.edit',[
+            'estimate_profit' => $estimate_profit
+        ]);
+    }
+ 
+    public function destroy($id)
+    { 
+        $this->estimateProfileRepository->delete($id);
+
+        return \Redirect('/estimateprofit/index'); 
+    }       
 }
