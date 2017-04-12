@@ -35,7 +35,7 @@ class MutualFundRepository  implements IMutualFundRepository
     public function find($id)
     {
         // TODO: Implement find() method.
-        return $this->nav-find($id);
+        return $this->nav->find($id);
     }
 
     public function create(Request $request)

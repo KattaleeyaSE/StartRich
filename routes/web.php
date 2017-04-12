@@ -69,6 +69,7 @@ Route::group(['prefix' => 'amc'], function () {
     Route::patch('/profile','AMC\AMCController@update'); 
 
     Route::get('/fund', 'AMC\FundController@index');
+    Route::get('/fund/{id}', 'AMC\FundController@show')->name('amc.fund.show');
 });
 
 // Backoffice Routes

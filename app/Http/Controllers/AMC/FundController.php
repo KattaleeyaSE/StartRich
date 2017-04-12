@@ -61,7 +61,9 @@ class FundController extends Controller
      */
     public function show($id)
     {
-        //
+        $fund = $this->mutualFundRepository->find($id);
+
+        return view('AMC.fund.show', ['fund' => $fund]);
     }
 
     /**

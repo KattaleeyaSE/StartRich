@@ -26,7 +26,7 @@
                                         <td>{{$fund->name}}</td>
                                         <td>{{$fund->type}}</td>
                                         <td>
-                                            <a class="btn btn-xs btn-info">view</a>
+                                            <a href="{{ route('amc.fund.show', $fund->id) }}" class="btn btn-xs btn-info">view</a>
                                             <a class="btn btn-xs btn-danger">delete</a>
                                         </td>
                                     </tr>
