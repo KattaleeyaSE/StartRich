@@ -1,32 +1,20 @@
 <div role="tabpanel" class="tab-pane active" id="past-performance">
 
-<a class="btn btn-warning">edit</a>
-
 <div class="row">
 	<div class="col-md-12">
 		<table class="table">
 			<thead>
 				<th>Modified date</th>
-				<th>NAV Standard</th>
-				<th>NAV bid</th>
-				<th>NAV offer</th>
-				<th>Change of nav standard</th>
-				<th>Change of NAV bit</th>
-				<th>Change of NAV offer</th>
+				<th>past performance name</th>
 				<th>Actions</th>
 			</thead>
 			<tbody>
 				@foreach($fund->nav as $item)
 					<tr>
-						<td>{{$item->updated_at}}</td>
-						<td>{{$item->standard}}</td>
-						<td>{{$item->bid}}</td>
-						<td>{{$item->offer}}</td>
-						<td></td>
 						<td></td>
 						<td></td>
 						<td>
-							<a class="btn btn-xs btn-warning">edit</a>
+							<a class="btn btn-xs btn-info">view</a>
 							<a class="btn btn-xs btn-danger">delete</a>
 						</td>
 					</tr>
