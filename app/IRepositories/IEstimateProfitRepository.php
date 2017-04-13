@@ -4,7 +4,7 @@ namespace App\IRepositories;
 
 use Illuminate\Http\Request;
 
-interface IEstimateProfileRepository
+interface IEstimateProfitRepository
 {
 
     /**

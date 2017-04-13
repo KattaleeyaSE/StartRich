@@ -7,21 +7,21 @@ use App\Http\Controllers\Controller;
 
 //Service Container 
 use App\IRepositories\IMutualFundRepository; 
-use App\IRepositories\IEstimateProfileRepository; 
+use App\IRepositories\IEstimateProfitRepository; 
 
 class EstimateProfitAPIController extends Controller
 {
     //
     private $mutualFundRepository;
-    private $estimateProfileRepository;
+    private $estimateProfitRepository;
 
     public function __construct( 
             IMutualFundRepository $mutualFundRepository,
-            IEstimateProfileRepository $estimateProfileRepository
+            IEstimateProfitRepository $estimateProfitRepository
         )
     {  
         $this->mutualFundRepository = $mutualFundRepository;
-        $this->estimateProfileRepository = $estimateProfileRepository;
+        $this->estimateProfitRepository = $estimateProfitRepository;
     }  
 
     public function allFunds()
@@ -54,7 +54,7 @@ class EstimateProfitAPIController extends Controller
         try
         { 
             
-            $funds  = $this->estimateProfileRepository->all_by_member_id($request->member_id); 
+            $funds  = $this->estimateProfitRepository->all_by_member_id($request->member_id); 
             
             if(sizeof($funds) >= 5)
             {
@@ -66,7 +66,7 @@ class EstimateProfitAPIController extends Controller
 
             }else
             {
-                $this->estimateProfileRepository->create($request); 
+                $this->estimateProfitRepository->create($request); 
 
                 $msg= [
                     'msg' => 'Success', 
@@ -87,7 +87,7 @@ class EstimateProfitAPIController extends Controller
         try
         { 
            
-            $this->estimateProfileRepository->update($request->id,$request); 
+            $this->estimateProfitRepository->update($request->id,$request); 
 
             $msg= [
                 'msg' => 'Success', 

@@ -48,7 +48,7 @@
                     </div>
                     {{-- Paging --}}
                       <div class="text-center">
-                          <a href="" class="btn btn-default">Calculate</a>
+                          <a href="{{url('/estimateprofit/result')}}" class="btn btn-default">Calculate & Result</a>
                     </div>
 
                 </div>

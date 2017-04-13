@@ -6,33 +6,38 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 //Service Container
-use App\IRepositories\IEstimateProfileRepository;
+use App\IRepositories\IEstimateProfitRepository;
 
 //Request Validation
 
 
 class EstimateProfitMemberController extends Controller
 {
-    private $estimateProfileRepository;
+    private $estimateProfitRepository;
 
     public function __construct
         (
-            IEstimateProfileRepository $estimateProfileRepository
+            IEstimateProfitRepository $estimateProfitRepository
         )
     {
         $this->middleware('auth.member');
-        $this->estimateProfileRepository = $estimateProfileRepository;
+        $this->estimateProfitRepository = $estimateProfitRepository;
     }
 
     public function index()
     {
-        $estimate_profits =  $this->estimateProfileRepository->all_by_member_id(\Auth::user()->member->id);
+        $estimate_profits =  $this->estimateProfitRepository->all_by_member_id(\Auth::user()->member->id);
         return view('estimate_profit.index',[
             'estimate_profits' => $estimate_profits
         ]);
     }
 
     public function create()
+    { 
+        return view('estimate_profit.create');
+    }
+
+    public function result()
     { 
         return view('estimate_profit.create');
     }
@@ -45,7 +50,7 @@ class EstimateProfitMemberController extends Controller
 
     public function edit($id)
     { 
-        $estimate_profit =  $this->estimateProfileRepository->find($id);
+        $estimate_profit =  $this->estimateProfitRepository->find($id);
         return view('estimate_profit.edit',[
             'estimate_profit' => $estimate_profit
         ]);
@@ -53,7 +58,7 @@ class EstimateProfitMemberController extends Controller
  
     public function destroy($id)
     { 
-        $this->estimateProfileRepository->delete($id);
+        $this->estimateProfitRepository->delete($id);
 
         return \Redirect('/estimateprofit/index'); 
     }       

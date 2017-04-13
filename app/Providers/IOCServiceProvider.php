@@ -56,8 +56,13 @@ class IOCServiceProvider extends ServiceProvider
         );        
 
         $this->app->bind(
-            'App\IRepositories\IEstimateProfileRepository',
-            'App\Repositories\EstimateProfileRepository'
+            'App\IRepositories\IEstimateProfitRepository',
+            'App\Repositories\EstimateProfitRepository'
+        );        
+
+        $this->app->bind(
+            'App\IServices\IEstimateProfitService',
+            'App\Services\EstimateProfitService'
         );        
     }
 }

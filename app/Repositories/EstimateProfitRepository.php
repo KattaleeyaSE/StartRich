@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use App\IRepositories\IEstimateProfileRepository; 
+use App\IRepositories\IEstimateProfitRepository; 
 
 use App\Models\EstimateProfit; 
 
 use Illuminate\Http\Request;
-class EstimateProfileRepository implements IEstimateProfileRepository
+class EstimateProfitRepository implements IEstimateProfitRepository
 {
     private $estimateProfit;
 

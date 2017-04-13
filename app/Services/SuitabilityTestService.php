@@ -4,8 +4,8 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use App\Models\SuitabilityTest;
+//Service Container 
 use App\IServices\ISuitabilityTestService;
-//Service Container
 use App\IRepositories\ISuitabilityTestRepository;
 use App\IRepositories\ISuitabilityTestMemberRepository;
 class SuitabilityTestService implements ISuitabilityTestService
