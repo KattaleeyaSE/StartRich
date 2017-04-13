@@ -21,7 +21,7 @@ class EstimateProfitsTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'effective_date' => '2017-04-04',
-                'balance_of_investment' => 5.0,
+                'balance_of_investment' => 123.0,
                 'member_id' => 1,
                 'invest_id' => 1,
                 'nav_id' => 3,

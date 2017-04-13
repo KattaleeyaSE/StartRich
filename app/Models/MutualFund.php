@@ -56,7 +56,7 @@ class MutualFund extends investment
         return $this->hasMany('App\portfolio');
     }
     public function purchasedetails(){
-        return $this->hasMany('App\purchasedetail');
+        return $this->hasMany('App\purchasedetail','fund_id');
     }
 
     /*

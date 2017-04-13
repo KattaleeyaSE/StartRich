@@ -19,6 +19,7 @@
                                 <th class="text-center">Company Name</th>  
                                 <th class="text-center">Balance of Investment</th>  
                                 <th class="text-center">NAV Offer</th>  
+                                <th class="text-center">Unit</th>  
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Action</th>
                             </tr>
@@ -35,6 +36,7 @@
                                     <td class="text-center">{{$item->fund->company_name}}</td>   
                                     <td class="text-center">{{$item->balance_of_investment}}</td>   
                                     <td class="text-center">{{$item->nav->offer}}</td>   
+                                    <td class="text-center">{{$item->balance_of_investment/$item->nav->offer}}</td>   
                                     <td class="text-center">Added</td> 
                                     <td class="text-center">
                                         <a href="{{url('/estimateprofit/edit/'.$item->id)}}" class="btn btn-warning">Edit</a> | <a href="{{url('/estimateprofit/delete/'.$item->id)}}" data-button-type="delete" class="btn btn-danger">Delete</a>
@@ -46,7 +48,7 @@
                     </div>
                     {{-- Paging --}}
                       <div class="text-center">
-                          <a href="" class="btn btn-default">Calculate</a>
+                          <a href="{{url('/estimateprofit/result')}}" class="btn btn-default">Calculate & Result</a>
                     </div>
 
                 </div>

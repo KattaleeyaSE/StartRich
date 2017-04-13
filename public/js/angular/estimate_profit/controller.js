@@ -264,12 +264,14 @@ function($scope,$sce,EstimateProfitResource) {
     { 
        $scope.selected.mutualFundType = {};
        $scope.selected.mutualFund = {};
+       $scope.buyDate = null;
        $scope.offAtBuyDate = null;
     };
 
     $scope.onSelectedMutualFundType = function ()
     { 
         $scope.selected.mutualFund = {};
+        $scope.buyDate = null;
         $scope.offAtBuyDate = null;
     };
 
