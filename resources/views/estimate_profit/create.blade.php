@@ -95,7 +95,7 @@
                             ng-model="balance_of_investment" 
                             class="form-control"  
                             ng-required="true" 
-                            min="1"
+                            min="<%selected.mutualFundType.purchasedetails[0].minimum_balance > 0 ? selected.mutualFundType.purchasedetails[0].minimum_balance : 1%>"
                         >
                     </div>  
 
