@@ -39,7 +39,7 @@ class FundController extends Controller
      */
     public function create()
     {
-        //
+        return view('AMC.fund.create');
     }
 
     /**

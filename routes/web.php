@@ -72,6 +72,7 @@ Route::group(['prefix' => 'amc'], function () {
 
     Route::get('/fund', 'AMC\FundController@index');
     Route::get('/fund/{id}', 'AMC\FundController@show')->name('amc.fund.show');
+    Route::get('/fund/create', 'AMC\FundController@create')->name('amc.fund.create');
 });
 
 // Backoffice Routes
