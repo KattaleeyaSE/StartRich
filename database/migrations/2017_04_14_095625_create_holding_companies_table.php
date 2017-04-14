@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePassperformancesTable extends Migration
+class CreateHoldingCompaniesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreatePassperformancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('past_performances', function (Blueprint $table) {
+        Schema::create('holding_companies', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('fund_id')->unsigned();
             $table->foreign('fund_id')->references('id')->on('investments')->onDelete('cascade')->onUpdate('cascade');
-            $table->date('date');
+            $table->float('percentage');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreatePassperformancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('past_performances ');
+        Schema::dropIfExists('holding_companies');
     }
 }

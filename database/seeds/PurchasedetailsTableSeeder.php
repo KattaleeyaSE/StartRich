@@ -14,9 +14,9 @@ class PurchasedetailsTableSeeder extends Seeder
     {
         
 
-        \DB::table('purchasedetails')->delete();
+        \DB::table('purchase_details')->delete();
         
-        \DB::table('purchasedetails')->insert(array (
+        \DB::table('purchase_details')->insert(array (
             0 => 
             array (
                 'id' => 1,
