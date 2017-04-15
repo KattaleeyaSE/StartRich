@@ -25,5 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(NavsTableSeeder::class);
         $this->call(PurchasedetailsTableSeeder::class);
         $this->call(EstimateProfitsTableSeeder::class);
+        $this->call(MutualFundTypesTableSeeder::class);
+        $this->call(AimcTypesTableSeeder::class);
     }
 }

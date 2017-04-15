@@ -21,6 +21,7 @@ class CreateNavsTable extends Migration
             $table->float('offer');
             $table->integer('fund_id')->unsigned();
             $table->foreign('fund_id')->references('id')->on('investments')->onDelete('cascade')->onUpdate('cascade');
+            $table->date('modified_date');
             $table->timestamps();
         });
     }
