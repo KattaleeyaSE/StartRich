@@ -12,6 +12,7 @@ use App\Models\AimcType;
 use App\Models\FundManager;
 use App\Models\NAV;
 use App\Models\DividendPayment;
+use App\Models\AssetAllocation;
 
 class FundController extends Controller
 {
@@ -76,12 +77,23 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
         $navs = [];
+        $asset_allocation_data = [];
 
         foreach ($fund->nav as $nav) {
             array_push($navs, [$nav->update_date, $nav->bid]);
         }
 
-        return view('AMC.fund.show', ['fund' => $fund, 'navs' => $navs]);
+        $asset_allocation = $fund->asset_allocation;
+
+        if (!is_null($asset_allocation)) {
+            array_push($asset_allocation_data, ['Type', 'Percentage']);
+            array_push($asset_allocation_data, ['Stock', $asset_allocation->stock]);
+            array_push($asset_allocation_data, ['Bond', $asset_allocation->bond]);
+            array_push($asset_allocation_data, ['Cash', $asset_allocation->cash]);
+            array_push($asset_allocation_data, ['Other', $asset_allocation->other]);
+        }
+
+        return view('AMC.fund.show', ['fund' => $fund, 'navs' => $navs, 'asset_allocation_data' => $asset_allocation_data]);
     }
 
     /**
@@ -243,5 +255,27 @@ class FundController extends Controller
         $dividend->delete();
 
         return redirect()->route('amc.fund.show', $fund->id);
+    }
+
+    // Asset Allocation
+    public function editAssetAllocation($id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        $asset_allocation = $fund->asset_allocation;
+
+        if (is_null($asset_allocation)) {
+            $asset_allocation = $fund->asset_allocation()->create(['stock' => 0.0, 'bond' => 0.0, 'cash' => 0.0, 'other' => 0.0]);
+        }
+
+        return view('AMC.fund.asset_allocation.edit', ['asset_allocation' => $asset_allocation]);
+    }
+
+    public function updateAssetAllocation(Request $request, $id)
+    {
+        $asset_allocation = AssetAllocation::find($id);
+        $asset_allocation->update($request->all());
+
+        return redirect()->route('amc.fund.show', $asset_allocation->fund->id);
     }
 }

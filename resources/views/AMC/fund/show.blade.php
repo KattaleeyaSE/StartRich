@@ -55,10 +55,12 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+
+// NAV Chart
   google.charts.load('current', {packages: ['corechart', 'line']});
   google.charts.setOnLoadCallback(drawBackgroundColor);
 
-  function drawBackgroundColor() {
+      function drawBackgroundColor() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'X');
         data.addColumn('number', 'Price');
@@ -78,28 +80,21 @@
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
-      
-  google.charts.load('current', {'packages':['corechart']});
+
+// Portfolio Chart
+  google.charts.load("current", {packages:["corechart"]});
   google.charts.setOnLoadCallback(drawChart);
 
-  function drawChart() {
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable({!!json_encode($asset_allocation_data)!!});
 
-    var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work',     11],
-      ['Eat',      2],
-      ['Commute',  2],
-      ['Watch TV', 2],
-      ['Sleep',    7]
-    ]);
+        var options = {
+          title: 'Asset Allocation',
+          is3D: true,
+        };
 
-    var options = {
-      title: 'My Daily Activities'
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-    chart.draw(data, options);
-  }
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
 </script>
 @endsection

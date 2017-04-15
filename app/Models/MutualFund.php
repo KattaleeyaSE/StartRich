@@ -106,6 +106,11 @@ class MutualFund extends investment
         return $this->hasMany('App\Models\PurchaseDetail','fund_id');
     }
 
+    public function asset_allocation()
+    {
+        return $this->hasOne('App\Models\AssetAllocation','fund_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
