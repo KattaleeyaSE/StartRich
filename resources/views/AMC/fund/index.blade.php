@@ -22,7 +22,7 @@
                                 @foreach($funds as $fund)
                                     <tr>
                                         <td>{{$fund->updated_at}}</td>
-                                        <td>--code--</td>
+                                        <td>{{$fund->code}}</td>
                                         <td>{{$fund->name}}</td>
                                         <td>{{$fund->type}}</td>
                                         <td>

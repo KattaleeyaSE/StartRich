@@ -17,7 +17,6 @@
                           <li><a href="#subscription-and-redemption-detail" data-toggle="tab">subscription and redemption detail</a></li>
                           <li><a href="#past-performance"                   data-toggle="tab">past performance</a></li>
                           <li><a href="#historical-dividend-payment"        data-toggle="tab">historical dividend payment</a></li>
-                          <li><a href="#fee-charge"                         data-toggle="tab">fee charge</a></li>
                           <li><a href="#portfolio"                          data-toggle="tab">portfolio</a></li>
                         </ul>
 
@@ -32,7 +31,6 @@
                             @include('AMC.fund.tabs.subscription-and-redemption-detail')
                             @include('AMC.fund.tabs.past-performance')
                             @include('AMC.fund.tabs.historical-dividend-payment')
-                            @include('AMC.fund.tabs.fee-charge')
                             @include('AMC.fund.tabs.portfolio')
                           </div>
 

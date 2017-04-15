@@ -1,6 +1,13 @@
 <div role="tabpanel" class="tab-pane active" id="fund-detail">
 
-<a class="btn btn-warning">edit</a>
+<div class="row">
+	<div class="col-md-12">
+		<div class="well well-sm">
+			<a class="btn btn-warning pull-right">edit</a>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
 
 <div class="row">
 	<div class="col-md-6">
@@ -19,11 +26,11 @@
 			</tr>
 			<tr>
 				<th>AIMC type</th>
-				<td>{{$fund->aimcfundtype}}</td>
+				<td>{{$fund->aimc_type}}</td>
 			</tr>
 			<tr>
 				<th>name of management company</th>
-				<td>{{$fund->company_name}}</td>
+				<td>{{$fund->management_company}}</td>
 			</tr>
 			<tr>
 				<th>trustee</th>
@@ -31,27 +38,35 @@
 			</tr>
 			<tr>
 				<th>dividend payment policy</th>
-				<td>{{$fund->Investment_policy}}</td>
+				<td>{{$fund->payment_policy ? 'YES' : 'NO'}}</td>
 			</tr>
 			<tr>
 				<th>frequency of subscription and redemption</th>
 				<td>{{$fund->frequency}}</td>
 			</tr>
+		</table>
+	</div>
+	<div class="col-md-6">
+		<table class="table">
 			<tr>
 				<th>fund establishment approved by</th>
-				<td>{{$fund->mock}}</td>
+				<td>{{$fund->approved_by}}</td>
 			</tr>
 			<tr>
-				<th>supervision protected fund</th>
-				<td>{{$fund->mock}}</td>
+				<th>supervision</th>
+				<td>{{$fund->supervision}}</td>
+			</tr>
+			<tr>
+				<th>protected fund</th>
+				<td>{{$fund->protected_fund ? 'YES' : 'NO'}}</td>
 			</tr>
 			<tr>
 				<th>name of guarantor</th>
-				<td>{{$fund->mock}}</td>
+				<td>{{$fund->name_of_guarantor}}</td>
 			</tr>
 			<tr>
-				<th>registration date</th>
-				<td>{{$fund->registered_date}}</td>
+				<th>start date</th>
+				<td>{{$fund->fund_start}}</td>
 			</tr>
 			<tr>
 				<th>end date</th>
@@ -59,11 +74,11 @@
 			</tr>
 			<tr>
 				<th>risk level</th>
-				<td>{{$fund->risklevel}}</td>
+				<td>{{$fund->risk_level}}</td>
 			</tr>
 			<tr>
 				<th>net asset value</th>
-				<td>{{$fund->assetvalue}}</td>
+				<td>{{$fund->net_asset_value}}</td>
 			</tr>
 		</table>
 	</div>
