@@ -21,7 +21,9 @@ class EstimateProfitService implements IEstimateProfitService
 
     public function calculation($id)
     {
+        $estimate_profit = $this->estimateProfitRepository->all_by_member_id($id);
 
+        
     }
 
 }

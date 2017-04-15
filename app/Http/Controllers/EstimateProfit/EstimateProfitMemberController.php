@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 //Service Container
 use App\IRepositories\IEstimateProfitRepository;
+use App\IServices\IEstimateProfitService;
 
 //Request Validation
 
@@ -14,14 +15,17 @@ use App\IRepositories\IEstimateProfitRepository;
 class EstimateProfitMemberController extends Controller
 {
     private $estimateProfitRepository;
+    private $estimateProfitService;
 
     public function __construct
         (
-            IEstimateProfitRepository $estimateProfitRepository
+            IEstimateProfitRepository $estimateProfitRepository,
+            IEstimateProfitService $estimateProfitService
         )
     {
         $this->middleware('auth.member');
         $this->estimateProfitRepository = $estimateProfitRepository;
+        $this->estimateProfitService = $estimateProfitService;
     }
 
     public function index()
@@ -39,7 +43,10 @@ class EstimateProfitMemberController extends Controller
 
     public function result()
     { 
-        return view('estimate_profit.create');
+        $result = $this->estimateProfitService->calculation(\Auth::user()->member->id);
+        return view('estimate_profit.result',[
+            'result' => $result
+        ]);
     }
 
     public function store(Request $request)
