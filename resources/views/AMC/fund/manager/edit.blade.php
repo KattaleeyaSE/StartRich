@@ -5,7 +5,7 @@
 	<div class="container">
 		{!! Form::model($manager, ['route' => ['amc.fund.update_manager', $manager->id], 'method' => 'PATCH', 'class' => 'form-horizontal']) !!}
 
-			@include('AMC.fund.partials._form-manager')
+			@include('AMC.fund.manager.partials._form')
 			
 			<hr>
 

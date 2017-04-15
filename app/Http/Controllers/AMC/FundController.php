@@ -165,7 +165,7 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        return view('AMC.fund.create_manager', ['fund' => $fund]);
+        return view('AMC.fund.manager.create', ['fund' => $fund]);
     }
 
     public function storeManager(Request $request, $id)
@@ -181,7 +181,7 @@ class FundController extends Controller
     {
         $manager = FundManager::find($id);
 
-        return view('AMC.fund.edit_manager', ['manager' => $manager]);
+        return view('AMC.fund.manager.edit', ['manager' => $manager]);
     }
 
     public function updateManager(Request $request, $id)

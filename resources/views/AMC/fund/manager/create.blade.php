@@ -5,7 +5,7 @@
 	<div class="container">
 		{!! Form::open(['route' => ['amc.fund.store_manager', $fund->id], 'class' => 'form-horizontal']) !!}
 
-			@include('AMC.fund.partials._form-manager')
+			@include('AMC.fund.manager.partials._form')
 			
 			<hr>
 
