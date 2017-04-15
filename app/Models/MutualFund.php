@@ -43,6 +43,8 @@ class MutualFund extends investment
     {
         return $this->belongsTo('App\Models\AMC');
     }
+
+    // ไม่ใช้ละ
     public function nav(){
         return $this->hasMany('App\Models\Nav','fund_id');
     }
@@ -57,6 +59,32 @@ class MutualFund extends investment
     }
     public function purchasedetails(){
         return $this->hasMany('App\purchasedetail','fund_id');
+    }
+
+    // ใช้อันนี้แทนนะ
+    public function navs()
+    {
+        return $this->hasMany('App\Models\Nav', 'fund_id');
+    }
+    
+    public function dividend_history()
+    {
+        return $this->hasMany('App\Models\DividendPayment', 'fund_id');
+    }
+
+    public function fund_managers()
+    {
+        return $this->hasMany('App\Models\FundManager', 'fund_id');
+    }
+
+    public function portfolios()
+    {
+        return $this->hasMany('App\Models\Portfolio', 'fund_id');
+    }
+
+    public function purchase_details()
+    {
+        return $this->hasMany('App\Models\PurchaseDetail','fund_id');
     }
 
     /*
