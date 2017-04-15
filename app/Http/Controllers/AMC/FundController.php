@@ -11,6 +11,7 @@ use App\Models\MutualFundType;
 use App\Models\AimcType;
 use App\Models\FundManager;
 use App\Models\NAV;
+use App\Models\DividendPayment;
 
 class FundController extends Controller
 {
@@ -198,6 +199,48 @@ class FundController extends Controller
         $fund = $manager->fund;
 
         $manager->delete();
+
+        return redirect()->route('amc.fund.show', $fund->id);
+    }
+
+    //Dividend
+    public function createDividend($id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        return view('AMC.fund.dividend_payment.create', ['fund' => $fund]);
+    }
+
+    public function storeDividend(Request $request, $id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        $dividends = $fund->dividend_payments()->create($request->all());
+
+        return redirect()->route('amc.fund.show', $fund->id);
+    }
+
+    public function editDividend($id)
+    {
+        $dividend = DividendPayment::find($id);
+
+        return view('AMC.fund.dividend_payment.edit', ['dividend' => $dividend]);
+    }
+
+    public function updateDividend(Request $request, $id)
+    {
+        $dividend = DividendPayment::find($id);
+        $dividend->update($request->all());
+
+        return redirect()->route('amc.fund.show', $dividend->fund->id);
+    }
+
+    public function destroyDividend($id)
+    {
+        $dividend = DividendPayment::find($id);
+        $fund = $dividend->fund;
+
+        $dividend->delete();
 
         return redirect()->route('amc.fund.show', $fund->id);
     }

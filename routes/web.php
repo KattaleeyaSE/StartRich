@@ -83,6 +83,12 @@ Route::group(['prefix' => 'amc'], function () {
         Route::get('/manager/{id}/edit', 'AMC\FundController@editManager')->name('amc.fund.edit_manager');
         Route::patch('/manager/{id}', 'AMC\FundController@updateManager')->name('amc.fund.update_manager');
         Route::delete('/manager/{id}', 'AMC\FundController@destroyManager')->name('amc.fund.destroy_manager');
+        // Dividend Payment
+        Route::get('fund/{id}/dividend/create', 'AMC\FundController@createDividend')->name('amc.fund.create_dividend');
+        Route::post('fund/{id}/dividend', 'AMC\FundController@storeDividend')->name('amc.fund.store_dividend');
+        Route::get('/dividend/{id}/edit', 'AMC\FundController@editDividend')->name('amc.fund.edit_dividend');
+        Route::patch('/dividend/{id}', 'AMC\FundController@updateDividend')->name('amc.fund.update_dividend');
+        Route::delete('/dividend/{id}', 'AMC\FundController@destroyDividend')->name('amc.fund.destroy_dividend');
 
 
     Route::resource('fund', 'AMC\FundController', [

@@ -1,69 +1,52 @@
 <div role="tabpanel" class="tab-pane active" id="historical-dividend-payment">
 
-<a class="btn btn-warning">edit</a>
+<div class="row">
+	<div class="col-md-12">
+		<div class="well well-sm">
+			<a href="{{ route('amc.fund.create_dividend', $fund->id) }}" class="btn btn-primary pull-right">Create</a>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
 
 <div class="row">
 	<div class="col-md-12">
 		<table class="table">
 			<thead>
-				<th>Modified date</th>
-				<th>NAV Standard</th>
-				<th>NAV bid</th>
-				<th>NAV offer</th>
-				<th>Change of nav standard</th>
-				<th>Change of NAV bit</th>
-				<th>Change of NAV offer</th>
+					<th colspan="3">History of dividend (Baht/Unit)</th>
+					<th></th>
+			</thead>
+			<thead>
+				<th>Year</th>
+				<th>Payment Date</th>
+				<th>Dividend (Bath/Unit)</th>
 				<th>Actions</th>
 			</thead>
 			<tbody>
-				@foreach($fund->nav as $item)
+				@foreach($fund->dividend_payments as $item)
 					<tr>
-						<td>{{$item->updated_at}}</td>
-						<td>{{$item->standard}}</td>
-						<td>{{$item->bid}}</td>
-						<td>{{$item->offer}}</td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>{{$item->getYear()}}</td>
+						<td>{{$item->payment_date}}</td>
+						<td>{{$item->dividend_price}}</td>
 						<td>
-							<a class="btn btn-xs btn-warning">edit</a>
-							<a class="btn btn-xs btn-danger">delete</a>
+							{!! Form::open(['route' => ['amc.fund.destroy_dividend', $item->id], 'method' => 'DELETE']) !!}
+								<a href="{{ route('amc.fund.edit_dividend', $item->id) }}" class="btn btn-xs btn-warning">edit</a>
+								{!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger']) !!}
+							{!! Form::close() !!}
 						</td>
 					</tr>
 				@endforeach
+				<tr>
+					<td colspan="2">Total Dividend</td>
+					<td>{{$fund->dividend_payments->sum('dividend_price')}}</td>
+				</tr>
+				<tr>
+					<td colspan="2">The frequency dividend</td>
+					<td>{{$fund->dividend_payments->count()}}</td>
+				</tr>
 			</tbody>
 		</table>
-		<div id="chart_div"></div>
 	</div>
 </div>
 
 </div>
-
-@section('script')
- 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
- 	<script type="text/javascript">
- 		google.charts.load('current', {packages: ['corechart', 'line']});
-		google.charts.setOnLoadCallback(drawBackgroundColor);
-
-		function drawBackgroundColor() {
-		      var data = new google.visualization.DataTable();
-		      data.addColumn('string', 'X');
-		      data.addColumn('number', 'Price');
-
-		      data.addRows({!!json_encode($navs)!!});
-
-		      var options = {
-		        hAxis: {
-		          title: 'Modified date'
-		        },
-		        vAxis: {
-		          title: 'Price (Bath)'
-		        },
-		        backgroundColor: '#f1f8e9'
-		      };
-
-		      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-		      chart.draw(data, options);
-		    }
- 	</script>
-@endsection
