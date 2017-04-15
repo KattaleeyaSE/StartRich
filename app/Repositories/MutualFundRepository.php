@@ -38,13 +38,14 @@ class MutualFundRepository  implements IMutualFundRepository
         return $this->nav->find($id);
     }
 
-    public function create(Request $request)
+    public function create(Request $request, $amc_id)
     {
         // TODO: Implement create() method.
-        $user = $this->NavRepository->create($request);
+        $data = $request->all();
+        $amc_id = ['amc_id' => $amc_id];
+        $data = array_merge($data,$amc_id);
 
-
-        return $this->nav->create($request->all());;
+        return $this->nav->create($data);;
 
     }
 

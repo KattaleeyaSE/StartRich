@@ -33,8 +33,8 @@ class CreateInvestmentsTable extends Migration
             $table->string('name_of_guarantor', 150);
             $table->date('fund_start');
             $table->date('fund_end')->nullable();
-            $table->integer('risklevel');
-            $table->integer('net_asset_value');
+            $table->integer('risk_level');
+            $table->bigInteger('net_asset_value');
 
             // about investment policy
             $table->longText('investment_asset_detail');

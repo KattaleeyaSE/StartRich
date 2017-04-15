@@ -62,7 +62,7 @@ Route::group(['prefix' => 'member'], function () {
 // AMC Routes
 Route::group(['prefix' => 'amc'], function () {
     Route::get('/fund','AMC\AMCController@fund');
-    Route::get('/create','AMC\AMCController@fundadd');
+    // Route::get('/create','AMC\AMCController@fundadd');
 
     Route::get('/getfund','AMC\AMCController@getfund');
     Route::post('/addnav','AMC\AMCController@addapi');
@@ -70,9 +70,16 @@ Route::group(['prefix' => 'amc'], function () {
     Route::get('/profile/edit','AMC\AMCController@edit'); 
     Route::patch('/profile','AMC\AMCController@update'); 
 
-    Route::get('/fund', 'AMC\FundController@index');
-    Route::get('/fund/{id}', 'AMC\FundController@show')->name('amc.fund.show');
-    Route::get('/fund/create', 'AMC\FundController@create')->name('amc.fund.create');
+    Route::resource('fund', 'AMC\FundController', [
+                            'names' => [
+                                'index' => 'amc.fund.index',
+                                'show' => 'amc.fund.show',
+                                'create' => 'amc.fund.create',
+                                'store' => 'amc.fund.store',
+                            ]]);
+    // Route::get('/fund', 'AMC\FundController@index');
+    // Route::get('/fund/{id}', 'AMC\FundController@show')->name('amc.fund.show');
+    // Route::get('/fund/create', 'AMC\FundController@create')->name('amc.fund.create');
 });
 
 // Backoffice Routes

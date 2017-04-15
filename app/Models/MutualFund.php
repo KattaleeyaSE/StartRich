@@ -19,10 +19,29 @@ class MutualFund extends investment
     // public $timestamps = false;
     // protected $guarded = ['id'];
     protected $fillable = [
-        'name',
-        'desc',
-        'type',
         'amc_id',
+        'name',
+        'code',
+        'type',
+        'aimc_type',
+        'management_company',
+        'trustee',
+        'payment_policy',
+        'frequency',
+        'approved_by',
+        'supervision',
+        'protected_fund',
+        'name_of_guarantor',
+        'fund_start',
+        'fund_end',
+        'risk_level',
+        'net_asset_value',
+        'investment_asset_detail',
+        'strategy_detail',
+        'factor_impact',
+        'benchmark_detail',
+        'type_of_investor',
+        'major_risk_factor'
     ];
 
     // protected $hidden = [];

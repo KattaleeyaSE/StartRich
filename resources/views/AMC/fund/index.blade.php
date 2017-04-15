@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">AMC : Fund Management</div>
                     <div class="panel-body">
-                        <a href="{{url('/amc/create')}}" class="btn btn-success">Create</a>
+                        <a href="{{ route('amc.fund.create') }}" class="btn btn-success">Create</a>
                     </div>
                     <div class="panel-body">
                         <table class="table">

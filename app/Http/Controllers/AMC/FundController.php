@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use Auth;
 use App\IRepositories\IMutualFundRepository;
+use App\Models\MutualFundType;
+use App\Models\AimcType;
 
 class FundController extends Controller
 {
@@ -39,7 +41,10 @@ class FundController extends Controller
      */
     public function create()
     {
-        return view('AMC.fund.create');
+        $fund_types = MutualFundType::all()->pluck('name', 'name');
+        $aimc_types = AimcType::all()->pluck('name', 'name');
+
+        return view('AMC.fund.create', ['fund_types' => $fund_types, 'aimc_types' => $aimc_types]);
     }
 
     /**
@@ -50,7 +55,10 @@ class FundController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $amc_id = Auth::user()->amc->id;
+        $fund = $this->mutualFundRepository->create($request, $amc_id);
+
+        return $fund;
     }
 
     /**
