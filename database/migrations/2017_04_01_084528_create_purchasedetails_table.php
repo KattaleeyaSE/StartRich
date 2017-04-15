@@ -21,6 +21,7 @@ class CreatePurchasedetailsTable extends Migration
 
             $table->string('subscription_period');
             $table->string('min_first_purchase');
+            $table->string('min_additional');
 
             $table->string('redemtion_period');
             $table->string('min_redemption');

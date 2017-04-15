@@ -75,16 +75,39 @@
 
 <div class="row">
 	<div class="col-md-12">
+		<div class="well well-sm">
+			<a href="{{ route('amc.fund.create_purchase_detail', $fund->id) }}" class="btn btn-primary pull-right">Create</a>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
 		<table class="table">
 			<thead>
-				<th>minimum value first purchase</th>
-				<th>minimum additional</th>
+				<th>subscription_period</th>
+				<th>min_first_purchase</th>
+				<th>min_additional</th>
+				<th>redemtion_period</th>
+				<th>min_redemption</th>
+				<th>min_balance</th>
+				<th>settlement_period</th>
+				<th>Actions</th>
 			</thead>
 			<tbody>
-				@foreach($fund->nav as $item)
+				@foreach($fund->purchase_details as $item)
 					<tr>
-						<td>{{$item->xxxx}}</td>
-						<td>{{$item->xxxx}}</td>
+						<td>{{$item->subscription_period}}</td>
+						<td>{{$item->min_first_purchase}}</td>
+						<td>{{$item->min_additional}}</td>
+						<td>{{$item->redemtion_period}}</td>
+						<td>{{$item->min_redemption}}</td>
+						<td>{{$item->min_balance}}</td>
+						<td>{{$item->settlement_period}}</td>
+						<td>
+							<a href="{{ route('amc.fund.edit_purchase_detail', $item->id) }}" class="btn btn-xs btn-warning">edit</a>
+						</td>
 					</tr>
 				@endforeach
 			</tbody>

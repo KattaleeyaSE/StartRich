@@ -15,6 +15,7 @@ use App\Models\DividendPayment;
 use App\Models\AssetAllocation;
 use App\Models\HoldingCompany;
 use App\Models\Fee;
+use App\Models\PurchaseDetail;
 
 class FundController extends Controller
 {
@@ -362,13 +363,35 @@ class FundController extends Controller
         return redirect()->route('amc.fund.show', $fee->fund->id);
     }
 
-    public function destroyFee($id)
+    //PurchaseDetail
+    public function createPurchaseDetail($id)
     {
-        $fee = Fee::find($id);
-        $fund = $fee->fund;
+        $fund = $this->mutualFundRepository->find($id);
 
-        $fee->delete();
+        return view('AMC.fund.purchase_detail.create', ['fund' => $fund]);
+    }
+
+    public function storePurchaseDetail(Request $request, $id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        $purchase_detail = $fund->purchase_details()->create($request->all());
 
         return redirect()->route('amc.fund.show', $fund->id);
+    }
+
+    public function editPurchaseDetail($id)
+    {
+        $purchase_detail = PurchaseDetail::find($id);
+
+        return view('AMC.fund.purchase_detail.edit', ['purchase_detail' => $purchase_detail]);
+    }
+
+    public function updatePurchaseDetail(Request $request, $id)
+    {
+        $purchase_detail = PurchaseDetail::find($id);
+        $purchase_detail->update($request->all());
+
+        return redirect()->route('amc.fund.show', $purchase_detail->fund->id);
     }
 }
