@@ -1,7 +1,5 @@
 <div role="tabpanel" class="tab-pane active" id="nav-daily">
 
-<a class="btn btn-warning">edit</a>
-
 <div class="row">
 	<div class="col-md-12">
 		<table class="table">
@@ -16,20 +14,27 @@
 				<th>Actions</th>
 			</thead>
 			<tbody>
-				@foreach($fund->nav as $item)
+				@foreach($fund->navs as $item)
 					<tr>
-						<td>{{$item->updated_at}}</td>
+						<td>{{$item->modified_date}}</td>
 						<td>{{$item->standard}}</td>
 						<td>{{$item->bid}}</td>
 						<td>{{$item->offer}}</td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>{{isset($temp_standard) ? $item->standard - $temp_standard : '-' }}</td>
+						<td>{{isset($temp_bid) ? $item->bid - $temp_bid : '-' }}</td>
+						<td>{{isset($temp_offer) ? $item->offer - $temp_offer : '-' }}</td>
 						<td>
 							<a class="btn btn-xs btn-warning">edit</a>
 							<a class="btn btn-xs btn-danger">delete</a>
 						</td>
 					</tr>
+
+					@php
+						$temp_standard = $item->standard;
+						$temp_bid = $item->bid;
+						$temp_offer = $item->offer;
+					@endphp
+
 				@endforeach
 			</tbody>
 		</table>
