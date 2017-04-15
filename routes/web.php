@@ -70,13 +70,20 @@ Route::group(['prefix' => 'amc'], function () {
     Route::get('/profile/edit','AMC\AMCController@edit'); 
     Route::patch('/profile','AMC\AMCController@update'); 
 
-    Route::get('fund/{id}/manager/create', 'AMC\FundController@createManager')->name('amc.fund.create_manager');
-    Route::post('fund/{id}/manager', 'AMC\FundController@storeManager')->name('amc.fund.store_manager');
+    //Fund
+        // NAV
+        Route::get('fund/{id}/nav/create', 'AMC\FundController@createNAV')->name('amc.fund.create_nav');
+        Route::post('fund/{id}/nav', 'AMC\FundController@storeNAV')->name('amc.fund.store_nav');
+        Route::get('/nav/{id}/edit', 'AMC\FundController@editNAV')->name('amc.fund.edit_nav');
+        Route::patch('/nav/{id}', 'AMC\FundController@updateNAV')->name('amc.fund.update_nav');
+        Route::delete('/nav/{id}', 'AMC\FundController@destroyNAV')->name('amc.fund.destroy_nav');
+        // Fund Manager
+        Route::get('fund/{id}/manager/create', 'AMC\FundController@createManager')->name('amc.fund.create_manager');
+        Route::post('fund/{id}/manager', 'AMC\FundController@storeManager')->name('amc.fund.store_manager');
+        Route::get('/manager/{id}/edit', 'AMC\FundController@editManager')->name('amc.fund.edit_manager');
+        Route::patch('/manager/{id}', 'AMC\FundController@updateManager')->name('amc.fund.update_manager');
+        Route::delete('/manager/{id}', 'AMC\FundController@destroyManager')->name('amc.fund.destroy_manager');
 
-    Route::get('/manager/{id}/edit', 'AMC\FundController@editManager')->name('amc.fund.edit_manager');
-    Route::patch('/manager/{id}', 'AMC\FundController@updateManager')->name('amc.fund.update_manager');
-
-    Route::delete('/manager/{id}', 'AMC\FundController@destroyManager')->name('amc.fund.destroy_manager');
 
     Route::resource('fund', 'AMC\FundController', [
                             'names' => [
@@ -85,9 +92,6 @@ Route::group(['prefix' => 'amc'], function () {
                                 'create' => 'amc.fund.create',
                                 'store' => 'amc.fund.store',
                             ]]);
-    // Route::get('/fund', 'AMC\FundController@index');
-    // Route::get('/fund/{id}', 'AMC\FundController@show')->name('amc.fund.show');
-    // Route::get('/fund/create', 'AMC\FundController@create')->name('amc.fund.create');
 });
 
 // Backoffice Routes

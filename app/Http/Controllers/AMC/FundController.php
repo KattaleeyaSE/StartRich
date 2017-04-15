@@ -10,6 +10,7 @@ use App\IRepositories\IMutualFundRepository;
 use App\Models\MutualFundType;
 use App\Models\AimcType;
 use App\Models\FundManager;
+use App\Models\NAV;
 
 class FundController extends Controller
 {
@@ -116,6 +117,49 @@ class FundController extends Controller
         //
     }
 
+    //NAV
+    public function createNAV($id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        return view('AMC.fund.nav.create', ['fund' => $fund]);
+    }
+
+    public function storeNAV(Request $request, $id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        $navs = $fund->navs()->create($request->all());
+
+        return redirect()->route('amc.fund.show', $fund->id);
+    }
+
+    public function editNAV($id)
+    {
+        $nav = NAV::find($id);
+
+        return view('AMC.fund.nav.edit', ['nav' => $nav]);
+    }
+
+    public function updateNAV(Request $request, $id)
+    {
+        $nav = NAV::find($id);
+        $nav->update($request->all());
+
+        return redirect()->route('amc.fund.show', $nav->fund->id);
+    }
+
+    public function destroyNAV($id)
+    {
+        $nav = NAV::find($id);
+        $fund = $nav->fund;
+
+        $nav->delete();
+
+        return redirect()->route('amc.fund.show', $fund->id);
+    }
+
+    //Manager
     public function createManager($id)
     {
         $fund = $this->mutualFundRepository->find($id);
