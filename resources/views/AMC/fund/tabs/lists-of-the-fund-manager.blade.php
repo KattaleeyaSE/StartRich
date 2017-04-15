@@ -1,23 +1,34 @@
 <div role="tabpanel" class="tab-pane active" id="lists-of-the-fund-manager">
 
-<a class="btn btn-primary">Create</a>
+<div class="row">
+	<div class="col-md-12">
+		<div class="well well-sm">
+			<a href="{{ route('amc.fund.create_manager', $fund->id) }}" class="btn btn-primary pull-right">Create</a>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
 
 <div class="row">
 	<div class="col-md-12">
 		<table class="table">
 			<thead>
-				<th>fund manager</th>
-				<th>date of fund management</th>
+				<th>Manager Name</th>
+				<th>Position</th>
+				<th>Date of Management</th>
 				<th>Actions</th>
 			</thead>
 			<tbody>
-				@foreach($fund->nav as $item)
+				@foreach($fund->fund_managers as $item)
 					<tr>
-						<td></td>
-						<td></td>
+						<td>{{$item->name}}</td>
+						<td>{{$item->position}}</td>
+						<td>{{$item->management_date}}</td>
 						<td>
-							<a class="btn btn-xs btn-warning">edit</a>
-							<a class="btn btn-xs btn-danger">delete</a>
+							{!! Form::open(['route' => ['amc.fund.destroy_manager', $item->id], 'method' => 'DELETE']) !!}
+								<a href="{{ route('amc.fund.edit_manager', $item->id) }}" class="btn btn-xs btn-warning">edit</a>
+								{!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger']) !!}
+							{!! Form::close() !!}
 						</td>
 					</tr>
 				@endforeach

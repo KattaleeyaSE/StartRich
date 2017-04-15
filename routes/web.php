@@ -70,6 +70,14 @@ Route::group(['prefix' => 'amc'], function () {
     Route::get('/profile/edit','AMC\AMCController@edit'); 
     Route::patch('/profile','AMC\AMCController@update'); 
 
+    Route::get('fund/{id}/manager/create', 'AMC\FundController@createManager')->name('amc.fund.create_manager');
+    Route::post('fund/{id}/manager', 'AMC\FundController@storeManager')->name('amc.fund.store_manager');
+
+    Route::get('/manager/{id}/edit', 'AMC\FundController@editManager')->name('amc.fund.edit_manager');
+    Route::patch('/manager/{id}', 'AMC\FundController@updateManager')->name('amc.fund.update_manager');
+
+    Route::delete('/manager/{id}', 'AMC\FundController@destroyManager')->name('amc.fund.destroy_manager');
+
     Route::resource('fund', 'AMC\FundController', [
                             'names' => [
                                 'index' => 'amc.fund.index',

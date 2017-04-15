@@ -9,6 +9,7 @@ use Auth;
 use App\IRepositories\IMutualFundRepository;
 use App\Models\MutualFundType;
 use App\Models\AimcType;
+use App\Models\FundManager;
 
 class FundController extends Controller
 {
@@ -57,6 +58,8 @@ class FundController extends Controller
     {
         $amc_id = Auth::user()->amc->id;
         $fund = $this->mutualFundRepository->create($request, $amc_id);
+
+        $fund_managers = $fund->fund_managers()->create(['name' => $request->manager_name, 'position' => $request->manager_position, 'management_date' => $request->management_date]);
 
         return $fund;
     }
@@ -111,5 +114,47 @@ class FundController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function createManager($id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        return view('AMC.fund.create_manager', ['fund' => $fund]);
+    }
+
+    public function storeManager(Request $request, $id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        $fund_managers = $fund->fund_managers()->create(['name' => $request->manager_name, 'position' => $request->manager_position, 'management_date' => $request->management_date]);
+
+        return redirect()->route('amc.fund.show', $fund->id);
+    }
+
+    public function editManager($id)
+    {
+        $manager = FundManager::find($id);
+
+        return view('AMC.fund.edit_manager', ['manager' => $manager]);
+    }
+
+    public function updateManager(Request $request, $id)
+    {
+        $manager = FundManager::find($id);
+
+        $manager->update(['name' => $request->manager_name, 'position' => $request->manager_position, 'management_date' => $request->management_date]);
+
+        return redirect()->route('amc.fund.show', $manager->fund->id);
+    }
+
+    public function destroyManager($id)
+    {
+        $manager = FundManager::find($id);
+        $fund = $manager->fund;
+
+        $manager->delete();
+
+        return redirect()->route('amc.fund.show', $fund->id);
     }
 }

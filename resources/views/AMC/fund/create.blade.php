@@ -66,13 +66,23 @@
 		
 			{!! Form::label('benchmark_detail', 'benchmark_detail', ['class' => 'control-label']) !!}
 			{!! Form::text('benchmark_detail', null, ['class' => 'form-control']) !!}
+
+			<hr>
 		
 			{!! Form::label('type_of_investor', 'type_of_investor', ['class' => 'control-label']) !!}
 			{!! Form::text('type_of_investor', null, ['class' => 'form-control']) !!}
+
+			<hr>
 		
 			{!! Form::label('major_risk_factor', 'major_risk_factor', ['class' => 'control-label']) !!}
 			{!! Form::text('major_risk_factor', null, ['class' => 'form-control']) !!}
 
+			<hr>
+
+			@include('AMC.fund.partials._form-manager')
+
+			<hr>
+			
 			{!! Form::submit('Create', ['class' => 'btn btn-primary']) !!}
 			
 		{!! Form::close() !!}
