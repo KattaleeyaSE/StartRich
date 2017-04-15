@@ -40,6 +40,15 @@
 
 <div class="row">
 	<div class="col-md-12">
+		<div class="well well-sm">
+			<a href="{{ route('amc.fund.create_expense', $fund->id) }}" class="btn btn-primary pull-right">Create</a>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
 		<table class="table">
 			<thead>
 				<th>specification manager fee</th>
@@ -53,7 +62,7 @@
 				<th>Actions</th>
 			</thead>
 			<tbody>
-				@foreach($fund->fees as $item)
+				@foreach($fund->expenses as $item)
 					<tr>
 						<td>{{$item->manager_fee}}</td>
 						<td>{{$item->actual_manager_fee}}</td>

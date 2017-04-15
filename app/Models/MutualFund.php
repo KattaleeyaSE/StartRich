@@ -121,6 +121,11 @@ class MutualFund extends investment
         return $this->hasMany('App\Models\Fee','fund_id');
     }
 
+    public function expenses()
+    {
+        return $this->hasMany('App\Models\Expense','fund_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

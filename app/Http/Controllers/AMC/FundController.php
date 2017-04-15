@@ -363,6 +363,38 @@ class FundController extends Controller
         return redirect()->route('amc.fund.show', $fee->fund->id);
     }
 
+    //Expense
+    public function createExpense($id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        return view('AMC.fund.expense.create', ['fund' => $fund]);
+    }
+
+    public function storeExpense(Request $request, $id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        $expense = $fund->expenses()->create($request->all());
+
+        return redirect()->route('amc.fund.show', $fund->id);
+    }
+
+    public function editExpense($id)
+    {
+        $expense = Expense::find($id);
+
+        return view('AMC.fund.expense.edit', ['expense' => $expense]);
+    }
+
+    public function updateExpense(Request $request, $id)
+    {
+        $expense = Expense::find($id);
+        $expense->update($request->all());
+
+        return redirect()->route('amc.fund.show', $expense->fund->id);
+    }
+
     //PurchaseDetail
     public function createPurchaseDetail($id)
     {

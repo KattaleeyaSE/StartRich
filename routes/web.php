@@ -104,6 +104,11 @@ Route::group(['prefix' => 'amc'], function () {
         Route::get('/fee/{id}/edit', 'AMC\FundController@editFee')->name('amc.fund.edit_fee');
         Route::patch('/fee/{id}', 'AMC\FundController@updateFee')->name('amc.fund.update_fee');
         // Fee
+        Route::get('fund/{id}/expense/create', 'AMC\FundController@createExpense')->name('amc.fund.create_expense');
+        Route::post('fund/{id}/expense', 'AMC\FundController@storeExpense')->name('amc.fund.store_expense');
+        Route::get('/expense/{id}/edit', 'AMC\FundController@editExpense')->name('amc.fund.edit_expense');
+        Route::patch('/expense/{id}', 'AMC\FundController@updateExpense')->name('amc.fund.update_expense');
+        // Purchase Detail
         Route::get('fund/{id}/purchase_detail/create', 'AMC\FundController@createPurchaseDetail')->name('amc.fund.create_purchase_detail');
         Route::post('fund/{id}/purchase_detail', 'AMC\FundController@storePurchaseDetail')->name('amc.fund.store_purchase_detail');
         Route::get('/purchase_detail/{id}/edit', 'AMC\FundController@editPurchaseDetail')->name('amc.fund.edit_purchase_detail');
