@@ -96,5 +96,20 @@
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
         chart.draw(data, options);
       }
+
+// Holding Company Chart
+  google.charts.setOnLoadCallback(drawChart2);
+
+      function drawChart2() {
+        var data = google.visualization.arrayToDataTable({!!json_encode($holding_company_data)!!});
+
+        var options = {
+          title: 'Holding Company',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d_holding_company'));
+        chart.draw(data, options);
+      }
 </script>
 @endsection

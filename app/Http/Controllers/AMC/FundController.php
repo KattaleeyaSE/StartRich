@@ -13,6 +13,7 @@ use App\Models\FundManager;
 use App\Models\NAV;
 use App\Models\DividendPayment;
 use App\Models\AssetAllocation;
+use App\Models\HoldingCompany;
 
 class FundController extends Controller
 {
@@ -78,6 +79,7 @@ class FundController extends Controller
         $fund = $this->mutualFundRepository->find($id);
         $navs = [];
         $asset_allocation_data = [];
+        $holding_company_data = [];
 
         foreach ($fund->nav as $nav) {
             array_push($navs, [$nav->update_date, $nav->bid]);
@@ -93,7 +95,13 @@ class FundController extends Controller
             array_push($asset_allocation_data, ['Other', $asset_allocation->other]);
         }
 
-        return view('AMC.fund.show', ['fund' => $fund, 'navs' => $navs, 'asset_allocation_data' => $asset_allocation_data]);
+        array_push($holding_company_data, ['Company Name', 'Percentage']);
+        foreach ($fund->holding_companies as $holding_company) {
+            array_push($holding_company_data, [$holding_company->name, $holding_company->percentage]);
+        }
+
+
+        return view('AMC.fund.show', ['fund' => $fund, 'navs' => $navs, 'asset_allocation_data' => $asset_allocation_data, 'holding_company_data' => $holding_company_data]);
     }
 
     /**
@@ -277,5 +285,47 @@ class FundController extends Controller
         $asset_allocation->update($request->all());
 
         return redirect()->route('amc.fund.show', $asset_allocation->fund->id);
+    }
+
+    //Holding Company
+    public function createHoldingCompany($id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        return view('AMC.fund.holding_company.create', ['fund' => $fund]);
+    }
+
+    public function storeHoldingCompany(Request $request, $id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        $dividends = $fund->holding_companies()->create($request->all());
+
+        return redirect()->route('amc.fund.show', $fund->id);
+    }
+
+    public function editHoldingCompany($id)
+    {
+        $holding_company = HoldingCompany::find($id);
+
+        return view('AMC.fund.holding_company.edit', ['holding_company' => $holding_company]);
+    }
+
+    public function updateHoldingCompany(Request $request, $id)
+    {
+        $holding_company = HoldingCompany::find($id);
+        $holding_company->update($request->all());
+
+        return redirect()->route('amc.fund.show', $holding_company->fund->id);
+    }
+
+    public function destroyHoldingCompany($id)
+    {
+        $holding_company = HoldingCompany::find($id);
+        $fund = $holding_company->fund;
+
+        $holding_company->delete();
+
+        return redirect()->route('amc.fund.show', $fund->id);
     }
 }

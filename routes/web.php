@@ -92,6 +92,12 @@ Route::group(['prefix' => 'amc'], function () {
         // Asset Allocation
         Route::get('fund/{id}/asset_allocation/edit', 'AMC\FundController@editAssetAllocation')->name('amc.fund.edit_asset_allocation');
         Route::patch('fund/{id}/asset_allocation', 'AMC\FundController@updateAssetAllocation')->name('amc.fund.update_asset_allocation');
+        // Holding Company
+        Route::get('fund/{id}/holding_company/create', 'AMC\FundController@createHoldingCompany')->name('amc.fund.create_holding_company');
+        Route::post('fund/{id}/holding_company', 'AMC\FundController@storeHoldingCompany')->name('amc.fund.store_holding_company');
+        Route::get('/holding_company/{id}/edit', 'AMC\FundController@editHoldingCompany')->name('amc.fund.edit_holding_company');
+        Route::patch('/holding_company/{id}', 'AMC\FundController@updateHoldingCompany')->name('amc.fund.update_holding_company');
+        Route::delete('/holding_company/{id}', 'AMC\FundController@destroyHoldingCompany')->name('amc.fund.destroy_holding_company');
 
 
     Route::resource('fund', 'AMC\FundController', [

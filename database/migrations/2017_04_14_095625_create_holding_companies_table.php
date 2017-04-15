@@ -17,6 +17,7 @@ class CreateHoldingCompaniesTable extends Migration
             $table->increments('id');
             $table->integer('fund_id')->unsigned();
             $table->foreign('fund_id')->references('id')->on('investments')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('name');
             $table->float('percentage');
             $table->timestamps();
         });

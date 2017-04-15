@@ -41,4 +41,46 @@
 	</div>
 </div>
 
+<hr>
+
+<div class="row">
+	<div class="col-md-6">
+		@if ($fund->holding_companies != NULL)
+    		<div id="piechart_3d_holding_company"></div>
+    	@else
+    		<div class="well">
+    			No data
+    		</div>
+    	@endif
+	</div>
+	<div class="col-md-6">
+		<div class="well well-sm">
+			<a href="{{ route('amc.fund.create_holding_company', $fund->id) }}" class="btn btn-primary pull-right">Create</a>
+			<div class="clearfix"></div>
+		</div>
+
+		<table class="table">
+			<thead>
+				<th>Company Name</th>
+				<th>% of Holding</th>
+				<th>Actions</th>
+			</thead>
+			<tbody>
+				@foreach($fund->holding_companies as $item)
+					<tr>
+						<td>{{$item->name}}</td>
+						<td>{{$item->percentage}}</td>
+						<td>
+							{!! Form::open(['route' => ['amc.fund.destroy_holding_company', $item->id], 'method' => 'DELETE']) !!}
+								<a href="{{ route('amc.fund.edit_holding_company', $item->id) }}" class="btn btn-xs btn-warning">edit</a>
+								{!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger']) !!}
+							{!! Form::close() !!}
+						</td>
+					</tr>
+				@endforeach
+			</tbody>
+		</table>
+	</div>
+</div>
+
 </div>
