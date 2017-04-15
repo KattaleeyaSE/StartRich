@@ -33,8 +33,6 @@ class CreateFeesTable extends Migration
             $table->float('registrar_fee');
             $table->float('actual_registrar_fee');
             $table->float('other_fee');
-            
-            $table->float('min_additional');
 
             $table->timestamps();
         });

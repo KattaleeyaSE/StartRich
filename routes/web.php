@@ -98,6 +98,12 @@ Route::group(['prefix' => 'amc'], function () {
         Route::get('/holding_company/{id}/edit', 'AMC\FundController@editHoldingCompany')->name('amc.fund.edit_holding_company');
         Route::patch('/holding_company/{id}', 'AMC\FundController@updateHoldingCompany')->name('amc.fund.update_holding_company');
         Route::delete('/holding_company/{id}', 'AMC\FundController@destroyHoldingCompany')->name('amc.fund.destroy_holding_company');
+        // Fee
+        Route::get('fund/{id}/fee/create', 'AMC\FundController@createFee')->name('amc.fund.create_fee');
+        Route::post('fund/{id}/fee', 'AMC\FundController@storeFee')->name('amc.fund.store_fee');
+        Route::get('/fee/{id}/edit', 'AMC\FundController@editFee')->name('amc.fund.edit_fee');
+        Route::patch('/fee/{id}', 'AMC\FundController@updateFee')->name('amc.fund.update_fee');
+        Route::delete('/fee/{id}', 'AMC\FundController@destroyFee')->name('amc.fund.destroy_fee');
 
 
     Route::resource('fund', 'AMC\FundController', [

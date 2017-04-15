@@ -14,6 +14,7 @@ use App\Models\NAV;
 use App\Models\DividendPayment;
 use App\Models\AssetAllocation;
 use App\Models\HoldingCompany;
+use App\Models\Fee;
 
 class FundController extends Controller
 {
@@ -325,6 +326,48 @@ class FundController extends Controller
         $fund = $holding_company->fund;
 
         $holding_company->delete();
+
+        return redirect()->route('amc.fund.show', $fund->id);
+    }
+
+    //Fee
+    public function createFee($id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        return view('AMC.fund.fee.create', ['fund' => $fund]);
+    }
+
+    public function storeFee(Request $request, $id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        $dividends = $fund->fees()->create($request->all());
+
+        return redirect()->route('amc.fund.show', $fund->id);
+    }
+
+    public function editFee($id)
+    {
+        $fee = Fee::find($id);
+
+        return view('AMC.fund.fee.edit', ['fee' => $fee]);
+    }
+
+    public function updateFee(Request $request, $id)
+    {
+        $fee = Fee::find($id);
+        $fee->update($request->all());
+
+        return redirect()->route('amc.fund.show', $fee->fund->id);
+    }
+
+    public function destroyFee($id)
+    {
+        $fee = Fee::find($id);
+        $fund = $fee->fund;
+
+        $fee->delete();
 
         return redirect()->route('amc.fund.show', $fund->id);
     }
