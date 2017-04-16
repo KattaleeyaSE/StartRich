@@ -117,24 +117,24 @@
                                         </td> 
 
                                     @if(sizeof($result->suitability_fund ) == 1)
-                                        <td>{{$result->suitability_fund[0]->risklevel}}</td> 
+                                        <td>{{$result->suitability_fund[0]->risk_level}}</td> 
                                         <td><a href="">{{$result->suitability_fund[0]->name}}</a></td> 
-                                        <td>{{$result->suitability_fund[0]->desc}}</td>   
+                                        <td>{{$result->suitability_fund[0]->investment_asset_detail}}</td>   
                                     </tr> 
                                     @elseif(sizeof($result->suitability_fund ) > 1) 
 
                                         @foreach($result->suitability_fund as $key => $fund) 
                                          @if($key == 0)
-                                                <td>{{$fund->risklevel}}</td> 
+                                                <td>{{$fund->risk_level}}</td> 
                                                 <td><a href="">{{$fund->name}}</a></td> 
-                                                <td>{{$fund->desc}}</td>   
+                                                <td>{{$fund->investment_asset_detail}}</td>   
                                             </tr> 
                                          @else 
                                             <tr> 
 
-                                                    <td>{{$fund->risklevel}}</td> 
+                                                    <td>{{$fund->risk_level}}</td> 
                                                     <td><a href="">{{$fund->name}}</a></td> 
-                                                    <td>{{$fund->desc}}</td>   
+                                                    <td>{{$fund->investment_asset_detail}}</td>   
                                                 
                                             </tr>  
                                          @endif 

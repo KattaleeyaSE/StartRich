@@ -67,9 +67,6 @@ class MutualFund extends investment
     public function nav(){
         return $this->hasMany('App\Models\Nav','fund_id');
     }
-    public function devidenHistory(){
-        return $this->hasMany('App\devidendhistory','fund_id');
-    }
     public function listoffund(){
         return $this->hasMany('App\listoffund');
     }

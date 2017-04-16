@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DevidendhistoriesTableSeeder extends Seeder
+class DividendPaymentsTableSeeder extends Seeder
 {
 
     /**
@@ -14,16 +14,15 @@ class DevidendhistoriesTableSeeder extends Seeder
     {
         
 
-        \DB::table('devidendhistories')->delete();
+        \DB::table('dividend_payments')->delete();
         
-        \DB::table('devidendhistories')->insert(array (
+        \DB::table('dividend_payments')->insert(array (
             0 => 
             array (
                 'id' => 1,
                 'fund_id' => 1,
-                'time' => 1,
-                'dprice' => 0.02,
-                'paydate' => '2016-12-16',
+                'payment_date' => '2016-12-16',
+                'dividend_price' => 0.050000000000000003,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
@@ -31,9 +30,8 @@ class DevidendhistoriesTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'fund_id' => 1,
-                'time' => 2,
-                'dprice' => 0.050000000000000003,
-                'paydate' => '2017-01-16',
+                'payment_date' => '2017-01-16',
+                'dividend_price' => 0.050000000000000003,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
@@ -41,9 +39,8 @@ class DevidendhistoriesTableSeeder extends Seeder
             array (
                 'id' => 3,
                 'fund_id' => 1,
-                'time' => 3,
-                'dprice' => 0.050000000000000003,
-                'paydate' => '2017-02-16',
+                'payment_date' => '2017-02-16',
+                'dividend_price' => 0.050000000000000003,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
@@ -51,9 +48,8 @@ class DevidendhistoriesTableSeeder extends Seeder
             array (
                 'id' => 4,
                 'fund_id' => 1,
-                'time' => 4,
-                'dprice' => 0.050000000000000003,
-                'paydate' => '2017-03-16',
+                'payment_date' => '2017-03-16',
+                'dividend_price' => 0.050000000000000003,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
@@ -61,9 +57,8 @@ class DevidendhistoriesTableSeeder extends Seeder
             array (
                 'id' => 5,
                 'fund_id' => 1,
-                'time' => 5,
-                'dprice' => 0.050000000000000003,
-                'paydate' => '2017-03-31',
+                'payment_date' => '2017-03-31',
+                'dividend_price' => 0.050000000000000003,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
@@ -71,9 +66,8 @@ class DevidendhistoriesTableSeeder extends Seeder
             array (
                 'id' => 6,
                 'fund_id' => 1,
-                'time' => 6,
-                'dprice' => 0.050000000000000003,
-                'paydate' => '2017-04-16',
+                'payment_date' => '2017-04-16',
+                'dividend_price' => 0.050000000000000003,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
@@ -81,9 +75,8 @@ class DevidendhistoriesTableSeeder extends Seeder
             array (
                 'id' => 7,
                 'fund_id' => 2,
-                'time' => 1,
-                'dprice' => 0.02,
-                'paydate' => '2016-12-16',
+                'payment_date' => '2016-12-16',
+                'dividend_price' => 0.050000000000000003,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
@@ -91,9 +84,8 @@ class DevidendhistoriesTableSeeder extends Seeder
             array (
                 'id' => 8,
                 'fund_id' => 2,
-                'time' => 2,
-                'dprice' => 0.050000000000000003,
-                'paydate' => '2017-01-16',
+                'payment_date' => '2017-01-16',
+                'dividend_price' => 0.050000000000000003,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
@@ -101,9 +93,8 @@ class DevidendhistoriesTableSeeder extends Seeder
             array (
                 'id' => 9,
                 'fund_id' => 2,
-                'time' => 3,
-                'dprice' => 0.050000000000000003,
-                'paydate' => '2017-02-16',
+                'payment_date' => '2017-02-16',
+                'dividend_price' => 0.050000000000000003,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
@@ -111,9 +102,8 @@ class DevidendhistoriesTableSeeder extends Seeder
             array (
                 'id' => 10,
                 'fund_id' => 2,
-                'time' => 4,
-                'dprice' => 0.050000000000000003,
-                'paydate' => '2017-03-16',
+                'payment_date' => '2017-03-16',
+                'dividend_price' => 0.050000000000000003,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
@@ -121,9 +111,8 @@ class DevidendhistoriesTableSeeder extends Seeder
             array (
                 'id' => 11,
                 'fund_id' => 2,
-                'time' => 5,
-                'dprice' => 0.050000000000000003,
-                'paydate' => '2017-03-31',
+                'payment_date' => '2017-03-31',
+                'dividend_price' => 0.050000000000000003,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
@@ -131,9 +120,8 @@ class DevidendhistoriesTableSeeder extends Seeder
             array (
                 'id' => 12,
                 'fund_id' => 2,
-                'time' => 6,
-                'dprice' => 0.050000000000000003,
-                'paydate' => '2017-04-16',
+                'payment_date' => '2017-04-16',
+                'dividend_price' => 0.050000000000000003,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),

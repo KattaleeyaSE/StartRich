@@ -15,14 +15,14 @@
                         <div class="form-group"> 
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company_name">Company name</label> 
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                    {{$estimate_profit->fund->company_name}}
+                                    {{$estimate_profit->fund->management_company}}
                             </div> 
                         </div>  
  
                         <div class="form-group">                     
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mutual_fund_type">Type of mutual fund</label> 
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                  {{TypeConverter::mapNormalType($estimate_profit->fund->type)}}
+                                  {{$estimate_profit->fund->type}}
                         </div> 
                     </div>
  
@@ -71,7 +71,7 @@
                             ng-model="balance_of_investment" 
                             class="form-control"  
                             ng-required="true" 
-                            min="<%selected.mutualFundType.purchasedetails[0].minimum_balance > 0 ? selected.mutualFundType.purchasedetails[0].minimum_balance : 1%>"
+                            min="<%selected.mutualFundType.purchasedetails[0].min_first_purchase > 0 ? selected.mutualFundType.purchasedetails[0].min_first_purchase : 1%>"
                         >
                     </div>  
 

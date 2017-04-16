@@ -125,7 +125,7 @@ class InvestmentsTableSeeder extends Seeder
             [ 
                 'id' => 5,
                 'amc_id' => 3,
-                'name' => 'Fund 4',
+                'name' => 'Fund 5',
                 'code' => 'F4444',
                 'type' => 'Equity fund',
                 'aimc_type' => 'EQSM',

@@ -20,10 +20,10 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <ui-select ng-model="selected.company" theme="bootstrap" on-select="onSelectedCompany()">
                                     <ui-select-match>
-                                            <div ng-bind-html="bindHtml(selected.company.company_name)"></div>
+                                            <div ng-bind-html="bindHtml(selected.company.management_company)"></div>
                                     </ui-select-match>
-                                    <ui-select-choices repeat="fund in (funds  | unique:'company_name'| filter: $select.search) track by fund.id"> 
-                                            <div ng-bind-html="fund.company_name | highlight: $select.search"></div>
+                                    <ui-select-choices repeat="fund in (funds  | unique:'management_company'| filter: $select.search) track by fund.id"> 
+                                            <div ng-bind-html="fund.management_company | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
                             </div> 
@@ -34,10 +34,10 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <ui-select ng-model="selected.mutualFundType" theme="bootstrap"  on-select="onSelectedMutualFundType()">
                                 <ui-select-match>
-                                        <div ng-bind-html="bindHtml(getNormalFund(selected.mutualFundType.type).name)"></div>
+                                        <div ng-bind-html="bindHtml(selected.mutualFundType.type)"></div>
                                 </ui-select-match>
-                                <ui-select-choices ui-disable-choice="!selected.company" repeat="fund in (funds | filter: {company_name : selected.company.company_name }:true )| unique:'type' track by fund.id"> 
-                                        <div ng-hide="!selected.company" ng-bind-html="getNormalFund(fund.type).name | highlight: $select.search"></div>
+                                <ui-select-choices ui-disable-choice="!selected.company" repeat="fund in (funds | filter: {management_company : selected.company.management_company }:true )| unique:'type' track by fund.id"> 
+                                        <div ng-hide="!selected.company" ng-bind-html="fund.type | highlight: $select.search"></div>
                                 </ui-select-choices>
                             </ui-select>
                         </div> 
@@ -50,7 +50,7 @@
                                 <ui-select-match>
                                         <div ng-bind-html="bindHtml(selected.mutualFund.name)"></div>
                                 </ui-select-match>
-                                <ui-select-choices ui-disable-choice="!selected.mutualFundType" repeat="fund in (funds | filter: {company_name : selected.mutualFundType.company_name, type : selected.mutualFundType.type  }:true )  track by fund.id"> 
+                                <ui-select-choices ui-disable-choice="!selected.mutualFundType" repeat="fund in (funds | filter: {management_company : selected.mutualFundType.management_company, type : selected.mutualFundType.type  }:true )  track by fund.id"> 
                                         <div ng-hide="!selected.mutualFundType" ng-bind-html="fund.name | highlight: $select.search"></div>
                                 </ui-select-choices>
                             </ui-select>
@@ -95,7 +95,7 @@
                             ng-model="balance_of_investment" 
                             class="form-control"  
                             ng-required="true" 
-                            min="<%selected.mutualFundType.purchasedetails[0].minimum_balance > 0 ? selected.mutualFundType.purchasedetails[0].minimum_balance : 1%>"
+                            min="<%selected.mutualFundType.purchasedetails[0].min_first_purchase > 0 ? selected.mutualFundType.purchasedetails[0].min_first_purchase : 1%>"
                         >
                     </div>  
 

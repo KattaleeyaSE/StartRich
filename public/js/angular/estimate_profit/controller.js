@@ -238,7 +238,7 @@ function($scope,$sce,EstimateProfitResource) {
             )
             {                     
                 var nav =  $scope.selected.mutualFund.nav.filter(function(nav){
-                                return nav.update_date == effective_date;
+                                return nav.modified_date == effective_date;
                                 
                             });  
                 
@@ -285,7 +285,7 @@ function($scope,$sce,EstimateProfitResource) {
             )
             {
                 var nav =  $scope.selected.mutualFund.nav.filter(function(nav){
-                                return nav.update_date == newValue.format("YYYY-MM-DD");
+                                return nav.modified_date == newValue.format("YYYY-MM-DD");
                                 
                             }); 
                 if(nav && nav.length > 0)
@@ -300,7 +300,7 @@ function($scope,$sce,EstimateProfitResource) {
         if( $scope.offAtBuyDate)
         {
             $scope.createEstmateProfit ={
-                'effective_date' : $scope.offAtBuyDate.update_date,
+                'effective_date' : $scope.offAtBuyDate.modified_date,
                 'balance_of_investment' : $scope.balance_of_investment,
                 'invest_id' :  $scope.offAtBuyDate.fund_id,
                 'nav_id' :   $scope.offAtBuyDate.id,
@@ -329,7 +329,7 @@ function($scope,$sce,EstimateProfitResource) {
         if( $scope.offAtBuyDate)
         {
             $scope.updateEstmateProfit ={
-                'effective_date' : $scope.offAtBuyDate.update_date,
+                'effective_date' : $scope.offAtBuyDate.modified_date,
                 'balance_of_investment' : $scope.balance_of_investment,
                 'id' :  id,
             };
