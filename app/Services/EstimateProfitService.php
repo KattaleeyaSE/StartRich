@@ -2,7 +2,8 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
+use Carbon\Carbon; 
 //Service Container 
 use App\IServices\IEstimateProfitService;
 use App\IRepositories\IEstimateProfitRepository; 
@@ -28,15 +29,52 @@ class EstimateProfitService implements IEstimateProfitService
         if(sizeof($estimate_profit) > 0)
         {
             foreach($estimate_profit as $key => $estimate_item)
-            {
-                $dividen_history = $estimate_item->devidenHistory;
-                if(sizeof($dividen_history) > 0)
-                {
-                    dd($dividen_history);
-                }
-            }
-        }
+            { 
 
+                $dividend_payment = $estimate_item->fund->dividend_payments;
+                $lastest_nav = $estimate_item->fund->navs->sortByDesc('modified_date')->first(); 
+
+                $bought_unit = $estimate_item->balance_of_investment / $estimate_item->nav->offer;
+                $bid_value = $bought_unit *  $lastest_nav->bid;
+
+                $total_dividend = 0;   
+                $return_profit = 0;
+
+                if(sizeof($dividend_payment) > 0)
+                {
+                    foreach($dividend_payment as $dividenedKey => $diveidend_item)
+                    {
+                        
+                        $payment_date = Carbon::parse($diveidend_item->payment_date);
+                        $effective_date = Carbon::parse($estimate_item->effective_date);
+                        if($payment_date->gte($effective_date))
+                        { 
+                            //calculate dividen profit
+                            $total_dividend = $total_dividend + ($bought_unit * $diveidend_item->dividend_price);
+                        }
+                    }
+                }
+
+                if($total_dividend > 0)
+                {  
+                    $return_profit = ($bid_value + $total_dividend - $estimate_item->balance_of_investment) /100;
+                    $return_profit = $return_profit * 100;
+                }
+                else
+                {
+                    $return_profit = ($bid_value - $estimate_item->balance_of_investment) /100;
+                    $return_profit = $return_profit * 100;
+                }
+
+                $result->push([
+                    'estimate_item' => $estimate_item,
+                    'total_dividend' => $total_dividend,
+                    'return_profit' => $return_profit
+                ]);
+            }
+
+           
+        } 
         return $result;
     }
 

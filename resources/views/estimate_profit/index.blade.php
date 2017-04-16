@@ -33,7 +33,7 @@
                                         <br>
                                         {{$item->fund->name}}
                                     </td>  
-                                    <td class="text-center">{{$item->fund->company_name}}</td>   
+                                    <td class="text-center">{{$item->fund->management_company}}</td>   
                                     <td class="text-center">{{$item->balance_of_investment}}</td>   
                                     <td class="text-center">{{$item->nav->offer}}</td>   
                                     <td class="text-center">{{$item->balance_of_investment/$item->nav->offer}}</td>   

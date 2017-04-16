@@ -33,8 +33,8 @@ class EstimateProfitAPIController extends Controller
 
             foreach($funds as $key => $fund)
             {
-                $fund->nav;
-                $fund->purchasedetails;
+                $fund->navs;
+                $fund->purchase_details;
             }
             
             $msg= [
