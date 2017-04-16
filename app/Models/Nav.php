@@ -22,7 +22,7 @@ class Nav extends investment
         'bid',
         'standard',
         'offer',
-        'update_date',
+        'modified_date',
         'amc_id',
     ];
 
@@ -43,6 +43,11 @@ class Nav extends investment
     public function amc()
     {
         return $this->belongsTo('App\Models\MutualFund');
+    }
+
+    public function fund()
+    {
+        return $this->belongsTo('App\Models\MutualFund', 'fund_id');
     }
     /*
     |--------------------------------------------------------------------------

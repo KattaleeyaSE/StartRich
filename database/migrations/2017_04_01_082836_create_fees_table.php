@@ -16,32 +16,13 @@ class CreateFeesTable extends Migration
         Schema::create('fees', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('fund_id')->unsigned();
-            $table->foreign('fund_id')
-                ->references('id')
-                ->on('investments')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            $table->foreign('fund_id')->references('id')->on('investments')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->float('frontendfee');
-            $table->float('actualfrontendfee');
-            $table->float('backendfee');
-            $table->float('actualbackendfee');
-
-            $table->float('switchfee');
-            $table->float('totalexpense');
-            $table->float('managefee');
-            $table->float('actualmanagefee');
-
-            $table->float('trusteefee');
-            $table->float('actualtrusteefee');
-            $table->float('registrafee');
-            $table->float('actualregistrafee');
-
-            $table->float('initial');
-            $table->float('addition');
-
-            $table->string('other');
-
+            $table->float('front_end_fee');
+            $table->float('actual_front_end_fee');
+            $table->float('back_end_fee');
+            $table->float('actual_back_end_fee');
+            $table->float('switching_fee');
 
             $table->timestamps();
         });

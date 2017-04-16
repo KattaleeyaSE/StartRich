@@ -15,15 +15,14 @@ class CreatePortfoliosTable extends Migration
     {
         Schema::create('portfolios', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->integer('fund_id')->unsigned();
-            $table->foreign('fund_id')
-                ->references('id')
-                ->on('investments')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            $table->foreign('fund_id')->references('id')->on('investments')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
-            $table->float('percentage');
+            $table->float('stock');
+            $table->float('bond');
+            $table->float('cash');
+            $table->float('other');
+            $table->timestamps();
         });
     }
 

@@ -13,17 +13,12 @@ class CreateDevidendhistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('devidendhistories', function (Blueprint $table) {
+        Schema::create('dividend_payments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('fund_id')->unsigned();
-            $table->foreign('fund_id')
-                ->references('id')
-                ->on('investments')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-            $table->integer('time');
-            $table->float('dprice');
-            $table->date('paydate');
+            $table->foreign('fund_id')->references('id')->on('investments')->onDelete('cascade')->onUpdate('cascade');
+            $table->date('payment_date');
+            $table->float('dividend_price');
             $table->timestamps();
         });
     }
@@ -35,6 +30,6 @@ class CreateDevidendhistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('devidendhistories');
+        Schema::dropIfExists('dividend_payments');
     }
 }

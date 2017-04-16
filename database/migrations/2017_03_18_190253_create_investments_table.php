@@ -16,41 +16,38 @@ class CreateInvestmentsTable extends Migration
         Schema::create('investments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('amc_id')->unsigned();
-            $table->integer('risklevel');
-            $table->date('registered_date');
-            $table->string('Investment_policy');
-$table->integer('assetvalue');
-$table->string('trustee');
-$table->string('frequency');
+            $table->foreign('amc_id')->references('id')->on('amcs')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->string('name');
-            $table->string('desc');
-            $table->string('company_name');
-            $table->boolean('paymentpolicy');
-$table->integer('type');
-$table->integer('aimcfundtype');
-$table->string('period');
-            $table->string('assetinvest');
-            $table->string('strategy');
-            $table->string('factorimpact');
+            // about fund
+            $table->string('name', 150);
+            $table->string('code', 50);
+            $table->string('type');
+            $table->string('aimc_type');
+            $table->string('management_company', 150);
+            $table->string('trustee', 150);
+            $table->boolean('payment_policy');
+            $table->string('frequency', 150);
+            $table->string('approved_by', 150);
+            $table->string('supervision', 150);
+            $table->boolean('protected_fund');
+            $table->string('name_of_guarantor', 150);
+            $table->date('fund_start');
+            $table->date('fund_end')->nullable();
+            $table->integer('risk_level');
+            $table->bigInteger('net_asset_value');
 
-            $table->string('investertype');
-            $table->string('benchmarkdetail');
-            $table->float('stock');
-            $table->float('bond');
-            $table->float('cash');
-            $table->float('assetother');
-$table->date('fund_start');
-$table->date('fund_end');
+            // about investment policy
+            $table->longText('investment_asset_detail');
+            $table->string('strategy_detail');
+            $table->longText('factor_impact');
+            $table->longText('benchmark_detail');
 
+            // types of investor
+            $table->longText('type_of_investor');
 
+            //major risk factor
+            $table->longText('major_risk_factor');
 
-
-            $table->foreign('amc_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
             $table->timestamps();
         });
 

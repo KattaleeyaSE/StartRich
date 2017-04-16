@@ -13,21 +13,21 @@ class CreatePurchasedetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchasedetails', function (Blueprint $table) {
+        Schema::create('purchase_details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('fund_id')->unsigned();
-            $table->foreign('fund_id')
-                ->references('id')
-                ->on('investments')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            $table->foreign('fund_id')->references('id')->on('investments')->onDelete('cascade')->onUpdate('cascade');
 
 
-            $table->string('subscribe_period');
-            $table->string('subscribe_minimum');
+            $table->string('subscription_period');
+            $table->string('min_first_purchase');
+            $table->string('min_additional');
+
             $table->string('redemtion_period');
-            $table->string('redemtion_minimum');
-            $table->string('minimum_balance');
+            $table->string('min_redemption');
+
+            $table->string('min_balance');
+
             $table->string('settlement_period');
 
             $table->timestamps();
@@ -41,6 +41,6 @@ class CreatePurchasedetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchasedetails');
+        Schema::dropIfExists('purchase_details');
     }
 }

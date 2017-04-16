@@ -13,19 +13,14 @@ class CreateListoffundmanagersTable extends Migration
      */
     public function up()
     {
-        Schema::create('listoffundmanagers', function (Blueprint $table) {
+        Schema::create('fund_managers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('fund_id')->unsigned();
-            $table->foreign('fund_id')
-                ->references('id')
-                ->on('investments')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            $table->foreign('fund_id')->references('id')->on('investments')->onDelete('cascade')->onUpdate('cascade');
 
             $table->string('name');
-            $table->date('start');
             $table->string('position');
-
+            $table->date('management_date');
 
             $table->timestamps();
         });
@@ -38,6 +33,6 @@ class CreateListoffundmanagersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('listoffundmanagers');
+        Schema::dropIfExists('fund_managers');
     }
 }

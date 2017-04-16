@@ -32,7 +32,7 @@ interface IMutualFundRepository
      *
      * @return Member Object
      **/
-    public function create(Request $request);
+    public function create(Request $request, $amc_id);
 
     /**
      * @param Illuminate\Http\Request $request

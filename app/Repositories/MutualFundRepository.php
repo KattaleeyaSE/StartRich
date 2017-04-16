@@ -35,16 +35,17 @@ class MutualFundRepository  implements IMutualFundRepository
     public function find($id)
     {
         // TODO: Implement find() method.
-        return $this->nav-find($id);
+        return $this->nav->find($id);
     }
 
-    public function create(Request $request)
+    public function create(Request $request, $amc_id)
     {
         // TODO: Implement create() method.
-        $user = $this->NavRepository->create($request);
+        $data = $request->all();
+        $amc_id = ['amc_id' => $amc_id];
+        $data = array_merge($data,$amc_id);
 
-
-        return $this->nav->create($request->all());;
+        return $this->nav->create($data);;
 
     }
 
@@ -71,5 +72,10 @@ class MutualFundRepository  implements IMutualFundRepository
     public function addprice($offer,$bid,$standard)
     {
         // TODO: Implement delete() method.
+    }
+
+    public function by_amc_id($id)
+    {
+        return $this->nav->where('amc_id', $id)->get();
     }
 }
