@@ -81,6 +81,23 @@
         chart.draw(data, options);
       }
 
+// Performance Chart
+  google.charts.setOnLoadCallback(drawChart1);
+
+  function drawChart1() {
+    var data = google.visualization.arrayToDataTable({!!json_encode($performance_data)!!});
+
+    var options = {
+      title: 'Company Performance',
+      curveType: 'function',
+      legend: { position: 'bottom' }
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+    chart.draw(data, options);
+  }
+
 // Portfolio Chart
   google.charts.load("current", {packages:["corechart"]});
   google.charts.setOnLoadCallback(drawChart);

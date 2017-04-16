@@ -123,6 +123,11 @@ class MutualFund extends investment
         return $this->hasMany('App\Models\Expense','fund_id');
     }
 
+    public function past_performances()
+    {
+        return $this->hasMany('App\Models\PastPerformance','fund_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
