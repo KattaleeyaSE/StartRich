@@ -39,6 +39,39 @@ class NavsTableSeeder extends Seeder
                 'created_at' => '2017-04-11 00:00:00',
                 'updated_at' => '2017-04-11 00:00:00',
             ),
+            2 => 
+            array (
+                'id' => 5,
+                'standard' => 123.0,
+                'bid' => 123.0,
+                'offer' => 123.0,
+                'update_date' => '2017-01-04',
+                'fund_id' => 2,
+                'created_at' => '2017-04-01 00:00:00',
+                'updated_at' => '2017-04-11 00:00:00',
+            ),
+            3 => 
+            array (
+                'id' => 6,
+                'standard' => 321.0,
+                'bid' => 321.0,
+                'offer' => 123.0,
+                'update_date' => '2017-01-11',
+                'fund_id' => 3,
+                'created_at' => '2017-04-11 00:00:00',
+                'updated_at' => '2017-04-11 00:00:00',
+            ),
+            4 => 
+            array (
+                'id' => 7,
+                'standard' => 123.0,
+                'bid' => 123.0,
+                'offer' => 123.0,
+                'update_date' => '2017-01-04',
+                'fund_id' => 5,
+                'created_at' => '2017-04-01 00:00:00',
+                'updated_at' => '2017-04-11 00:00:00',
+            ),
         ));
         
         
