@@ -38,6 +38,7 @@ class EstimateProfitService implements IEstimateProfitService
                 $bid_value = $bought_unit *  $lastest_nav->bid;
 
                 $total_dividend = 0;   
+                $return_profit_percent = 0;
                 $return_profit = 0;
 
                 if(sizeof($dividend_payment) > 0)
@@ -57,24 +58,28 @@ class EstimateProfitService implements IEstimateProfitService
 
                 if($total_dividend > 0)
                 {  
-                    $return_profit = ($bid_value + $total_dividend - $estimate_item->balance_of_investment) /100;
-                    $return_profit = $return_profit * 100;
+                    $return_profit_percent = ($bid_value + $total_dividend - $estimate_item->balance_of_investment) /100;
+                    $return_profit_percent = $return_profit_percent * 100;
                 }
                 else
                 {
-                    $return_profit = ($bid_value - $estimate_item->balance_of_investment) /100;
-                    $return_profit = $return_profit * 100;
+                    $return_profit_percent = ($bid_value - $estimate_item->balance_of_investment) /100;
+                    $return_profit_percent = $return_profit_percent * 100;
                 }
 
+                $return_profit =  ($estimate_item->balance_of_investment *  $return_profit_percent)/100;
+ 
                 $result->push([
                     'estimate_item' => $estimate_item,
                     'total_dividend' => $total_dividend,
-                    'return_profit' => $return_profit
+                    'return_profit' => $return_profit,
+                    'recent_nav' => $lastest_nav,
                 ]);
             }
 
            
-        } 
+        }  
+        
         return $result;
     }
 
