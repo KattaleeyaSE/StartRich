@@ -22,8 +22,18 @@ class EstimateProfitService implements IEstimateProfitService
     public function calculation($id)
     {
         $estimate_profit = $this->estimateProfitRepository->all_by_member_id($id);
-
         
+        $result = collect();
+        
+        if(sizeof($estimate_profit) > 0)
+        {
+            foreach($estimate_profit as $key => $estimate_item)
+            {
+                dd($estimate_item);
+            }
+        }
+
+        return $result;
     }
 
 }
