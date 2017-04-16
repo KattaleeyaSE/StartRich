@@ -69,7 +69,7 @@
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                                     @foreach($question->suitability_answers as $akey => $answer)
                                                         <label class="radio-inline">
-                                                            <input type="radio" name="q_{{$qkey+1}}" value="{{$answer->id}}" required>{{$answer->answer}}
+                                                            <input type="radio" name="q_{{$question->id}}" value="{{$answer->id}}" required>{{$answer->answer}}
                                                         </label> 
                                                      @endforeach
                                                 </div>  
