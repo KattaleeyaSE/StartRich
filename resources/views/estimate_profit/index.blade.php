@@ -29,7 +29,7 @@
                                 <tr> 
                                     <td class="text-center">{{$item->effective_date}}</td>  
                                     <td class="text-center">
-                                        <strong>{{TypeConverter::mapAIMCType($item->fund->aimcfundtype)}}</strong>
+                                        <strong>{{$item->fund->aimc_type}}</strong>
                                         <br>
                                         {{$item->fund->name}}
                                     </td>  

@@ -16,63 +16,58 @@ class NavsTableSeeder extends Seeder
 
         \DB::table('navs')->delete();
         
-        \DB::table('navs')->insert(array (
-            0 => 
-            array (
-                'id' => 3,
-                'standard' => 123.0,
-                'bid' => 123.0,
-                'offer' => 123.0,
-                'update_date' => '2017-01-04',
+         \DB::table('navs')->insert([
+            [
+                'id' => 1,
+                'standard' => 100.0,
+                'bid' => 100.0,
+                'offer' => 100.0,
                 'fund_id' => 1,
+                'modified_date' => '2017-01-01',
                 'created_at' => '2017-04-01 00:00:00',
                 'updated_at' => '2017-04-11 00:00:00',
-            ),
-            1 => 
-            array (
-                'id' => 4,
-                'standard' => 321.0,
-                'bid' => 321.0,
-                'offer' => 123.0,
-                'update_date' => '2017-01-11',
-                'fund_id' => 4,
-                'created_at' => '2017-04-11 00:00:00',
-                'updated_at' => '2017-04-11 00:00:00',
-            ),
-            2 => 
-            array (
-                'id' => 5,
-                'standard' => 123.0,
-                'bid' => 123.0,
-                'offer' => 123.0,
-                'update_date' => '2017-01-04',
+            ],
+            [
+                'id' => 2,
+                'standard' => 100.0,
+                'bid' => 100.0,
+                'offer' => 100.0,
                 'fund_id' => 2,
-                'created_at' => '2017-04-01 00:00:00',
-                'updated_at' => '2017-04-11 00:00:00',
-            ),
-            3 => 
-            array (
-                'id' => 6,
-                'standard' => 321.0,
-                'bid' => 321.0,
-                'offer' => 123.0,
-                'update_date' => '2017-01-11',
-                'fund_id' => 3,
+                'modified_date' => '2017-01-01',
                 'created_at' => '2017-04-11 00:00:00',
                 'updated_at' => '2017-04-11 00:00:00',
-            ),
-            4 => 
-            array (
-                'id' => 7,
-                'standard' => 123.0,
-                'bid' => 123.0,
-                'offer' => 123.0,
-                'update_date' => '2017-01-04',
-                'fund_id' => 5,
-                'created_at' => '2017-04-01 00:00:00',
+            ],
+            [
+                'id' => 3,
+                'standard' => 100.0,
+                'bid' => 100.0,
+                'offer' => 100.0,
+                'fund_id' => 3,
+                'modified_date' => '2017-01-01',
+                'created_at' => '2017-04-11 00:00:00',
                 'updated_at' => '2017-04-11 00:00:00',
-            ),
-        ));
+            ],
+            [
+                'id' => 4,
+                'standard' => 100.0,
+                'bid' => 100.0,
+                'offer' => 100.0,
+                'fund_id' => 4,
+                'modified_date' => '2017-01-01',
+                'created_at' => '2017-04-11 00:00:00',
+                'updated_at' => '2017-04-11 00:00:00',
+            ],
+            [
+                'id' => 5,
+                'standard' => 100.0,
+                'bid' => 100.0,
+                'offer' => 100.0,
+                'fund_id' => 5,
+                'modified_date' => '2017-01-01',
+                'created_at' => '2017-04-11 00:00:00',
+                'updated_at' => '2017-04-11 00:00:00',
+            ],
+        ]);
         
         
     }
