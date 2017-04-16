@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Result</div>
 
@@ -20,6 +20,9 @@
                                 <th class="text-center">Remaining Unit</th> 
                                 <th class="text-center">Balance of Investment</th>       
                                 <th class="text-center">Investment Amount</th>       
+                                <th class="text-center">Total Dividend</th>       
+                                <th class="text-center">Return Investment Profit</th>       
+                                <th class="text-center">Return Investment Profit %</th>       
                             </tr>
                             </thead>
                             <tbody> 
@@ -40,7 +43,10 @@
                                     </td>   
                                     <td class="text-center">{{$item['estimate_item']->balance_of_investment/$item['estimate_item']->nav->offer}}</td>   
                                     <td class="text-center">{{$item['estimate_item']->balance_of_investment}}</td>   
-                                    <td class="text-center">{{round($item['estimate_item']->balance_of_investment + $item['return_profit'] + $item['total_dividend'],2)}}</td>   
+                                    <td class="text-center">{{round($item['return_profit_total'],2)}}</td>   
+                                    <td class="text-center">{{round($item['total_dividend'],2)}}</td>   
+                                    <td class="text-center">{{round($item['return_profit'],2)}}</td>   
+                                    <td class="text-center">{{round($item['return_profit_percent'],2)}} %</td>   
  
                                 </tr> 
                             @endforeach
