@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane active" id="types-of-investor">
+<div role="tabpanel" class="tab-pane" id="types-of-investor">
 
 <div class="row">
 	<div class="col-md-12">

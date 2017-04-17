@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane active" id="major-risk-factor">
+<div role="tabpanel" class="tab-pane" id="major-risk-factor">
 
 <div class="row">
 	<div class="col-md-6">

@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane active" id="show-by-past-performance">
+<div role="tabpanel" class="tab-pane" id="show-by-past-performance">
 
 <div class="row">
 	<div class="col-md-12">
