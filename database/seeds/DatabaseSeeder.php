@@ -28,5 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MutualFundTypesTableSeeder::class);
         $this->call(AimcTypesTableSeeder::class);
         $this->call(DividendPaymentsTableSeeder::class);
+        $this->call(PastPerformancesTableSeeder::class);
+        $this->call(PastPerformanceRecordsTableSeeder::class);
     }
 }
