@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Member;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MutualFund;
+use App\Models\MutualFundType;
 
 class FundController extends Controller
 {
@@ -13,11 +14,13 @@ class FundController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $funds = MutualFund::all();
+        $fund_types = MutualFundType::all()->pluck('name', 'name');
+        
+        $funds = MutualFund::filter($request->all());
 
-        return view('fund.member.index', ['funds' => $funds]);
+        return view('fund.member.index', ['funds' => $funds, 'fund_types' => $fund_types]);
     }
 
     /**

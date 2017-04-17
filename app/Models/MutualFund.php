@@ -144,6 +144,34 @@ class MutualFund extends investment
     | SCOPES
     |--------------------------------------------------------------------------
     */
+    public function scopeFilter($query, $filter)
+    {
+        if (isset($filter['name'])) {
+            $query->where('name', $filter['name']);
+        }
+        if (isset($filter['code'])) {
+            $query->where('code', $filter['code']);
+        }
+        if (isset($filter['type'])) {
+            $query->where('type', $filter['type']);
+        }
+        if (isset($filter['protected_fund'])) {
+            $query->where('protected_fund', $filter['protected_fund']);
+        }
+        if (isset($filter['payment_policy'])) {
+            $query->where('payment_policy', $filter['payment_policy']);
+        }
+        if (isset($filter['risk_level'])) {
+            $query->where('risk_level', $filter['risk_level']);
+        }
+        if (isset($filter['min_first_purchase'])) {
+            $query->whereHas('purchase_details', function ($query) use ($filter) {
+                $query->where('min_first_purchase', $filter['min_first_purchase']);
+            });
+        }
+
+        return $query->get();
+    }
 
     /*
     |--------------------------------------------------------------------------
