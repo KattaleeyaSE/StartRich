@@ -10,9 +10,9 @@
                 <th>1 Month</th>
                 <th>3 Months</th>
                 <th>1 Year</th>
-                <th>3 Year</th>
-                <th>5 Year</th>
-                <th>10 Year</th>
+                <th>3 Years</th>
+                <th>5 Years</th>
+                <th>10 Years</th>
                 <th>Since Inception</th>
                 <th>Actions</th>
             </thead>

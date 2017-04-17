@@ -85,6 +85,7 @@
                             <li><a href="#">Menu2</a></li>
                             <li><a href="#">Menu3</a></li> --}}
                             <li><a href="{{url('suitabilitytest/member/index')}}">Suitability Test</a></li>
+                            <li><a href="{{route('member.fund.index')}}">Supporter</a></li>
                             <li><a href="{{url('estimateprofit/index')}}">Estimate Profit</a></li>
                         @else
                             {{--admin menu--}}
