@@ -23,7 +23,6 @@
                         <td>{{$fund->name}}</td>
                         <td>{{ !(is_null($fund->fees->first())) ? $fund->fees->first()->actual_front_end_fee : '-'}}</td>
                         <td>{{ !(is_null($fund->fees->first())) ? $fund->fees->first()->actual_back_end_fee : '-'}}</td>
-                        <td>{{ !(is_null($fund->expenses->first())) ? $fund->expenses->first()->manager_fee : '-'}}</td>
                         <td>{{ !(is_null($fund->expenses->first())) ? $fund->expenses->first()->actual_manager_fee : '-'}}</td>
                         <td>{{ !(is_null($fund->expenses->first())) ? $fund->expenses->first()->total_expense_ratio : '-'}}</td>
                         <td>{{ !(is_null($fund->purchase_details->first())) ? $fund->purchase_details->first()->min_first_purchase : '-'}}</td>
