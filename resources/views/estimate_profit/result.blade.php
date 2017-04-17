@@ -9,6 +9,22 @@
 
                 <div class="panel-body"> 
 
+                    <div class="chart-area">
+                        <div class="form-group">
+                        <label for="sel1">Select Fund:</label>
+                        <select class="form-control" id="fund_selection">
+                            @foreach ($result as $key => $item) 
+                                <option value="{{$key}}">
+                                    {{$item['estimate_item']->fund->name}}
+                                </option> 
+                            @endforeach
+                        </select>
+                        </div>
+
+                        <canvas id="result-chart" width="393" height="196"></canvas>
+
+                    </div>
+                    <hr />
                     <div class="table-responsive">
                     <table class="table">
                             <thead>
@@ -61,4 +77,91 @@
         </div>
     </div>
 </div>
+@endsection
+@section('style')
+<style>
+.chart-area{
+    margin-top:20px;
+    margin-bottom:50px;   
+}
+</style>
+@endsection
+@section('script')
+<script src="/js/libs/Chart.min.js"></script>
+<script>
+$(document).ready(function(){
+
+    var chartarea = $('#result-chart');  
+    var dataset = [];
+    
+    @foreach ($result as $key => $item)  
+
+        dataset[{{$key}}] = {
+        labels: [
+            @foreach($item['estimate_item']->fund->past_performances as $past_perform)
+                "{{$past_perform->date}}",
+            @endforeach
+        ],
+            datasets: [
+                {
+                    label: "Information Ratio", 
+                    borderColor: getRandomColor(), 
+                    fill: false,
+                    lineTension: 0.1,
+                    pointRadius: 1,
+                    data: [
+                        @foreach($item['estimate_item']->fund->past_performances as $past_perform) 
+                            @if($past_perform->records->where('name','=','Information Ratio')->first() != null)
+                             "{{$past_perform->records->where('name','=','Information Ratio')->first()->since_inception}}",
+                            @endif
+                        @endforeach
+                    ], 
+                },
+                {
+                    label: "Standard Deviation", 
+                    borderColor:getRandomColor(), 
+                    fill: false,
+                    lineTension: 0.1,
+                    pointRadius: 1,
+                    data: [
+                        @foreach($item['estimate_item']->fund->past_performances as $past_perform) 
+                            @if($past_perform->records->where('name','=','Standard Deviation')->first() != null)
+                             "{{$past_perform->records->where('name','=','Standard Deviation')->first()->since_inception}}",
+                            @endif
+                        @endforeach
+                    ], 
+                }
+            ]
+        }; 
+    @endforeach
+ 
+    if(dataset[0])
+    {
+        var myChart = new Chart(chartarea,{
+            type: 'line',
+            data: dataset[0],  
+        }); 
+    }
+
+
+    $('#fund_selection').change(function(){ 
+        if(dataset[$(this).val()])
+        {
+            var myChart = new Chart(chartarea,{
+                type: 'line',
+                data: dataset[$(this).val()]
+            }); 
+        } 
+    });
+});
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+</script>
 @endsection
