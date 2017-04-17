@@ -49,7 +49,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-left">
                     @if (Auth::guest())
-                        <li   class="dropdown">
+                        {{-- <li   class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 Submenu1 <span class="caret"></span>
                             </a>
@@ -73,22 +73,22 @@
 
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
                         @elseif(!is_null(Auth::user()->amc))
                             {{--amc menu--}}
-                            <li><a href="#">Home</a></li>
+                            <li><a href="{{url('')}}">Home</a></li>
                             <li><a href="{{url('amc/fund')}}">Fund Management</a></li>
                             <li><a href="{{url('suitabilitytest/amc/index')}}">Suitability Test</a></li>
                         @elseif(!is_null(Auth::user()->member))
                             {{--member menu--}}
-                            <li><a href="#">Menu1</a></li>
+                            {{-- <li><a href="#">Menu1</a></li>
                             <li><a href="#">Menu2</a></li>
-                            <li><a href="#">Menu3</a></li>
+                            <li><a href="#">Menu3</a></li> --}}
                             <li><a href="{{url('suitabilitytest/member/index')}}">Suitability Test</a></li>
                             <li><a href="{{url('estimateprofit/index')}}">Estimate Profit</a></li>
                         @else
                             {{--admin menu--}}
-                            <li><a href="#">Menu1</a></li> 
+                            {{-- <li><a href="#">Menu1</a></li>  --}}
                     @endif
 
                 </ul>
