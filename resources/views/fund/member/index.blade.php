@@ -7,38 +7,19 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Fund</div>
                     <div class="panel-body">
-                    </div>
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                                <th></th>
-                                <th>Fund code</th>
-                                <th>Fund name</th>
-                                <th>Fund normal type</th>
-                                <th>StartRich Rate</th>
-                                <th>Dividend Policy</th>
-                                <th>NAV</th>
-                                <th>Last percentage of return per 1 year</th>
-                                <th>Actions</th>
-                            </thead>
-                            <tbody>
-                                @foreach($funds as $fund)
-                                    <tr>
-                                        <td>{!! Form::checkbox('x', 0, 0, []) !!}</td>
-                                        <td>{{$fund->code}}</td>
-                                        <td>{{$fund->name}}</td>
-                                        <td>{{$fund->type}}</td>
-                                        <td>{{$fund->getRate()}}</td>
-                                        <td>{{$fund->payment_policy ? 'YES' : 'NO'}}</td>
-                                        <td>{{$fund->navs->first()->standard}}</td>
-                                        <td>{{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->oneyear : ''}}</td>
-                                        <td>
-                                            <a href="{{ route('member.fund.show', $fund->id) }}" class="btn btn-xs btn-info">view</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+
+                        <ul id="fund-info-tabs" class="nav nav-tabs">
+                          <li class="active"><a href="#show-by-info"        data-toggle="tab">Show by Info</a></li>
+                          <li><a href="#show-by-past-performance"           data-toggle="tab">Show by Past Performance</a></li>
+                          <li><a href="#show-by-subscription"               data-toggle="tab">Show by subscription and redemption detail</a></li>
+                        </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            @include('fund.member.tabs.index.show-by-info')
+                            @include('fund.member.tabs.index.show-by-past-performance')
+                            @include('fund.member.tabs.index.show-by-subscription')
+                          </div>
                     </div>
                 </div>
             </div>
@@ -47,4 +28,13 @@
 
     {{--Delete Form--}}
 
+@endsection
+
+@section('script')
+<script>
+    $('#fund-info-tabs a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
+</script>
 @endsection
