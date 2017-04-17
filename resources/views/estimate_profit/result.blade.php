@@ -98,7 +98,7 @@ $(document).ready(function(){
 
         dataset[{{$key}}] = {
         labels: [
-            @foreach($item['estimate_item']->fund->past_performances as $past_perform)
+            @foreach($item['estimate_item']->fund->past_performances->sortBy('date') as $past_perform)
                 "{{$past_perform->date}}",
             @endforeach
         ],
@@ -110,7 +110,7 @@ $(document).ready(function(){
                     lineTension: 0.1,
                     pointRadius: 1,
                     data: [
-                        @foreach($item['estimate_item']->fund->past_performances as $past_perform) 
+                        @foreach($item['estimate_item']->fund->past_performances->sortBy('date') as $past_perform) 
                             @if($past_perform->records->where('name','=','Information Ratio')->first() != null)
                              "{{$past_perform->records->where('name','=','Information Ratio')->first()->since_inception}}",
                             @endif
@@ -124,7 +124,7 @@ $(document).ready(function(){
                     lineTension: 0.1,
                     pointRadius: 1,
                     data: [
-                        @foreach($item['estimate_item']->fund->past_performances as $past_perform) 
+                        @foreach($item['estimate_item']->fund->past_performances->sortBy('date') as $past_perform) 
                             @if($past_perform->records->where('name','=','Standard Deviation')->first() != null)
                              "{{$past_perform->records->where('name','=','Standard Deviation')->first()->since_inception}}",
                             @endif
