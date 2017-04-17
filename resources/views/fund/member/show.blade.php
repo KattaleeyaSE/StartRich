@@ -22,16 +22,16 @@
 
                           <!-- Tab panes -->
                           <div class="tab-content">
-                            @include('fund.member.tabs.fund-detail')
-                            @include('fund.member.tabs.nav-daily')
-                            @include('fund.member.tabs.investment-policy')
-                            @include('fund.member.tabs.types-of-investor')
-                            @include('fund.member.tabs.major-risk-factor')
-                            @include('fund.member.tabs.lists-of-the-fund-manager')
-                            @include('fund.member.tabs.subscription-and-redemption-detail')
-                            @include('fund.member.tabs.past-performance')
-                            @include('fund.member.tabs.historical-dividend-payment')
-                            @include('fund.member.tabs.portfolio')
+                            @include('fund.member.tabs.show.fund-detail')
+                            @include('fund.member.tabs.show.nav-daily')
+                            @include('fund.member.tabs.show.investment-policy')
+                            @include('fund.member.tabs.show.types-of-investor')
+                            @include('fund.member.tabs.show.major-risk-factor')
+                            @include('fund.member.tabs.show.lists-of-the-fund-manager')
+                            @include('fund.member.tabs.show.subscription-and-redemption-detail')
+                            @include('fund.member.tabs.show.past-performance')
+                            @include('fund.member.tabs.show.historical-dividend-payment')
+                            @include('fund.member.tabs.show.portfolio')
                           </div>
 
 

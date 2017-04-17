@@ -17,4 +17,9 @@ class PastPerformance extends Model
     {
     	return $this->hasMany('App\Models\PastPerformanceRecord', 'past_performance_id');
     }
+
+    public function fundReturn()
+    {
+    	return $this->hasMany('App\Models\PastPerformanceRecord', 'past_performance_id')->where('name', $this->fund->name)->first();
+    }
 }
