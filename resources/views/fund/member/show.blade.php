@@ -22,16 +22,16 @@
 
                           <!-- Tab panes -->
                           <div class="tab-content">
-                            @include('AMC.fund.tabs.fund-detail')
-                            @include('AMC.fund.tabs.nav-daily')
-                            @include('AMC.fund.tabs.investment-policy')
-                            @include('AMC.fund.tabs.types-of-investor')
-                            @include('AMC.fund.tabs.major-risk-factor')
-                            @include('AMC.fund.tabs.lists-of-the-fund-manager')
-                            @include('AMC.fund.tabs.subscription-and-redemption-detail')
-                            @include('AMC.fund.tabs.past-performance')
-                            @include('AMC.fund.tabs.historical-dividend-payment')
-                            @include('AMC.fund.tabs.portfolio')
+                            @include('fund.member.tabs.fund-detail')
+                            @include('fund.member.tabs.nav-daily')
+                            @include('fund.member.tabs.investment-policy')
+                            @include('fund.member.tabs.types-of-investor')
+                            @include('fund.member.tabs.major-risk-factor')
+                            @include('fund.member.tabs.lists-of-the-fund-manager')
+                            @include('fund.member.tabs.subscription-and-redemption-detail')
+                            @include('fund.member.tabs.past-performance')
+                            @include('fund.member.tabs.historical-dividend-payment')
+                            @include('fund.member.tabs.portfolio')
                           </div>
 
 

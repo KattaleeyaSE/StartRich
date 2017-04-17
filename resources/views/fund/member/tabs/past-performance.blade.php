@@ -2,15 +2,6 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="well well-sm">
-			<a href="{{ route('amc.fund.create_past_performance', $fund->id) }}" class="btn btn-primary pull-right">Create</a>
-			<div class="clearfix"></div>
-		</div>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-12">
 		<table class="table">
 			<thead>
 				<th>Modified date</th>
@@ -23,10 +14,7 @@
 						<td>{{$item->updated_at	}}</td>
 						<td>{{$item->date}}</td>
 						<td>
-							{!! Form::open(['route' => ['amc.fund.destroy_past_performance', $item->id], 'method' => 'DELETE']) !!}
 								<a class="btn btn-xs btn-info" data-toggle="modal" data-target="#past-performance-{{$item->id}}">view</a>
-								{!! Form::submit('Delete', ['class' => 'btn btn-xs btn-danger']) !!}
-							{!! Form::close() !!}
 						</td>
 					</tr>
 				@endforeach
@@ -44,8 +32,6 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-		
-		<a href="{{ route('amc.fund.edit_past_performance', $fund->id) }}" class="btn btn-primary pull-right">Create</a>
 
       	<table class="table table-bordered">
       		<thead>

@@ -57,6 +57,9 @@ Route::group(['prefix' => 'member'], function () {
     Route::get('/profile','Member\MemberController@show'); 
     Route::get('/profile/edit','Member\MemberController@edit'); 
     Route::patch('/profile','Member\MemberController@update'); 
+
+    Route::get('fund', 'Member\FundController@index')->name('member.fund.index');
+    Route::get('fund/{id}', 'Member\FundController@show')->name('member.fund.show');
 });
 
 // AMC Routes
@@ -113,6 +116,12 @@ Route::group(['prefix' => 'amc'], function () {
         Route::post('fund/{id}/purchase_detail', 'AMC\FundController@storePurchaseDetail')->name('amc.fund.store_purchase_detail');
         Route::get('/purchase_detail/{id}/edit', 'AMC\FundController@editPurchaseDetail')->name('amc.fund.edit_purchase_detail');
         Route::patch('/purchase_detail/{id}', 'AMC\FundController@updatePurchaseDetail')->name('amc.fund.update_purchase_detail');
+        // Past Performance
+        Route::get('fund/{id}/past_performance/create', 'AMC\FundController@createPastPerformance')->name('amc.fund.create_past_performance');
+        Route::post('fund/{id}/past_performance', 'AMC\FundController@storePastPerformance')->name('amc.fund.store_past_performance');
+        Route::get('/past_performance/{id}/edit', 'AMC\FundController@editPastPerformance')->name('amc.fund.edit_past_performance');
+        Route::patch('/past_performance/{id}', 'AMC\FundController@updatePastPerformance')->name('amc.fund.update_past_performance');
+        Route::delete('/past_performance/{id}', 'AMC\FundController@destroyPastPerformance')->name('amc.fund.destroy_past_performance');
 
 
     Route::resource('fund', 'AMC\FundController', [

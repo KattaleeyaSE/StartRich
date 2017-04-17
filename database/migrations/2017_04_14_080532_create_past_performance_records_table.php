@@ -18,13 +18,12 @@ class CreatePastPerformanceRecordsTable extends Migration
             $table->integer('past_performance_id')->unsigned();
             $table->foreign('past_performance_id')->references('id')->on('past_performances')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
-            $table->float('1day');
-            $table->float('1month');
             $table->float('3month');
             $table->float('6month');
             $table->float('1year');
             $table->float('3year');
             $table->float('5year');
+            $table->float('10year');
             $table->float('since_inception');
             $table->timestamps();
         });

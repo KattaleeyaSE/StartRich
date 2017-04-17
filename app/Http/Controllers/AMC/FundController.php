@@ -16,6 +16,7 @@ use App\Models\AssetAllocation;
 use App\Models\HoldingCompany;
 use App\Models\Fee;
 use App\Models\PurchaseDetail;
+use App\Models\PastPerformance;
 
 class FundController extends Controller
 {
@@ -82,6 +83,7 @@ class FundController extends Controller
         $navs = [];
         $asset_allocation_data = [];
         $holding_company_data = [];
+        $performance_data = [];
 
         foreach ($fund->nav as $nav) {
             array_push($navs, [$nav->update_date, $nav->bid]);
@@ -102,8 +104,17 @@ class FundController extends Controller
             array_push($holding_company_data, [$holding_company->name, $holding_company->percentage]);
         }
 
+      
+        array_push($performance_data, ['Modified Date', 'Fund Return', 'Benchmark', 'Information Ratio', 'SD of Performance']);
+        foreach ($fund->past_performances()->with('records')->get() as $past_performance) {
+            $fund_temp = $past_performance->records->where('name', $fund->name)->first()->since_inception;
+            $benchmark_temp = $past_performance->records->where('name', 'Benchmark 1')->first()->since_inception;
+            $ratio_temp = $past_performance->records->where('name', 'Information Ratio')->first()->since_inception;
+            $sd_temp = $past_performance->records->where('name', 'Standard Deviation')->first()->since_inception;
+            array_push($performance_data, [$past_performance->date, $fund_temp, $benchmark_temp, $ratio_temp, $sd_temp]);
+        }
 
-        return view('AMC.fund.show', ['fund' => $fund, 'navs' => $navs, 'asset_allocation_data' => $asset_allocation_data, 'holding_company_data' => $holding_company_data]);
+        return view('AMC.fund.show', ['fund' => $fund, 'navs' => $navs, 'asset_allocation_data' => $asset_allocation_data, 'holding_company_data' => $holding_company_data, 'performance_data' => $performance_data]);
     }
 
     /**
@@ -425,5 +436,51 @@ class FundController extends Controller
         $purchase_detail->update($request->all());
 
         return redirect()->route('amc.fund.show', $purchase_detail->fund->id);
+    }
+
+    //Past Performance
+    public function createPastPerformance($id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        return view('AMC.fund.past_performance.create', ['fund' => $fund]);
+    }
+
+    public function storePastPerformance(Request $request, $id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        $past_performance = $fund->past_performances()->create(['date' => $request->date]);
+
+        foreach ($request->data as $data) {
+            $past_performance->records()->create($data);
+        }
+
+        return redirect()->route('amc.fund.show', $fund->id);
+    }
+
+    // public function editPastPerformance($id)
+    // {
+    //     $holding_company = HoldingCompany::find($id);
+
+    //     return view('AMC.fund.holding_company.edit', ['holding_company' => $holding_company]);
+    // }
+
+    // public function updatePastPerformance(Request $request, $id)
+    // {
+    //     $holding_company = HoldingCompany::find($id);
+    //     $holding_company->update($request->all());
+
+    //     return redirect()->route('amc.fund.show', $holding_company->fund->id);
+    // }
+
+    public function destroyPastPerformance($id)
+    {
+        $past_performance = PastPerformance::find($id);
+        $fund = $past_performance->fund;
+
+        $past_performance->delete();
+
+        return redirect()->route('amc.fund.show', $fund->id);
     }
 }
