@@ -82,9 +82,6 @@
                 selectFund($(this).val())
             } else {
                 $(this).prop('checked', !$(this).prop('checked'))
-                $('*#'+$(this).attr('id')).each(function() {
-                    $(this).prop('checked', !$(this).prop('checked'))
-                })
                 selectFund($(this).val())
                 $(this).prop('checked', false)
             }
