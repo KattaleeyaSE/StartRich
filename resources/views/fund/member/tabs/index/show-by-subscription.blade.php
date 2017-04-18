@@ -18,7 +18,7 @@
             <tbody>
                 @foreach($funds as $fund)
                     <tr>
-                        <td>{!! Form::checkbox('x', 0, 0, []) !!}</td>
+                        <td>{!! Form::checkbox('chckbx', json_encode($fund->getAttributes()), 0, ['id' => 'chckbx'.$fund->id]) !!}</td>
                         <td>{{$fund->code}}</td>
                         <td>{{$fund->name}}</td>
                         <td>{{ !(is_null($fund->fees->first())) ? $fund->fees->first()->actual_front_end_fee : '-'}}</td>
