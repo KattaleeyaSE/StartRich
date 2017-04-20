@@ -62,6 +62,9 @@ Route::group(['prefix' => 'member'], function () {
     Route::patch('fund/{id}/favorite', 'Member\FundController@favorite')->name('member.fund.favorite');
     Route::get('fund', 'Member\FundController@index')->name('member.fund.index');
     Route::get('fund/{id}', 'Member\FundController@show')->name('member.fund.show');
+
+    Route::get('fund/{id}/review', 'Member\FundController@review')->name('member.fund.review');
+    Route::post('fund/{id}/review', 'Member\FundController@saveReview')->name('member.fund.save_review');
 });
 
 // AMC Routes

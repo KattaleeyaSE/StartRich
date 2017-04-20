@@ -108,4 +108,25 @@ class FundController extends Controller
 
         return redirect()->route('member.fund.index');
     }
+
+    public function review($id)
+    {
+        $fund = MutualFund::find($id);
+
+        return view('fund.member.review', ['fund' => $fund]);
+    }
+
+    public function saveReview(Request $request, $id)
+    {
+        $fund = MutualFund::find($id);
+        $member = \Auth::user()->member;
+
+        $data = $request->all();
+        $data['member_id'] = $member->id;
+        $data['fund_id'] = $fund->id;
+
+        $review = $fund->reviews()->create($data);
+
+        return redirect()->route('member.fund.review', $fund->id);
+    }
 }

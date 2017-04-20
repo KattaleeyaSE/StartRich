@@ -36,6 +36,7 @@
                                 @else
                                     {!! Form::submit('add favorite', ['class' => 'btn btn-xs btn-info']) !!}
                                 @endif
+                                <a href="{{ route('member.fund.review', $fund->id) }}" class="btn btn-xs btn-info">review</a>
                                 <a href="{{ route('member.fund.show', $fund->id) }}" class="btn btn-xs btn-info">view</a>
                             {!! Form::close() !!}
                         </td>

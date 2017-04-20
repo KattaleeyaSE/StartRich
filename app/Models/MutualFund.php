@@ -59,6 +59,17 @@ class MutualFund extends investment
         return $this->past_performances->where('date', $max_date)->first();
     }
 
+    public function reviewedByMember($member_id)
+    {
+        foreach ($this->reviews as $review) {
+            if ($review->member_id == $member_id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function isFavoriteBy($member_id)
     {
         foreach ($this->members as $member) {
@@ -168,6 +179,11 @@ class MutualFund extends investment
     public function members()
     {
         return $this->belongsToMany('App\Models\Member', 'member_fund', 'fund_id', 'member_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Models\FundReview', 'fund_id');
     }
 
     /*
