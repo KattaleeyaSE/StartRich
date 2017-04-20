@@ -30,7 +30,14 @@
                         <td>{{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->tenyear : '-'}}</td>
                         <td>{{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->since_inception : '-'}}</td>
                         <td>
-                            <a href="{{ route('member.fund.show', $fund->id) }}" class="btn btn-xs btn-info">view</a>
+                            {!! Form::open(['route' => ['member.fund.favorite', $fund->id], 'method' => 'PATCH']) !!}
+                                @if($fund->isFavoriteBy(Auth::user()->member->id))
+                                    {!! Form::submit('remove favorite', ['class' => 'btn btn-xs btn-warning']) !!}
+                                @else
+                                    {!! Form::submit('add favorite', ['class' => 'btn btn-xs btn-info']) !!}
+                                @endif
+                                <a href="{{ route('member.fund.show', $fund->id) }}" class="btn btn-xs btn-info">view</a>
+                            {!! Form::close() !!}
                         </td>
                     </tr>
                 @endforeach

@@ -58,6 +58,8 @@ Route::group(['prefix' => 'member'], function () {
     Route::get('/profile/edit','Member\MemberController@edit'); 
     Route::patch('/profile','Member\MemberController@update'); 
 
+    Route::get('fund/favorite', 'Member\FundController@favorites')->name('member.fund.favorites');
+    Route::patch('fund/{id}/favorite', 'Member\FundController@favorite')->name('member.fund.favorite');
     Route::get('fund', 'Member\FundController@index')->name('member.fund.index');
     Route::get('fund/{id}', 'Member\FundController@show')->name('member.fund.show');
 });

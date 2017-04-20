@@ -43,6 +43,11 @@ class Member extends User
 		{
 			return $this->belongsTo('App\User');
 		}
+
+		public function favorite_funds()
+		{
+			return $this->belongsToMany('App\Models\MutualFund', 'member_fund', 'member_id', 'fund_id');
+		}
 	/*
 	|--------------------------------------------------------------------------
 	| SCOPES

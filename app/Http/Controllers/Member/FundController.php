@@ -83,4 +83,29 @@ class FundController extends Controller
 
         return view('fund.member.show', ['fund' => $fund, 'navs' => $navs, 'asset_allocation_data' => $asset_allocation_data, 'holding_company_data' => $holding_company_data, 'performance_data' => $performance_data]);
     }
+
+    public function favorites()
+    {
+        $member = \Auth::user()->member;
+
+        $funds = $member->favorite_funds;
+
+        return view('fund.member.favorite', ['funds' => $funds]);
+    }
+
+    public function favorite($id)
+    {
+        $fund = MutualFund::find($id);
+        $member = \Auth::user()->member;
+
+        $check_fund = $fund->isFavoriteBy($member->id);
+
+        if ($check_fund) {
+            $fund->members()->detach($member);
+        } else {
+            $fund->members()->attach($member);
+        }
+
+        return redirect()->route('member.fund.index');
+    }
 }
