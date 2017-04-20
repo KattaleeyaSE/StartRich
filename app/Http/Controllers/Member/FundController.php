@@ -18,7 +18,22 @@ class FundController extends Controller
     {
         $fund_types = MutualFundType::all()->pluck('name', 'name');
         
-        $funds = MutualFund::filter($request->all());
+        $funds = MutualFund::filter($request->all())->get();
+
+        if ($request->sort_by) {
+            if ($request->sort_by == 'risk_level') {
+                $funds = $request->desc ? $funds->sortByDesc('risk_level') : $funds->sortBy('risk_level');
+            }
+            if ($request->sort_by == 'name') {
+                $funds = $request->desc ? $funds->sortByDesc('name') : $funds->sortBy('name');
+            }
+            if ($request->sort_by == 'min_first_purchase') {
+                $funds = $request->desc ? $funds->sortByDesc('purchase_detail.min_first_purchase') : $funds->sortBy('purchase_detail.min_first_purchase');
+            }
+            if ($request->sort_by == 'nav') {
+                $funds = $request->desc ? $funds->sortByDesc('nav.standard') : $funds->sortBy('nav.standard');
+            }
+        }
 
         return view('fund.member.index', ['funds' => $funds, 'fund_types' => $fund_types]);
     }

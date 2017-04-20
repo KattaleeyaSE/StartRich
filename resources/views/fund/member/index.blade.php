@@ -19,6 +19,24 @@
                     </div>
                     
                     <div class="panel-body">
+
+                            <div class="col-md-6 col-md-offset-6">
+                                {!! Form::open(['route' => 'member.fund.index', 'method' => 'GET', 'class' => 'form-horizontal']) !!}
+                                <div class="form-group">
+                                    {!! Form::label('sort_by', 'Sort By', []) !!}
+                                    {!! Form::select('sort_by', ['risk_level' => 'Risk Level',  
+                                                                  'name' => 'Fund Name', 
+                                                                  'min_first_purchase' => 'Minimum First Purchase', 
+                                                                  'nav' => 'Nav'], null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                                    {!! Form::radio('desc', false, true, []) !!} low to high
+                                    {!! Form::radio('desc', true, false, []) !!} high to low
+
+                                {!! Form::submit('Sort', ['class' => 'btn btn-xs btn-info']) !!}
+                                </div>
+
+                                {!! Form::close() !!}
+                            </div>
+
                           <ul id="fund-info-tabs" class="nav nav-tabs">
                             <li class="active"><a href="#show-by-info"        data-toggle="tab">Show by Info</a></li>
                             <li><a href="#show-by-past-performance"           data-toggle="tab">Show by Past Performance</a></li>

@@ -75,9 +75,9 @@ class MutualFund extends investment
     }
 
     // ไม่ใช้ละ
-    public function nav(){
-        return $this->hasMany('App\Models\Nav','fund_id');
-    }
+    // public function nav(){
+    //     return $this->hasMany('App\Models\Nav','fund_id');
+    // }
     public function listoffund(){
         return $this->hasMany('App\listoffund');
     }
@@ -89,6 +89,11 @@ class MutualFund extends investment
     }
 
     // ใช้อันนี้แทนนะ
+    public function nav()
+    {
+        return $this->hasOne('App\Models\Nav', 'fund_id');
+    }
+
     public function navs()
     {
         return $this->hasMany('App\Models\Nav', 'fund_id');
@@ -107,6 +112,11 @@ class MutualFund extends investment
     public function portfolios()
     {
         return $this->hasMany('App\Models\Portfolio', 'fund_id');
+    }
+
+    public function purchase_detail()
+    {
+        return $this->hasOne('App\Models\PurchaseDetail','fund_id');
     }
 
     public function purchase_details()
@@ -170,7 +180,7 @@ class MutualFund extends investment
             });
         }
 
-        return $query->get();
+        return $query;
     }
 
     /*
