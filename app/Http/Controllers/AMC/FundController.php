@@ -475,10 +475,13 @@ class FundController extends Controller
         $past_performance = PastPerformance::find($id);
         $past_performance->update(['date' => $request->date]);
 
-        // dd($request->all());
         foreach ($request->data as $key => $data) {
             $record = PastPerformanceRecord::find($key);
-            $record->update($data);
+            if($record != null) {
+                $record->update($data);
+            } else {
+                $past_performance->records()->create($data);
+            }
         }
 
         return redirect()->route('amc.fund.show', $past_performance->fund->id);

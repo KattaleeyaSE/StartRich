@@ -44,3 +44,5 @@
 	</div>
 </div>
 @endforeach
+
+<div id="addingPane"></div>
