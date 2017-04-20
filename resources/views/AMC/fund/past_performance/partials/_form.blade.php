@@ -168,3 +168,5 @@
 		{!! Form::text('data[2][since_inception]', null, ['class' => 'form-control']) !!}
 	</div>
 </div>
+
+<div id="addingPane"></div>
