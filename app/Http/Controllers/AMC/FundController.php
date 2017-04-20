@@ -109,7 +109,7 @@ class FundController extends Controller
 
       
         array_push($performance_data, ['Modified Date', 'Fund Return', 'Benchmark', 'Information Ratio', 'SD of Performance']);
-        foreach ($fund->past_performances()->with('records')->get() as $past_performance) {
+        foreach ($fund->past_performances as $past_performance) {
             $fund_temp = $past_performance->records->where('name', $fund->name)->first()->since_inception;
             $benchmark_temp = $past_performance->records->where('name', 'Benchmark 1')->first()->since_inception;
             $ratio_temp = $past_performance->records->where('name', 'Information Ratio')->first()->since_inception;

@@ -52,7 +52,7 @@ class FundController extends Controller
         $holding_company_data = [];
         $performance_data = [];
 
-        foreach ($fund->nav as $nav) {
+        foreach ($fund->navs as $nav) {
             array_push($navs, [$nav->update_date, $nav->bid]);
         }
 
@@ -71,13 +71,12 @@ class FundController extends Controller
             array_push($holding_company_data, [$holding_company->name, $holding_company->percentage]);
         }
 
-      
         array_push($performance_data, ['Modified Date', 'Fund Return', 'Benchmark', 'Information Ratio', 'SD of Performance']);
-        foreach ($fund->past_performances()->with('records')->get() as $past_performance) {
-            $fund_temp = $past_performance->records->where('name', $fund->name)->first()->since_inception;
-            $benchmark_temp = $past_performance->records->where('name', 'Benchmark 1')->first()->since_inception;
-            $ratio_temp = $past_performance->records->where('name', 'Information Ratio')->first()->since_inception;
-            $sd_temp = $past_performance->records->where('name', 'Standard Deviation')->first()->since_inception;
+        foreach ($fund->past_performances as $past_performance) {
+            $fund_temp = $past_performance->fundReturn()->since_inception;
+            $benchmark_temp = $past_performance->benchmark1()->since_inception;
+            $ratio_temp = $past_performance->information_ratio()->since_inception;
+            $sd_temp = $past_performance->standard_deviation()->since_inception;
             array_push($performance_data, [$past_performance->date, $fund_temp, $benchmark_temp, $ratio_temp, $sd_temp]);
         }
 

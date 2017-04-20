@@ -261,7 +261,7 @@ class PastPerformanceRecordsTableSeeder extends Seeder
             array (
                 'id' => 17,
                 'past_performance_id' => 6,
-                'name' => 'Fund 1',
+                'name' => 'Fund 2',
                 '3month' => 17.0,
                 '6month' => 17.0,
                 '1year' => 17.0,
@@ -321,7 +321,7 @@ class PastPerformanceRecordsTableSeeder extends Seeder
             array (
                 'id' => 21,
                 'past_performance_id' => 10,
-                'name' => 'Fund 1',
+                'name' => 'Fund 2',
                 '3month' => 21.0,
                 '6month' => 21.0,
                 '1year' => 21.0,
@@ -441,7 +441,7 @@ class PastPerformanceRecordsTableSeeder extends Seeder
             array (
                 'id' => 29,
                 'past_performance_id' => 2,
-                'name' => 'Fund 1',
+                'name' => 'Fund 2',
                 '3month' => 29.0,
                 '6month' => 29.0,
                 '1year' => 29.0,
@@ -501,7 +501,7 @@ class PastPerformanceRecordsTableSeeder extends Seeder
             array (
                 'id' => 33,
                 'past_performance_id' => 11,
-                'name' => 'Fund 1',
+                'name' => 'Fund 3',
                 '3month' => 33.0,
                 '6month' => 33.0,
                 '1year' => 33.0,
@@ -561,7 +561,7 @@ class PastPerformanceRecordsTableSeeder extends Seeder
             array (
                 'id' => 37,
                 'past_performance_id' => 7,
-                'name' => 'Fund 1',
+                'name' => 'Fund 3',
                 '3month' => 37.0,
                 '6month' => 37.0,
                 '1year' => 37.0,
@@ -681,7 +681,7 @@ class PastPerformanceRecordsTableSeeder extends Seeder
             array (
                 'id' => 45,
                 'past_performance_id' => 3,
-                'name' => 'Fund 1',
+                'name' => 'Fund 3',
                 '3month' => 45.0,
                 '6month' => 45.0,
                 '1year' => 45.0,
@@ -741,7 +741,7 @@ class PastPerformanceRecordsTableSeeder extends Seeder
             array (
                 'id' => 49,
                 'past_performance_id' => 12,
-                'name' => 'Fund 1',
+                'name' => 'Fund 4',
                 '3month' => 49.0,
                 '6month' => 49.0,
                 '1year' => 49.0,
@@ -801,7 +801,7 @@ class PastPerformanceRecordsTableSeeder extends Seeder
             array (
                 'id' => 53,
                 'past_performance_id' => 4,
-                'name' => 'Fund 1',
+                'name' => 'Fund 4',
                 '3month' => 53.0,
                 '6month' => 53.0,
                 '1year' => 53.0,
@@ -861,7 +861,7 @@ class PastPerformanceRecordsTableSeeder extends Seeder
             array (
                 'id' => 57,
                 'past_performance_id' => 8,
-                'name' => 'Fund 1',
+                'name' => 'Fund 4',
                 '3month' => 57.0,
                 '6month' => 57.0,
                 '1year' => 57.0,
