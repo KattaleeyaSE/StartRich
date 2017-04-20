@@ -160,6 +160,11 @@ class MutualFund extends investment
         return $this->hasMany('App\Models\PastPerformance','fund_id');
     }
 
+    public function users()
+    {
+        return $this->hasManyThrough('App\User', 'App\Models\Member', 'user_id', 'id');
+    }
+
     public function members()
     {
         return $this->belongsToMany('App\Models\Member', 'member_fund', 'fund_id', 'member_id');

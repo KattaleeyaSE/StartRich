@@ -17,6 +17,8 @@ use App\Models\HoldingCompany;
 use App\Models\Fee;
 use App\Models\PurchaseDetail;
 use App\Models\PastPerformance;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\FundUpdated;
 
 class FundController extends Controller
 {
@@ -137,7 +139,8 @@ class FundController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $fund = MutualFund::find($id);
+        Mail::to($fund->users)->send(new FundUpdated($fund));
     }
 
     /**
