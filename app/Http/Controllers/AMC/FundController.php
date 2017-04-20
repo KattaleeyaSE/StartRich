@@ -17,6 +17,7 @@ use App\Models\HoldingCompany;
 use App\Models\Fee;
 use App\Models\PurchaseDetail;
 use App\Models\PastPerformance;
+use App\Models\PastPerformanceRecord;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\FundUpdated;
 
@@ -87,7 +88,7 @@ class FundController extends Controller
         $holding_company_data = [];
         $performance_data = [];
 
-        foreach ($fund->nav as $nav) {
+        foreach ($fund->navs as $nav) {
             array_push($navs, [$nav->update_date, $nav->bid]);
         }
 
@@ -462,20 +463,26 @@ class FundController extends Controller
         return redirect()->route('amc.fund.show', $fund->id);
     }
 
-    // public function editPastPerformance($id)
-    // {
-    //     $holding_company = HoldingCompany::find($id);
+    public function editPastPerformance($id)
+    {
+        $past_performance = PastPerformance::with('records')->find($id);
 
-    //     return view('AMC.fund.holding_company.edit', ['holding_company' => $holding_company]);
-    // }
+        return view('AMC.fund.past_performance.edit', ['past_performance' => $past_performance, 'fund' => $past_performance->fund]);
+    }
 
-    // public function updatePastPerformance(Request $request, $id)
-    // {
-    //     $holding_company = HoldingCompany::find($id);
-    //     $holding_company->update($request->all());
+    public function updatePastPerformance(Request $request, $id)
+    {
+        $past_performance = PastPerformance::find($id);
+        $past_performance->update(['date' => $request->date]);
 
-    //     return redirect()->route('amc.fund.show', $holding_company->fund->id);
-    // }
+        // dd($request->all());
+        foreach ($request->data as $key => $data) {
+            $record = PastPerformanceRecord::find($key);
+            $record->update($data);
+        }
+
+        return redirect()->route('amc.fund.show', $past_performance->fund->id);
+    }
 
     public function destroyPastPerformance($id)
     {
