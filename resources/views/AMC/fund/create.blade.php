@@ -82,6 +82,10 @@
 			@include('AMC.fund.manager.partials._form')
 
 			<hr>
+
+			@include('AMC.fund.asset_allocation.partials._form')
+
+			<hr>
 			
 			{!! Form::submit('Create', ['class' => 'btn btn-primary']) !!}
 			

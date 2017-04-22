@@ -71,6 +71,8 @@ class FundController extends Controller
 
         $fund_managers = $fund->fund_managers()->create(['name' => $request->manager_name, 'position' => $request->manager_position, 'management_date' => $request->management_date]);
 
+        $asset_allocation = $fund->asset_allocation()->create(['stock' => $request->stock, 'bond' => $request->bond, 'cash' => $request->cash, 'other' => $request->other]);
+
         return redirect()->route('amc.fund.show', $fund->id);
     }
 
