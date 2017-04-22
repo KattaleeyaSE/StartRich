@@ -3,7 +3,8 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="well well-sm">
-			<a href="{{  route('amc.fund.edit_asset_allocation', $fund->id) }}" class="btn btn-warning pull-right">edit</a>
+			<!-- <a href="{{  route('amc.fund.edit_asset_allocation', $fund->id) }}" class="btn btn-warning pull-right">edit</a> -->
+			<a href="{{ route('amc.fund.edit', $fund->id) }}" class="btn btn-warning pull-right">edit</a>
 			<div class="clearfix"></div>
 		</div>
 	</div>
