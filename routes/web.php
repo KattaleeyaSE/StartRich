@@ -58,8 +58,13 @@ Route::group(['prefix' => 'member'], function () {
     Route::get('/profile/edit','Member\MemberController@edit'); 
     Route::patch('/profile','Member\MemberController@update'); 
 
+    Route::get('fund/favorite', 'Member\FundController@favorites')->name('member.fund.favorites');
+    Route::patch('fund/{id}/favorite', 'Member\FundController@favorite')->name('member.fund.favorite');
     Route::get('fund', 'Member\FundController@index')->name('member.fund.index');
     Route::get('fund/{id}', 'Member\FundController@show')->name('member.fund.show');
+
+    Route::get('fund/{id}/review', 'Member\FundController@review')->name('member.fund.review');
+    Route::post('fund/{id}/review', 'Member\FundController@saveReview')->name('member.fund.save_review');
 });
 
 // AMC Routes
@@ -130,6 +135,8 @@ Route::group(['prefix' => 'amc'], function () {
                                 'show' => 'amc.fund.show',
                                 'create' => 'amc.fund.create',
                                 'store' => 'amc.fund.store',
+                                'edit' => 'amc.fund.edit',
+                                'update' => 'amc.fund.update',
                             ]]);
 });
 

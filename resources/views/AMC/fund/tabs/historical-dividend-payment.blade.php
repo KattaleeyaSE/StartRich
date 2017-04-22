@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane active" id="historical-dividend-payment">
+<div role="tabpanel" class="tab-pane" id="historical-dividend-payment">
 
 <div class="row">
 	<div class="col-md-12">

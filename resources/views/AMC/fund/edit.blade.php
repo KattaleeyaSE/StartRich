@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="container">
-		{!! Form::open(['route' => 'amc.fund.store', 'class' => 'form-horizontal']) !!}
+		{!! Form::model($fund, ['route' => ['amc.fund.update', $fund->id], 'method' => 'PATCH', 'class' => 'form-horizontal']) !!}
 
 			{!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
 			{!! Form::text('name', null, ['class' => 'form-control']) !!}
@@ -76,10 +76,6 @@
 		
 			{!! Form::label('major_risk_factor', 'major_risk_factor', ['class' => 'control-label']) !!}
 			{!! Form::text('major_risk_factor', null, ['class' => 'form-control']) !!}
-
-			<hr>
-
-			@include('AMC.fund.manager.partials._form')
 
 			<hr>
 

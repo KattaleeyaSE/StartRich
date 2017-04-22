@@ -1,0 +1,1 @@
+{{$fund->name}} is updated

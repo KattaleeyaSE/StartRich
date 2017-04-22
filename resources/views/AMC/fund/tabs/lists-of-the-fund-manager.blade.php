@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane active" id="lists-of-the-fund-manager">
+<div role="tabpanel" class="tab-pane" id="lists-of-the-fund-manager">
 
 <div class="row">
 	<div class="col-md-12">

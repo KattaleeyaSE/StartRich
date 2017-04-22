@@ -1,14 +1,8 @@
-<div role="tabpanel" class="tab-pane active" id="portfolio">
+<div role="tabpanel" class="tab-pane" id="portfolio">
 
 <div class="row">
 	<div class="col-md-6">
-		@if ($fund->asset_allocation != NULL)
-    		<div id="piechart_3d"></div>
-    	@else
-    		<div class="well">
-    			No data
-    		</div>
-    	@endif
+    	<div id="piechart_3d"></div>
 	</div>
 	<div class="col-md-6">
 		<table class="table">
@@ -36,13 +30,7 @@
 
 <div class="row">
 	<div class="col-md-6">
-		@if ($fund->holding_companies != NULL)
-    		<div id="piechart_3d_holding_company"></div>
-    	@else
-    		<div class="well">
-    			No data
-    		</div>
-    	@endif
+    	<div id="piechart_3d_holding_company"></div>
 	</div>
 	<div class="col-md-6">
 

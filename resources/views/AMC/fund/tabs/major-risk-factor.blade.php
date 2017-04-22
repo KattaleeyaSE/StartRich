@@ -1,9 +1,9 @@
-<div role="tabpanel" class="tab-pane active" id="major-risk-factor">
+<div role="tabpanel" class="tab-pane" id="major-risk-factor">
 
 <div class="row">
 	<div class="col-md-12">
 		<div class="well well-sm">
-			<a class="btn btn-warning pull-right">edit</a>
+			<a href="{{ route('amc.fund.edit', $fund->id) }}" class="btn btn-warning pull-right">edit</a>
 			<div class="clearfix"></div>
 		</div>
 	</div>

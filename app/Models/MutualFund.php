@@ -52,6 +52,41 @@ class MutualFund extends investment
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function lastPastPerforamce()
+    {
+        $max_date = $this->past_performances->max('date');
+
+        return $this->past_performances->where('date', $max_date)->first();
+    }
+
+    public function reviewedByMember($member_id)
+    {
+        foreach ($this->reviews as $review) {
+            if ($review->member_id == $member_id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isFavoriteBy($member_id)
+    {
+        foreach ($this->members as $member) {
+            if ($member->id == $member_id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getRate()
+    {
+        if($this->reviews->isEmpty()) { return 0; }
+
+        return $this->reviews->avg('point');
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -64,9 +99,9 @@ class MutualFund extends investment
     }
 
     // ไม่ใช้ละ
-    public function nav(){
-        return $this->hasMany('App\Models\Nav','fund_id');
-    }
+    // public function nav(){
+    //     return $this->hasMany('App\Models\Nav','fund_id');
+    // }
     public function listoffund(){
         return $this->hasMany('App\listoffund');
     }
@@ -78,6 +113,11 @@ class MutualFund extends investment
     }
 
     // ใช้อันนี้แทนนะ
+    public function nav()
+    {
+        return $this->hasOne('App\Models\Nav', 'fund_id');
+    }
+
     public function navs()
     {
         return $this->hasMany('App\Models\Nav', 'fund_id');
@@ -96,6 +136,11 @@ class MutualFund extends investment
     public function portfolios()
     {
         return $this->hasMany('App\Models\Portfolio', 'fund_id');
+    }
+
+    public function purchase_detail()
+    {
+        return $this->hasOne('App\Models\PurchaseDetail','fund_id');
     }
 
     public function purchase_details()
@@ -128,11 +173,54 @@ class MutualFund extends investment
         return $this->hasMany('App\Models\PastPerformance','fund_id');
     }
 
+    public function users()
+    {
+        return $this->hasManyThrough('App\User', 'App\Models\Member', 'user_id', 'id');
+    }
+
+    public function members()
+    {
+        return $this->belongsToMany('App\Models\Member', 'member_fund', 'fund_id', 'member_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Models\FundReview', 'fund_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
     |--------------------------------------------------------------------------
     */
+    public function scopeFilter($query, $filter)
+    {
+        if (isset($filter['name'])) {
+            $query->where('name', $filter['name']);
+        }
+        if (isset($filter['code'])) {
+            $query->where('code', $filter['code']);
+        }
+        if (isset($filter['type'])) {
+            $query->where('type', $filter['type']);
+        }
+        if (isset($filter['protected_fund'])) {
+            $query->where('protected_fund', $filter['protected_fund']);
+        }
+        if (isset($filter['payment_policy'])) {
+            $query->where('payment_policy', $filter['payment_policy']);
+        }
+        if (isset($filter['risk_level'])) {
+            $query->where('risk_level', $filter['risk_level']);
+        }
+        if (isset($filter['min_first_purchase'])) {
+            $query->whereHas('purchase_details', function ($query) use ($filter) {
+                $query->where('min_first_purchase', $filter['min_first_purchase']);
+            });
+        }
+
+        return $query;
+    }
 
     /*
     |--------------------------------------------------------------------------

@@ -17,4 +17,24 @@ class PastPerformance extends Model
     {
     	return $this->hasMany('App\Models\PastPerformanceRecord', 'past_performance_id');
     }
+
+    public function fundReturn()
+    {
+    	return $this->hasMany('App\Models\PastPerformanceRecord', 'past_performance_id')->where('name', $this->fund->name)->first();
+    }
+
+    public function benchmark1()
+    {
+        return $this->hasMany('App\Models\PastPerformanceRecord', 'past_performance_id')->where('name', 'Benchmark 1')->first();
+    }
+
+    public function information_ratio()
+    {
+        return $this->hasMany('App\Models\PastPerformanceRecord', 'past_performance_id')->where('name', 'Information Ratio')->first();
+    }
+
+    public function standard_deviation()
+    {
+        return $this->hasMany('App\Models\PastPerformanceRecord', 'past_performance_id')->where('name', 'Standard Deviation')->first();
+    }
 }

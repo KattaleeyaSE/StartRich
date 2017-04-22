@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Member;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MutualFund;
+use App\Models\MutualFundType;
 
 class FundController extends Controller
 {
@@ -13,11 +14,28 @@ class FundController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $funds = MutualFund::all();
+        $fund_types = MutualFundType::all()->pluck('name', 'name');
+        
+        $funds = MutualFund::filter($request->all())->get();
 
-        return view('fund.member.index', ['funds' => $funds]);
+        if ($request->sort_by) {
+            if ($request->sort_by == 'risk_level') {
+                $funds = $request->desc ? $funds->sortByDesc('risk_level') : $funds->sortBy('risk_level');
+            }
+            if ($request->sort_by == 'name') {
+                $funds = $request->desc ? $funds->sortByDesc('name') : $funds->sortBy('name');
+            }
+            if ($request->sort_by == 'min_first_purchase') {
+                $funds = $request->desc ? $funds->sortByDesc('purchase_detail.min_first_purchase') : $funds->sortBy('purchase_detail.min_first_purchase');
+            }
+            if ($request->sort_by == 'nav') {
+                $funds = $request->desc ? $funds->sortByDesc('nav.standard') : $funds->sortBy('nav.standard');
+            }
+        }
+
+        return view('fund.member.index', ['funds' => $funds, 'fund_types' => $fund_types]);
     }
 
     /**
@@ -34,7 +52,7 @@ class FundController extends Controller
         $holding_company_data = [];
         $performance_data = [];
 
-        foreach ($fund->nav as $nav) {
+        foreach ($fund->navs as $nav) {
             array_push($navs, [$nav->update_date, $nav->bid]);
         }
 
@@ -53,16 +71,61 @@ class FundController extends Controller
             array_push($holding_company_data, [$holding_company->name, $holding_company->percentage]);
         }
 
-      
         array_push($performance_data, ['Modified Date', 'Fund Return', 'Benchmark', 'Information Ratio', 'SD of Performance']);
-        foreach ($fund->past_performances()->with('records')->get() as $past_performance) {
-            $fund_temp = $past_performance->records->where('name', $fund->name)->first()->since_inception;
-            $benchmark_temp = $past_performance->records->where('name', 'Benchmark 1')->first()->since_inception;
-            $ratio_temp = $past_performance->records->where('name', 'Information Ratio')->first()->since_inception;
-            $sd_temp = $past_performance->records->where('name', 'Standard Deviation')->first()->since_inception;
+        foreach ($fund->past_performances as $past_performance) {
+            $fund_temp = $past_performance->fundReturn()->since_inception;
+            $benchmark_temp = $past_performance->benchmark1()->since_inception;
+            $ratio_temp = $past_performance->information_ratio()->since_inception;
+            $sd_temp = $past_performance->standard_deviation()->since_inception;
             array_push($performance_data, [$past_performance->date, $fund_temp, $benchmark_temp, $ratio_temp, $sd_temp]);
         }
 
         return view('fund.member.show', ['fund' => $fund, 'navs' => $navs, 'asset_allocation_data' => $asset_allocation_data, 'holding_company_data' => $holding_company_data, 'performance_data' => $performance_data]);
+    }
+
+    public function favorites()
+    {
+        $member = \Auth::user()->member;
+
+        $funds = $member->favorite_funds;
+
+        return view('fund.member.favorite', ['funds' => $funds]);
+    }
+
+    public function favorite($id)
+    {
+        $fund = MutualFund::find($id);
+        $member = \Auth::user()->member;
+
+        $check_fund = $fund->isFavoriteBy($member->id);
+
+        if ($check_fund) {
+            $fund->members()->detach($member);
+        } else {
+            $fund->members()->attach($member);
+        }
+
+        return redirect()->route('member.fund.index');
+    }
+
+    public function review($id)
+    {
+        $fund = MutualFund::find($id);
+
+        return view('fund.member.review', ['fund' => $fund]);
+    }
+
+    public function saveReview(Request $request, $id)
+    {
+        $fund = MutualFund::find($id);
+        $member = \Auth::user()->member;
+
+        $data = $request->all();
+        $data['member_id'] = $member->id;
+        $data['fund_id'] = $fund->id;
+
+        $review = $fund->reviews()->create($data);
+
+        return redirect()->route('member.fund.review', $fund->id);
     }
 }
