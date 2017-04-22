@@ -83,7 +83,9 @@ class MutualFund extends investment
 
     public function getRate()
     {
-        return 'Mock';
+        if($this->reviews->isEmpty()) { return 0; }
+
+        return $this->reviews->avg('point');
     }
 
     /*
