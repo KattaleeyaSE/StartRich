@@ -6,11 +6,10 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class AdminTest extends TestCase
+class AMCTest extends TestCase
 {
-
-    public function testGetRelationAdminUser_Successfully()
+    public function testGetRelationAMCUser_Successfully()
     {
         $this->assertTrue(true);
-    } 
+    }
 }
