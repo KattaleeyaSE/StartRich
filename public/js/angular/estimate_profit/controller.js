@@ -233,11 +233,11 @@ function($scope,$sce,EstimateProfitResource) {
              $scope.selected.mutualFund = mutualFund[0];
              if(
                 $scope.selected.mutualFund 
-                && $scope.selected.mutualFund.nav 
-                && $scope.selected.mutualFund.nav.length > 0 
+                && $scope.selected.mutualFund.navs 
+                && $scope.selected.mutualFund.navs.length > 0 
             )
             {                     
-                var nav =  $scope.selected.mutualFund.nav.filter(function(nav){
+                var nav =  $scope.selected.mutualFund.navs.filter(function(nav){
                                 return nav.modified_date == effective_date;
                                 
                             });  
@@ -280,14 +280,16 @@ function($scope,$sce,EstimateProfitResource) {
         $scope.offAtBuyDate = null;
         if(
             $scope.selected.mutualFund 
-            && $scope.selected.mutualFund.nav 
-            && $scope.selected.mutualFund.nav.length > 0 
+            && $scope.selected.mutualFund.navs 
+            && $scope.selected.mutualFund.navs.length > 0 
             )
             {
-                var nav =  $scope.selected.mutualFund.nav.filter(function(nav){
+                var nav =  $scope.selected.mutualFund.navs.filter(function(nav){
                                 return nav.modified_date == newValue.format("YYYY-MM-DD");
                                 
                             }); 
+                //console.log(nav);
+                
                 if(nav && nav.length > 0)
                 {
                     $scope.offAtBuyDate = nav[0]; 
