@@ -18,7 +18,7 @@
             <tbody>
                 @foreach($funds as $fund)
                     <tr>
-                        <td>{!! Form::checkbox('chckbx', json_encode($fund->getAttributes()), 0, ['id' => 'chckbx'.$fund->id]) !!}</td>
+                        <td id="chckbx-fee" class="td-chckbx">{!! Form::checkbox('chckbx', json_encode($fund->getAttributes()), 0, ['id' => 'chckbx'.$fund->id]) !!}</td>
                         <td>{{$fund->code}}</td>
                         <td>{{$fund->name}}</td>
                         <td>{{ !(is_null($fund->fees->first())) ? $fund->fees->first()->actual_front_end_fee : '-'}}</td>
@@ -27,7 +27,7 @@
                         <td>{{ !(is_null($fund->expenses->first())) ? $fund->expenses->first()->total_expense_ratio : '-'}}</td>
                         <td>{{ !(is_null($fund->purchase_details->first())) ? $fund->purchase_details->first()->min_first_purchase : '-'}}</td>
                         <td>{{ !(is_null($fund->purchase_details->first())) ? $fund->purchase_details->first()->min_additional : '-'}}</td>
-                        <td>
+                        <td class="td-actions">
                             {!! Form::open(['route' => ['member.fund.favorite', $fund->id], 'method' => 'PATCH']) !!}
                                 @if($fund->isFavoriteBy(Auth::user()->member->id))
                                     {!! Form::submit('remove favorite', ['class' => 'btn btn-xs btn-warning']) !!}

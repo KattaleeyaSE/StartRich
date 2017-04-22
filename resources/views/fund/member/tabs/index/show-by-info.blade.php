@@ -17,15 +17,15 @@
             <tbody>
                 @foreach($funds as $fund)
                     <tr>
-                        <td>{!! Form::checkbox('chckbx', json_encode($fund->getAttributes()), 0, ['id' => 'chckbx'.$fund->id]) !!}</td>
+                        <td id="chckbx-info" class="td-chckbx">{!! Form::checkbox('chckbx', json_encode($fund->getAttributes()), 0, ['id' => 'chckbx'.$fund->id]) !!}</td>
                         <td>{{$fund->code}}</td>
                         <td>{{$fund->name}}</td>
                         <td>{{$fund->type}}</td>
                         <td>{{$fund->getRate()}}</td>
                         <td>{{$fund->payment_policy ? 'YES' : 'NO'}}</td>
-                        <td>{{$fund->navs->first()->standard}}</td>
+                        <td>{{ !(is_null($fund->navs->first())) ? $fund->navs->first()->standard : '-'}}</td>
                         <td>{{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->oneyear : '-'}}</td>
-                        <td>
+                        <td class="td-actions">
                             {!! Form::open(['route' => ['member.fund.favorite', $fund->id], 'method' => 'PATCH']) !!}
                                 @if($fund->isFavoriteBy(Auth::user()->member->id))
                                     {!! Form::submit('remove favorite', ['class' => 'btn btn-xs btn-warning']) !!}

@@ -55,40 +55,18 @@
         </div>
     </div>
 
-    <div class="modal fade" id="compare-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Compare</h4>
-          </div>
-          <div class="modal-body">        
-              <table class="table">
-                <thead>
-                    <th>Fund code</th>
-                    <th>Fund name</th>
-                    <th>Fund normal type</th>
-                    <th>StartRich Rate</th>
-                    <th>Dividend Policy</th>
-                    <th>NAV</th>
-                    <th>Last percentage of return per 1 year</th>
-                </thead>
-                <tbody id="compare-body">
-                    <tr id="compare-row"><td>Test</td></tr>
-                </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-          </div>
-        </div>
-      </div>
-    </div>
+@include('fund.member.partials._compare-modal')
+
 @endsection
 
 @section('script')
     <script>        
         var selected = []
-        var max_select = 10
+        var max_select = 5
+
+        var info_rows = []
+        var past_performance_rows = []
+        var fee_rows = []
 
         $('input[name=chckbx]').change(function() {
 
@@ -97,12 +75,12 @@
                 $('*#'+$(this).attr('id')).each(function() {
                     $(this).prop('checked', !$(this).prop('checked'))
                 })
-                selectFund($(this).val())
             } else {
                 $(this).prop('checked', !$(this).prop('checked'))
-                selectFund($(this).val())
                 $(this).prop('checked', false)
             }
+            
+            selectFund($(this).attr('id'))
 
             function selectFund(val) {
                 var idx = $.inArray(val, selected);
@@ -117,13 +95,35 @@
         })
 
         $('#compare-modal').on('shown.bs.modal', function () {
-            $( "#compare-body" ).empty()
-            var rows = ''
-            $.each(selected, function( index, value ) {
-                fund = jQuery.parseJSON(value)
-                rows = '<tr><td>'+fund.name+'</td><td>'+fund.code+'</td><td>'+fund.type+'</td><td></td><td>'+fund.payment_policy+'</td>'
-                $( "#compare-body" ).append(rows)
+            $( "#compare-detail-body" ).empty()
+
+            $.each(selected, function (key, value) {
+                $('*#' + value).each(function() {
+
+                    var tr = $(this).parent().parent().clone(true)
+                    tr.children("td.td-actions").remove()
+                    tr.children("td.td-chckbx").remove()
+
+                    if ($(this).parent().attr('id') == "chckbx-info") {
+                        
+                        info_rows.push(tr)
+
+                    } else if ($(this).parent().attr('id') == "chckbx-past-performance") {
+
+                        past_performance_rows.push(tr)
+
+                    } else if ($(this).parent().attr('id') == "chckbx-fee") {
+
+                        fee_rows.push(tr)
+
+                    }
+
+                })
             })
+
+            $( "#compare-detail-body" ).append(info_rows)
+            $( "#compare-performance-body" ).append(past_performance_rows)
+            $( "#compare-fee-body" ).append(fee_rows)
         })
     </script>
 
