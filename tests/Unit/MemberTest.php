@@ -6,30 +6,28 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-use Mockery as m;
-
-class AdminTest extends TestCase
+class MemberTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function testGetRelationAdminUser_NotNull()
+    public function testGetRelationMemberUser_NotNull()
     {
         //Set 
-        $admin = \App\Models\Admin::first(); 
+        $member = \App\Models\Member::first(); 
         $expected = [ 
-                'id' => 1,
-                'username' => 'admin',
-                'email' => 'admin@example.com',
+                'id' => 2,
+                'username' => 'member',
+                'email' => 'member@example.com',
             ];
 
         //Test
-        $result = $admin->user->getAttributes();
+        $result = $member->user->getAttributes();
         unset($result['password']);
         unset($result['remember_token']);
         unset($result['updated_at']);
         unset($result['created_at']);
         
-        $this->assertInstanceOf('\App\User',$admin->user);
+        $this->assertInstanceOf('\App\User',$member->user);
         $this->assertEquals($expected,$result);
     } 
 }

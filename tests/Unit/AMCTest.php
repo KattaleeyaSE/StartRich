@@ -6,10 +6,30 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+use Mockery as m;
+
 class AMCTest extends TestCase
 {
-    public function testGetRelationAMCUser_Successfully()
+    use DatabaseTransactions;
+
+    public function testGetRelationAMCUser_NotNull()
     {
-        $this->assertTrue(true);
-    }
+        //Set 
+        $amc = \App\Models\AMC::first(); 
+        $expected = [ 
+                'id' => 3,
+                'username' => 'amc',
+                'email' => 'amc@example.com',
+            ];
+
+        //Test
+        $result = $amc->user->getAttributes();
+        unset($result['password']);
+        unset($result['remember_token']);
+        unset($result['updated_at']);
+        unset($result['created_at']);
+        
+        $this->assertInstanceOf('\App\User',$amc->user);
+        $this->assertEquals($expected,$result);
+    } 
 }
