@@ -8,7 +8,6 @@
                         Supporter
                         <a data-toggle="collapse" data-target="#filter-pane" class="btn btn-xs btn-info pull-right">Filter</a>
                         <a data-toggle="modal" data-target="#compare-modal" class="btn btn-xs btn-info pull-right">compare</a>
-                        <a href="{{ route('member.fund.favorites') }}" class="btn btn-xs btn-info">favorite funds</a>
                     </div>
 
                     <div class="panel-body">

@@ -9,9 +9,9 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#compare-detail" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-    <li role="presentation"><a href="#compare-performance" aria-controls="compare-performance" role="tab" data-toggle="tab">Profile</a></li>
-    <li role="presentation"><a href="#compare-fee" aria-controls="compare-fee" role="tab" data-toggle="tab">Messages</a></li>
+    <li role="presentation" class="active"><a href="#compare-detail" data-toggle="tab">Show by Info</a></li>
+    <li role="presentation"><a href="#compare-performance" data-toggle="tab">Show by Past Performance</a></li>
+    <li role="presentation"><a href="#compare-fee" data-toggle="tab">Show by subscription and redemption detail</a></li>
   </ul>
 
   <!-- Tab panes -->
