@@ -79,7 +79,7 @@
 
 			<hr>
 
-			@include('AMC.fund.partials._form-manager')
+			@include('AMC.fund.manager.partials._form')
 
 			<hr>
 			
