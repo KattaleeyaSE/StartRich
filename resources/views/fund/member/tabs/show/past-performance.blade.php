@@ -1,28 +1,25 @@
 <div role="tabpanel" class="tab-pane" id="past-performance">
 
-<div class="row">
-	<div class="col-md-12">
-		<table class="table">
-			<thead>
-				<th>Modified date</th>
-				<th>past performance name</th>
-				<th>Actions</th>
-			</thead>
-			<tbody>
-				@foreach($fund->past_performances as $item)
-					<tr>
-						<td>{{$item->updated_at	}}</td>
-						<td>{{$item->date}}</td>
-						<td>
-								<a class="btn btn-xs btn-info" data-toggle="modal" data-target="#past-performance-{{$item->id}}">view</a>
-						</td>
-					</tr>
-				@endforeach
-			</tbody>
-		</table>
+  	<table class="table">
+  		<thead>
+  			<th>Modified Date</th>
+  			<th>Past Performance Name</th>
+  			<th>Actions</th>
+  		</thead>
+  		<tbody>
+  			@foreach($fund->past_performances as $item)
+  				<tr>
+  					<td>{{$item->updated_at	}}</td>
+  					<td>{{$item->date}}</td>
+  					<td>
+  							<a class="btn btn-xs btn-info" data-toggle="modal" data-target="#past-performance-{{$item->id}}">view</a>
+  					</td>
+  				</tr>
+  			@endforeach
+  		</tbody>
+  	</table>
+
     <div id="curve_chart"></div>
-	</div>
-</div>
 
 </div>
 
@@ -31,31 +28,33 @@
 <div class="modal fade" id="past-performance-{{$item->id}}">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
       <div class="modal-body">
-
       	<table class="table table-bordered">
       		<thead>
       			<tr>
 	      			<th rowspan="3"></th>
-	      			<th colspan="7">Past Performance as of {{$item->date}}</th>
+	      			<th colspan="7" style="text-align: center;">Past Performance as of {{$item->date}}</th>
       			</tr>
       			<tr>
-      				<th colspan="2">% of each period</th>
-      				<th colspan="5">% per year</th>
+      				<th colspan="2" style="text-align: center;">% of each period</th>
+      				<th colspan="5" style="text-align: center;">% per year</th>
       			</tr>
       			<tr>
-      				<th>3 M</th>
-      				<th>6 M</th>
-      				<th>1 Y</th>
-      				<th>3 Y</th>
-      				<th>5 Y</th>
-      				<th>10 Y</th>
-      				<th>Since Inception</th>
+      				<th style="text-align: center;">3 M</th>
+      				<th style="text-align: center;">6 M</th>
+      				<th style="text-align: center;">1 Y</th>
+      				<th style="text-align: center;">3 Y</th>
+      				<th style="text-align: center;">5 Y</th>
+      				<th style="text-align: center;">10 Y</th>
+      				<th style="text-align: center;">Since Inception</th>
       			</tr>
       		</thead>
       		<tbody>
       			@foreach($item->records as $record)
-      				<tr>
+      				<tr align="center">
       					<th>{{$record->name}}</th>
       					<td>{{$record->three_month}}</td>
       					<td>{{$record->six_month}}</td>

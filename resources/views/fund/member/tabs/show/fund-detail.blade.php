@@ -4,35 +4,35 @@
 	<div class="col-md-6">
 		<table class="table">
 			<tr>
-				<th>fund name</th>
+				<th>Fund Name</th>
 				<td>{{$fund->name}}</td>
 			</tr>
 			<tr>
-				<th>fund code</th>
+				<th>Fund Code</th>
 				<td>{{$fund->code}}</td>
 			</tr>
 			<tr>
-				<th>fund type</th>
+				<th>Fund Type</th>
 				<td>{{$fund->type}}</td>
 			</tr>
 			<tr>
-				<th>AIMC type</th>
+				<th>AIMC Type</th>
 				<td>{{$fund->aimc_type}}</td>
 			</tr>
 			<tr>
-				<th>name of management company</th>
+				<th>Management Company</th>
 				<td>{{$fund->management_company}}</td>
 			</tr>
 			<tr>
-				<th>trustee</th>
+				<th>Trustee</th>
 				<td>{{$fund->trustee}}</td>
 			</tr>
 			<tr>
-				<th>dividend payment policy</th>
+				<th>Dividend Payment</th>
 				<td>{{$fund->payment_policy ? 'YES' : 'NO'}}</td>
 			</tr>
 			<tr>
-				<th>frequency of subscription and redemption</th>
+				<th>Frequency of Subscription & Redemption</th>
 				<td>{{$fund->frequency}}</td>
 			</tr>
 		</table>
@@ -40,35 +40,35 @@
 	<div class="col-md-6">
 		<table class="table">
 			<tr>
-				<th>fund establishment approved by</th>
+				<th>Fund Establishment Approved By</th>
 				<td>{{$fund->approved_by}}</td>
 			</tr>
 			<tr>
-				<th>supervision</th>
+				<th>Supervision</th>
 				<td>{{$fund->supervision}}</td>
 			</tr>
 			<tr>
-				<th>protected fund</th>
+				<th>Protected Fund</th>
 				<td>{{$fund->protected_fund ? 'YES' : 'NO'}}</td>
 			</tr>
 			<tr>
-				<th>name of guarantor</th>
+				<th>Guarantor</th>
 				<td>{{$fund->name_of_guarantor}}</td>
 			</tr>
 			<tr>
-				<th>start date</th>
+				<th>Start Date</th>
 				<td>{{$fund->fund_start}}</td>
 			</tr>
 			<tr>
-				<th>end date</th>
+				<th>End Date</th>
 				<td>{{$fund->fund_end}}</td>
 			</tr>
 			<tr>
-				<th>risk level</th>
+				<th>Risk Level</th>
 				<td>{{$fund->risk_level}}</td>
 			</tr>
 			<tr>
-				<th>net asset value</th>
+				<th>Net Asset Value</th>
 				<td>{{$fund->net_asset_value}}</td>
 			</tr>
 		</table>
