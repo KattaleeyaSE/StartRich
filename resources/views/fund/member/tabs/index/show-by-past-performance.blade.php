@@ -19,7 +19,7 @@
             <tbody>
                 @foreach($funds as $fund)
                     <tr>
-                        <td>{!! Form::checkbox('chckbx', json_encode($fund->getAttributes()), 0, ['id' => 'chckbx'.$fund->id]) !!}</td>
+                        <td id="chckbx-past-performance" class="td-chckbx">{!! Form::checkbox('chckbx', json_encode($fund->getAttributes()), 0, ['id' => 'chckbx'.$fund->id]) !!}</td>
                         <td>{{$fund->code}}</td>
                         <td>{{$fund->name}}</td>
                         <td>{{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->threemonth : '-'}}</td>
@@ -29,7 +29,7 @@
                         <td>{{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->fiveyear : '-'}}</td>
                         <td>{{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->tenyear : '-'}}</td>
                         <td>{{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->since_inception : '-'}}</td>
-                        <td>
+                        <td class="td-actions">
                             {!! Form::open(['route' => ['member.fund.favorite', $fund->id], 'method' => 'PATCH']) !!}
                                 @if($fund->isFavoriteBy(Auth::user()->member->id))
                                     {!! Form::submit('remove favorite', ['class' => 'btn btn-xs btn-warning']) !!}
