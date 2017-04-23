@@ -69,9 +69,35 @@ class FundController extends Controller
         $amc_id = Auth::user()->amc->id;
         $fund = $this->mutualFundRepository->create($request, $amc_id);
 
-        $fund_managers = $fund->fund_managers()->create(['name' => $request->manager_name, 'position' => $request->manager_position, 'management_date' => $request->management_date]);
-
         $asset_allocation = $fund->asset_allocation()->create(['stock' => $request->stock, 'bond' => $request->bond, 'cash' => $request->cash, 'other' => $request->other]);
+
+        foreach ($request->navs as $nav) {
+            $fund->navs()->create($nav);
+        }
+
+        foreach ($request->managers as $manager) {
+            $fund->fund_managers()->create($manager);
+        }
+
+        foreach ($request->companies as $company) {
+            $fund->holding_companies()->create($company);
+        }
+
+        foreach ($request->dividends as $dividend) {
+            $fund->dividend_payments()->create($dividend);
+        }
+
+        foreach ($request->fees as $fee) {
+            $fund->fees()->create($fee);
+        }
+
+        foreach ($request->purchases as $purchase) {
+            $fund->purchase_details()->create($purchase);
+        }
+
+        foreach ($request->expenses as $expense) {
+            $fund->expenses()->create($expense);
+        }
 
         return redirect()->route('amc.fund.show', $fund->id);
     }
