@@ -41,9 +41,6 @@
             </div>
         </div>
     </div>
-
-    {{--Delete Form--}}
-
 @endsection
 
 @section('script')
