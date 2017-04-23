@@ -137,6 +137,7 @@ Route::group(['prefix' => 'amc'], function () {
                                 'store' => 'amc.fund.store',
                                 'edit' => 'amc.fund.edit',
                                 'update' => 'amc.fund.update',
+                                'destroy' => 'amc.fund.destroy',
                             ]]);
 });
 

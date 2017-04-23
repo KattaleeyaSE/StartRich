@@ -38,9 +38,9 @@
                             </div>
 
                           <ul id="fund-info-tabs" class="nav nav-tabs">
-                            <li class="active"><a href="#show-by-info"        data-toggle="tab">Show by Info</a></li>
-                            <li><a href="#show-by-past-performance"           data-toggle="tab">Show by Past Performance</a></li>
-                            <li><a href="#show-by-subscription"               data-toggle="tab">Show by subscription and redemption detail</a></li>
+                            <li class="active"><a href="#show-by-info"        data-toggle="tab">Info</a></li>
+                            <li><a href="#show-by-past-performance"           data-toggle="tab">Past Performance</a></li>
+                            <li><a href="#show-by-subscription"               data-toggle="tab">Subscription & Redemption Detail</a></li>
                           </ul>
 
                           <div class="tab-content">

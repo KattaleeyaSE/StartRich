@@ -158,7 +158,10 @@ class FundController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fund = $this->mutualFundRepository->find($id);
+        $fund->delete();
+
+        return redirect()->route('amc.fund.index');
     }
 
     //NAV
