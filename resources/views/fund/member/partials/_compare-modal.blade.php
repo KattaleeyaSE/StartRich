@@ -19,13 +19,12 @@
     <div role="tabpanel" class="tab-pane active" id="compare-detail">
       <table class="table">
         <thead>
-            <th>Fund code</th>
-            <th>Fund name</th>
-            <th>Fund normal type</th>
-            <th>StartRich Rate</th>
-            <th>Dividend Policy</th>
-            <th>NAV</th>
-            <th>Last percentage of return per 1 year</th>
+            <th style="text-align: center;">Fund</th>
+            <th style="text-align: center;">Type</th>
+            <th style="text-align: center;">StartRich Rate</th>
+            <th style="text-align: center;">Dividend Policy</th>
+            <th style="text-align: center;">NAV</th>
+            <th style="text-align: center;">Last percentage of return per 1 year</th>
         </thead>
         <tbody id="compare-detail-body">
         </tbody>
@@ -34,15 +33,14 @@
     <div role="tabpanel" class="tab-pane" id="compare-performance">
       <table class="table">
         <thead>
-            <th>Fund code</th>
-            <th>Fund name</th>
-            <th>1 Month</th>
-            <th>3 Months</th>
-            <th>1 Year</th>
-            <th>3 Years</th>
-            <th>5 Years</th>
-            <th>10 Years</th>
-            <th>Since Inception</th>
+            <th style="text-align: center;">Fund</th>
+            <th style="text-align: center;">1 Month</th>
+            <th style="text-align: center;">3 Months</th>
+            <th style="text-align: center;">1 Year</th>
+            <th style="text-align: center;">3 Years</th>
+            <th style="text-align: center;">5 Years</th>
+            <th style="text-align: center;">10 Years</th>
+            <th style="text-align: center;">Since Inception</th>
         </thead>
         <tbody id="compare-performance-body">
         </tbody>
@@ -51,14 +49,13 @@
     <div role="tabpanel" class="tab-pane" id="compare-fee">
       <table class="table">
         <thead>
-            <th>Fund code</th>
-            <th>Fund name</th>
-            <th>Actual Front End Fee</th>
-            <th>Actual Back End Fee</th>
-            <th>Actual Manager Fee</th>
-            <th>Total Expense Ratio</th>
-            <th>Minimum Value First Purchase</th>
-            <th>Minimum Additional</th>
+            <th style="text-align: center;">Fund</th>
+            <th style="text-align: center;">Actual Front End Fee</th>
+            <th style="text-align: center;">Actual Back End Fee</th>
+            <th style="text-align: center;">Actual Manager Fee</th>
+            <th style="text-align: center;">Total Expense Ratio</th>
+            <th style="text-align: center;">Minimum Value First Purchase</th>
+            <th style="text-align: center;">Minimum Additional</th>
         </thead>
         <tbody id="compare-fee-body">
         </tbody>
