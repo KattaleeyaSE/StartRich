@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -13,9 +13,9 @@
                         <table class="table">
                             <thead>
                                 <th>Modified date</th>
-                                <th>Fund code</th>
-                                <th>Fund name</th>
-                                <th>Fund normal type</th>
+                                <th>Fund Code</th>
+                                <th>Fund Name</th>
+                                <th>Fund Normal Type</th>
                                 <th>Actions</th>
                             </thead>
                             <tbody>
@@ -27,7 +27,7 @@
                                         <td>{{$fund->type}}</td>
                                         <td>
                                             <a href="{{ route('amc.fund.show', $fund->id) }}" class="btn btn-xs btn-info">view</a>
-                                            <a class="btn btn-xs btn-danger">delete</a>
+                                            <a href="#" data-href="{{ route('amc.fund.destroy', $fund->id) }}" data-toggle="modal" data-target="#confirm-delete" class="btn btn-xs btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -40,5 +40,30 @@
     </div>
 
     {{--Delete Form--}}
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Confirmation
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this item?
+                </div>
+                <div class="modal-footer">
+                {!! Form::open(['route' => ['amc.fund.destroy', 'temp'], 'method' => 'DELETE', 'id' => 'form-delete']) !!}
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 
+@section('script')
+<script>
+    $('#confirm-delete').on('show.bs.modal', function(e) {
+        $('#form-delete').attr('action', $(e.relatedTarget).data('href'))
+    });
+</script>
 @endsection

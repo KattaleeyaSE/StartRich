@@ -2,25 +2,25 @@
 
 <div class="row">
 	<div class="col-md-6">
-    	<div id="piechart_3d"></div>
+		<canvas id="asset-chart"></canvas>
 	</div>
 	<div class="col-md-6">
 		<table class="table">
 			<tr>
 				<th>Stock</th>
-				<td>{{$fund->asset_allocation != NULL ? $fund->asset_allocation->stock : '-'}}</td>
+				<td align="center">{{$fund->asset_allocation != NULL ? $fund->asset_allocation->stock : '-'}}</td>
 			</tr>
 			<tr>
 				<th>Bond</th>
-				<td>{{$fund->asset_allocation != NULL ? $fund->asset_allocation->bond : '-'}}</td>
+				<td align="center">{{$fund->asset_allocation != NULL ? $fund->asset_allocation->bond : '-'}}</td>
 			</tr>
 			<tr>
 				<th>Cash</th>
-				<td>{{$fund->asset_allocation != NULL ? $fund->asset_allocation->cash : '-'}}</td>
+				<td align="center">{{$fund->asset_allocation != NULL ? $fund->asset_allocation->cash : '-'}}</td>
 			</tr>
 			<tr>
 				<th>Other</th>
-				<td>{{$fund->asset_allocation != NULL ? $fund->asset_allocation->other : '-'}}</td>
+				<td align="center">{{$fund->asset_allocation != NULL ? $fund->asset_allocation->other : '-'}}</td>
 			</tr>
 		</table>
 	</div>
@@ -30,20 +30,20 @@
 
 <div class="row">
 	<div class="col-md-6">
-    	<div id="piechart_3d_holding_company"></div>
+    	<canvas id="holding-chart"></canvas>
 	</div>
 	<div class="col-md-6">
 
 		<table class="table">
 			<thead>
 				<th>Company Name</th>
-				<th>% of Holding</th>
+				<th style="text-align: center;">% of Holding</th>
 			</thead>
 			<tbody>
 				@foreach($fund->holding_companies as $item)
 					<tr>
 						<td>{{$item->name}}</td>
-						<td>{{$item->percentage}}</td>
+						<td align="center">{{$item->percentage}}</td>
 					</tr>
 				@endforeach
 			</tbody>
