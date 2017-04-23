@@ -146,8 +146,18 @@ class FundController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fund = MutualFund::find($id);
-        Mail::to($fund->users)->send(new FundUpdated($fund));
+        $fund = $this->mutualFundRepository->find($id);
+        $fund_returns = PastPerformanceRecord::where('name', $fund->name)->get();
+
+        foreach ($fund_returns as $fund_return) {
+            $fund_return->update(['name' => $request->name]);
+        }
+
+        $fund->update($request->all());
+
+        Mail::to($fund->getUsers())->send(new FundUpdated($fund));
+
+        return redirect()->route('amc.fund.show', $fund->id);
     }
 
     /**
