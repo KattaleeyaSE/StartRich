@@ -2,7 +2,7 @@
 
 <div class="row">
 	<div class="col-md-6">
-    	<div id="piechart_3d"></div>
+		<canvas id="asset-chart"></canvas>
 	</div>
 	<div class="col-md-6">
 		<table class="table">
@@ -30,7 +30,7 @@
 
 <div class="row">
 	<div class="col-md-6">
-    	<div id="piechart_3d_holding_company"></div>
+    	<canvas id="holding-chart"></canvas>
 	</div>
 	<div class="col-md-6">
 

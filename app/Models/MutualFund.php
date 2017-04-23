@@ -52,6 +52,13 @@ class MutualFund extends investment
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function getAssetAllocationData()
+    {
+        $allocation = $this->asset_allocation;
+
+        return ($allocation == null) ? [0, 0, 0, 0] : [$allocation->stock, $allocation->bond, $allocation->cash, $allocation->other];
+    }
+
     public function getUsers()
     {
         $members = $this->members;

@@ -12,13 +12,7 @@
 
 <div class="row">
 	<div class="col-md-6">
-		@if ($fund->asset_allocation != NULL)
-    		<div id="piechart_3d"></div>
-    	@else
-    		<div class="well">
-    			No data
-    		</div>
-    	@endif
+		<canvas id="asset-chart"></canvas>
 	</div>
 	<div class="col-md-6">
 		<table class="table">
@@ -46,13 +40,7 @@
 
 <div class="row">
 	<div class="col-md-6">
-		@if ($fund->holding_companies != NULL)
-    		<div id="piechart_3d_holding_company"></div>
-    	@else
-    		<div class="well">
-    			No data
-    		</div>
-    	@endif
+		<canvas id="holding-chart"></canvas>
 	</div>
 	<div class="col-md-6">
 		<div class="well well-sm">

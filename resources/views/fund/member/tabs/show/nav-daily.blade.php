@@ -32,6 +32,6 @@
 		</tbody>
 	</table>
 
-	<div id="chart_nav"></div>
+	<canvas id="nav-chart"></canvas>
 
 </div>

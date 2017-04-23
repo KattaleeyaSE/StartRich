@@ -42,7 +42,7 @@ class FundController extends Controller
         $amc = Auth::user()->amc;
         $funds = $this->mutualFundRepository->by_amc_id($amc->id);
 
-        return view('AMC.fund.index', ['funds' => $funds]);
+        return view('fund.amc.index', ['funds' => $funds]);
     }
 
     /**
@@ -119,7 +119,7 @@ class FundController extends Controller
             array_push($performance_data, [$past_performance->date, $fund_temp, $benchmark_temp, $ratio_temp, $sd_temp]);
         }
 
-        return view('AMC.fund.show', ['fund' => $fund, 'navs' => $navs, 'asset_allocation_data' => $asset_allocation_data, 'holding_company_data' => $holding_company_data, 'performance_data' => $performance_data]);
+        return view('fund.amc.show', ['fund' => $fund, 'navs' => $navs, 'asset_allocation_data' => $asset_allocation_data, 'holding_company_data' => $holding_company_data, 'performance_data' => $performance_data]);
     }
 
     /**

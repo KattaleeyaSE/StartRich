@@ -49,7 +49,7 @@
 				@endforeach
 			</tbody>
 		</table>
-		<div id="chart_div"></div>
+		<canvas id="nav-chart"></canvas>
 	</div>
 </div>
 
