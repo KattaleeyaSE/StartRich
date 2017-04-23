@@ -52,6 +52,25 @@ class MutualFund extends investment
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function getAssetAllocationData()
+    {
+        $allocation = $this->asset_allocation;
+
+        return ($allocation == null) ? [0, 0, 0, 0] : [$allocation->stock, $allocation->bond, $allocation->cash, $allocation->other];
+    }
+
+    public function getUsers()
+    {
+        $members = $this->members;
+        $users = collect();
+
+        foreach ($members as $member) {
+            $users->push($member->user);
+        }
+
+        return $users;
+    }
+
     public function lastPastPerforamce()
     {
         $max_date = $this->past_performances->max('date');
@@ -171,11 +190,6 @@ class MutualFund extends investment
     public function past_performances()
     {
         return $this->hasMany('App\Models\PastPerformance','fund_id');
-    }
-
-    public function users()
-    {
-        return $this->hasManyThrough('App\User', 'App\Models\Member', 'user_id', 'id');
     }
 
     public function members()

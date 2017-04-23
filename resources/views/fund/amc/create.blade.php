@@ -1,9 +1,16 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="row">
-	<div class="container">
-		{!! Form::open(['route' => 'amc.fund.store', 'class' => 'form-horizontal']) !!}
+	<div class="container-fluid">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">AMC : Create Fund</div>
+            <div class="panel-body">
+
+				{!! Form::open(['route' => 'amc.fund.store', 'class' => 'form-horizontal']) !!}
+
+			<div class="row">
+	            <div class="col-md-6">
 
 			{!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
 			{!! Form::text('name', null, ['class' => 'form-control']) !!}
@@ -22,12 +29,15 @@
 		
 			{!! Form::label('trustee', 'Trustee', ['class' => 'control-label']) !!}
 			{!! Form::text('trustee', null, ['class' => 'form-control']) !!}
-		
+	           		
 			{!! Form::label('payment_policy', 'Payment Policy', ['class' => 'control-label']) !!}
 			{!! Form::select('payment_policy', [1 => 'Have', 0 => 'Not Have'], null, ['class' => 'form-control']) !!}
 		
 			{!! Form::label('frequency', 'Frequency of subscription and redemption', ['class' => 'control-label']) !!}
 			{!! Form::text('frequency', null, ['class' => 'form-control']) !!}
+		
+	            </div>
+	           	<div class="col-md-6">
 		
 			{!! Form::label('approved_by', 'Approved by', ['class' => 'control-label']) !!}
 			{!! Form::text('approved_by', null, ['class' => 'form-control']) !!}
@@ -53,7 +63,14 @@
 			{!! Form::label('net_asset_value', 'Net Asset Value', ['class' => 'control-label']) !!}
 			{!! Form::number('net_asset_value', null, ['class' => 'form-control']) !!}
 
+	           	</div>
+			</div>
+
 			<hr>
+
+			<div class="row">
+
+	            <div class="col-md-6">
 		
 			{!! Form::label('investment_asset_detail', 'investment_asset_detail', ['class' => 'control-label']) !!}
 			{!! Form::text('investment_asset_detail', null, ['class' => 'form-control']) !!}
@@ -77,20 +94,27 @@
 			{!! Form::label('major_risk_factor', 'major_risk_factor', ['class' => 'control-label']) !!}
 			{!! Form::text('major_risk_factor', null, ['class' => 'form-control']) !!}
 
-			<hr>
-
-			@include('AMC.fund.manager.partials._form')
-
-			<hr>
+	            </div>
+	            <div class="col-md-6">
 
 			@include('AMC.fund.asset_allocation.partials._form')
+	            	
+	            </div>
+
+			</div>
 
 			<hr>
-			
-			{!! Form::submit('Create', ['class' => 'btn btn-primary']) !!}
-			
-		{!! Form::close() !!}
-	</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					{!! Form::submit('Create', ['class' => 'btn btn-primary']) !!}
+				</div>
+			</div>
+
+				{!! Form::close() !!}
+				
+            </div>
+        </div>
 </div>
 
 @endsection
