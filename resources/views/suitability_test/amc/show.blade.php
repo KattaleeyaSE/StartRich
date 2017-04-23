@@ -90,6 +90,10 @@
                                                 <ul>
                                                     @foreach($result->suitability_fund as $fund)
                                                         <li><a href="">{{$fund->name}}</a></li>
+                                                        <p>Risk Level</p>
+                                                            <ul>
+                                                                <li>{{$fund->risk_level}}</li>
+                                                            </ul>
                                                     @endforeach
                                                 </ul>
                                             </div> 
