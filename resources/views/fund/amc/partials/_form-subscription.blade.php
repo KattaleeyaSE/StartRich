@@ -1,4 +1,4 @@
-<a class="btn btn-primary" id="btn-add-fee"> + </a>
+<!-- <a class="btn btn-primary" id="btn-add-fee"> + </a> -->
 
 <div class="row">
 	<div class="col-md-2">
@@ -26,7 +26,7 @@
 
 <div id="pane-add-fee"></div>
 <hr>
-<a class="btn btn-primary" id="btn-add-purchase"> + </a>
+<!-- <a class="btn btn-primary" id="btn-add-purchase"> + </a> -->
 
 <div class="row">
 	<div class="col-md-2">
@@ -61,7 +61,7 @@
 
 <div id="pane-add-purchase"></div>
 <hr>
-<a class="btn btn-primary" id="btn-add-expense"> + </a>
+<!-- <a class="btn btn-primary" id="btn-add-expense"> + </a> -->
 
 <div class="row">
 	<div class="col-md-2">
