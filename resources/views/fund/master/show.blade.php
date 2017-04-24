@@ -35,6 +35,12 @@
 @endsection
 
 @section('script')
+<script>
+    $(document).ready( function () {
+        $('.nav-pills a[href="#{!!$tab!!}"]').tab('show')
+    })
+</script>
+
 <script src="/js/libs/Chart.min.js"></script>
 <!-- holding chart -->
 <script>

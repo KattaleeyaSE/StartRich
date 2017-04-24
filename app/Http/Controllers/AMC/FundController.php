@@ -114,11 +114,11 @@ class FundController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        return view('fund.amc.show', ['fund' => $fund]);
+        return view('fund.amc.show', ['fund' => $fund, 'tab' => isset($request->tab) ? $request->tab : null]);
     }
 
     /**
@@ -187,7 +187,7 @@ class FundController extends Controller
 
         $navs = $fund->navs()->create($request->all());
 
-        return redirect()->route('amc.fund.show', $fund->id);
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'nav-daily']);
     }
 
     public function editNAV($id)
@@ -202,7 +202,7 @@ class FundController extends Controller
         $nav = NAV::find($id);
         $nav->update($request->all());
 
-        return redirect()->route('amc.fund.show', $nav->fund->id);
+        return redirect()->route('amc.fund.show', [$nav->fund->id, 'tab' => 'nav-daily']);
     }
 
     public function destroyNAV($id)
@@ -212,7 +212,7 @@ class FundController extends Controller
 
         $nav->delete();
 
-        return redirect()->route('amc.fund.show', $fund->id);
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'nav-daily']);
     }
 
     //Manager
@@ -229,7 +229,7 @@ class FundController extends Controller
 
         $fund_managers = $fund->fund_managers()->create(['name' => $request->manager_name, 'position' => $request->manager_position, 'management_date' => $request->management_date]);
 
-        return redirect()->route('amc.fund.show', $fund->id);
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'lists-of-the-fund-manager']);
     }
 
     public function editManager($id)
@@ -245,7 +245,7 @@ class FundController extends Controller
 
         $manager->update(['name' => $request->manager_name, 'position' => $request->manager_position, 'management_date' => $request->management_date]);
 
-        return redirect()->route('amc.fund.show', $manager->fund->id);
+        return redirect()->route('amc.fund.show', [$manager->fund->id, 'tab' => 'lists-of-the-fund-manager']);
     }
 
     public function destroyManager($id)
@@ -255,7 +255,7 @@ class FundController extends Controller
 
         $manager->delete();
 
-        return redirect()->route('amc.fund.show', $fund->id);
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'lists-of-the-fund-manager']);
     }
 
     //Dividend
@@ -272,7 +272,7 @@ class FundController extends Controller
 
         $dividends = $fund->dividend_payments()->create($request->all());
 
-        return redirect()->route('amc.fund.show', $fund->id);
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'historical-dividend-payment']);
     }
 
     public function editDividend($id)
@@ -287,7 +287,7 @@ class FundController extends Controller
         $dividend = DividendPayment::find($id);
         $dividend->update($request->all());
 
-        return redirect()->route('amc.fund.show', $dividend->fund->id);
+        return redirect()->route('amc.fund.show', [$dividend->fund->id, 'tab' => 'historical-dividend-payment']);
     }
 
     public function destroyDividend($id)
@@ -297,7 +297,7 @@ class FundController extends Controller
 
         $dividend->delete();
 
-        return redirect()->route('amc.fund.show', $fund->id);
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'historical-dividend-payment']);
     }
 
     // Asset Allocation
@@ -319,7 +319,7 @@ class FundController extends Controller
         $asset_allocation = AssetAllocation::find($id);
         $asset_allocation->update($request->all());
 
-        return redirect()->route('amc.fund.show', $asset_allocation->fund->id);
+        return redirect()->route('amc.fund.show', [$asset_allocation->fund->id, 'tab' => 'portfolio']);
     }
 
     //Holding Company
@@ -336,7 +336,7 @@ class FundController extends Controller
 
         $dividends = $fund->holding_companies()->create($request->all());
 
-        return redirect()->route('amc.fund.show', $fund->id);
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'portfolio']);
     }
 
     public function editHoldingCompany($id)
@@ -351,7 +351,7 @@ class FundController extends Controller
         $holding_company = HoldingCompany::find($id);
         $holding_company->update($request->all());
 
-        return redirect()->route('amc.fund.show', $holding_company->fund->id);
+        return redirect()->route('amc.fund.show', [$holding_company->fund->id, 'tab' => 'portfolio']);
     }
 
     public function destroyHoldingCompany($id)
@@ -361,7 +361,7 @@ class FundController extends Controller
 
         $holding_company->delete();
 
-        return redirect()->route('amc.fund.show', $fund->id);
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'portfolio']);
     }
 
     //Fee
@@ -378,7 +378,7 @@ class FundController extends Controller
 
         $dividends = $fund->fees()->create($request->all());
 
-        return redirect()->route('amc.fund.show', $fund->id);
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
 
     public function editFee($id)
@@ -393,7 +393,7 @@ class FundController extends Controller
         $fee = Fee::find($id);
         $fee->update($request->all());
 
-        return redirect()->route('amc.fund.show', $fee->fund->id);
+        return redirect()->route('amc.fund.show', [$fee->fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
 
     //Expense
@@ -410,7 +410,7 @@ class FundController extends Controller
 
         $expense = $fund->expenses()->create($request->all());
 
-        return redirect()->route('amc.fund.show', $fund->id);
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
 
     public function editExpense($id)
@@ -425,7 +425,7 @@ class FundController extends Controller
         $expense = Expense::find($id);
         $expense->update($request->all());
 
-        return redirect()->route('amc.fund.show', $expense->fund->id);
+        return redirect()->route('amc.fund.show', [$expense->fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
 
     //PurchaseDetail
@@ -442,7 +442,7 @@ class FundController extends Controller
 
         $purchase_detail = $fund->purchase_details()->create($request->all());
 
-        return redirect()->route('amc.fund.show', $fund->id);
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
 
     public function editPurchaseDetail($id)
@@ -457,7 +457,7 @@ class FundController extends Controller
         $purchase_detail = PurchaseDetail::find($id);
         $purchase_detail->update($request->all());
 
-        return redirect()->route('amc.fund.show', $purchase_detail->fund->id);
+        return redirect()->route('amc.fund.show', [$purchase_detail->fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
 
     //Past Performance
@@ -478,7 +478,7 @@ class FundController extends Controller
             $past_performance->records()->create($data);
         }
 
-        return redirect()->route('amc.fund.show', $fund->id);
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'past-performance']);
     }
 
     public function editPastPerformance($id)
@@ -502,7 +502,7 @@ class FundController extends Controller
             }
         }
 
-        return redirect()->route('amc.fund.show', $past_performance->fund->id);
+        return redirect()->route('amc.fund.show', [$past_performance->fund->id, 'tab' => 'past-performance']);
     }
 
     public function destroyPastPerformance($id)
@@ -512,6 +512,6 @@ class FundController extends Controller
 
         $past_performance->delete();
 
-        return redirect()->route('amc.fund.show', $fund->id);
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'past-performance']);
     }
 }
