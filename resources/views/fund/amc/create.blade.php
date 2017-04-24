@@ -54,13 +54,9 @@
                         @include('fund.amc.partials._form-dividend')
                     </section>
 
-				    <h3>Asset Allocation</h3>
-				    <section>
-						@include('fund.amc.partials._form-asset-allocation')
-				    </section>
-
-                    <h3>Holding Company</h3>
+                    <h3>Portfolio</h3>
                     <section>
+                        @include('fund.amc.partials._form-asset-allocation')
                         @include('fund.amc.partials._form-holding')
                     </section>
 
