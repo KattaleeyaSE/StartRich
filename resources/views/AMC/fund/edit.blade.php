@@ -54,34 +54,6 @@
 			{!! Form::number('net_asset_value', null, ['class' => 'form-control']) !!}
 
 			<hr>
-		
-			{!! Form::label('investment_asset_detail', 'investment_asset_detail', ['class' => 'control-label']) !!}
-			{!! Form::text('investment_asset_detail', null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('strategy_detail', 'strategy_detail', ['class' => 'control-label']) !!}
-			{!! Form::select('strategy_detail', ['Active Management' => 'Active Management', 'Passive Management' => 'Passive Management'], null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('factor_impact', 'factor_impact', ['class' => 'control-label']) !!}
-			{!! Form::text('factor_impact', null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('benchmark_detail', 'benchmark_detail', ['class' => 'control-label']) !!}
-			{!! Form::text('benchmark_detail', null, ['class' => 'form-control']) !!}
-
-			<hr>
-		
-			{!! Form::label('type_of_investor', 'type_of_investor', ['class' => 'control-label']) !!}
-			{!! Form::text('type_of_investor', null, ['class' => 'form-control']) !!}
-
-			<hr>
-		
-			{!! Form::label('major_risk_factor', 'major_risk_factor', ['class' => 'control-label']) !!}
-			{!! Form::text('major_risk_factor', null, ['class' => 'form-control']) !!}
-
-			<hr>
-
-			@include('AMC.fund.asset_allocation.partials._form')
-
-			<hr>
 			
 			{!! Form::submit('Create', ['class' => 'btn btn-primary']) !!}
 			

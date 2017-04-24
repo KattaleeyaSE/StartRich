@@ -99,9 +99,6 @@ Route::group(['prefix' => 'amc'], function () {
         Route::get('/dividend/{id}/edit', 'AMC\FundController@editDividend')->name('amc.fund.edit_dividend');
         Route::patch('/dividend/{id}', 'AMC\FundController@updateDividend')->name('amc.fund.update_dividend');
         Route::delete('/dividend/{id}', 'AMC\FundController@destroyDividend')->name('amc.fund.destroy_dividend');
-        // Asset Allocation
-        Route::get('fund/{id}/asset_allocation/edit', 'AMC\FundController@editAssetAllocation')->name('amc.fund.edit_asset_allocation');
-        Route::patch('fund/{id}/asset_allocation', 'AMC\FundController@updateAssetAllocation')->name('amc.fund.update_asset_allocation');
         // Holding Company
         Route::get('fund/{id}/holding_company/create', 'AMC\FundController@createHoldingCompany')->name('amc.fund.create_holding_company');
         Route::post('fund/{id}/holding_company', 'AMC\FundController@storeHoldingCompany')->name('amc.fund.store_holding_company');
@@ -129,6 +126,18 @@ Route::group(['prefix' => 'amc'], function () {
         Route::get('/past_performance/{id}/edit', 'AMC\FundController@editPastPerformance')->name('amc.fund.edit_past_performance');
         Route::patch('/past_performance/{id}', 'AMC\FundController@updatePastPerformance')->name('amc.fund.update_past_performance');
         Route::delete('/past_performance/{id}', 'AMC\FundController@destroyPastPerformance')->name('amc.fund.destroy_past_performance');
+        // Asset Allocation
+        Route::get('fund/{id}/asset_allocation/edit', 'AMC\FundController@editAssetAllocation')->name('amc.fund.edit_asset_allocation');
+        Route::patch('fund/{id}/asset_allocation', 'AMC\FundController@updateAssetAllocation')->name('amc.fund.update_asset_allocation');
+        // Types of investor
+        Route::get('fund/{id}/types_of_investor/edit', 'AMC\FundController@editTypesOfInvestor')->name('amc.fund.edit_types_of_investor');
+        Route::patch('fund/{id}/types_of_investor', 'AMC\FundController@updateTypesOfInvestor')->name('amc.fund.update_types_of_investor');
+        // Investment policy
+        Route::get('fund/{id}/investment_policy/edit', 'AMC\FundController@editInvestmentPolicy')->name('amc.fund.edit_investment_policy');
+        Route::patch('fund/{id}/investment_policy', 'AMC\FundController@updateInvestmentPolicy')->name('amc.fund.update_investment_policy');
+        // major_risk_factor
+        Route::get('fund/{id}/major_risk_factor/edit', 'AMC\FundController@editMajorRiskFactor')->name('amc.fund.edit_major_risk_factor');
+        Route::patch('fund/{id}/major_risk_factor', 'AMC\FundController@updateMajorRiskFactor')->name('amc.fund.update_major_risk_factor');
 
 
     Route::resource('fund', 'AMC\FundController', [

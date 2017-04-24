@@ -514,4 +514,53 @@ class FundController extends Controller
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'past-performance']);
     }
+
+    // Types of investor
+    public function editTypesOfInvestor($id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        return view('AMC.fund.types_of_investor.edit', ['fund' => $fund]);
+    }
+
+    public function updateTypesOfInvestor(Request $request, $id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+        $fund->type_of_investor = $request->type_of_investor;
+        $fund->save();
+
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'types-of-investor']);
+    }
+
+    // Investment Policy
+    public function editInvestmentPolicy($id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        return view('AMC.fund.investment_policy.edit', ['fund' => $fund]);
+    }
+
+    public function updateInvestmentPolicy(Request $request, $id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+        $fund->update($request->all());
+
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'investment-policy']);
+    }
+
+    // Major Risk Factor
+    public function editMajorRiskFactor($id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+
+        return view('AMC.fund.major_risk_factor.edit', ['fund' => $fund]);
+    }
+
+    public function updateMajorRiskFactor(Request $request, $id)
+    {
+        $fund = $this->mutualFundRepository->find($id);
+        $fund->update($request->all());
+
+        return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'major-risk-factor']);
+    }
 }
