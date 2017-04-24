@@ -32,7 +32,7 @@
 				@endforeach
 			</tbody>
 		</table>
-    <div id="curve_chart"></div>
+    <canvas id="performance-chart"></canvas>
 	</div>
 </div>
 
