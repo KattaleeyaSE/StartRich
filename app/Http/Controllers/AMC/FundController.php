@@ -95,6 +95,12 @@ class FundController extends Controller
             $fund->purchase_details()->create($purchase);
         }
 
+        $past_performance = $fund->past_performances()->create(['date' => $request->performance_date]);
+
+        foreach ($request->past_performances as $past_performances) {
+            $past_performance->records()->create($past_performances);
+        }
+
         foreach ($request->expenses as $expense) {
             $fund->expenses()->create($expense);
         }
