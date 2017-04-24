@@ -7,114 +7,556 @@
             <div class="panel-heading">AMC : Create Fund</div>
             <div class="panel-body">
 
-				{!! Form::open(['route' => 'amc.fund.store', 'class' => 'form-horizontal']) !!}
+				{!! Form::open(['route' => 'amc.fund.store', 'class' => 'form-horizontal', 'id' => 'form-fund']) !!}
 
-			<div class="row">
-	            <div class="col-md-6">
+				    <h3>Fund</h3>
+				    <section>
+				    	@include('fund.amc.partials._form-fund')
+				    </section>
 
-			{!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
-			{!! Form::text('name', null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('code', 'Code', ['class' => 'control-label']) !!}
-			{!! Form::text('code', null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('type', 'Type', ['class' => 'control-label']) !!}
-			{!! Form::select('type', $fund_types, null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('aimc_type', 'AIMC Type', ['class' => 'control-label']) !!}
-			{!! Form::select('aimc_type', $aimc_types, null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('management_company', 'Management Company', ['class' => 'control-label']) !!}
-			{!! Form::text('management_company', null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('trustee', 'Trustee', ['class' => 'control-label']) !!}
-			{!! Form::text('trustee', null, ['class' => 'form-control']) !!}
-	           		
-			{!! Form::label('payment_policy', 'Payment Policy', ['class' => 'control-label']) !!}
-			{!! Form::select('payment_policy', [1 => 'Have', 0 => 'Not Have'], null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('frequency', 'Frequency of subscription and redemption', ['class' => 'control-label']) !!}
-			{!! Form::text('frequency', null, ['class' => 'form-control']) !!}
-		
-	            </div>
-	           	<div class="col-md-6">
-		
-			{!! Form::label('approved_by', 'Approved by', ['class' => 'control-label']) !!}
-			{!! Form::text('approved_by', null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('supervision', 'Supervision', ['class' => 'control-label']) !!}
-			{!! Form::text('supervision', null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('protected_fund', 'Protected Fund', ['class' => 'control-label']) !!}
-			{!! Form::select('protected_fund', [1 => 'Have', 0 => 'Not Have'], null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('name_of_guarantor', 'Name of Guarantor', ['class' => 'control-label']) !!}
-			{!! Form::text('name_of_guarantor', null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('fund_start', 'Fund Start', ['class' => 'control-label']) !!}
-			{!! Form::date('fund_start', null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('fund_end', 'Fund End', ['class' => 'control-label']) !!}
-			{!! Form::date('fund_end', null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('risk_level', 'Risk Level', ['class' => 'control-label']) !!}
-			{!! Form::select('risk_level', [1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8], null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('net_asset_value', 'Net Asset Value', ['class' => 'control-label']) !!}
-			{!! Form::number('net_asset_value', null, ['class' => 'form-control']) !!}
+				    <h3>NAV</h3>
+				    <section>
+				    	@include('fund.amc.partials._form-nav')
+				    </section>
 
-	           	</div>
-			</div>
+				    <h3>Investment Policy</h3>
+				    <section>
+				    	@include('fund.amc.partials._form-investment-policy')
+				    </section>
 
-			<hr>
+				    <h3>Types of Investor</h3>
+				    <section>
+				    	@include('fund.amc.partials._form-types-of-investor')
+				    </section>
 
-			<div class="row">
+				    <h3>Major Risk Factor</h3>
+				    <section>
+				    	@include('fund.amc.partials._form-major-risk-factor')
+				    </section>
 
-	            <div class="col-md-6">
-		
-			{!! Form::label('investment_asset_detail', 'investment_asset_detail', ['class' => 'control-label']) !!}
-			{!! Form::text('investment_asset_detail', null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('strategy_detail', 'strategy_detail', ['class' => 'control-label']) !!}
-			{!! Form::select('strategy_detail', ['Active Management' => 'Active Management', 'Passive Management' => 'Passive Management'], null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('factor_impact', 'factor_impact', ['class' => 'control-label']) !!}
-			{!! Form::text('factor_impact', null, ['class' => 'form-control']) !!}
-		
-			{!! Form::label('benchmark_detail', 'benchmark_detail', ['class' => 'control-label']) !!}
-			{!! Form::text('benchmark_detail', null, ['class' => 'form-control']) !!}
+                    <h3>Fund Manager</h3>
+                    <section>
+                        @include('fund.amc.partials._form-manager')
+                    </section>
 
-			<hr>
-		
-			{!! Form::label('type_of_investor', 'type_of_investor', ['class' => 'control-label']) !!}
-			{!! Form::text('type_of_investor', null, ['class' => 'form-control']) !!}
+                    <h3>Subscription & Redemption</h3>
+                    <section>
+                        @include('fund.amc.partials._form-subscription')
+                    </section>
 
-			<hr>
-		
-			{!! Form::label('major_risk_factor', 'major_risk_factor', ['class' => 'control-label']) !!}
-			{!! Form::text('major_risk_factor', null, ['class' => 'form-control']) !!}
+                    <h3>Dividend Payment</h3>
+                    <section>
+                        @include('fund.amc.partials._form-dividend')
+                    </section>
 
-	            </div>
-	            <div class="col-md-6">
+				    <h3>Asset Allocation</h3>
+				    <section>
+						@include('fund.amc.partials._form-asset-allocation')
+				    </section>
 
-			@include('AMC.fund.asset_allocation.partials._form')
-	            	
-	            </div>
-
-			</div>
-
-			<hr>
-
-			<div class="row">
-				<div class="col-md-12">
-					{!! Form::submit('Create', ['class' => 'btn btn-primary']) !!}
-				</div>
-			</div>
+                    <h3>Holding Company</h3>
+                    <section>
+                        @include('fund.amc.partials._form-holding')
+                    </section>
 
 				{!! Form::close() !!}
-				
             </div>
         </div>
 </div>
 
+@include('fund.amc.partials._template-nav')
+@include('fund.amc.partials._template-manager')
+@include('fund.amc.partials._template-holding')
+@include('fund.amc.partials._template-dividend')
+@include('fund.amc.partials._template-subscription')
+
+@endsection
+
+@section('script')
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
+	<script type="text/javascript">
+		$("#form-fund").steps({
+		    headerTag: "h3",
+		    bodyTag: "section",
+		    transitionEffect: "slideLeft",
+		    autoFocus: true,
+            onFinished: function (event, currentIndex)
+            {
+            	console.log($(this))
+                $(this).submit();
+            }
+		});
+	</script>
+
+	<!-- add field nav -->
+	<script type="text/javascript">
+		var next_nav_index = 1
+
+		$('#btn-add-nav').click( function () {
+			var template = $('#template-nav').html()
+			template = template.replace(new RegExp("ROW_INDEX", 'g'), next_nav_index)
+			$('#pane-add-nav').append(template)
+			next_nav_index++
+		});
+	</script>
+
+    <!-- add field fund manager -->
+    <script type="text/javascript">
+        var next_manager_index = 1
+
+        $('#btn-add-manager').click( function () {
+            var template = $('#template-manager').html()
+            template = template.replace(new RegExp("ROW_INDEX", 'g'), next_manager_index)
+            $('#pane-add-manager').append(template)
+            next_manager_index++
+        });
+    </script>
+
+    <!-- add field holding company -->
+    <script type="text/javascript">
+        var next_company_index = 1
+
+        $('#btn-add-company').click( function () {
+            var template = $('#template-company').html()
+            template = template.replace(new RegExp("ROW_INDEX", 'g'), next_company_index)
+            $('#pane-add-company').append(template)
+            next_company_index++
+        });
+    </script>
+
+    <!-- add field dividend payment -->
+    <script type="text/javascript">
+        var next_dividend_index = 1
+
+        $('#btn-add-dividend').click( function () {
+            var template = $('#template-dividend').html()
+            template = template.replace(new RegExp("ROW_INDEX", 'g'), next_dividend_index)
+            $('#pane-add-dividend').append(template)
+            next_dividend_index++
+        });
+    </script>
+
+    <!-- add field fee -->
+    <script type="text/javascript">
+        var next_fee_index = 1
+
+        $('#btn-add-fee').click( function () {
+            var template = $('#template-fee').html()
+            template = template.replace(new RegExp("ROW_INDEX", 'g'), next_fee_index)
+            $('#pane-add-fee').append(template)
+            next_fee_index++
+        });
+    </script>
+
+    <!-- add field pruchase -->
+    <script type="text/javascript">
+        var next_purchase_index = 1
+
+        $('#btn-add-purchase').click( function () {
+            var template = $('#template-purchase').html()
+            template = template.replace(new RegExp("ROW_INDEX", 'g'), next_purchase_index)
+            $('#pane-add-purchase').append(template)
+            next_purchase_index++
+        });
+    </script>
+
+    <!-- add field expense -->
+    <script type="text/javascript">
+        var next_expense_index = 1
+
+        $('#btn-add-expense').click( function () {
+            var template = $('#template-expense').html()
+            template = template.replace(new RegExp("ROW_INDEX", 'g'), next_expense_index)
+            $('#pane-add-expense').append(template)
+            next_expense_index++
+        });
+    </script>
+@endsection
+
+@section('style')
+	<style type="text/css">
+		/*
+    Common 
+*/
+
+.wizard,
+.tabcontrol
+{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+
+.wizard a,
+.tabcontrol a
+{
+    outline: 0;
+}
+
+.wizard ul,
+.tabcontrol ul
+{
+    list-style: none !important;
+    padding: 0;
+    margin: 0;
+}
+
+.wizard ul > li,
+.tabcontrol ul > li
+{
+    display: block;
+    padding: 0;
+}
+
+/* Accessibility */
+.wizard > .steps .current-info,
+.tabcontrol > .steps .current-info
+{
+    position: absolute;
+    left: -999em;
+}
+
+.wizard > .content > .title,
+.tabcontrol > .content > .title
+{
+    position: absolute;
+    left: -999em;
+}
+
+
+
+/*
+    Wizard
+*/
+
+.wizard > .steps
+{
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.wizard.vertical > .steps
+{
+    display: inline;
+    float: left;
+    width: 30%;
+}
+
+.wizard > .steps .number
+{
+    font-size: 1.429em;
+}
+
+.wizard > .steps > ul > li
+{
+    width: 25%;
+}
+
+.wizard > .steps > ul > li,
+.wizard > .actions > ul > li
+{
+    float: left;
+}
+
+.wizard.vertical > .steps > ul > li
+{
+    float: none;
+    width: 100%;
+}
+
+.wizard > .steps a,
+.wizard > .steps a:hover,
+.wizard > .steps a:active
+{
+    display: block;
+    width: auto;
+    margin: 0 0.5em 0.5em;
+    padding: 1em 1em;
+    text-decoration: none;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.wizard > .steps .disabled a,
+.wizard > .steps .disabled a:hover,
+.wizard > .steps .disabled a:active
+{
+    background: #eee;
+    color: #aaa;
+    cursor: default;
+}
+
+.wizard > .steps .current a,
+.wizard > .steps .current a:hover,
+.wizard > .steps .current a:active
+{
+    background: #2184be;
+    color: #fff;
+    cursor: default;
+}
+
+.wizard > .steps .done a,
+.wizard > .steps .done a:hover,
+.wizard > .steps .done a:active
+{
+    background: #9dc8e2;
+    color: #fff;
+}
+
+.wizard > .steps .error a,
+.wizard > .steps .error a:hover,
+.wizard > .steps .error a:active
+{
+    background: #ff3111;
+    color: #fff;
+}
+
+.wizard > .content
+{
+    background: #eee;
+    display: block;
+    margin: 0.5em;
+    min-height: 35em;
+    overflow: scroll;
+    position: relative;
+    width: auto;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.wizard.vertical > .content
+{
+    display: inline;
+    float: left;
+    margin: 0 2.5% 0.5em 2.5%;
+    width: 65%;
+}
+
+.wizard > .content > .body
+{
+    float: left;
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    padding: 2.5%;
+}
+
+.wizard > .content > .body ul
+{
+    list-style: disc !important;
+}
+
+.wizard > .content > .body ul > li
+{
+    display: list-item;
+}
+
+.wizard > .content > .body > iframe
+{
+    border: 0 none;
+    width: 100%;
+    height: 100%;
+}
+
+.wizard > .content > .body input
+{
+    display: block;
+    border: 1px solid #ccc;
+}
+
+.wizard > .content > .body input[type="checkbox"]
+{
+    display: inline-block;
+}
+
+.wizard > .content > .body input.error
+{
+    background: rgb(251, 227, 228);
+    border: 1px solid #fbc2c4;
+    color: #8a1f11;
+}
+
+.wizard > .content > .body label
+{
+    display: inline-block;
+    margin-bottom: 0.5em;
+}
+
+.wizard > .content > .body label.error
+{
+    color: #8a1f11;
+    display: inline-block;
+    margin-left: 1.5em;
+}
+
+.wizard > .actions
+{
+    position: relative;
+    display: block;
+    text-align: right;
+    width: 100%;
+}
+
+.wizard.vertical > .actions
+{
+    display: inline;
+    float: right;
+    margin: 0 2.5%;
+    width: 95%;
+}
+
+.wizard > .actions > ul
+{
+    display: inline-block;
+    text-align: right;
+}
+
+.wizard > .actions > ul > li
+{
+    margin: 0 0.5em;
+}
+
+.wizard.vertical > .actions > ul > li
+{
+    margin: 0 0 0 1em;
+}
+
+.wizard > .actions a,
+.wizard > .actions a:hover,
+.wizard > .actions a:active
+{
+    background: #2184be;
+    color: #fff;
+    display: block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.wizard > .actions .disabled a,
+.wizard > .actions .disabled a:hover,
+.wizard > .actions .disabled a:active
+{
+    background: #eee;
+    color: #aaa;
+}
+
+.wizard > .loading
+{
+}
+
+.wizard > .loading .spinner
+{
+}
+
+
+
+/*
+    Tabcontrol
+*/
+
+.tabcontrol > .steps
+{
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.tabcontrol > .steps > ul
+{
+    position: relative;
+    margin: 6px 0 0 0;
+    top: 1px;
+    z-index: 1;
+}
+
+.tabcontrol > .steps > ul > li
+{
+    float: left;
+    margin: 5px 2px 0 0;
+    padding: 1px;
+
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.tabcontrol > .steps > ul > li:hover
+{
+    background: #edecec;
+    border: 1px solid #bbb;
+    padding: 0;
+}
+
+.tabcontrol > .steps > ul > li.current
+{
+    background: #fff;
+    border: 1px solid #bbb;
+    border-bottom: 0 none;
+    padding: 0 0 1px 0;
+    margin-top: 0;
+}
+
+.tabcontrol > .steps > ul > li > a
+{
+    color: #5f5f5f;
+    display: inline-block;
+    border: 0 none;
+    margin: 0;
+    padding: 10px 30px;
+    text-decoration: none;
+}
+
+.tabcontrol > .steps > ul > li > a:hover
+{
+    text-decoration: none;
+}
+
+.tabcontrol > .steps > ul > li.current > a
+{
+    padding: 15px 30px 10px 30px;
+}
+
+.tabcontrol > .content
+{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 35em;
+    overflow: hidden;
+    border-top: 1px solid #bbb;
+    padding-top: 20px;
+}
+
+.tabcontrol > .content > .body
+{
+    float: left;
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    padding: 2.5%;
+}
+
+.tabcontrol > .content > .body ul
+{
+    list-style: disc !important;
+}
+
+.tabcontrol > .content > .body ul > li
+{
+    display: list-item;
+}
+	</style>
 @endsection
