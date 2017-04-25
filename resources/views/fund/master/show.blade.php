@@ -35,6 +35,12 @@
 @endsection
 
 @section('script')
+<script>
+    $(document).ready( function () {
+        $('.nav-pills a[href="#{!!$tab!!}"]').tab('show')
+    })
+</script>
+
 <script src="/js/libs/Chart.min.js"></script>
 <!-- holding chart -->
 <script>
@@ -101,6 +107,51 @@
         labels: [
               @foreach($fund->navs->sortBy('modified_date') as $nav)
                   "{{$nav->modified_date}}",
+              @endforeach
+            ],
+        datasets: [
+            {
+                label: "Price",
+                fill: false,
+                lineTension: 0.1,
+                backgroundColor: "rgba(75,192,192,0.4)",
+                borderColor: "rgba(75,192,192,1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: [
+                    @foreach($fund->navs->sortBy('modified_date') as $nav) 
+                         "{{$nav->standard}}",
+                    @endforeach
+                ], 
+                spanGaps: false,
+            }
+        ]
+    };
+
+    var myLineChart = Chart.Line(ctx, {
+        data: data
+    });
+</script>
+
+<!-- performance chart -->
+<script>
+    var ctx = $("#performance-chart");
+
+    var data = {
+        labels: [
+              @foreach($fund->past_performances->sortBy('date') as $performance)
+                  "{{$performance->date}}",
               @endforeach
             ],
         datasets: [

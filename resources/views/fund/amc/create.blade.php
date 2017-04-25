@@ -44,18 +44,19 @@
                         @include('fund.amc.partials._form-subscription')
                     </section>
 
+                    <h3>Past Performance</h3>
+                    <section>
+                        @include('fund.amc.partials._form-performance')
+                    </section>
+
                     <h3>Dividend Payment</h3>
                     <section>
                         @include('fund.amc.partials._form-dividend')
                     </section>
 
-				    <h3>Asset Allocation</h3>
-				    <section>
-						@include('fund.amc.partials._form-asset-allocation')
-				    </section>
-
-                    <h3>Holding Company</h3>
+                    <h3>Portfolio</h3>
                     <section>
+                        @include('fund.amc.partials._form-asset-allocation')
                         @include('fund.amc.partials._form-holding')
                     </section>
 
@@ -69,6 +70,7 @@
 @include('fund.amc.partials._template-holding')
 @include('fund.amc.partials._template-dividend')
 @include('fund.amc.partials._template-subscription')
+@include('fund.amc.partials._template-performance')
 
 @endsection
 
@@ -170,6 +172,18 @@
             template = template.replace(new RegExp("ROW_INDEX", 'g'), next_expense_index)
             $('#pane-add-expense').append(template)
             next_expense_index++
+        });
+    </script>
+
+    <!-- add field performance -->
+    <script type="text/javascript">
+        var next_performance_index = 2
+
+        $('#btn-add-performance').click( function () {
+            var template = $('#template-performance').html()
+            template = template.replace(new RegExp("DEFAULT_ROW_NAME", 'g'), "Benchmark " + next_performance_index)
+            $('#pane-add-performance').append(template)
+            next_performance_index++
         });
     </script>
 @endsection
