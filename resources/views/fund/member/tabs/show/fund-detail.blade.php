@@ -20,10 +20,6 @@
 				<td>{{$fund->aimc_type}}</td>
 			</tr>
 			<tr>
-				<th>Company Name (AMC)</th>
-				<td>{{$fund->amc->company_name}}</td>
-			</tr>
-			<tr>
 				<th>Management Company</th>
 				<td>{{$fund->management_company}}</td>
 			</tr>
