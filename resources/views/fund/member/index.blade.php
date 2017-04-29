@@ -23,12 +23,14 @@
                             <li class="active"><a href="#show-by-info"        data-toggle="tab">Info</a></li>
                             <li><a href="#show-by-past-performance"           data-toggle="tab">Past Performance</a></li>
                             <li><a href="#show-by-subscription"               data-toggle="tab">Subscription & Redemption Detail</a></li>
+                            <!-- <li><a href="#show-by-portfolio"                  data-toggle="tab">Portflio</a></li> -->
                           </ul>
 
                           <div class="tab-content">
                             @include('fund.member.tabs.index.show-by-info')
                             @include('fund.member.tabs.index.show-by-past-performance')
                             @include('fund.member.tabs.index.show-by-subscription')
+                            @include('fund.member.tabs.index.show-by-portfolio')
                           </div>
                     </div>
                 </div>
@@ -41,13 +43,14 @@
 @endsection
 
 @section('script')
-    <script>        
+    <script> 
         var selected = []
         var max_select = 5
 
         var info_rows = []
         var past_performance_rows = []
         var fee_rows = []
+        var portfolio_rows = []
 
         $('input[name=chckbx]').change(function() {
 
@@ -77,6 +80,14 @@
 
         $('#compare-modal').on('shown.bs.modal', function () {
             $( "#compare-detail-body" ).empty()
+            $( "#compare-performance-body" ).empty()
+            $( "#compare-fee-body" ).empty()
+            $( "#compare-portfolio-body" ).empty()
+
+            info_rows = []
+            past_performance_rows = []
+            fee_rows = []
+            portfolio_rows = []
 
             $.each(selected, function (key, value) {
                 $('*#' + value).each(function() {
@@ -97,6 +108,10 @@
 
                         fee_rows.push(tr)
 
+                    } else if ($(this).parent().attr('id') == "chckbx-portfolio") {
+
+                        portfolio_rows.push(tr)
+
                     }
 
                 })
@@ -105,6 +120,7 @@
             $( "#compare-detail-body" ).append(info_rows)
             $( "#compare-performance-body" ).append(past_performance_rows)
             $( "#compare-fee-body" ).append(fee_rows)
+            $( "#compare-portfolio-body" ).append(portfolio_rows)
         })
     </script>
 

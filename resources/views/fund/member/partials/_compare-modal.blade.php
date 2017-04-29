@@ -12,6 +12,7 @@
     <li role="presentation" class="active"><a href="#compare-detail" data-toggle="tab">Show by Info</a></li>
     <li role="presentation"><a href="#compare-performance" data-toggle="tab">Show by Past Performance</a></li>
     <li role="presentation"><a href="#compare-fee" data-toggle="tab">Show by subscription and redemption detail</a></li>
+    <li role="presentation"><a href="#compare-portfolio" data-toggle="tab">Show by Portfolio</a></li>
   </ul>
 
   <!-- Tab panes -->
@@ -58,6 +59,20 @@
             <th style="text-align: center;">Minimum Additional</th>
         </thead>
         <tbody id="compare-fee-body">
+        </tbody>
+      </table>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="compare-portfolio">
+      <table class="table">
+        <thead>
+            <th class="text-center" style="vertical-align: middle;">Fund</th>
+            <th class="text-center" style="vertical-align: middle;">AIMC Type</th>
+            <th class="text-center" style="vertical-align: middle;">% of Stock</th>
+            <th class="text-center" style="vertical-align: middle;">% of Bond</th>
+            <th class="text-center" style="vertical-align: middle;">% of Cash</th>
+            <th class="text-center" style="vertical-align: middle;">% of Other</th>
+        </thead>
+        <tbody id="compare-portfolio-body">
         </tbody>
       </table>
     </div>
