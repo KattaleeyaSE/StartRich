@@ -19,11 +19,11 @@
                     <tr align="center">
                         <td id="chckbx-info" class="td-chckbx" style="vertical-align: middle;">{!! Form::checkbox('chckbx', null, 0, ['id' => 'chckbx'.$fund->id]) !!}</td>
                         <td style="vertical-align: middle;">
-                            <strong>{{$fund->aimc_type}}</strong>
+                            <strong>{{$fund->code}}</strong>
                             <br>
                             {{$fund->name}}
                         </td>
-                        <td style="vertical-align: middle;">{{$fund->type}}</td>
+                        <td style="vertical-align: middle;">{{$fund->aimc_type}}</td>
                         <td style="vertical-align: middle;">{{$fund->amc->company_name}}</td>
                         <td style="vertical-align: middle;">{{$fund->getRate()}}</td>
                         <td style="vertical-align: middle;">{{$fund->payment_policy ? 'YES' : 'NO'}}</td>

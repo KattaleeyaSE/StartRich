@@ -132,8 +132,25 @@
             });
         });
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $("#fund-name-select").select2({
+            theme: "bootstrap"
+        });
+      $("#fund-code-select").select2({
+            theme: "bootstrap"
+        });
+      $("#fund-amc-select").select2({
+            theme: "bootstrap"
+        });
+    });
+</script>
 @endsection
 
 @section('style')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 @endsection

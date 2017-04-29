@@ -35,7 +35,9 @@ class FundController extends Controller
             }
         }
 
-        return view('fund.member.index', ['funds' => $funds, 'fund_types' => $fund_types]);
+        $fund_options = MutualFund::all();
+
+        return view('fund.member.index', ['funds' => $funds, 'fund_types' => $fund_types, 'fund_options' => $fund_options]);
     }
 
     /**
