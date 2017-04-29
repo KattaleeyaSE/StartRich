@@ -6,8 +6,8 @@
             <thead>
                 <th class="text-center" style="vertical-align: middle;"></th>
                 <th class="text-center" style="vertical-align: middle;">Fund</th>
-                <th class="text-center" style="vertical-align: middle;">1 Month</th>
-                <th class="text-center" style="vertical-align: middle;">3 Months</th>
+                <th class="text-center" style="vertical-align: middle;">3 Month</th>
+                <th class="text-center" style="vertical-align: middle;">6 Months</th>
                 <th class="text-center" style="vertical-align: middle;">1 Year</th>
                 <th class="text-center" style="vertical-align: middle;">3 Years</th>
                 <th class="text-center" style="vertical-align: middle;">5 Years</th>
