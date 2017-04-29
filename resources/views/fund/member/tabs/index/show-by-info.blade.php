@@ -24,7 +24,7 @@
                             {{$fund->name}}
                         </td>
                         <td style="vertical-align: middle;">{{$fund->type}}</td>
-                        <td style="vertical-align: middle;">{{$fund->management_company}}</td>
+                        <td style="vertical-align: middle;">{{$fund->amc->company_name}}</td>
                         <td style="vertical-align: middle;">{{$fund->getRate()}}</td>
                         <td style="vertical-align: middle;">{{$fund->payment_policy ? 'YES' : 'NO'}}</td>
                         <td style="vertical-align: middle;">{{ !(is_null($fund->navs->first())) ? $fund->navs->first()->standard : '-'}}</td>
