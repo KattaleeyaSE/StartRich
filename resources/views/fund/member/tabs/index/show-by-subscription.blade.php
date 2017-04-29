@@ -2,7 +2,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-        <table class="table">
+        <table class="table" id="subscription-table">
             <thead>
                 <th class="text-center" style="vertical-align: middle;"></th>
                 <th class="text-center" style="vertical-align: middle;">Fund</th>

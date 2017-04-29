@@ -19,24 +19,6 @@
                     </div>
                     
                     <div class="panel-body">
-
-                            <div class="col-md-6 col-md-offset-6">
-                                {!! Form::open(['route' => 'member.fund.index', 'method' => 'GET', 'class' => 'form-horizontal']) !!}
-                                <div class="form-group">
-                                    {!! Form::label('sort_by', 'Sort By', []) !!}
-                                    {!! Form::select('sort_by', ['risk_level' => 'Risk Level',  
-                                                                  'name' => 'Fund Name', 
-                                                                  'min_first_purchase' => 'Minimum First Purchase', 
-                                                                  'nav' => 'Nav'], null, ['class' => 'form-control', 'placeholder' => '']) !!}
-                                    {!! Form::radio('desc', false, true, []) !!} low to high
-                                    {!! Form::radio('desc', true, false, []) !!} high to low
-
-                                {!! Form::submit('Sort', ['class' => 'btn btn-xs btn-info']) !!}
-                                </div>
-
-                                {!! Form::close() !!}
-                            </div>
-
                           <ul id="fund-info-tabs" class="nav nav-tabs">
                             <li class="active"><a href="#show-by-info"        data-toggle="tab">Info</a></li>
                             <li><a href="#show-by-past-performance"           data-toggle="tab">Past Performance</a></li>
@@ -132,4 +114,26 @@
           $(this).tab('show')
         })
     </script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#info-table').DataTable({
+              "bFilter": false, 
+              "paging": false
+            });
+            $('#performance-table').DataTable({
+              "bFilter": false, 
+              "paging": false
+            });
+            $('#subscription-table').DataTable({
+              "bFilter": false, 
+              "paging": false
+            });
+        });
+    </script>
+@endsection
+
+@section('style')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 @endsection
