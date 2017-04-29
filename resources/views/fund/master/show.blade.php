@@ -37,7 +37,9 @@
 @section('script')
 <script>
     $(document).ready( function () {
-        $('.nav-pills a[href="#{!!$tab!!}"]').tab('show')
+        @if (isset($tab))
+            $('.nav-pills a[href="#{!!$tab!!}"]').tab('show')
+        @endif
     })
 </script>
 
