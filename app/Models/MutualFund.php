@@ -232,6 +232,11 @@ class MutualFund extends investment
                 $query->where('min_first_purchase', $filter['min_first_purchase']);
             });
         }
+        if (isset($filter['company_name'])) {
+            $query->whereHas('amc', function ($query) use ($filter) {
+                $query->where('company_name', $filter['company_name']);
+            });
+        }
 
         return $query;
     }

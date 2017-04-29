@@ -22,8 +22,13 @@
 
 <div class="col-md-4 col-md-offset-1">
     <div class="form-group">
-        {!! Form::label('code', 'Fund Code', []) !!}    
+        {!! Form::label('code', 'Fund Code', []) !!}
         {!! Form::text('code', null, ['class' => 'form-control']) !!}
+    </div>
+
+    <div class="form-group">
+        {!! Form::label('company_name', 'Company Name (AMC)', []) !!}
+        {!! Form::text('company_name', null, ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">
