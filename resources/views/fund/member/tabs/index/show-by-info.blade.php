@@ -7,6 +7,7 @@
                 <th class="text-center" style="vertical-align: middle;"></th>
                 <th class="text-center" style="vertical-align: middle;">Fund</th>
                 <th class="text-center" style="vertical-align: middle;">Type</th>
+                <th class="text-center" style="vertical-align: middle;">Company</th>
                 <th class="text-center" style="vertical-align: middle;">StartRich Rate</th>
                 <th class="text-center" style="vertical-align: middle;">Dividend Policy</th>
                 <th class="text-center" style="vertical-align: middle;">NAV</th>
@@ -23,6 +24,7 @@
                             {{$fund->name}}
                         </td>
                         <td style="vertical-align: middle;">{{$fund->type}}</td>
+                        <td style="vertical-align: middle;">{{$fund->management_company}}</td>
                         <td style="vertical-align: middle;">{{$fund->getRate()}}</td>
                         <td style="vertical-align: middle;">{{$fund->payment_policy ? 'YES' : 'NO'}}</td>
                         <td style="vertical-align: middle;">{{ !(is_null($fund->navs->first())) ? $fund->navs->first()->standard : '-'}}</td>
