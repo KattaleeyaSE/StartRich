@@ -66,6 +66,51 @@ class FundController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'code' => 'required',
+            'type' => 'required',
+            'aimc_type' => 'required',
+            'management_company' => 'required',
+            'trustee' => 'required',
+            'payment_policy' => 'required',
+            'frequency' => 'required',
+            'approved_by' => 'required',
+            'supervision' => 'required',
+            'protected_fund' => 'required',
+            'name_of_guarantor' => 'required',
+            'fund_start' => 'required',
+            'fund_end' => 'required',
+            'risk_level' => 'required',
+            'net_asset_value' => 'required',
+            'investment_asset_detail' => 'required',
+            'strategy_detail' => 'required',
+            'factor_impact' => 'required',
+            'benchmark_detail' => 'required',
+            'type_of_investor' => 'required',
+            'major_risk_factor' => 'required',
+            'fees.*.front_end_fee' => 'required',
+            'fees.*.actual_front_end_fee' => 'required',
+            'fees.*.back_end_fee' => 'required',
+            'fees.*.actual_back_end_fee' => 'required',
+            'fees.*.switching_fee' => 'required',
+            'purchases.*.subscription_period' => 'required',
+            'purchases.*.min_first_purchase' => 'required',
+            'purchases.*.min_additional' => 'required',
+            'purchases.*.redemtion_period' => 'required',
+            'purchases.*.min_redemption' => 'required',
+            'purchases.*.min_balance' => 'required',
+            'purchases.*.settlement_period' => 'required',
+            'expenses.*.manager_fee' => 'required',
+            'expenses.*.actual_manager_fee' => 'required',
+            'expenses.*.total_expense_ratio' => 'required',
+            'expenses.*.trustee_fee' => 'required',
+            'expenses.*.actual_trustee_fee' => 'required',
+            'expenses.*.registrar_fee' => 'required',
+            'expenses.*.actual_registrar_fee' => 'required',
+            'expenses.*.other_fee' => 'required',
+        ]);
+
         $amc_id = Auth::user()->amc->id;
         $fund = $this->mutualFundRepository->create($request, $amc_id);
 
