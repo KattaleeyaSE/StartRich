@@ -2,11 +2,12 @@
 
 <div class="row">
 	<div class="col-md-12">
-        <table class="table">
+        <table class="table" id="info-table">
             <thead>
                 <th class="text-center" style="vertical-align: middle;"></th>
                 <th class="text-center" style="vertical-align: middle;">Fund</th>
                 <th class="text-center" style="vertical-align: middle;">Type</th>
+                <th class="text-center" style="vertical-align: middle;">Company</th>
                 <th class="text-center" style="vertical-align: middle;">StartRich Rate</th>
                 <th class="text-center" style="vertical-align: middle;">Dividend Policy</th>
                 <th class="text-center" style="vertical-align: middle;">NAV</th>
@@ -18,11 +19,12 @@
                     <tr align="center">
                         <td id="chckbx-info" class="td-chckbx" style="vertical-align: middle;">{!! Form::checkbox('chckbx', null, 0, ['id' => 'chckbx'.$fund->id]) !!}</td>
                         <td style="vertical-align: middle;">
-                            <strong>{{$fund->aimc_type}}</strong>
+                            <strong>{{$fund->code}}</strong>
                             <br>
                             {{$fund->name}}
                         </td>
-                        <td style="vertical-align: middle;">{{$fund->type}}</td>
+                        <td style="vertical-align: middle;">{{$fund->aimc_type}}</td>
+                        <td style="vertical-align: middle;">{{$fund->amc->company_name}}</td>
                         <td style="vertical-align: middle;">{{$fund->getRate()}}</td>
                         <td style="vertical-align: middle;">{{$fund->payment_policy ? 'YES' : 'NO'}}</td>
                         <td style="vertical-align: middle;">{{ !(is_null($fund->navs->first())) ? $fund->navs->first()->standard : '-'}}</td>

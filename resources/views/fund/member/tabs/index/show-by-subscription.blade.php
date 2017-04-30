@@ -2,7 +2,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-        <table class="table">
+        <table class="table" id="subscription-table">
             <thead>
                 <th class="text-center" style="vertical-align: middle;"></th>
                 <th class="text-center" style="vertical-align: middle;">Fund</th>
@@ -21,7 +21,7 @@
                             {!! Form::checkbox('chckbx', null, 0, ['id' => 'chckbx'.$fund->id]) !!}
                         </td>
                         <td style="vertical-align: middle;">
-                            <strong>{{$fund->aimc_type}}</strong>
+                            <strong>{{$fund->code}}</strong>
                             <br>
                             {{$fund->name}}
                         </td>

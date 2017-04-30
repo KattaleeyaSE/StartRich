@@ -1,7 +1,7 @@
 <div class="col-md-4">
     <div class="form-group">
         {!! Form::label('name', 'Fund Name', []) !!}    
-        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+        {!! Form::select('name', $fund_options->pluck('name', 'name'), null, ['placeholder' => 'select...', 'id' => 'fund-name-select']) !!}
     </div>
 
     <div class="form-group">
@@ -22,8 +22,13 @@
 
 <div class="col-md-4 col-md-offset-1">
     <div class="form-group">
-        {!! Form::label('code', 'Fund Code', []) !!}    
-        {!! Form::text('code', null, ['class' => 'form-control']) !!}
+        {!! Form::label('code', 'Fund Code', []) !!}
+        {!! Form::select('code', $fund_options->pluck('code', 'code'), null, ['placeholder' => 'select...', 'id' => 'fund-code-select']) !!}
+    </div>
+
+    <div class="form-group">
+        {!! Form::label('company_name', 'Company Name (AMC)', []) !!}
+        {!! Form::select('company_name', $fund_options->pluck('amc.company_name', 'amc.company_name'), null, ['placeholder' => 'select...', 'id' => 'fund-amc-select']) !!}
     </div>
 
     <div class="form-group">
