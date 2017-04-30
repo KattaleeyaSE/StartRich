@@ -109,6 +109,10 @@ class FundController extends Controller
             'expenses.*.registrar_fee' => 'required',
             'expenses.*.actual_registrar_fee' => 'required',
             'expenses.*.other_fee' => 'required',
+            'stock' => 'required',
+            'cash' => 'required',
+            'bond' => 'required',
+            'other' => 'required',
         ]);
 
         $amc_id = Auth::user()->amc->id;
