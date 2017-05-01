@@ -113,7 +113,13 @@ class FundController extends Controller
             'cash' => 'required',
             'bond' => 'required',
             'other' => 'required',
-        ];
+        ];        
+        foreach ($request->navs as $key => $value) {
+            $validate['navs.'.$key.'.modified_date'] = 'required';
+            $validate['navs.'.$key.'.standard'] = 'required';
+            $validate['navs.'.$key.'.bid'] = 'required';
+            $validate['navs.'.$key.'.offer'] = 'required';
+        }
         foreach ($request->dividends as $key => $value) {
             $validate['dividends.'.$key.'.payment_date'] = 'required';
             $validate['dividends.'.$key.'.dividend_price'] = 'required';
