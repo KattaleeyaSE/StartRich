@@ -37,7 +37,7 @@
 <div class="form-group{{ $errors->has('aimc_type') ? ' has-error' : '' }}">
     {!! Form::label('aimc_type', 'AIMC Type *', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12', 'for' => 'aimc_type']) !!}
     <div class="col-md-6 col-sm-6 col-xs-12">
-	{!! Form::select('aimc_type', $fund_types, null, ['class' => 'form-control col-md-7 col-xs-12']) !!}
+	{!! Form::select('aimc_type', $aimc_types, null, ['class' => 'form-control col-md-7 col-xs-12']) !!}
     </div>
         @if ($errors->has('aimc_type'))
             <span class="help-block">
