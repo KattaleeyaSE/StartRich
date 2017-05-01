@@ -4,7 +4,7 @@
 		<div class="form-group{{ $errors->has('companies.*.name') ? ' has-error' : '' }}">
 		    {!! Form::label('companies[0][name]', 'Company Name *', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']) !!}
 		    <div class="col-md-6 col-sm-6 col-xs-12">
-		    {!! Form::text('companies[0][name]', null,['class' => 'form-control col-md-7 col-xs-12']) !!}
+		    {!! Form::text('companies[0][name]', null,['class' => 'form-control col-md-7 col-xs-12 required']) !!}
 		    </div>
 		        @if ($errors->has('companies.*.name'))
 		            <span class="help-block">
@@ -16,7 +16,7 @@
 		<div class="form-group{{ $errors->has('companies.*.percentage') ? ' has-error' : '' }}">
 		    {!! Form::label('companies[0][percentage]', 'Percentage *', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']) !!}
 		    <div class="col-md-6 col-sm-6 col-xs-12">
-		    {!! Form::text('companies[0][percentage]', null,['class' => 'form-control col-md-7 col-xs-12']) !!}
+		    {!! Form::text('companies[0][percentage]', null,['class' => 'form-control col-md-7 col-xs-12 required']) !!}
 		    </div>
 		        @if ($errors->has('companies.*.percentage'))
 		            <span class="help-block">

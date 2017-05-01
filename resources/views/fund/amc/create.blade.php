@@ -77,12 +77,34 @@
 @section('script')
 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 	<script type="text/javascript">
-		$("#form-fund").steps({
+        var form = $("#form-fund");
+
+        form.validate({
+            errorPlacement: function errorPlacement(error, element) { element.before(error); },
+            rules: {
+                confirm: {
+                    equalTo: "#password"
+                }
+            }
+        });
+        
+		form.steps({
 		    headerTag: "h3",
 		    bodyTag: "section",
 		    transitionEffect: "slideLeft",
 		    autoFocus: true,
+            onStepChanging: function (event, currentIndex, newIndex)
+            {
+                form.validate().settings.ignore = ":disabled,:hidden";
+                return form.valid();
+            },
+            onFinishing: function (event, currentIndex)
+            {
+                form.validate().settings.ignore = ":disabled";
+                return form.valid();
+            },
             onFinished: function (event, currentIndex)
             {
             	console.log($(this))
