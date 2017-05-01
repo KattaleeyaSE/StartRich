@@ -422,7 +422,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $dividends = $fund->holding_companies()->create($request->all());
+        foreach ($request->companies as $company) {
+            $fund->holding_companies()->create($company);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'portfolio']);
     }
