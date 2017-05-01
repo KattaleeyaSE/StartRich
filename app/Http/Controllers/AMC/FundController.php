@@ -564,9 +564,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $past_performance = $fund->past_performances()->create(['date' => $request->date]);
+        $past_performance = $fund->past_performances()->create(['date' => $request->performance_date]);
 
-        foreach ($request->data as $data) {
+        foreach ($request->past_performances as $data) {
             $past_performance->records()->create($data);
         }
 
@@ -585,7 +585,7 @@ class FundController extends Controller
         $past_performance = PastPerformance::find($id);
         $past_performance->update(['date' => $request->date]);
 
-        foreach ($request->data as $key => $data) {
+        foreach ($request->past_performances as $key => $data) {
             $record = PastPerformanceRecord::find($key);
             if($record != null) {
                 $record->update($data);

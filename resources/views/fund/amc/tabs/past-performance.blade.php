@@ -45,7 +45,7 @@
     <div class="modal-content">
       <div class="modal-body">
 		
-		<a href="{{ route('amc.fund.edit_past_performance', $fund->id) }}" class="btn btn-warning pull-right">Edit</a>
+		<a href="{{ route('amc.fund.edit_past_performance', $item->id) }}" class="btn btn-warning pull-right">Edit</a>
 
       	<table class="table table-bordered">
       		<thead>
