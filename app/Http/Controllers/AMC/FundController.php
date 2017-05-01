@@ -66,7 +66,7 @@ class FundController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validate = [
             'name' => 'required',
             'code' => 'required',
             'type' => 'required',
@@ -113,7 +113,13 @@ class FundController extends Controller
             'cash' => 'required',
             'bond' => 'required',
             'other' => 'required',
-        ]);
+        ];
+        foreach ($request->companies as $key => $value) {
+            $validate['companies.'.$key.'.name'] = 'required';
+            $validate['companies.'.$key.'.percentage'] = 'required';
+        }
+
+        $this->validate($request, $validate);
 
         $amc_id = Auth::user()->amc->id;
         $fund = $this->mutualFundRepository->create($request, $amc_id);
