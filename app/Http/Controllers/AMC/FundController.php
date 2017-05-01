@@ -356,7 +356,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $dividends = $fund->dividend_payments()->create($request->all());
+        foreach ($request->dividends as $dividend) {
+            $fund->dividend_payments()->create($dividend);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'historical-dividend-payment']);
     }
