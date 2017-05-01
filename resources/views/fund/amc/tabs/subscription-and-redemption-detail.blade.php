@@ -73,7 +73,7 @@
 						<td>{{$item->actual_registrar_fee}}</td>
 						<td>{{$item->other_fee}}</td>
 						<td>
-							<a href="{{ route('amc.fund.edit_fee', $item->id) }}" class="btn btn-xs btn-warning">edit</a>
+							<a href="{{ route('amc.fund.edit_expense', $item->id) }}" class="btn btn-xs btn-warning">edit</a>
 						</td>
 					</tr>
 				@endforeach

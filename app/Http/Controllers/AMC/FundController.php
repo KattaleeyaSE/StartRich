@@ -16,6 +16,7 @@ use App\Models\AssetAllocation;
 use App\Models\HoldingCompany;
 use App\Models\Fee;
 use App\Models\PurchaseDetail;
+use App\Models\Expense;
 use App\Models\PastPerformance;
 use App\Models\PastPerformanceRecord;
 use Illuminate\Support\Facades\Mail;
@@ -214,7 +215,7 @@ class FundController extends Controller
         $fund_types = MutualFundType::all()->pluck('name', 'name');
         $aimc_types = AimcType::all()->pluck('name', 'name');
 
-        return view('AMC.fund.edit', ['fund' => $fund, 'fund_types' => $fund_types, 'aimc_types' => $aimc_types]);
+        return view('fund.amc.edit', ['fund' => $fund, 'fund_types' => $fund_types, 'aimc_types' => $aimc_types]);
     }
 
     /**
@@ -266,7 +267,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $navs = $fund->navs()->create($request->all());
+        foreach ($request->navs as $nav) {
+            $fund->navs()->create($nav);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'nav-daily']);
     }
@@ -308,7 +311,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $fund_managers = $fund->fund_managers()->create(['name' => $request->manager_name, 'position' => $request->manager_position, 'management_date' => $request->management_date]);
+        foreach ($request->managers as $manager) {
+            $fund->fund_managers()->create($manager);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'lists-of-the-fund-manager']);
     }
@@ -351,7 +356,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $dividends = $fund->dividend_payments()->create($request->all());
+        foreach ($request->dividends as $dividend) {
+            $fund->dividend_payments()->create($dividend);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'historical-dividend-payment']);
     }
@@ -415,7 +422,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $dividends = $fund->holding_companies()->create($request->all());
+        foreach ($request->companies as $company) {
+            $fund->holding_companies()->create($company);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'portfolio']);
     }
@@ -457,7 +466,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $dividends = $fund->fees()->create($request->all());
+        foreach ($request->fees as $fee) {
+            $fund->fees()->create($fee);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
@@ -489,7 +500,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $expense = $fund->expenses()->create($request->all());
+        foreach ($request->expenses as $expense) {
+            $fund->expenses()->create($expense);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
@@ -521,7 +534,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $purchase_detail = $fund->purchase_details()->create($request->all());
+        foreach ($request->purchases as $purchase) {
+            $fund->purchase_details()->create($purchase);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
@@ -553,9 +568,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $past_performance = $fund->past_performances()->create(['date' => $request->date]);
+        $past_performance = $fund->past_performances()->create(['date' => $request->performance_date]);
 
-        foreach ($request->data as $data) {
+        foreach ($request->past_performances as $data) {
             $past_performance->records()->create($data);
         }
 
@@ -574,7 +589,7 @@ class FundController extends Controller
         $past_performance = PastPerformance::find($id);
         $past_performance->update(['date' => $request->date]);
 
-        foreach ($request->data as $key => $data) {
+        foreach ($request->past_performances as $key => $data) {
             $record = PastPerformanceRecord::find($key);
             if($record != null) {
                 $record->update($data);
