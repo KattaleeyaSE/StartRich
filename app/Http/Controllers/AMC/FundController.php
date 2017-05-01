@@ -16,6 +16,7 @@ use App\Models\AssetAllocation;
 use App\Models\HoldingCompany;
 use App\Models\Fee;
 use App\Models\PurchaseDetail;
+use App\Models\Expense;
 use App\Models\PastPerformance;
 use App\Models\PastPerformanceRecord;
 use Illuminate\Support\Facades\Mail;
@@ -495,7 +496,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $expense = $fund->expenses()->create($request->all());
+        foreach ($request->expenses as $expense) {
+            $fund->expenses()->create($expense);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
