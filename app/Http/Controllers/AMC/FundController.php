@@ -527,7 +527,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $purchase_detail = $fund->purchase_details()->create($request->all());
+        foreach ($request->purchases as $purchase) {
+            $fund->purchase_details()->create($purchase);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
