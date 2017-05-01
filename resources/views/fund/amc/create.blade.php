@@ -9,10 +9,56 @@
 
 				{!! Form::open(['route' => 'amc.fund.store', 'class' => 'form-horizontal', 'id' => 'form-fund']) !!}
 
+				    <h3>Fund</h3>
+				    <section>
+				    	@include('fund.amc.partials._form-fund')
+				    </section>
+
 				    <h3>NAV</h3>
 				    <section>
 				    	@include('fund.amc.partials._form-nav')
 				    </section>
+
+				    <h3>Investment Policy</h3>
+				    <section>
+				    	@include('fund.amc.partials._form-investment-policy')
+				    </section>
+
+				    <h3>Types of Investor</h3>
+				    <section>
+				    	@include('fund.amc.partials._form-types-of-investor')
+				    </section>
+
+				    <h3>Major Risk Factor</h3>
+				    <section>
+				    	@include('fund.amc.partials._form-major-risk-factor')
+				    </section>
+
+                    <h3>Fund Manager</h3>
+                    <section>
+                        @include('fund.amc.partials._form-manager')
+                    </section>
+
+                    <h3>Subscription & Redemption</h3>
+                    <section>
+                        @include('fund.amc.partials._form-subscription')
+                    </section>
+
+                    <h3>Past Performance</h3>
+                    <section>
+                        @include('fund.amc.partials._form-performance')
+                    </section>
+
+                    <h3>Dividend Payment</h3>
+                    <section>
+                        @include('fund.amc.partials._form-dividend')
+                    </section>
+
+                    <h3>Portfolio</h3>
+                    <section>
+                        @include('fund.amc.partials._form-asset-allocation')
+                        @include('fund.amc.partials._form-holding')
+                    </section>
 
 				{!! Form::close() !!}
             </div>
