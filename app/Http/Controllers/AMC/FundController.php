@@ -461,7 +461,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $dividends = $fund->fees()->create($request->all());
+        foreach ($request->fees as $fee) {
+            $fund->fees()->create($fee);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
