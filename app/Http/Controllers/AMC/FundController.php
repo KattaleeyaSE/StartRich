@@ -214,7 +214,7 @@ class FundController extends Controller
         $fund_types = MutualFundType::all()->pluck('name', 'name');
         $aimc_types = AimcType::all()->pluck('name', 'name');
 
-        return view('AMC.fund.edit', ['fund' => $fund, 'fund_types' => $fund_types, 'aimc_types' => $aimc_types]);
+        return view('fund.amc.edit', ['fund' => $fund, 'fund_types' => $fund_types, 'aimc_types' => $aimc_types]);
     }
 
     /**
