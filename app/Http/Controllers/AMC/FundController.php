@@ -66,7 +66,7 @@ class FundController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validate = [
             'name' => 'required',
             'code' => 'required',
             'type' => 'required',
@@ -113,7 +113,39 @@ class FundController extends Controller
             'cash' => 'required',
             'bond' => 'required',
             'other' => 'required',
-        ]);
+            'performance_date' => 'required',
+        ];        
+        foreach ($request->past_performances as $key => $value) {
+            $validate['past_performances.'.$key.'.name'] = 'required';
+            $validate['past_performances.'.$key.'.3month'] = 'required';
+            $validate['past_performances.'.$key.'.6month'] = 'required';
+            $validate['past_performances.'.$key.'.1year'] = 'required';
+            $validate['past_performances.'.$key.'.3year'] = 'required';
+            $validate['past_performances.'.$key.'.5year'] = 'required';
+            $validate['past_performances.'.$key.'.10year'] = 'required';
+            $validate['past_performances.'.$key.'.since_inception'] = 'required';
+        }       
+        foreach ($request->managers as $key => $value) {
+            $validate['managers.'.$key.'.name'] = 'required';
+            $validate['managers.'.$key.'.position'] = 'required';
+            $validate['managers.'.$key.'.management_date'] = 'required';
+        }     
+        foreach ($request->navs as $key => $value) {
+            $validate['navs.'.$key.'.modified_date'] = 'required';
+            $validate['navs.'.$key.'.standard'] = 'required';
+            $validate['navs.'.$key.'.bid'] = 'required';
+            $validate['navs.'.$key.'.offer'] = 'required';
+        }
+        foreach ($request->dividends as $key => $value) {
+            $validate['dividends.'.$key.'.payment_date'] = 'required';
+            $validate['dividends.'.$key.'.dividend_price'] = 'required';
+        }
+        foreach ($request->companies as $key => $value) {
+            $validate['companies.'.$key.'.name'] = 'required';
+            $validate['companies.'.$key.'.percentage'] = 'required';
+        }
+
+        $this->validate($request, $validate);
 
         $amc_id = Auth::user()->amc->id;
         $fund = $this->mutualFundRepository->create($request, $amc_id);
