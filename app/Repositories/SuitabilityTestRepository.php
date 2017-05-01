@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\IRepositories\ISuitabilityTestRepository;
 
 use App\Models\SuitabilityTest;
-use App\Models\SuitabilityTestFund;
 use App\Models\SuitabilityTestResult;
 use App\Models\SuitabilityQuestion;
 use App\Models\SuitabilityQuestionAnswer;
@@ -15,7 +14,6 @@ use Illuminate\Http\Request;
 class SuitabilityTestRepository implements ISuitabilityTestRepository
 {
     private $suitabilityTest;
-    private $suitabilityTestFund;
     private $suitabilityTestResult;
     private $suitabilityTestQuestion;
     private $suitabilityTestAnswer;
@@ -23,7 +21,6 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
     private $suitabilityAssetTest;
     public function __construct(
             SuitabilityTest $suitabilityTest,
-            SuitabilityTestFund $suitabilityTestFund,
             SuitabilityTestResult $suitabilityTestResult,
             SuitabilityQuestion $suitabilityTestQuestion,
             SuitabilityQuestionAnswer $suitabilityTestAnswer,
@@ -32,7 +29,6 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
         )
     {
         $this->suitabilityTest = $suitabilityTest;
-        $this->suitabilityTestFund = $suitabilityTestFund;
         $this->suitabilityTestResult = $suitabilityTestResult;
         $this->suitabilityTestQuestion = $suitabilityTestQuestion;
         $this->suitabilityTestAnswer = $suitabilityTestAnswer;
@@ -227,27 +223,4 @@ class SuitabilityTestRepository implements ISuitabilityTestRepository
         return $suitabilityAssetTest->delete();
     }     
 
-    public function find_fund_test($id)
-    {
-        return $this->suitabilityTestFund->find($id);
-    }  
-
-    public function find_fund_test_by_result_id($id)
-    {
-        return $this->suitabilityTestFund->where('suitability_result_id','=',$id)->get();
-    }  
-
-    public function create_fund_test(Request $request)
-    {
-        return $this->suitabilityTestFund->create($request->all());        
-    }    
-
-     public function delete_fund_test($id)
-    {
-        $suitabilityTestFund = $this->find_fund_test($id);  
-        if (is_null($suitabilityTestFund)) {
-            return false;
-        }
-        return $suitabilityTestFund->delete();
-    }     
 }

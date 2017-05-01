@@ -76,7 +76,7 @@ class EstimateProfitService implements IEstimateProfitService
                 }
                 else
                 {
-                    $return_profit_total = $estimate_item->balance_of_investment - $return_profit;
+                    $return_profit_total = $estimate_item->balance_of_investment + $return_profit;
                 }
 
                 $result->push([
