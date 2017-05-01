@@ -266,7 +266,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $navs = $fund->navs()->create($request->all());
+        foreach ($request->navs as $nav) {
+            $fund->navs()->create($nav);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'nav-daily']);
     }
