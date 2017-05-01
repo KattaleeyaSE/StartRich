@@ -3,7 +3,7 @@
 		<div class="col-md-2">
 				<div class="form-group{{ $errors->has('navs.*.modified_date') ? ' has-error' : '' }}">
 				    {!! Form::label('navs[ROW_INDEX][modified_date]', 'Modified Date *', ['class' => 'control-label']) !!}
-				    {!! Form::text('navs[ROW_INDEX][modified_date]', null,['class' => 'form-control']) !!}
+				    {!! Form::date('navs[ROW_INDEX][modified_date]', null,['class' => 'form-control']) !!}
 				        @if ($errors->has('navs[ROW_INDEX][modified_date]'))
 				            <span class="help-block">
 				                <strong>{{ $errors->first('navs.*.modified_date') }}</strong>

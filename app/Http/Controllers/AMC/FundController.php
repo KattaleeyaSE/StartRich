@@ -113,7 +113,18 @@ class FundController extends Controller
             'cash' => 'required',
             'bond' => 'required',
             'other' => 'required',
+            'performance_date' => 'required',
         ];        
+        foreach ($request->past_performances as $key => $value) {
+            $validate['past_performances.'.$key.'.name'] = 'required';
+            $validate['past_performances.'.$key.'.3month'] = 'required';
+            $validate['past_performances.'.$key.'.6month'] = 'required';
+            $validate['past_performances.'.$key.'.1year'] = 'required';
+            $validate['past_performances.'.$key.'.3year'] = 'required';
+            $validate['past_performances.'.$key.'.5year'] = 'required';
+            $validate['past_performances.'.$key.'.10year'] = 'required';
+            $validate['past_performances.'.$key.'.since_inception'] = 'required';
+        }       
         foreach ($request->managers as $key => $value) {
             $validate['managers.'.$key.'.name'] = 'required';
             $validate['managers.'.$key.'.position'] = 'required';
