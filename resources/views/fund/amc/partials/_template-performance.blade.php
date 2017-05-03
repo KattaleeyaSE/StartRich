@@ -3,7 +3,7 @@
 		<div class="col-md-2">
 			<div class="form-group{{ $errors->has('past_performances.*.name') ? ' has-error' : '' }}">
 			    {!! Form::label('past_performances[ROW_INDEX][name]', 'Name *', ['class' => 'control-label']) !!}
-			    {!! Form::text('past_performances[ROW_INDEX][name]', 'DEFAULT_ROW_NAME',['class' => 'form-control required']) !!}
+			    {!! Form::text('past_performances[ROW_INDEX][name]', 'DEFAULT_ROW_NAME',['class' => 'form-control required', 'readonly' => 'readonly']) !!}
 			        @if ($errors->has('past_performances[ROW_INDEX][name]'))
 			            <span class="help-block">
 			                <strong>{{ $errors->first('past_performances.*.name') }}</strong>

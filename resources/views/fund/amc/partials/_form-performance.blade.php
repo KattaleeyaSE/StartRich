@@ -15,7 +15,7 @@
 	<div class="col-md-2">
 		<div class="form-group{{ $errors->has('past_performances.*.name') ? ' has-error' : '' }}">
 		    {!! Form::label('past_performances[0][name]', 'Name *', ['class' => 'control-label']) !!}
-		    {!! Form::text('past_performances[0][name]', null,['class' => 'form-control required']) !!}
+		    {!! Form::text('past_performances[0][name]', null,['class' => 'form-control required', 'id' => 'create-fund-return', 'readonly' => 'readonly']) !!}
 		        @if ($errors->has('past_performances[0][name]'))
 		            <span class="help-block">
 		                <strong>{{ $errors->first('past_performances.*.name') }}</strong>
@@ -106,7 +106,7 @@
 	<div class="col-md-2">
 		<div class="form-group{{ $errors->has('past_performances.*.name') ? ' has-error' : '' }}">
 		    {!! Form::label('past_performances[3][name]', 'Name *', ['class' => 'control-label']) !!}
-		    {!! Form::text('past_performances[3][name]', 'Benchmark 1',['class' => 'form-control required']) !!}
+		    {!! Form::text('past_performances[3][name]', 'Benchmark 1',['class' => 'form-control required', 'readonly' => 'readonly']) !!}
 		        @if ($errors->has('past_performances[3][name]'))
 		            <span class="help-block">
 		                <strong>{{ $errors->first('past_performances.*.name') }}</strong>
@@ -197,7 +197,7 @@
 	<div class="col-md-2">
 		<div class="form-group{{ $errors->has('past_performances.*.name') ? ' has-error' : '' }}">
 		    {!! Form::label('past_performances[1][name]', 'Name *', ['class' => 'control-label']) !!}
-		    {!! Form::text('past_performances[1][name]', 'Information Ratio',['class' => 'form-control required']) !!}
+		    {!! Form::text('past_performances[1][name]', 'Information Ratio',['class' => 'form-control required', 'readonly' => 'readonly']) !!}
 		        @if ($errors->has('past_performances[1][name]'))
 		            <span class="help-block">
 		                <strong>{{ $errors->first('past_performances.*.name') }}</strong>
@@ -288,7 +288,7 @@
 	<div class="col-md-2">
 		<div class="form-group{{ $errors->has('past_performances.*.name') ? ' has-error' : '' }}">
 		    {!! Form::label('past_performances[2][name]', 'Name *', ['class' => 'control-label']) !!}
-		    {!! Form::text('past_performances[2][name]', 'Standard Deviation',['class' => 'form-control required']) !!}
+		    {!! Form::text('past_performances[2][name]', 'Standard Deviation',['class' => 'form-control required', 'readonly' => 'readonly']) !!}
 		        @if ($errors->has('past_performances[2][name]'))
 		            <span class="help-block">
 		                <strong>{{ $errors->first('past_performances.*.name') }}</strong>

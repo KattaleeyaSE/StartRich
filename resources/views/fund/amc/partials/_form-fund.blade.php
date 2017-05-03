@@ -1,7 +1,7 @@
 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
     {!! Form::label('name', 'Name *', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12', 'for' => 'name']) !!}
     <div class="col-md-6 col-sm-6 col-xs-12">
-    {!! Form::text('name', null,['class' => 'form-control col-md-7 col-xs-12 required']) !!}
+    {!! Form::text('name', null,['class' => 'form-control col-md-7 col-xs-12 required', 'id' => 'create-fund-name']) !!}
     </div>
         @if ($errors->has('name'))
             <span class="help-block">

@@ -97,6 +97,7 @@
 		    autoFocus: true,
             onStepChanging: function (event, currentIndex, newIndex)
             {
+                $("#create-fund-return").val($("#create-fund-name").val());
                 form.validate().settings.ignore = ":disabled,:hidden";
                 return form.valid();
             },
