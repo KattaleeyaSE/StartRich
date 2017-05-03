@@ -18,8 +18,15 @@ class CreateSuitabilityTestResultsTable extends Migration
             $table->integer('max_score')->unsigned();
             $table->integer('min_score')->unsigned(); 
             $table->string('type_of_investors')->nullable();
+            $table->integer('risk_level')->nullable();
             $table->integer('suitability_test_id')->unsigned();
             $table->foreign('suitability_test_id')
+                ->references('id')
+                ->on('suitability_tests')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');       
+            $table->integer('mutual_fund_type_id')->unsigned()->nullable();        
+            $table->foreign('mutual_fund_type_id')
                 ->references('id')
                 ->on('suitability_tests')
                 ->onDelete('cascade')
