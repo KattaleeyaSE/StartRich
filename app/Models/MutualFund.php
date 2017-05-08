@@ -71,11 +71,16 @@ class MutualFund extends investment
         return $users;
     }
 
-    public function lastPastPerforamce()
+    public function lastPastPerformance()
     {
         $max_date = $this->past_performances->max('date');
 
         return $this->past_performances->where('date', $max_date)->first();
+    }
+
+    public function lastPastPerforamce()
+    {
+        return $this->lastPastPerformance();
     }
 
     public function reviewedByMember($member_id)

@@ -16,6 +16,7 @@ use App\Models\AssetAllocation;
 use App\Models\HoldingCompany;
 use App\Models\Fee;
 use App\Models\PurchaseDetail;
+use App\Models\Expense;
 use App\Models\PastPerformance;
 use App\Models\PastPerformanceRecord;
 use Illuminate\Support\Facades\Mail;
@@ -66,6 +67,87 @@ class FundController extends Controller
      */
     public function store(Request $request)
     {
+        $validate = [
+            'name' => 'required',
+            'code' => 'required',
+            'type' => 'required',
+            'aimc_type' => 'required',
+            'management_company' => 'required',
+            'trustee' => 'required',
+            'payment_policy' => 'required',
+            'frequency' => 'required',
+            'approved_by' => 'required',
+            'supervision' => 'required',
+            'protected_fund' => 'required',
+            'name_of_guarantor' => 'required',
+            'fund_start' => 'required',
+            'fund_end' => 'required',
+            'risk_level' => 'required',
+            'net_asset_value' => 'required',
+            'investment_asset_detail' => 'required',
+            'strategy_detail' => 'required',
+            'factor_impact' => 'required',
+            'benchmark_detail' => 'required',
+            'type_of_investor' => 'required',
+            'major_risk_factor' => 'required',
+            'fees.*.front_end_fee' => 'required',
+            'fees.*.actual_front_end_fee' => 'required',
+            'fees.*.back_end_fee' => 'required',
+            'fees.*.actual_back_end_fee' => 'required',
+            'fees.*.switching_fee' => 'required',
+            'purchases.*.subscription_period' => 'required',
+            'purchases.*.min_first_purchase' => 'required',
+            'purchases.*.min_additional' => 'required',
+            'purchases.*.redemtion_period' => 'required',
+            'purchases.*.min_redemption' => 'required',
+            'purchases.*.min_balance' => 'required',
+            'purchases.*.settlement_period' => 'required',
+            'expenses.*.manager_fee' => 'required',
+            'expenses.*.actual_manager_fee' => 'required',
+            'expenses.*.total_expense_ratio' => 'required',
+            'expenses.*.trustee_fee' => 'required',
+            'expenses.*.actual_trustee_fee' => 'required',
+            'expenses.*.registrar_fee' => 'required',
+            'expenses.*.actual_registrar_fee' => 'required',
+            'expenses.*.other_fee' => 'required',
+            'stock' => 'required',
+            'cash' => 'required',
+            'bond' => 'required',
+            'other' => 'required',
+            'performance_date' => 'required',
+        ];        
+        foreach ($request->past_performances as $key => $value) {
+            $validate['past_performances.'.$key.'.name'] = 'required';
+            $validate['past_performances.'.$key.'.3month'] = 'required';
+            $validate['past_performances.'.$key.'.6month'] = 'required';
+            $validate['past_performances.'.$key.'.1year'] = 'required';
+            $validate['past_performances.'.$key.'.3year'] = 'required';
+            $validate['past_performances.'.$key.'.5year'] = 'required';
+            $validate['past_performances.'.$key.'.10year'] = 'required';
+            $validate['past_performances.'.$key.'.since_inception'] = 'required';
+        }       
+        foreach ($request->managers as $key => $value) {
+            $validate['managers.'.$key.'.name'] = 'required';
+            $validate['managers.'.$key.'.position'] = 'required';
+            $validate['managers.'.$key.'.management_date'] = 'required';
+        }     
+        foreach ($request->navs as $key => $value) {
+            $validate['navs.'.$key.'.modified_date'] = 'required';
+            $validate['navs.'.$key.'.standard'] = 'required';
+            $validate['navs.'.$key.'.bid'] = 'required';
+            $validate['navs.'.$key.'.offer'] = 'required';
+        }
+        foreach ($request->dividends as $key => $value) {
+            $validate['dividends.'.$key.'.payment_date'] = 'required';
+            $validate['dividends.'.$key.'.dividend_price'] = 'required';
+        }
+        foreach ($request->companies as $key => $value) {
+            $validate['companies.'.$key.'.name'] = 'required';
+            $validate['companies.'.$key.'.percentage'] = 'required';
+        }
+
+        $this->validate($request, $validate);
+
         $amc_id = Auth::user()->amc->id;
         $fund = $this->mutualFundRepository->create($request, $amc_id);
 
@@ -97,8 +179,8 @@ class FundController extends Controller
 
         $past_performance = $fund->past_performances()->create(['date' => $request->performance_date]);
 
-        foreach ($request->past_performances as $past_performances) {
-            $past_performance->records()->create($past_performances);
+        foreach ($request->past_performances as $record) {
+            $past_performance->records()->create($record);
         }
 
         foreach ($request->expenses as $expense) {
@@ -133,7 +215,7 @@ class FundController extends Controller
         $fund_types = MutualFundType::all()->pluck('name', 'name');
         $aimc_types = AimcType::all()->pluck('name', 'name');
 
-        return view('AMC.fund.edit', ['fund' => $fund, 'fund_types' => $fund_types, 'aimc_types' => $aimc_types]);
+        return view('fund.amc.edit', ['fund' => $fund, 'fund_types' => $fund_types, 'aimc_types' => $aimc_types]);
     }
 
     /**
@@ -185,7 +267,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $navs = $fund->navs()->create($request->all());
+        foreach ($request->navs as $nav) {
+            $fund->navs()->create($nav);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'nav-daily']);
     }
@@ -227,7 +311,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $fund_managers = $fund->fund_managers()->create(['name' => $request->manager_name, 'position' => $request->manager_position, 'management_date' => $request->management_date]);
+        foreach ($request->managers as $manager) {
+            $fund->fund_managers()->create($manager);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'lists-of-the-fund-manager']);
     }
@@ -270,7 +356,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $dividends = $fund->dividend_payments()->create($request->all());
+        foreach ($request->dividends as $dividend) {
+            $fund->dividend_payments()->create($dividend);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'historical-dividend-payment']);
     }
@@ -334,7 +422,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $dividends = $fund->holding_companies()->create($request->all());
+        foreach ($request->companies as $company) {
+            $fund->holding_companies()->create($company);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'portfolio']);
     }
@@ -376,7 +466,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $dividends = $fund->fees()->create($request->all());
+        foreach ($request->fees as $fee) {
+            $fund->fees()->create($fee);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
@@ -408,7 +500,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $expense = $fund->expenses()->create($request->all());
+        foreach ($request->expenses as $expense) {
+            $fund->expenses()->create($expense);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
@@ -440,7 +534,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $purchase_detail = $fund->purchase_details()->create($request->all());
+        foreach ($request->purchases as $purchase) {
+            $fund->purchase_details()->create($purchase);
+        }
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'subscription-and-redemption-detail']);
     }
@@ -472,9 +568,9 @@ class FundController extends Controller
     {
         $fund = $this->mutualFundRepository->find($id);
 
-        $past_performance = $fund->past_performances()->create(['date' => $request->date]);
+        $past_performance = $fund->past_performances()->create(['date' => $request->performance_date]);
 
-        foreach ($request->data as $data) {
+        foreach ($request->past_performances as $data) {
             $past_performance->records()->create($data);
         }
 
@@ -493,7 +589,7 @@ class FundController extends Controller
         $past_performance = PastPerformance::find($id);
         $past_performance->update(['date' => $request->date]);
 
-        foreach ($request->data as $key => $data) {
+        foreach ($request->past_performances as $key => $data) {
             $record = PastPerformanceRecord::find($key);
             if($record != null) {
                 $record->update($data);

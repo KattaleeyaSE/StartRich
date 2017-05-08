@@ -17,6 +17,13 @@
             </thead>
             <tbody>
                 @foreach($funds as $fund)
+
+                    @php
+                        $hasPastPerformance = !is_null($fund->lastPastPerformance());
+
+                        $hasFundReturn = $hasPastPerformance ? !is_null($fund->lastPastPerformance()->fundReturn()) : false;
+                    @endphp
+
                     <tr align="center">
                         <td id="chckbx-past-performance" class="td-chckbx" style="vertical-align: middle;">
                             {!! Form::checkbox('chckbx', null, 0, ['id' => 'chckbx'.$fund->id]) !!}
@@ -27,25 +34,25 @@
                             {{$fund->name}}
                         </td>
                         <td style="vertical-align: middle;">
-                            {{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->threemonth : '-'}}
+                            {{ ($hasPastPerformance && $hasFundReturn) ? $fund->lastPastPerforamce()->fundReturn()->threemonth : '-'}}
                         </td>
                         <td style="vertical-align: middle;">
-                            {{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->sixmonth : '-'}}
+                            {{ ($hasPastPerformance && $hasFundReturn) ? $fund->lastPastPerforamce()->fundReturn()->sixmonth : '-'}}
                         </td>
                         <td style="vertical-align: middle;">
-                            {{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->oneyear : '-'}}
+                            {{ ($hasPastPerformance && $hasFundReturn) ? $fund->lastPastPerforamce()->fundReturn()->oneyear : '-'}}
                         </td>
                         <td style="vertical-align: middle;">
-                            {{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->threeyear : '-'}}
+                            {{ ($hasPastPerformance && $hasFundReturn) ? $fund->lastPastPerforamce()->fundReturn()->threeyear : '-'}}
                         </td>
                         <td style="vertical-align: middle;">
-                            {{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->fiveyear : '-'}}
+                            {{ ($hasPastPerformance && $hasFundReturn) ? $fund->lastPastPerforamce()->fundReturn()->fiveyear : '-'}}
                         </td>
                         <td style="vertical-align: middle;">
-                            {{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->tenyear : '-'}}
+                            {{ ($hasPastPerformance && $hasFundReturn) ? $fund->lastPastPerforamce()->fundReturn()->tenyear : '-'}}
                         </td>
                         <td style="vertical-align: middle;">
-                            {{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->since_inception : '-'}}
+                            {{ ($hasPastPerformance && $hasFundReturn) ? $fund->lastPastPerforamce()->fundReturn()->since_inception : '-'}}
                         </td>
                         <td style="vertical-align: middle;" class="td-actions">
                             {!! Form::open(['route' => ['member.fund.favorite', $fund->id], 'method' => 'PATCH']) !!}

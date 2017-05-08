@@ -68,20 +68,14 @@ class SuitabilityTestService implements ISuitabilityTestService
                 $newRequest->offsetSet('max_score',$result['max_score']);
                 $newRequest->offsetSet('min_score',$result['min_score']);
                 $newRequest->offsetSet('type_of_investors',$result['type_of_investors']);                
-                $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);            
-
-                $suitabilityTestResult = $this->suitabilityTestRepository->create_result($newRequest); 
-
-                if(isset($result['funds']) && !is_null($result['funds']))
+                $newRequest->offsetSet('risk_level',$result['risk_level']);                 
+                $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);   
+                if(isset($result['funds']['id']) && !is_null($result['funds']['id']))
                 {
-                    foreach($result['funds'] as  $key => $item)
-                    {   
-                        $newRequest = new Request(); 
-                        $newRequest->offsetSet('invest_id',$item['id']);
-                        $newRequest->offsetSet('suitability_result_id',$suitabilityTestResult->id); 
-                        $this->suitabilityTestRepository->create_fund_test($newRequest); 
-                    }
-                }    
+                    $newRequest->offsetSet('mutual_fund_type_id',$result['funds']['id']);   
+                }          
+
+                $suitabilityTestResult = $this->suitabilityTestRepository->create_result($newRequest);     
 
                 if(isset($result['asset']) && !is_null($result['asset']))
                 {
@@ -216,8 +210,12 @@ class SuitabilityTestService implements ISuitabilityTestService
                     $newRequest = new Request(); 
                     $newRequest->offsetSet('max_score',$result['max_score']);
                     $newRequest->offsetSet('min_score',$result['min_score']);
+                    $newRequest->offsetSet('risk_level',$result['risk_level']);
                     $newRequest->offsetSet('type_of_investors',$result['type_of_investors']);      
-
+                    if(isset($result['funds']['id']) && !is_null($result['funds']['id']))
+                    {
+                        $newRequest->offsetSet('mutual_fund_type_id',$result['funds']['id']);   
+                    }     
                    $this->suitabilityTestRepository->update_result($result['id'],$newRequest); 
                    $suitabilityTestResult = $this->suitabilityTestRepository->find_result($result['id']); 
 
@@ -228,29 +226,16 @@ class SuitabilityTestService implements ISuitabilityTestService
                     $newRequest = new Request(); 
                     $newRequest->offsetSet('max_score',$result['max_score']);
                     $newRequest->offsetSet('min_score',$result['min_score']);
-                    $newRequest->offsetSet('type_of_investors',$result['type_of_investors']);                
+                    $newRequest->offsetSet('type_of_investors',$result['type_of_investors']); 
+                    $newRequest->offsetSet('risk_level',$result['risk_level']);                                   
                     $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);            
-
+                    if(isset($result['funds']['id']) && !is_null($result['funds']['id']))
+                    {
+                        $newRequest->offsetSet('mutual_fund_type_id',$result['funds']['id']);   
+                    }  
                     $suitabilityTestResult = $this->suitabilityTestRepository->create_result($newRequest); 
 
-                } 
-
-                if(isset($result['funds']) && !is_null($result['funds']))
-                {   
-  
-                    foreach(  $this->suitabilityTestRepository->find_fund_test_by_result_id( $suitabilityTestResult ->id) as $item)
-                    {
-                        $this->suitabilityTestRepository->delete_fund_test($item->id); 
-                    }
-
-                    foreach($result['funds'] as  $key => $item)
-                    {   
-                        $newRequest = new Request(); 
-                        $newRequest->offsetSet('invest_id',$item['id']);
-                        $newRequest->offsetSet('suitability_result_id',$suitabilityTestResult->id); 
-                        $this->suitabilityTestRepository->create_fund_test($newRequest); 
-                    }
-                }
+                }  
 
                 if(isset($result['asset']) && !is_null($result['asset']))
                 {   

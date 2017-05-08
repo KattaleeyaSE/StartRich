@@ -57,7 +57,15 @@
                             </div> 
                         </div>
  
-
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Risk Level</label> 
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-control-static col-md-7 col-xs-12">
+                                    {{$test_result->risk_level}}
+                                </div> 
+                            </div> 
+                        </div>
+                        
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Investor</label> 
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -102,50 +110,21 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr> 
-                                        <th class="text-center">Type of Investor</th>
-                                        <th class="text-center">Risk Level</th>
-                                        <th class="text-center">Fund</th>
-                                        <th class="text-center">Description</th>
+                                        <th class="text-center">Type of Investor</th> 
+                                        <th class="text-center">Mutual Fund Type</th>
                                     </tr> 
                                 </thead>
                                 <tbody>
                                   @foreach($test_result->suitability_test->suitability_test_results as $result)
                                     
-                                    <tr>
-                                        <td {{sizeof($result->suitability_fund) > 1 ? 'rowspan='.sizeof($result->suitability_fund):''}}>
+                                     <tr>
+                                        <td>
                                             {{$result->type_of_investors}}
-                                        </td> 
-
-                                    @if(sizeof($result->suitability_fund ) == 1)
-                                        <td>{{$result->suitability_fund[0]->risk_level}}</td> 
-                                        <td><a href="">{{$result->suitability_fund[0]->name}}</a></td> 
-                                        <td>{{$result->suitability_fund[0]->investment_asset_detail}}</td>   
+                                        </td>  
+                                        <td>
+                                            <a href="{{url('/fund?type='.$result->fund_type->name)}}" target="_blank">{{$result->fund_type->name}}</a>
+                                        </td>  
                                     </tr> 
-                                    @elseif(sizeof($result->suitability_fund ) > 1) 
-
-                                        @foreach($result->suitability_fund as $key => $fund) 
-                                         @if($key == 0)
-                                                <td>{{$fund->risk_level}}</td> 
-                                                <td><a href="">{{$fund->name}}</a></td> 
-                                                <td>{{$fund->investment_asset_detail}}</td>   
-                                            </tr> 
-                                         @else 
-                                            <tr> 
-
-                                                    <td>{{$fund->risk_level}}</td> 
-                                                    <td><a href="">{{$fund->name}}</a></td> 
-                                                    <td>{{$fund->investment_asset_detail}}</td>   
-                                                
-                                            </tr>  
-                                         @endif 
-                                        @endforeach
-
-                                    @else
-                                        <td></td> 
-                                        <td></td> 
-                                        <td></td>   
-                                    </tr>  
-                                    @endif
 
                                   @endforeach
                                 </tbody>

@@ -90,13 +90,20 @@
                                     </div> 
                                 </div>
 
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Risk Level</label> 
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                       <input type="number" name="min_score[]" ng-model="result.risk_level" class="form-control col-md-7 col-xs-12" /> 
+                                    </div> 
+                                </div>
+
                                 {{--Funds Selection--}}
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Mutual fund</label> 
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Mutual fund type</label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <ui-select multiple ng-model="result.funds" theme="bootstrap">
+                                        <ui-select ng-model="result.funds" theme="bootstrap">
                                             <ui-select-match>
-                                                 <div ng-bind-html="bindHtml($item.name)"></div>
+                                                 <div ng-bind-html="result.funds.name"></div>
                                             </ui-select-match>
                                             <ui-select-choices repeat="fund in (funds | filter: $select.search) track by fund.id"> 
                                                  <div ng-bind-html="fund.name | highlight: $select.search"></div>

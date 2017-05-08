@@ -1,7 +1,11 @@
 <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username</label> 
     <div class="col-md-6 col-sm-6 col-xs-12">
+        @if($submit_text !='Edit')
         <input type="text" name="username" value="{{isset($member) ? $member->user->username : old('username')}}" class="form-control col-md-7 col-xs-12" /> 
+        @else
+         <input type="text" name="username" value="{{isset($member) ? $member->user->username : old('username')}}" class="form-control col-md-7 col-xs-12" readonly/> 
+        @endif
     </div>
     @if ($errors->has('username'))
         <div class="row">

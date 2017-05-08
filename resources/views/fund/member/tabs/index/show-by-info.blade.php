@@ -16,6 +16,13 @@
             </thead>
             <tbody>
                 @foreach($funds as $fund)
+
+                    @php
+                        $hasPastPerformance = !is_null($fund->lastPastPerformance());
+
+                        $hasFundReturn = $hasPastPerformance ? !is_null($fund->lastPastPerformance()->fundReturn()) : false;
+                    @endphp
+
                     <tr align="center">
                         <td id="chckbx-info" class="td-chckbx" style="vertical-align: middle;">{!! Form::checkbox('chckbx', null, 0, ['id' => 'chckbx'.$fund->id]) !!}</td>
                         <td style="vertical-align: middle;">
@@ -28,7 +35,7 @@
                         <td style="vertical-align: middle;">{{$fund->getRate()}}</td>
                         <td style="vertical-align: middle;">{{$fund->payment_policy ? 'YES' : 'NO'}}</td>
                         <td style="vertical-align: middle;">{{ !(is_null($fund->navs->first())) ? $fund->navs->first()->standard : '-'}}</td>
-                        <td style="vertical-align: middle;">{{ !(is_null($fund->lastPastPerforamce())) ? $fund->lastPastPerforamce()->fundReturn()->oneyear : '-'}}</td>
+                        <td style="vertical-align: middle;">{{ ($hasPastPerformance && $hasFundReturn) ? $fund->lastPastPerforamce()->fundReturn()->oneyear : '-'}}</td>
                         <td style="vertical-align: middle;" class="td-actions">
                             {!! Form::open(['route' => ['member.fund.favorite', $fund->id], 'method' => 'PATCH']) !!}
                                 @if($fund->isFavoriteBy(Auth::user()->member->id))

@@ -3,24 +3,20 @@
 
 <div class="row">
 	<div class="container">
-		{!! Form::open(['route' => ['amc.fund.store_holding_company', $fund->id], 'class' => 'form-horizontal', 'id' => 'form-fund']) !!}
+		{!! Form::model($fund, ['route' => ['amc.fund.update', $fund->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund']) !!}
 
-            <h3>Holding Company</h3>
-            <section>
-				@include('fund.amc.partials._form-holding')
-            </section>
+	        <h3>Fund Information</h3>
+	        <section>
+				@include('fund.amc.partials._form-fund')
+	        </section>
 			
 		{!! Form::close() !!}
-
-		@include('fund.amc.partials._template-holding')
-
 	</div>
 </div>
 
 @endsection
 
 @section('script')
-
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 	<script type="text/javascript">
@@ -40,6 +36,9 @@
 		    bodyTag: "section",
 		    transitionEffect: "slideLeft",
 		    autoFocus: true,
+		    onInit: function (event, current) {
+		        $('.actions > ul > li:first-child').attr('style', 'display:none');
+		    },
             onStepChanging: function (event, currentIndex, newIndex)
             {
                 form.validate().settings.ignore = ":disabled,:hidden";
@@ -57,19 +56,6 @@
             }
 		});
 	</script>
-
-    <!-- add field holding company -->
-    <script type="text/javascript">
-        var next_company_index = 1
-
-        $('#btn-add-company').click( function () {
-            var template = $('#template-company').html()
-            template = template.replace(new RegExp("ROW_INDEX", 'g'), next_company_index)
-            $('#pane-add-company').append(template)
-            next_company_index++
-        });
-    </script>
-
 @endsection
 
 @section('style')

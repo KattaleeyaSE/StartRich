@@ -20,6 +20,8 @@ class SuitabilityTestResult extends Model
             'max_score',
             'min_score',
             'type_of_investors',
+			'risk_level',
+			'mutual_fund_type_id',
             'suitability_test_id',
         ];
 
@@ -42,16 +44,17 @@ class SuitabilityTestResult extends Model
             return $this->belongsTo('App\Models\SuitabilityTest');
 		}
 
+		public function fund_type()
+		{
+            return $this->hasOne('App\Models\MutualFundType','id');
+		}
+
 		public function suitability_asset_test()
 		{
             return $this->belongsToMany('App\Models\SuitabilityAsset', 'suitability_asset_tests', 'suitability_result_id', 'suitability_asset_id')
 			->withPivot('id','percent');
 		}
 
-		public function suitability_fund()
-		{
-            return $this->belongsToMany('App\Models\MutualFund', 'suitability_test_funds', 'suitability_result_id', 'invest_id');
-		}
 	/*
 	|--------------------------------------------------------------------------
 	| SCOPES
