@@ -55,7 +55,7 @@ class SuitabilityAssetTest extends TestCase
 
     }
 
-    public function testGetRelationSuitabilityAssetSuitabilityAssetTest_Pivot_NotNull()
+    public function testGetRelationSuitabilityAssetSuitabilityAssetTest_Value_NotNull()
     {
         $test = SuitabilityAsset::first(); 
         $expected_first = [ 
