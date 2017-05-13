@@ -38,12 +38,12 @@ class SuitabilityTestMemberAnswer extends Model
  
 		public function suitability_test_member()
 		{
-            return $this->belongsTo('App\Models\SuitabilityTestMember');
+            return $this->belongsTo('App\Models\SuitabilityTestMember','suit_member_answer_id');
 		}
 
 		public function suitability_test_answer()
 		{
-            return $this->hasOne('App\Models\SuitabilityQuestionAnswer');
+            return $this->hasOne('App\Models\SuitabilityQuestionAnswer','id','suit_member_answer_id');
 		}
 
 	/*
