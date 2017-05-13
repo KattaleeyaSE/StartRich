@@ -47,5 +47,44 @@ class DividendPaymentTest extends TestCase
         $this->assertEquals($expected,$result);
     }
 
-    
+     /**
+      * @expectedException ErrorException 
+      * @expectedExceptionMessage Trying to get property of non-object
+      */
+    public function testGetRelationDividendPaymentFund_Null()
+    {
+        //Set 
+        $dividend = \App\Models\DividendPayment::find(9999); 
+        $dividend->fund;
+        //Test 
+        $this->assertNull($dividend);
+    }
+
+     public function testDividendPaymentGetYears_NotNull()
+    {
+        //Set 
+        $dividend = \App\Models\DividendPayment::first(); 
+
+        $expected = '2016';
+        $result = $dividend->getYear(); 
+
+        //Test 
+        $this->assertEquals($expected,$result);
+    }
+
+     /**
+      * @expectedException Error 
+      * @expectedExceptionMessage Call to a member function getYear() on null
+      */
+     public function testDividendPaymentGetYears_Null()
+    {
+        //Set 
+        $dividend = \App\Models\DividendPayment::find(9999); 
+
+        //$expected = '2016';
+        $result = $dividend->getYear(); 
+
+        //Test 
+        $this->assertNull($dividend);
+    }
 }
