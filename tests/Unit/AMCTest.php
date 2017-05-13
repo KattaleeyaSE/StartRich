@@ -33,10 +33,15 @@ class AMCTest extends TestCase
         $this->assertEquals($expected,$result);
     } 
 
+    /**
+      * @expectedException ErrorException 
+      * @expectedExceptionMessage Trying to get property of non-object
+      */
     public function testGetRelationAMCUser_Null()
     {
         //Set 
         $amc = \App\Models\AMC::find(9999);  
+        $amc->user;
         //Test 
         $this->assertNull($amc);
     } 

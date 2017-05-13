@@ -8,11 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AssetAllocationTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
+ 
     public function testGetRelationAssetAllocateFund_NotNull()
     {
         //Set 
@@ -49,5 +45,18 @@ class AssetAllocationTest extends TestCase
         unset($result['created_at']);
         $this->assertInstanceOf('\App\Models\MutualFund',$asset->fund);
         $this->assertEquals($expected,$result);
+    }
+ 
+     /**
+      * @expectedException ErrorException 
+      * @expectedExceptionMessage Trying to get property of non-object
+      */
+    public function testGetRelationAssetAllocateFund_Null()
+    {
+        //Set 
+        $asset = \App\Models\AssetAllocation::find(9999); 
+        $asset->fund;
+        //Test 
+        $this->assertNull($asset);
     }
 }

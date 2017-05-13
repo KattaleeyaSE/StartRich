@@ -30,10 +30,16 @@ class MemberTest extends TestCase
         $this->assertInstanceOf('\App\User',$member->user);
         $this->assertEquals($expected,$result);
     } 
+
+    /**
+      * @expectedException ErrorException 
+      * @expectedExceptionMessage Trying to get property of non-object
+      */    
     public function testGetRelationMemberUser_Null()
     {
         //Set 
         $member = \App\Models\Member::find(9999);  
+        $member->user;  
         //Test 
         $this->assertNull($member);
     } 

@@ -33,10 +33,15 @@ class AdminTest extends TestCase
         $this->assertEquals($expected,$result);
     } 
 
+    /**
+      * @expectedException ErrorException 
+      * @expectedExceptionMessage Trying to get property of non-object
+      */
     public function testGetRelationAdminUser_Null()
     {
         //Set 
         $admin = \App\Models\Admin::find(9999);  
+        $admin->user;
         //Test 
         $this->assertNull($admin);
     } 
