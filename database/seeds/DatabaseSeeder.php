@@ -30,5 +30,10 @@ class DatabaseSeeder extends Seeder
         $this->call(PastPerformancesTableSeeder::class);
         $this->call(PastPerformanceRecordsTableSeeder::class);
         $this->call(AssetAllocationsTableSeeder::class);
+        $this->call(ExpensesTableSeeder::class);
+        $this->call(FeesTableSeeder::class);
+        $this->call(FundManagersTableSeeder::class);
+        $this->call(FundReviewsTableSeeder::class);
+        $this->call(HoldingCompaniesTableSeeder::class);
     }
 }

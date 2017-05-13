@@ -40,6 +40,7 @@ class Nav extends investment
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    //Not use
     public function amc()
     {
         return $this->belongsTo('App\Models\MutualFund');
