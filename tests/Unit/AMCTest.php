@@ -18,7 +18,7 @@ class AMCTest extends TestCase
         $amc = \App\Models\AMC::first(); 
         $expected = [ 
                 'id' => 3,
-                'username' => 'amc',
+                'username' => 'amcmebmer',
                 'email' => 'amc@example.com',
             ];
 
@@ -31,5 +31,13 @@ class AMCTest extends TestCase
         
         $this->assertInstanceOf('\App\User',$amc->user);
         $this->assertEquals($expected,$result);
+    } 
+
+    public function testGetRelationAMCUser_Null()
+    {
+        //Set 
+        $amc = \App\Models\AMC::find(9999);  
+        //Test 
+        $this->assertNull($amc);
     } 
 }

@@ -30,4 +30,11 @@ class MemberTest extends TestCase
         $this->assertInstanceOf('\App\User',$member->user);
         $this->assertEquals($expected,$result);
     } 
+    public function testGetRelationMemberUser_Null()
+    {
+        //Set 
+        $member = \App\Models\Member::find(9999);  
+        //Test 
+        $this->assertNull($member);
+    } 
 }

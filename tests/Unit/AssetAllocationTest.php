@@ -32,8 +32,8 @@ class AssetAllocationTest extends TestCase
                 "supervision" => "supervision",
                 "protected_fund" => 1,
                 "name_of_guarantor" => "name_of_guarantor",
-                "fund_start" => "2017-04-22",
-                "fund_end" => "2017-04-22",
+                'fund_start' => '2017-05-13',
+                'fund_end' => '2017-05-13',
                 "risk_level" => 1,
                 "net_asset_value" => 1,
                 "investment_asset_detail" => "investment_asset_detail",
@@ -43,11 +43,10 @@ class AssetAllocationTest extends TestCase
                 "type_of_investor" => "type_of_investor",
                 "major_risk_factor" => "major_risk_factor",
             ];
-        //Test
+        //Test 
         $result = $asset->fund->getAttributes(); 
         unset($result['updated_at']);
         unset($result['created_at']);
-        
         $this->assertInstanceOf('\App\Models\MutualFund',$asset->fund);
         $this->assertEquals($expected,$result);
     }

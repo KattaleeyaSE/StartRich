@@ -32,4 +32,12 @@ class AdminTest extends TestCase
         $this->assertInstanceOf('\App\User',$admin->user);
         $this->assertEquals($expected,$result);
     } 
+
+    public function testGetRelationAdminUser_Null()
+    {
+        //Set 
+        $admin = \App\Models\Admin::find(9999);  
+        //Test 
+        $this->assertNull($admin);
+    } 
 }
