@@ -59,7 +59,7 @@ class EstimateProfitService implements IEstimateProfitService
 
                 if($total_dividend > 0)
                 {  
-                    $return_profit_percent = (($bid_value + $total_dividend) - $estimate_item->balance_of_investment) /100;
+                    $return_profit_percent = (($bid_value + $total_dividend) - $estimate_item->balance_of_investment) / $estimate_item->balance_of_investment;
                     $return_profit_percent = $return_profit_percent * 100;
                 }
                 else
