@@ -35,5 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FundManagersTableSeeder::class);
         $this->call(FundReviewsTableSeeder::class);
         $this->call(HoldingCompaniesTableSeeder::class);
+        $this->call(PortfoliosTableSeeder::class);
+        $this->call(MemberFundTableSeeder::class);
     }
 }
