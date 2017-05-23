@@ -1170,4 +1170,80 @@ class FundTest extends TestCase
         $this->assertNull($result);
     }
           
+    public function testFundGetAssetAllocationData()
+    {
+        //Set 
+        $expect = [
+                0 => 123.0,
+                1 => 123.0,
+                2 => 123.0,
+                3 => 123.0
+        ];
+
+        //Test
+        $model = MutualFund::first();
+        $result = $model->getAssetAllocationData();
+
+        $this->assertEquals($expect,$result);         
+    }
+          
+    public function testFundGetUsers()
+    {
+        //Set 
+        $expect = [
+            "id" => 2,
+            "username" => "member",
+            "email" => "member@example.com"
+        ];
+
+        //Test
+        $model = MutualFund::first();
+        $result = $model->getUsers()[0]->getAttributes();
+        unset($result['password']);
+        unset($result['remember_token']);
+        unset($result['updated_at']);
+        unset($result['created_at']);      
+        $this->assertEquals($expect,$result);         
+    }
+
+    public function testFundGetLastPastPerformance()
+    {
+        //Set 
+        $expect = [
+            "id" => 13,
+            "fund_id" => 1,
+            "date" => "2017-04-17"
+        ];
+
+        //Test
+        $model = MutualFund::first();
+        $result = $model->lastPastPerformance()->getAttributes();
+        unset($result['updated_at']);
+        unset($result['created_at']);      
+ 
+        $this->assertEquals($expect,$result);         
+    }
+
+    public function testFundGetIsFavoriteBy()
+    {
+        //Set 
+        $expect = true;
+
+        //Test
+        $model = MutualFund::first();
+        $result = $model->isFavoriteBy(1); 
+ 
+        $this->assertEquals($expect,$result);         
+    }
+
+    public function testFundGetRate()
+    {
+        //Set 
+        $expect = 1;
+
+        //Test
+        $model = MutualFund::first();
+        $result = $model->getRate();  
+        $this->assertEquals($expect,$result);         
+    }
 }
