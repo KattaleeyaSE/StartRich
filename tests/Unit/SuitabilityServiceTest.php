@@ -16,86 +16,18 @@ class SuitabilityServiceTest extends TestCase
         //Set
         $service = $this->app->make('App\IServices\ISuitabilityTestService');
       
-        $expect = [ 
-                "amc_id" => 1,
-                "question_name" => "Name",
-                "description" => "Description",
-                "results" => [
-                 [
-                    "max_score" => 1,
-                    "min_score" => 10,
-                    "type_of_investors" => "Type",
-                    "funds" =>  [
-                        "id" => 5, 
-                    ],
-                    "risk_level" => 5,
-                    "asset" => [ 
-                        "allocate" => 1 
-                    ],
-                ],
-                [
-                    "max_score" => 11,
-                    "min_score" => 20,
-                    "type_of_investors" => null,
-                    "funds" => [
-                        "id" => 7, 
-                    ],
-                        "risk_level" => 6,
-                        "asset" => [ 
-                            "allocate" => 1 
-                        ],
-                ]
-                ],
-                "assets" => [
-                    [
-                     "name" => "Asset"
-                    ]
-                ],
-                "questions" =>[
-                   [ 
-                    "question" => "Question 1",
-                        "answers" => [
-                            [ 
-                                "answer" => "5",
-                                "score" => 10
-                            ],
-                            [ 
-                                "answer" => "10",
-                                "score" => 15
-                            ],
-                            [ 
-                                "answer" => "15",
-                                "score" => 20
-                            ]
-                        ]
-                    ],
-                    [ 
-                        "question" => "Question 2",
-                        "answers" => [
-                            [ 
-                                "answer" => "10",
-                                "score" => 1
-                            ],
-                            [ 
-                                "answer" => "20",
-                                "score" => 2
-                            ]
-                        ]
-                    ]
-                ],
-            "show_create_result" => false,
-            "show_add_question" => true
-        ];
-
+        $expectJson = '{"id":0,"amc_id":1,"question_name":"Name","description":"Description","results":[{"id":0,"max_score":1,"min_score":10,"type_of_investors":"Investor","funds":{"id":2,"name":"General fixed income fund","created_at":null,"updated_at":null},"risk_level":5,"asset":{"0":{"allocate":123}}},{"id":0,"max_score":11,"min_score":25,"type_of_investors":"Investor","funds":{"id":7,"name":"Fund of funds","created_at":null,"updated_at":null},"risk_level":6,"asset":{"0":{"allocate":12}}}],"assets":[{"id":0,"name":"Asset 1"}],"questions":[{"id":0,"question":"Question 1","answers":[{"id":0,"answer":"20","score":1},{"id":0,"answer":"25","score":2},{"id":0,"answer":"30","score":3}]}],"show_create_result":false,"show_add_question":true}';
+        $decodeExpect = json_decode($expectJson,true);      
         $expectRequest = new Request();
-        $expectRequest->offsetSet('question_name',$expect['question_name']);
-        $expectRequest->offsetSet('description',$expect['description']);
-        $expectRequest->offsetSet('amc_id',$expect['amc_id']);
-        $expectRequest->offsetSet('results',$expect['results']);
+        $expectRequest->offsetSet('question_name',$decodeExpect['question_name']);
+        $expectRequest->offsetSet('description',$decodeExpect['description']);
+        $expectRequest->offsetSet('assets',$decodeExpect['assets']);
+        $expectRequest->offsetSet('amc_id',$decodeExpect['amc_id']);
+        $expectRequest->offsetSet('results',$decodeExpect['results']);
  
         $result = $service->create_test($expectRequest);
 
-        dd($result);
+ 
         $this->assertEquals(true,true);   
     }
 
