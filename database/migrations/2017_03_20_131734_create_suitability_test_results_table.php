@@ -25,12 +25,7 @@ class CreateSuitabilityTestResultsTable extends Migration
                 ->on('suitability_tests')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');       
-            $table->integer('mutual_fund_type_id')->unsigned()->nullable();        
-            $table->foreign('mutual_fund_type_id')
-                ->references('id')
-                ->on('suitability_tests')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');           
+            $table->integer('mutual_fund_type_id')->unsigned()->nullable();               
             $table->timestamps();
         });
     }

@@ -8,7 +8,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\EstimateProfit;
 class EstimateProfitServiceTest extends TestCase
 {
- 
+    use DatabaseTransactions;
+
     public function testCalculation_NotNull()
     {
         //Set
@@ -91,8 +92,7 @@ class EstimateProfitServiceTest extends TestCase
         //Set
         $estimate_profit = EstimateProfit::find(9992);
         $service = $this->app->make('App\IServices\IEstimateProfitService');
- 
-
+  
         //Test
         $result = $service->calculation($estimate_profit->id); 
         
