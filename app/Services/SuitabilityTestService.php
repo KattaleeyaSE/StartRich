@@ -380,7 +380,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                 $suit_member_answer_request->offsetSet('suit_test_member_id', $suit_member->id);
 
                 $answer =  $this->suitabilityTestRepository->find_answer($answer_id); 
-
+             
                 $score  += $answer->score; 
 
                 $suit_member_answer = $this->suitabilityTestMemberRepository->create_answer($suit_member_answer_request);
@@ -390,6 +390,7 @@ class SuitabilityTestService implements ISuitabilityTestService
             $suit_member_request->offsetSet('score',  $score); 
  
             $this->suitabilityTestMemberRepository->update($suit_member->id,$suit_member_request);
+            $suit_member =  $this->suitabilityTestMemberRepository->find($suit_member->id);
         }
 
         return $suit_member ;
