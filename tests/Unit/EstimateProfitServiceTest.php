@@ -90,7 +90,7 @@ class EstimateProfitServiceTest extends TestCase
     public function testCalculation_Null()
     {
         //Set
-        $estimate_profit = EstimateProfit::find(9992);
+        $estimate_profit = EstimateProfit::find(9999);
         $service = $this->app->make('App\IServices\IEstimateProfitService');
   
         //Test
