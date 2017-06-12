@@ -16,7 +16,7 @@ class SimulatorService implements ISimulatorService
     public function create_simulator(Request $request)
     { 
         $file_name = $this->generateFileName();
-        $file_path = public_path().'\temp_r\\'.$file_name;
+        $file_path = storage_path('app\public').'\temp_r\\'.$file_name;
         dd($file_path);   
     }
 
