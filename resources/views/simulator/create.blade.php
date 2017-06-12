@@ -47,7 +47,7 @@
                 <div class="form-group">                     
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mutual_fund">Mutual fund</label> 
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <ui-select ng-model="selected.mutualFund" theme="bootstrap">
+                        <ui-select ng-model="selected.mutualFund" theme="bootstrap" on-select="onSelectedFund()">
                             <ui-select-match>
                                     <div ng-bind-html="bindHtml(selected.mutualFund.name)"></div>
                             </ui-select-match>
@@ -63,12 +63,16 @@
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <input 
                             type="text"  
+                            name="buy_date"  
                             moment-picker="buyDate" 
                             format="YYYY-MM-DD" 
                             ng-model="buyDate" 
                             class="form-control" 
-                            change="onBuyDateChange(newValue, oldValue)"
+                            change="onBuyDatePickerChange(newValue, oldValue)"
                             ng-required="true" 
+                            min-date="dateRange.buy_start"
+                            max-date="dateRange.buy_end"
+                            start-view="month"
                             disable="!selected.mutualFundType.id"
                         >
                     </div> 
@@ -78,12 +82,16 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="buy_date">Sell Date</label> 
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <input 
-                            type="text"  
+                            type="text"
+                            name="sell_date"  
                             moment-picker="sellDate" 
                             format="YYYY-MM-DD" 
                             ng-model="sellDate" 
                             class="form-control" 
-                            change="onSellDateChange(newValue, oldValue)"
+                            change="onSellDatePickerChange(newValue, oldValue)"
+                            min-date="dateRange.sell_start"
+                            max-date="dateRange.sell_end"
+                            start-view="month"
                             ng-required="true" 
                             disable="!buyDate"
                         >
@@ -105,7 +113,7 @@
                 </div>
 
                 <div class="sr-only">
-                    <input type="text" name="nav" value="<%selected.mutualFundType%>">
+                    <input type="text" name="fund_id" value="<%selected.mutualFund.id%>">
                 </div>
 
                 <div class="form-group">

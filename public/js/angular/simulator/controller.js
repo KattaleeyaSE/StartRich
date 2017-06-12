@@ -211,12 +211,12 @@ function($scope,$sce,EstimateProfitResource) {
     $scope.selected = {};
     $scope.funds = [];
     $scope.groupCompany = [];
+    $scope.dateRange = {};
 
     $scope.init = function ()
     {
         EstimateProfitResource.AllFunds().then(function(resp){
-            $scope.funds = resp.data;
-            
+            $scope.funds = resp.data; 
         });
     }; 
 
@@ -235,35 +235,27 @@ function($scope,$sce,EstimateProfitResource) {
        $scope.selected.mutualFundType = {};
        $scope.selected.mutualFund = {};
        $scope.buyDate = null;
-       $scope.offAtBuyDate = null;
+       $scope.sellDate = null;
     };
 
     $scope.onSelectedMutualFundType = function ()
     { 
         $scope.selected.mutualFund = {};
         $scope.buyDate = null;
-        $scope.offAtBuyDate = null;
+        $scope.sellDate = null;
     };
 
-    $scope.onBuyDateChange = function (newValue, oldValue)
-    { 
-        $scope.offAtBuyDate = null;
-        if(
-            $scope.selected.mutualFund 
-            && $scope.selected.mutualFund.navs 
-            && $scope.selected.mutualFund.navs.length > 0 
-            )
-            {
-                var nav =  $scope.selected.mutualFund.navs.filter(function(nav){
-                                return nav.modified_date == newValue.format("YYYY-MM-DD");
-                                
-                            });  
+    $scope.onSelectedFund = function ()
+    {
+        $scope.dateRange.buy_start = $scope.selected.mutualFund.fund_start;
+        $scope.dateRange.buy_end = $scope.selected.mutualFund.fund_end; 
+        $scope.dateRange.sell_start = $scope.selected.mutualFund.fund_start;
+        $scope.dateRange.sell_end = $scope.selected.mutualFund.fund_end; 
+    };
 
-                if(nav && nav.length > 0)
-                {
-                    $scope.offAtBuyDate = nav[0]; 
-                }
-            }   
+    $scope.onBuyDatePickerChange = function (newValue, oldValue)
+    { 
+        $scope.dateRange.sell_start = newValue;
     };
 
     $scope.create = function ()
