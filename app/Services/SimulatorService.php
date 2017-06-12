@@ -23,7 +23,7 @@ class SimulatorService implements ISimulatorService
     //https://stackoverflow.com/questions/23718375/how-to-integrate-php-and-r-on-windows
     public function calculation($filename)
     { 
-        $command = 'Rscript.exe D:\test.R';
+        $command = 'Rscript.exe '.$filename;
         $result = exec($command);
  
         echo $result;
