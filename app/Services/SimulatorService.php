@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use Carbon\Carbon;
+use Storage;
 use Illuminate\Http\Request;
 //R
- 
 
 //Service Container
 use App\IServices\ISimulatorService;
@@ -15,9 +15,11 @@ class SimulatorService implements ISimulatorService
 
     public function create_simulator(Request $request)
     { 
+        $fileContents = 'data<-c(1,2,3,4,5,6,7)'."\n";
+        $fileContents .= 'fit<-arima(data,order=c(1,0,1))'."\n";
         $file_name = $this->generateFileName();
-        $file_path = storage_path('app\public').'\temp_r\\'.$file_name;
-        dd($file_path);   
+        Storage::disk('local')->put('//public/r_temp/'.$file_name, $fileContents); 
+        dd($file_name);   
     }
 
     //https://stackoverflow.com/questions/23718375/how-to-integrate-php-and-r-on-windows
