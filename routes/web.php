@@ -42,7 +42,7 @@ Route::group(['prefix' => 'suitabilitytest'], function () {
 }); 
 
 
-// Suitability Test Routes
+// Estimate Profit Routes
 Route::group(['prefix' => 'estimateprofit'], function () {  
     Route::get('/index','EstimateProfit\EstimateProfitMemberController@index');   
     Route::get('/create','EstimateProfit\EstimateProfitMemberController@create');   
@@ -50,6 +50,12 @@ Route::group(['prefix' => 'estimateprofit'], function () {
     Route::get('/edit/{id}','EstimateProfit\EstimateProfitMemberController@edit');   
     Route::delete('/delete/{id}','EstimateProfit\EstimateProfitMemberController@destroy');   
 });
+
+// Simulator Routes
+Route::group(['prefix' => 'simulator'], function () {  
+    Route::get('/index','Simulator\SimulatorMemberController@index');   
+});
+
 
 // Fund Routes
 Route::get('fund/favorite', 'Member\FundController@favorites')->name('member.fund.favorites');

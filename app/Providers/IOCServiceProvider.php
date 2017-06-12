@@ -64,5 +64,10 @@ class IOCServiceProvider extends ServiceProvider
             'App\IServices\IEstimateProfitService',
             'App\Services\EstimateProfitService'
         );        
+
+        $this->app->bind(
+            'App\IServices\ISimulatorService',
+            'App\Services\SimulatorService'
+        );        
     }
 }
