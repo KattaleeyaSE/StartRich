@@ -54,6 +54,8 @@ Route::group(['prefix' => 'estimateprofit'], function () {
 // Simulator Routes
 Route::group(['prefix' => 'simulator'], function () {  
     Route::get('/index','Simulator\SimulatorMemberController@index');   
+    Route::get('/create','Simulator\SimulatorMemberController@create');   
+    Route::post('/create','Simulator\SimulatorMemberController@store');   
 });
 
 

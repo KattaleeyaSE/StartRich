@@ -16,7 +16,7 @@ class SimulatorMemberController extends Controller
             ISimulatorService $simulatorService
         )
     {
-        //$this->middleware('auth.member');
+        $this->middleware('auth.member');
         $this->simulatorService = $simulatorService; 
     }
 
@@ -28,7 +28,8 @@ class SimulatorMemberController extends Controller
     public function index()
     {
         //
-        $this->simulatorService->calculation();
+        //$this->simulatorService->calculation();
+        return view('simulator.index');
     }
 
     /**
@@ -39,6 +40,7 @@ class SimulatorMemberController extends Controller
     public function create()
     {
         //
+        return view('simulator.create');
     }
 
     /**
@@ -50,6 +52,7 @@ class SimulatorMemberController extends Controller
     public function store(Request $request)
     {
         //
+        dd($request->all());
     }
 
     /**
