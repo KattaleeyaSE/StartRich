@@ -5,8 +5,8 @@ namespace App\Services;
 use Carbon\Carbon;
 use Storage;
 use Illuminate\Http\Request;
-//R
 
+use App\Models\MutualFund;
 //Service Container
 use App\IServices\ISimulatorService;
 
@@ -15,11 +15,54 @@ class SimulatorService implements ISimulatorService
 
     public function create_simulator(Request $request)
     { 
-        $fileContents = 'data<-c(1,2,3,4,5,6,7)'."\n";
-        $fileContents .= 'fit<-arima(data,order=c(1,0,1))'."\n";
-        $file_name = $this->generateFileName();
-        Storage::disk('local')->put('//public/r_temp/'.$file_name, $fileContents); 
-        dd($file_name);   
+        try{
+          
+                $fund = MutualFund::find($request->fund_id);
+                $file_name = $this->generateFileName();
+                if($fund != null)
+                {
+                    $fileOfferContents = 'dataOffer<-c(';
+                    $fileBidContents = 'dataBid<-c(';
+                    foreach($fund->navs as $key => $fundItem)
+                    { 
+                        $comma = sizeof($fund->navs) == $key+1 ? '' : ',';
+                        $fileOfferContents .=$fundItem->offer.$comma;
+                        $fileBidContents .=$fundItem->bid.$comma;
+                    }
+                    $fileOfferContents .=")\n";
+                    $fileBidContents .=")\n";
+                } 
+                $fileContents = $fileOfferContents .  $fileBidContents ;
+                $fileContents .= 'fitOffer<-arima(dataOffer,order=c(1,0,1))'."\n";
+                $fileContents .= 'fitBid<-arima(dataBid,order=c(1,0,1))'."\n";  
+                
+                $carbonStartDate = new Carbon($request->buy_date);
+                $carbonEndDate = new Carbon($request->sell_date);
+                $diffDate = $carbonStartDate->diff($carbonEndDate)->days;
+
+                $fileContents .= 'resultBid<-predict(fitBid,'.$diffDate.')'."\n"; 
+
+                $fileContents .= 'resultOffer<-predict(fitOffer,'.$diffDate.')'."\n"; 
+
+                $fileBidContents  = $fileContents. 'resultBid$pred[1-'.$diffDate.']'."\n"; 
+                $fileOfferContents  = $fileContents. 'resultOffer$pred[1-'.$diffDate.']'."\n"; 
+
+                Storage::disk('local')->put('//public/r_temp/'.$file_name.'bid.R', $fileBidContents); 
+                Storage::disk('local')->put('//public/r_temp/'.$file_name.'offer.R', $fileOfferContents); 
+                $commandBid  = 'Rscript.exe '.storage_path('app\public\r_temp\\'. $file_name.'bid.R');
+                $resultBid = exec($commandBid); 
+                $commandOffer = 'Rscript.exe '.storage_path('app\public\r_temp\\'. $file_name.'offer.R');
+                $resultOffer = exec($commandOffer); 
+                return [
+                    'resultBid' => $resultBid,
+                    'resultOffer' => $resultOffer 
+                ];
+
+        }catch(\Exception $e)
+        {
+ 
+        }
+ 
     }
 
     //https://stackoverflow.com/questions/23718375/how-to-integrate-php-and-r-on-windows
@@ -27,7 +70,7 @@ class SimulatorService implements ISimulatorService
     { 
         $command = 'Rscript.exe '.$filename;
         $result = exec($command);
- 
+        
         echo $result;
     }
 
@@ -37,6 +80,6 @@ class SimulatorService implements ISimulatorService
         $file_name = str_replace("-","_", $file_name);
         $file_name = str_replace(" ","_", $file_name);
         $file_name = str_replace(":","_", $file_name);
-        return $file_name.'.R';
+        return $file_name;
     }
 }
