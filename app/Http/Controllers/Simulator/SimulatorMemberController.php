@@ -53,5 +53,6 @@ class SimulatorMemberController extends Controller
     {
         //
         $resultsSet = $this->simulatorService->create_simulator($request);
+        dd($resultsSet);
     }
 }

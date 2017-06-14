@@ -44,9 +44,10 @@ class SimulatorService implements ISimulatorService
                 
                 $fund_start = $fund->fund_start; 
                
+                $carbonFundStartDate = new Carbon($fund_start);
                 $carbonStartDate = new Carbon($request->buy_date);
                 $carbonEndDate = new Carbon($request->sell_date);
-                $diffNavStartDate = $carbonStartDate->diff(new Carbon($fund_start))->days;
+                $diffNavStartDate = $carbonFundStartDate->diff($carbonStartDate)->days;
                 $diffNavEndDate = $carbonEndDate->diff(new Carbon($fund_start))->days;
                 if($diffNavEndDate > 0)
                 { 
@@ -80,7 +81,7 @@ class SimulatorService implements ISimulatorService
                     $resultBidArrays = explode(' ', $resultBid);
                     foreach($resultBidArrays as $key => $item)
                     {
-                        if(strpos($item, "[") === false)
+                        if($item !== "" && strpos($item, "[") === false )
                         {
                             array_push($resultBidFiltered,$item);
                         }
@@ -88,25 +89,40 @@ class SimulatorService implements ISimulatorService
                     $resultOfferArrays = explode(' ', $resultOffer);
                     foreach($resultOfferArrays as $key => $item)
                     {
-                        if(strpos($item, "[") === false)
+                        if($item !== "" && strpos($item, "[") === false  )
                         {
                             array_push($resultOfferFiltered,$item);
                         }
                     }
+                    
+                    $total_dividend = 0;   
+                    $return_profit_percent = 0;
+                    $return_profit = 0;
+                    $return_profit_total = 0;
+                    
+                    $index = $diffNavStartDate-1 > 0 ? $diffNavStartDate-1 : 0;
+                    $bought_unit = $request->balance_of_investment / $resultOfferFiltered[$index];
+                    $bid_value = $bought_unit *  $resultBidFiltered[sizeof($resultBidFiltered)-1]; 
 
+                    $return_profit_percent = ($bid_value - $request->balance_of_investment) /100;
+
+                    $return_profit_percent = $return_profit_percent * 100;
+
+                    $return_profit =  ($request->balance_of_investment *  $return_profit_percent)/100;
+ 
+                    $return_profit_total = $request->balance_of_investment + $return_profit; 
                 }
 
-                return [
-                    // 'resultBid' => $resultBid,
-                    // 'resultOffer' => $resultOffer,
-                    // 'lastest_nav' => $last_nav,
-                    // 'fund_id' => $request->fund_id,
-                    // 'balance_of_investment' => $request->balance_of_investment
+                return [  
+                    'return_profit_percent' => $return_profit_percent,
+                    'return_profit' => $return_profit,
+                    'return_profit_total' => $return_profit_total,
                 ];
 
         }catch(\Exception $e)
         {
-            //dd($e);
+            dd($e);
+            return [];
         }
  
     }
