@@ -95,34 +95,39 @@ class SimulatorService implements ISimulatorService
                         }
                     }
                     
-                    $total_dividend = 0;   
-                    $return_profit_percent = 0;
-                    $return_profit = 0;
-                    $return_profit_total = 0;
-                    
-                    $index = $diffNavStartDate-1 > 0 ? $diffNavStartDate-1 : 0;
-                    $bought_unit = $request->balance_of_investment / $resultOfferFiltered[$index];
-                    $bid_value = $bought_unit *  $resultBidFiltered[sizeof($resultBidFiltered)-1]; 
+                    $result = collect();
+                    for($i = $diffNavStartDate; $i < $diffNavEndDate ; $i++)
+                    {
+                        $total_dividend = 0;   
+                        $return_profit_percent = 0;
+                        $return_profit = 0;
+                        $return_profit_total = 0;
 
-                    $return_profit_percent = ($bid_value - $request->balance_of_investment) /100;
+                        $index = $diffNavStartDate-1 > 0 ? $diffNavStartDate-1 : 0;
+                        $bought_unit = $request->balance_of_investment / $resultOfferFiltered[$index];
+                        $bid_value = $bought_unit *  $resultBidFiltered[sizeof($resultBidFiltered)-1]; 
 
-                    $return_profit_percent = $return_profit_percent * 100;
+                        $return_profit_percent = ($bid_value - $request->balance_of_investment) /100;
 
-                    $return_profit =  ($request->balance_of_investment *  $return_profit_percent)/100;
- 
-                    $return_profit_total = $request->balance_of_investment + $return_profit; 
+                        $return_profit_percent = $return_profit_percent * 100;
+
+                        $return_profit =  ($request->balance_of_investment *  $return_profit_percent)/100;
+    
+                        $return_profit_total = $request->balance_of_investment + $return_profit;  
+                        $result->push([  
+                            'return_profit_percent' => $return_profit_percent,
+                            'return_profit' => $return_profit,
+                            'return_profit_total' => $return_profit_total,
+                        ]);
+                    } 
                 }
 
-                return [  
-                    'return_profit_percent' => $return_profit_percent,
-                    'return_profit' => $return_profit,
-                    'return_profit_total' => $return_profit_total,
-                ];
+                return $result;
 
         }catch(\Exception $e)
         {
-            dd($e);
-            return [];
+            //dd($e);
+            return collect();
         }
  
     }
