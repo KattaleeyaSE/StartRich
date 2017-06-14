@@ -9,15 +9,8 @@ interface ISimulatorService
     /**
      * @param Request $request
      *
-     * @return String filename
+     * @return array $results
     **/     
     public function create_simulator(Request $request); 
-
-    /**
-     * @param int 
-     *
-     * @return Collection consists of
-    **/     
-    public function calculation($filename); 
-
+ 
 }
