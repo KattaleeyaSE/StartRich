@@ -113,7 +113,10 @@ class SimulatorService implements ISimulatorService
                         }
                         fclose($file);
                     } 
-                 
+                    if($last_nav != null)
+                    {
+                       $carbonStartDate = new Carbon($lastnav_date); 
+                    } 
                     for($i = 0; $i < sizeof($resultOfferFiltered) ; $i++)
                     {   
                         $offerVal = 0;
