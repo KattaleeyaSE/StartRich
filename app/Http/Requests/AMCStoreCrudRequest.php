@@ -28,6 +28,7 @@ class AMCStoreCrudRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
             'company_name' => 'required',
             'username' => 'required|min:6|unique:users',
             'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required',
             'phone_number' => 'required|min:10',
             'email' => 'required|email|unique:users',
         ];
@@ -41,11 +42,12 @@ class AMCStoreCrudRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function attributes()
     {
         return [
-            'company_name' => 'company name',
-            'username' => 'username',
-            'password' => 'password',
-            'phone_number' => 'phone number',
-            'email' => 'email',
+            'company_name' => 'Company name',
+            'username' => 'Username',
+            'password' => 'Password',
+            'password_confirmation' => 'Password confirmation',
+            'phone_number' => 'Phone number',
+            'email' => 'Email',
         ];
     }
 
@@ -57,9 +59,9 @@ class AMCStoreCrudRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function messages()
     {
         return [
-            'required' => 'Text field is required.',
+            'required' => ':attribute can\'t be empty.',
             'min' => 'Please enter :attribute at least :min characteristic.',
-            'unique' => ':attribute is duplicate with the database.',
+            'unique' => ':attribute is already in the database.',
             'email' => 'Please enter a valid email address.',
         ];
     }
