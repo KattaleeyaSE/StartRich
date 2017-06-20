@@ -76,8 +76,8 @@ class NavsTableSeeder extends Seeder
             array (
                 'id' => 6,
                 'standard' => 100.0,
-                'bid' => 100.0,
-                'offer' => 100.0,
+                'bid' => 105.0,
+                'offer' => 105.0,
                 'fund_id' => 1,
                 'modified_date' => '2017-04-16',
                 'created_at' => '2017-04-01 00:00:00',

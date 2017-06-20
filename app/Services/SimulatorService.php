@@ -22,13 +22,27 @@ class SimulatorService implements ISimulatorService
                 $last_nav = null;
                 $resultBid = '';
                 $resultOffer = '';
+                $resultBidFiltered = [];
+                $resultOfferFiltered = [];
+                $result = collect();  
+                $carbonFundStartDate = new Carbon($fund->fund_start);
+                $carbonStartDate = new Carbon($request->buy_date);
+                $carbonEndDate = new Carbon($request->sell_date);
                 if($fund != null)
                 {
                     $fileOfferContents = 'dataOffer<-c(';
                     $fileBidContents = 'dataBid<-c(';
                     foreach($fund->navs as $key => $fundItem)
-                    { 
-                        $comma =',';
+                    {  
+                        $comma =',';  
+                        if(!$carbonStartDate->gte(new Carbon($fundItem->modified_date)))
+                        {   
+                            array_push($resultBidFiltered,$fundItem->bid);
+                            array_push($resultOfferFiltered,[
+                                "date" => $fundItem->modified_date,
+                                "value" => $fundItem->offer,
+                            ]);
+                        } 
                         if(sizeof($fund->navs) == $key+1)
                         {
                             $comma = '';
@@ -36,21 +50,16 @@ class SimulatorService implements ISimulatorService
                         }
                         $fileOfferContents .=$fundItem->offer.$comma;
                         $fileBidContents .= $fundItem->bid.$comma;
-                       
                     }
                     $fileOfferContents .=")\n";
                     $fileBidContents .=")\n";
                 } 
                 
-                $fund_start = $fund->fund_start; 
-               
-                $carbonFundStartDate = new Carbon($fund_start);
-                $carbonStartDate = new Carbon($request->buy_date);
-                $carbonEndDate = new Carbon($request->sell_date);
+                $lastnav_date = $last_nav != null ? $last_nav->modified_date : $fund->fund_start;
                 $diffNavStartDate = $carbonFundStartDate->diff($carbonStartDate)->days;
-                $diffNavEndDate = $carbonEndDate->diff(new Carbon($fund_start))->days;
+                $diffNavEndDate = $carbonEndDate->diff(new Carbon($lastnav_date))->days;
                 if($diffNavEndDate > 0)
-                { 
+                {
                     $diffDate = $diffNavEndDate+1;
 
                     $fileContents = $fileOfferContents .  $fileBidContents ;
@@ -75,9 +84,7 @@ class SimulatorService implements ISimulatorService
                     $resultBid = storage_path('app\\public\\r_temp\\'. $file_name.'bidresult.txt');
                     $resultOffer = storage_path('app\\public\\r_temp\\'. $file_name.'offerresult.txt');
                   
-                }  
-                $resultBidFiltered = [];
-                $resultOfferFiltered = [];
+                }
 
                 if($resultBid !== null && $resultOffer !== null)
                 {
@@ -107,26 +114,32 @@ class SimulatorService implements ISimulatorService
                         fclose($file);
                     } 
                  
-                    $result = collect();  
-                    for($i = $diffNavStartDate; $i <= $diffNavEndDate ; $i++)
-                    {
-                    
-                        if($i == $diffNavStartDate)
-                        {
-                            $dateString = $carbonStartDate->toDateString();
-                        }
-                        else
-                        {
-                            $dateString = $carbonStartDate->addDay()->toDateString();
-                        }
-                        
+                    for($i = 0; $i < sizeof($resultOfferFiltered) ; $i++)
+                    {   
+                        $offerVal = 0;
                         $total_dividend = 0;   
                         $return_profit_percent = 0;
                         $return_profit = 0;
                         $return_profit_total = 0;
+                        if(!is_array($resultOfferFiltered[$i]) || (sizeof($fund->navs) == 0))
+                        {
+                            if($i == 0)
+                            {
+                                $dateString = $carbonStartDate->toDateString();
+                            }
+                            else
+                            {
+                                $dateString = $carbonStartDate->addDay()->toDateString();
+                            }
+                            $offerVal = $resultOfferFiltered[$i];
+                        }
+                        else
+                        { 
+                            $dateString = $resultOfferFiltered[$i]['date'];
+                            $offerVal = $resultOfferFiltered[$i]['value'];
+                        }
 
-                        $index =$i-1 > 0 ? $i-1 : 0;
-                        $bought_unit = $request->balance_of_investment / $resultOfferFiltered[$index];
+                        $bought_unit = $request->balance_of_investment / $offerVal;
                         $bid_value = $bought_unit *  $resultBidFiltered[sizeof($resultBidFiltered)-1]; 
 
                         $return_profit_percent = ($bid_value - $request->balance_of_investment) /100;
@@ -137,17 +150,19 @@ class SimulatorService implements ISimulatorService
     
                         $return_profit_total = $request->balance_of_investment + $return_profit;  
                         $result->push([
-                            'date' => $carbonStartDate->toDateString(),
+                            'date' => $dateString,
                             'return_profit_percent' => $return_profit_percent,
                             'return_profit' => $return_profit,
                             'return_profit_total' => $return_profit_total,
                         ]); 
+ 
                     } 
                 } 
                 
                 return $result;
 
-        }catch(\Exception $e)
+        }
+        catch(\Exception $e)
         {
             dd($e);
             return collect();
@@ -156,7 +171,6 @@ class SimulatorService implements ISimulatorService
     }
 
     //https://stackoverflow.com/questions/23718375/how-to-integrate-php-and-r-on-windows
- 
     private function generateFileName()
     {
         $file_name = Carbon::now();
