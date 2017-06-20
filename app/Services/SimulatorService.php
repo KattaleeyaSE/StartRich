@@ -28,6 +28,7 @@ class SimulatorService implements ISimulatorService
                 $carbonFundStartDate = new Carbon($fund->fund_start);
                 $carbonStartDate = new Carbon($request->buy_date);
                 $carbonEndDate = new Carbon($request->sell_date);
+                $isUseLastNav = false;
                 if($fund != null)
                 {
                     $fileOfferContents = 'dataOffer<-c(';
@@ -35,14 +36,17 @@ class SimulatorService implements ISimulatorService
                     foreach($fund->navs as $key => $fundItem)
                     {  
                         $comma =',';  
+                        
                         if(!$carbonStartDate->gte(new Carbon($fundItem->modified_date)))
-                        {   
+                        {    
+                            $isUseLastNav = true;
                             array_push($resultBidFiltered,$fundItem->bid);
                             array_push($resultOfferFiltered,[
                                 "date" => $fundItem->modified_date,
                                 "value" => $fundItem->offer,
                             ]);
                         } 
+                       
                         if(sizeof($fund->navs) == $key+1)
                         {
                             $comma = '';
@@ -58,6 +62,7 @@ class SimulatorService implements ISimulatorService
                 $lastnav_date = $last_nav != null ? $last_nav->modified_date : $fund->fund_start;
                 $diffNavStartDate = $carbonFundStartDate->diff($carbonStartDate)->days;
                 $diffNavEndDate = $carbonEndDate->diff(new Carbon($lastnav_date))->days;
+                
                 if($diffNavEndDate > 0)
                 {
                     $diffDate = $diffNavEndDate+1;
@@ -113,11 +118,18 @@ class SimulatorService implements ISimulatorService
                         }
                         fclose($file);
                     } 
-                    if($last_nav != null)
+                    $index = 0;
+                    if($isUseLastNav)
                     {
                        $carbonStartDate = new Carbon($lastnav_date); 
-                    } 
-                    for($i = 0; $i < sizeof($resultOfferFiltered) ; $i++)
+                    }
+                    else
+                    {
+                       $index = sizeof($resultOfferFiltered) - $carbonStartDate->diff(new Carbon($carbonEndDate))->days;
+                       $index -= 1;
+                    }
+
+                    for($i = $index; $i < sizeof($resultOfferFiltered) ; $i++)
                     {   
                         $offerVal = 0;
                         $total_dividend = 0;   
@@ -126,7 +138,7 @@ class SimulatorService implements ISimulatorService
                         $return_profit_total = 0;
                         if(!is_array($resultOfferFiltered[$i]) || (sizeof($fund->navs) == 0))
                         {
-                            if($i == 0)
+                            if($i == 0 || $i == $index)
                             {
                                 $dateString = $carbonStartDate->toDateString();
                             }
@@ -167,7 +179,6 @@ class SimulatorService implements ISimulatorService
         }
         catch(\Exception $e)
         {
-            dd($e);
             return collect();
         }
  

@@ -52,7 +52,16 @@ class SimulatorMemberController extends Controller
     public function store(Request $request)
     {
         //
-        $resultsSet = $this->simulatorService->create_simulator($request);
-        dd($resultsSet);
+        $results = $this->simulatorService->create_simulator($request);
+      dd($results);
+        if(sizeof($results) > 0)
+        {
+            return view('simulator.result',[
+                'results' =>  $results
+            ]);
+        }
+        return view('simulator.create',[
+            'isFail' => true
+        ]);
     }
 }

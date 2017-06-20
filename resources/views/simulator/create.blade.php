@@ -8,7 +8,13 @@
                 <div class="panel-heading">Member : Create Simulator</div>
 
             <div class="panel-body"> 
- 
+                @if(isset($isFail) && $isFail == true)
+                    <div class="alert alert-danger text-center">
+                         <b>Cannot simulate with this Mutual Fund.</b>
+                         <br/>
+                         <b>Please try another Mutual Fund!</b>    
+                    </div>
+                @endif
                 <form   
                     method="post" 
                     action="{{url('simulator/create')}}"  
