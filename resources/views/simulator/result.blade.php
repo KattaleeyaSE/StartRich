@@ -8,7 +8,7 @@
                 <div class="panel-heading">Result</div>
 
                 <div class="panel-body"> 
-
+{{dump($results)}}
                     <div class="chart-area">  
 
                         <canvas id="result-chart" width="393" height="196"></canvas>
@@ -17,56 +17,66 @@
                     <hr />
                     <div>
                         <div class="form-group">                     
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="price_per_unit">Balance of investment</label> 
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                123
+                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price_per_unit">Fund Name</label> 
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <p><strong>{{$fund->aimc_type}}</strong>  {{$fund->name}}</p>
                             </div>   
                         </div>
-                    </div>
-                    <hr />
+                        <div class="clearfix"></div>
+                        <div class="form-group">                     
+                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price_per_unit">Company Name</label> 
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <p>{{$fund->management_company}}</p>
+                            </div>   
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">                     
+                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price_per_unit">Fund Type</label> 
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <p>{{$fund->type}}</p>
+                            </div>   
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">                     
+                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price_per_unit">Balance of investment</label> 
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <p>{{$balance_of_investment}}</p>
+                            </div>   
+                        </div>
+                        <div class="clearfix"></div>
+                    </div> 
                     <div class="table-responsive">
-                    <table class="table">
-                            <thead>
-                            <tr>  
-                                <th class="text-center">Fund Name</th> 
-                                <th class="text-center">Company Name</th>   
-                                <th class="text-center">Fund Type</th> 
-                                <th class="text-center">Recent Nav</th> 
-                                <th class="text-center">Remaining Unit</th> 
-                                <th class="text-center">Balance of Investment</th>       
-                                <th class="text-center">Investment Amount</th>       
-                                <th class="text-center">Total Dividend</th>       
-                                <th class="text-center">Return Investment Profit</th>       
-                                <th class="text-center">Return Investment Profit %</th>       
-                            </tr>
-                            </thead>
-                            <tbody> 
-                            @foreach ($result as $item) 
-            
-                                <tr>  
-                                    <td class="text-center">
-                                        <strong>{{$item['estimate_item']->fund->aimc_type}}</strong>
-                                        <br>
-                                        {{$item['estimate_item']->fund->name}}
-                                    </td>  
-                                    <td class="text-center">{{$item['estimate_item']->fund->management_company}}</td>   
-                                    <td class="text-center">{{$item['estimate_item']->fund->type}}</td>   
-                                    <td class="text-center">
-                                        {{$item['recent_nav']->standard}}
-                                        <br>
-                                        {{$item['recent_nav']->modified_date}}
-                                    </td>   
-                                    <td class="text-center">{{$item['estimate_item']->balance_of_investment/$item['estimate_item']->nav->offer}}</td>   
-                                    <td class="text-center">{{$item['estimate_item']->balance_of_investment}}</td>   
-                                    <td class="text-center">{{round($item['return_profit_total'],2)}}</td>   
-                                    <td class="text-center">{{round($item['total_dividend'],2)}}</td>   
-                                    <td class="text-center">{{round($item['return_profit'],2)}}</td>   
-                                    <td class="text-center">{{round($item['return_profit_percent'],2)}} %</td>   
- 
-                                </tr> 
-                            @endforeach
-                            </tbody>
-                        </table>  
+                        <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Recent Nav</th> 
+                                        <th class="text-center">Remaining Unit</th> 
+                                        <th class="text-center">Balance of Investment</th>       
+                                        <th class="text-center">Investment Amount</th>      
+                                        <th class="text-center">Return Investment Profit</th>       
+                                        <th class="text-center">Return Investment Profit %</th>       
+                                    </tr>
+                                </thead>
+                                <tbody> 
+                                @foreach ($results as $item) 
+                
+                                    {{-- <tr>   
+                                        <td class="text-center">
+                                            {{$item['recent_nav']->standard}}
+                                            <br>
+                                            {{$item['recent_nav']->modified_date}}
+                                        </td>   
+                                        <td class="text-center">{{$item['estimate_item']->balance_of_investment/$item['estimate_item']->nav->offer}}</td>   
+                                        <td class="text-center">{{$item['estimate_item']->balance_of_investment}}</td>   
+                                        <td class="text-center">{{round($item['return_profit_total'],2)}}</td>   
+                                        <td class="text-center">{{round($item['total_dividend'],2)}}</td>   
+                                        <td class="text-center">{{round($item['return_profit'],2)}}</td>   
+                                        <td class="text-center">{{round($item['return_profit_percent'],2)}} %</td>   
+    
+                                    </tr>  --}}
+                                @endforeach
+                                </tbody>
+                            </table>  
                     </div>
                     
 
@@ -93,13 +103,13 @@ $(document).ready(function(){
     var chartarea = $('#result-chart');  
     var dataset = [];
     
-    @foreach ($result as $key => $item)  
+    {{-- @foreach ($result as $key => $item)   --}}
 
-        dataset[{{$key}}] = {
+        dataset[0] = {
         labels: [
-            @foreach($item['estimate_item']->fund->past_performances->sortBy('date') as $past_perform)
+            {{-- @foreach($item['estimate_item']->fund->past_performances->sortBy('date') as $past_perform)
                 "{{$past_perform->date}}",
-            @endforeach
+            @endforeach --}}
         ],
             datasets: [
                 {
@@ -109,11 +119,11 @@ $(document).ready(function(){
                     lineTension: 0.1,
                     pointRadius: 1,
                     data: [
-                        @foreach($item['estimate_item']->fund->past_performances->sortBy('date') as $past_perform) 
+                        {{-- @foreach($item['estimate_item']->fund->past_performances->sortBy('date') as $past_perform) 
                             @if($past_perform->records->where('name','=','Information Ratio')->first() != null)
                              "{{$past_perform->records->where('name','=','Information Ratio')->first()->since_inception}}",
                             @endif
-                        @endforeach
+                        @endforeach --}}
                     ], 
                 },
                 {
@@ -123,16 +133,16 @@ $(document).ready(function(){
                     lineTension: 0.1,
                     pointRadius: 1,
                     data: [
-                        @foreach($item['estimate_item']->fund->past_performances->sortBy('date') as $past_perform) 
+                        {{-- @foreach($item['estimate_item']->fund->past_performances->sortBy('date') as $past_perform) 
                             @if($past_perform->records->where('name','=','Standard Deviation')->first() != null)
                              "{{$past_perform->records->where('name','=','Standard Deviation')->first()->since_inception}}",
                             @endif
-                        @endforeach
+                        @endforeach --}}
                     ], 
                 }
             ]
         }; 
-    @endforeach
+    {{-- @endforeach --}}
  
     if(dataset[0])
     {
