@@ -20,21 +20,18 @@ class SimulatorServiceTest extends TestCase
 
         $service = $this->app->make('App\IServices\ISimulatorService');
         $results = $service->create_simulator($mockRequest);
-
+        $this->assertInstanceOf('\Illuminate\Support\Collection',$results);
         $this->assertTrue(sizeof($results) == 15);
     }
 
 
     public function testCreateSimulator_Null()
     {
-        $mockRequest = new Request();
-        $mockRequest->offsetSet('buy_date',"2017-01-12");
-        $mockRequest->offsetSet('sell_date',"2017-01-30");
-        $mockRequest->offsetSet('balance_of_investment',"300");
-        $mockRequest->offsetSet('fund_id',"");
+        $mockRequest = new Request(); 
 
         $service = $this->app->make('App\IServices\ISimulatorService');
         $results = $service->create_simulator($mockRequest); 
+        $this->assertInstanceOf('\Illuminate\Support\Collection',$results);
         $this->assertTrue(sizeof($results) == 0);
     }
 }
