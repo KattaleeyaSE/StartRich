@@ -192,10 +192,10 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Answer</label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="answer<%$index%>" ng-model="answer.answer" class="form-control col-md-7 col-xs-12" ng-pattern="/^[a-zA-Z0-9]*$/" ng-required="true" maxlength="10" /> 
+                                        <input type="text" name="answer<%question.question%><%$index%>" ng-model="answer.answer" class="form-control col-md-7 col-xs-12" ng-pattern="/^[a-zA-Z0-9]*$/" ng-required="true" maxlength="10" /> 
                                         <div role="alert">
-                                          <span class="error" ng-show="createform.answer<%$index%>.$error.required">This field is required.</span>
-                                          <span class="error" ng-show="createform.answer<%$index%>.$error.pattern">Wrong format</span>
+                                          <span class="error" ng-show="createform.answer<%question.question%><%$index%>.$error.required">This field is required.</span>
+                                          <span class="error" ng-show="createform.answer<%question.question%><%$index%>.$error.pattern">Wrong format</span>
                                         </div>
                                     </div> 
                                 </div> 
