@@ -166,6 +166,7 @@ class SimulatorService implements ISimulatorService
                         $return_profit_total = $request->balance_of_investment + $return_profit;  
                         $result->push([
                             'date' => $dateString,
+                            'remaining_unit' => $bought_unit,
                             'return_profit_percent' => $return_profit_percent,
                             'return_profit' => $return_profit,
                             'return_profit_total' => $return_profit_total,

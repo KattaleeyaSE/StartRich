@@ -7,8 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Result</div>
 
-                <div class="panel-body"> 
-{{dump($results)}}
+                <div class="panel-body">  
                     <div class="chart-area">  
 
                         <canvas id="result-chart" width="393" height="196"></canvas>
@@ -49,9 +48,8 @@
                         <table class="table">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Recent Nav</th> 
-                                        <th class="text-center">Remaining Unit</th> 
-                                        <th class="text-center">Balance of Investment</th>       
+                                        <th class="text-center">NAV Date</th>  
+                                        <th class="text-center">Remaining Unit</th>      
                                         <th class="text-center">Investment Amount</th>      
                                         <th class="text-center">Return Investment Profit</th>       
                                         <th class="text-center">Return Investment Profit %</th>       
@@ -60,20 +58,15 @@
                                 <tbody> 
                                 @foreach ($results as $item) 
                 
-                                    {{-- <tr>   
+                                    <tr>   
                                         <td class="text-center">
-                                            {{$item['recent_nav']->standard}}
-                                            <br>
-                                            {{$item['recent_nav']->modified_date}}
+                                            {{$item['date']}} 
                                         </td>   
-                                        <td class="text-center">{{$item['estimate_item']->balance_of_investment/$item['estimate_item']->nav->offer}}</td>   
-                                        <td class="text-center">{{$item['estimate_item']->balance_of_investment}}</td>   
-                                        <td class="text-center">{{round($item['return_profit_total'],2)}}</td>   
-                                        <td class="text-center">{{round($item['total_dividend'],2)}}</td>   
+                                        <td class="text-center">{{round($item['remaining_unit'],2)}}</td>
+                                        <td class="text-center">{{round($item['return_profit_total'],2)}}</td>
                                         <td class="text-center">{{round($item['return_profit'],2)}}</td>   
                                         <td class="text-center">{{round($item['return_profit_percent'],2)}} %</td>   
-    
-                                    </tr>  --}}
+                                    </tr>
                                 @endforeach
                                 </tbody>
                             </table>  
@@ -102,47 +95,27 @@ $(document).ready(function(){
 
     var chartarea = $('#result-chart');  
     var dataset = [];
-    
-    {{-- @foreach ($result as $key => $item)   --}}
-
         dataset[0] = {
         labels: [
-            {{-- @foreach($item['estimate_item']->fund->past_performances->sortBy('date') as $past_perform)
-                "{{$past_perform->date}}",
-            @endforeach --}}
+            @foreach ($results as $key => $item) 
+                "{{$item['date']}}",
+            @endforeach
         ],
             datasets: [
                 {
-                    label: "Information Ratio", 
+                    label: "Investment Amount", 
                     borderColor: getRandomColor(), 
                     fill: false,
                     lineTension: 0.1,
                     pointRadius: 1,
                     data: [
-                        {{-- @foreach($item['estimate_item']->fund->past_performances->sortBy('date') as $past_perform) 
-                            @if($past_perform->records->where('name','=','Information Ratio')->first() != null)
-                             "{{$past_perform->records->where('name','=','Information Ratio')->first()->since_inception}}",
-                            @endif
-                        @endforeach --}}
-                    ], 
-                },
-                {
-                    label: "Standard Deviation", 
-                    borderColor:getRandomColor(), 
-                    fill: false,
-                    lineTension: 0.1,
-                    pointRadius: 1,
-                    data: [
-                        {{-- @foreach($item['estimate_item']->fund->past_performances->sortBy('date') as $past_perform) 
-                            @if($past_perform->records->where('name','=','Standard Deviation')->first() != null)
-                             "{{$past_perform->records->where('name','=','Standard Deviation')->first()->since_inception}}",
-                            @endif
-                        @endforeach --}}
+                        @foreach ($results as $key => $item) 
+                             "{{round($item['return_profit_total'],2)}}", 
+                        @endforeach
                     ], 
                 }
             ]
-        }; 
-    {{-- @endforeach --}}
+        };  
  
     if(dataset[0])
     {
