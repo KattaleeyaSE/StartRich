@@ -8,20 +8,15 @@
                     <div class="box-title">{{ trans('backpack::base.login') }}</div>
                 </div>
                 <div class="box-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url(config('backpack.base.route_prefix').'/login') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url(config('backpack.base.route_prefix').'/login') }}" data-toggle="validator">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">{{ trans('backpack::base.email_address') }}</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="username" value="{{ old('username') }}">
-
-                                @if ($errors->has('username'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                @endif
+                                <input type="text" class="form-control" name="username" value="{{ old('username') }}" pattern="^[A-z0-9]{1,}$" required>
+                                <div class="help-block with-errors"></div>
                             </div>
                         </div>
 
@@ -29,7 +24,8 @@
                             <label class="col-md-4 control-label">{{ trans('backpack::base.password') }}</label>
 
                             <div class="col-md-6">
-                                <input type="password" class="form-control" name="password">
+                                <input type="password" class="form-control" name="password" pattern="^[A-z0-9]{1,}$" required>
+                                <div class="help-block with-errors"></div>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -66,4 +62,7 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 @endsection
