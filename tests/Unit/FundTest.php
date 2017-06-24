@@ -101,8 +101,8 @@ class FundTest extends TestCase
         $expected_second = [ 
                 "id" => 6,
                 "standard" => 100.0,
-                "bid" => 100.0,
-                "offer" => 100.0,
+                "bid" => 105.0,
+                "offer" => 105.0,
                 "fund_id" => 1,
                 "modified_date" => "2017-04-16"
              ];

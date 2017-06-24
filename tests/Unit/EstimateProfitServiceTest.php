@@ -28,16 +28,16 @@ class EstimateProfitServiceTest extends TestCase
         $expect_1_recent_nav = [
             "id" => 6,
             "standard" => 100.0,
-            "bid" => 100.0,
-            "offer" => 100.0,
+            "bid" => 105.0,
+            "offer" => 105.0,
             "fund_id" => 1,
             "modified_date" => "2017-04-16"
         ];
 
         $expect_1_total_dividend = 0.3075;
-        $expect_1_return_profit= 0.3075;
-        $expect_1_return_profit_total= 123.3075;
-        $expect_1_return_profit_percent= 0.25;
+        $expect_1_return_profit= 6.4575000000000102;
+        $expect_1_return_profit_total= 129.45750000000001;
+        $expect_1_return_profit_percent= 5.250000000000008;
 
         //Test
         $result = $service->calculation($estimate_profit->id);

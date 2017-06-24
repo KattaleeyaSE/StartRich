@@ -52,7 +52,9 @@ class SimulatorMemberController extends Controller
     public function store(Request $request)
     {
         //
+       
         $results = $this->simulatorService->create_simulator($request);
+         
         $fund =  MutualFund::find($request->fund_id); 
         if(sizeof($results) > 0)
         {
