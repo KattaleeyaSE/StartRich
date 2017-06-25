@@ -17,6 +17,15 @@
 
     @yield('style')
 
+    <style type="text/css">
+        
+
+.has-error .form-control {
+    background: rgb(251, 227, 228) !important;
+    border: 1px solid #fbc2c4 !important;
+    color: #8a1f11 !important;
+}
+    </style>
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
