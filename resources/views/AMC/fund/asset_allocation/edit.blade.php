@@ -7,6 +7,9 @@
 
             <h3>Asset Allocation</h3>
             <section>
+                <div class="alert alert-danger exceed" style="display: none;">
+                  <strong>The sum of these inputs is greather than 100%.</strong>
+                </div>
 				@include('fund.amc.partials._form-asset-allocation')
             </section>
 			
@@ -58,6 +61,40 @@
 		});
 	</script>
 
+    <script type="text/javascript">
+
+    $('.assets').change( function () {
+        var sum = 0;
+        var val = 0;
+
+        $('.assets').each( function () {
+            val = parseInt($(this).val());
+            val = isNaN(val) ? 0 : val;
+            sum += val;
+        });
+
+        if (sum > 100) {
+            alertSum();
+        } else {
+            hideSum();
+        }
+    });
+
+    function alertSum()
+    {
+        $('.exceed').show();
+        $('.assets').parent().addClass('has-error');
+        $('a[href="#finish"]').css('cursor', 'not-allowed');
+        $('a[href="#finish"]').attr('disabled', 'disabled');
+    }
+
+    function hideSum()
+    {
+        $('.exceed').hide();
+        $('.assets').parent().removeClass('has-error');
+        $('a[href="#finish"]').css('cursor', 'pointer');
+    }
+    </script>
 @endsection
 
 @section('style')
