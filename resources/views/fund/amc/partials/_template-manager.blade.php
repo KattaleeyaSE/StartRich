@@ -4,7 +4,8 @@
 		<div class="form-group{{ $errors->has('managers.*.name') ? ' has-error' : '' }}">
 		    {!! Form::label('managers[ROW_INDEX][name]', 'Manager Name *', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']) !!}
 		    <div class="col-md-6 col-sm-6 col-xs-12">
-		    {!! Form::text('managers[ROW_INDEX][name]', null,['class' => 'form-control col-md-7 col-xs-12 required']) !!}
+		    {!! Form::text('managers[ROW_INDEX][name]', null,['class' => 'form-control col-md-7 col-xs-12 required', 'maxlength' => '255']) !!}
+		    <div class="help-block with-errors"></div>
 		    </div>
 		        @if ($errors->has('managers.*.name'))
 		            <span class="help-block">
@@ -15,7 +16,8 @@
 		<div class="form-group{{ $errors->has('managers.*.position') ? ' has-error' : '' }}">
 		    {!! Form::label('managers[ROW_INDEX][position]', 'Manager Position *', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']) !!}
 		    <div class="col-md-6 col-sm-6 col-xs-12">
-		    {!! Form::text('managers[ROW_INDEX][position]', null,['class' => 'form-control col-md-7 col-xs-12 required']) !!}
+		    {!! Form::text('managers[ROW_INDEX][position]', null,['class' => 'form-control col-md-7 col-xs-12 required', 'maxlength' => '255']) !!}
+		    <div class="help-block with-errors"></div>
 		    </div>
 		        @if ($errors->has('managers.*.position'))
 		            <span class="help-block">

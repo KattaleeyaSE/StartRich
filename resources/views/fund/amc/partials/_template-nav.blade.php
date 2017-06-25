@@ -15,7 +15,8 @@
 		<div class="col-md-1">
 				<div class="form-group{{ $errors->has('navs.*.standard') ? ' has-error' : '' }}">
 				    {!! Form::label('navs[ROW_INDEX][standard]', 'Standard *', ['class' => 'control-label']) !!}
-				    {!! Form::text('navs[ROW_INDEX][standard]', null,['class' => 'form-control required']) !!}
+				    {!! Form::text('navs[ROW_INDEX][standard]', null,['class' => 'form-control required', 'pattern' => '^[0-9.]{1,}$']) !!}
+		    <div class="help-block with-errors"></div>
 				        @if ($errors->has('navs[ROW_INDEX][standard]'))
 				            <span class="help-block">
 				                <strong>{{ $errors->first('navs.*.standard') }}</strong>
@@ -27,7 +28,8 @@
 		<div class="col-md-1">
 				<div class="form-group{{ $errors->has('navs.*.bid') ? ' has-error' : '' }}">
 				    {!! Form::label('navs[ROW_INDEX][bid]', 'Bid *', ['class' => 'control-label']) !!}
-				    {!! Form::text('navs[ROW_INDEX][bid]', null,['class' => 'form-control required']) !!}
+				    {!! Form::text('navs[ROW_INDEX][bid]', null,['class' => 'form-control required', 'pattern' => '^[0-9.]{1,}$']) !!}
+		    <div class="help-block with-errors"></div>
 				        @if ($errors->has('navs[ROW_INDEX][bid]'))
 				            <span class="help-block">
 				                <strong>{{ $errors->first('navs.*.bid') }}</strong>
@@ -39,7 +41,8 @@
 		<div class="col-md-1">
 				<div class="form-group{{ $errors->has('navs.*.offer') ? ' has-error' : '' }}">
 				    {!! Form::label('navs[ROW_INDEX][offer]', 'Offer *', ['class' => 'control-label']) !!}
-				    {!! Form::text('navs[ROW_INDEX][offer]', null,['class' => 'form-control required']) !!}
+				    {!! Form::text('navs[ROW_INDEX][offer]', null,['class' => 'form-control required', 'pattern' => '^[0-9.]{1,}$']) !!}
+		    <div class="help-block with-errors"></div>
 				        @if ($errors->has('navs[ROW_INDEX][offer]'))
 				            <span class="help-block">
 				                <strong>{{ $errors->first('navs.*.offer') }}</strong>

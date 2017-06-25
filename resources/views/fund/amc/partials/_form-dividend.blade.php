@@ -6,6 +6,7 @@
 		    {!! Form::label('dividends[0][payment_date]', 'Payment Date *', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']) !!}
 		    <div class="col-md-6 col-sm-6 col-xs-12">
 		    {!! Form::date('dividends[0][payment_date]', null,['class' => 'form-control col-md-7 col-xs-12 required']) !!}
+		    <div class="help-block with-errors"></div>
 		    </div>
 		        @if ($errors->has('dividends.*.payment_date'))
 		            <span class="help-block">
@@ -16,7 +17,8 @@
 		<div class="form-group{{ $errors->has('dividends.*.dividend_price') ? ' has-error' : '' }}">
 		    {!! Form::label('dividends[0][dividend_price]', 'Dividend Price *', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']) !!}
 		    <div class="col-md-6 col-sm-6 col-xs-12">
-		    {!! Form::text('dividends[0][dividend_price]', null,['class' => 'form-control col-md-7 col-xs-12 required']) !!}
+		    {!! Form::text('dividends[0][dividend_price]', null,['class' => 'form-control col-md-7 col-xs-12 required', 'pattern' => '^[0-9.]{1,}$']) !!}
+		    <div class="help-block with-errors"></div>
 		    </div>
 		        @if ($errors->has('dividends.*.dividend_price'))
 		            <span class="help-block">
