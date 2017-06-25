@@ -5,6 +5,6 @@
 </div>
 <div class="form-group">
 	{!! Form::label('dividend_price', 'Dividend Price', ['class' => 'control-label']) !!}
-	{!! Form::text('dividend_price', null, ['class' => 'form-control required', 'required' => 'required']) !!}
+	{!! Form::text('dividend_price', null, ['class' => 'form-control required', 'required' => 'required', 'pattern' => '^[0-9.]{1,}$']) !!}
 	<div class="help-block with-errors"></div>
 </div>

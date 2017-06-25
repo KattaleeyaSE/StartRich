@@ -1,12 +1,12 @@
 <div class="form-group">
 	{!! Form::label('manager_name', 'Manager Name', ['class' => 'control-label']) !!}
-	{!! Form::text('manager_name', null, ['class' => 'form-control required', 'required' => 'required']) !!}
+	{!! Form::text('manager_name', null, ['class' => 'form-control required', 'required' => 'required', 'maxlength' => '255', 'pattern' => '^[_A-z0-9]{1,}$']) !!}
 	<div class="help-block with-errors"></div>
 </div>
 
 <div class="form-group">
 	{!! Form::label('manager_position', 'Manager Position', ['class' => 'control-label']) !!}
-	{!! Form::text('manager_position', null, ['class' => 'form-control required', 'required' => 'required']) !!}
+	{!! Form::text('manager_position', null, ['class' => 'form-control required', 'required' => 'required', 'maxlength' => '255', 'pattern' => '^[_A-z0-9]{1,}$']) !!}
 	<div class="help-block with-errors"></div>
 </div>
 

@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="container">
-		{!! Form::model($fund, ['route' => ['amc.fund.update_major_risk_factor', $fund->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund']) !!}
+		{!! Form::model($fund, ['route' => ['amc.fund.update_major_risk_factor', $fund->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund', 'data-toggle' => 'validator']) !!}
 
 	        <h3>Major Risk Factor</h3>
 	        <section>
