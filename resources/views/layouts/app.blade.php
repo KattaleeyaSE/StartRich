@@ -152,6 +152,7 @@
 <script src="/js/angular/libs/angular-moment-picker.min.js"></script> 
 <script src="/js/angular/libs/angular-filter.min.js"></script> 
 <script src="/js/angular/app.js"></script> 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 <!-- assests --> 
 @yield('script')
 

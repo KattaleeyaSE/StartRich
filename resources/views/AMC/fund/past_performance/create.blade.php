@@ -4,7 +4,7 @@
 <div class="row">
 	<div class="container">
 
-		{!! Form::open(['route' => ['amc.fund.store_past_performance', $fund->id], 'class' => 'form-horizontal', 'id' => 'form-fund']) !!}
+		{!! Form::open(['route' => ['amc.fund.store_past_performance', $fund->id], 'class' => 'form-horizontal', 'id' => 'form-fund', 'data-toggle' => 'validator']) !!}
 
             <h3>Past Performance</h3>
             <section>
