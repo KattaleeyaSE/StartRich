@@ -4,7 +4,7 @@
 	<div class="col-md-2">
 		<div class="form-group{{ $errors->has('fees.*.front_end_fee') ? ' has-error' : '' }}">
 		    {!! Form::label('fees[0][front_end_fee]', 'Front End Fee *', ['class' => 'control-label']) !!}
-		    {!! Form::text('fees[0][front_end_fee]', null,['class' => 'form-control required', 'pattern' => '^[0-9.]{1,}$']) !!}
+		    {!! Form::text('fees[0][front_end_fee]', null,['class' => 'form-control required', 'required' => 'required', 'pattern' => '^[0-9.]{1,}$']) !!}
 		    <div class="help-block with-errors"></div>
 		        @if ($errors->has('fees[0][front_end_fee]'))
 		            <span class="help-block">
@@ -16,7 +16,7 @@
 	<div class="col-md-2">
 		<div class="form-group{{ $errors->has('fees.*.actual_front_end_fee') ? ' has-error' : '' }}">
 			{!! Form::label('fees[0][actual_front_end_fee]', 'Actual Front End Fee *', ['class' => 'control-label']) !!}
-		    {!! Form::text('fees[0][actual_front_end_fee]', null,['class' => 'form-control required', 'pattern' => '^[0-9.]{1,}$']) !!}
+		    {!! Form::text('fees[0][actual_front_end_fee]', null,['class' => 'form-control required', 'required' => 'required', 'pattern' => '^[0-9.]{1,}$']) !!}
 		    <div class="help-block with-errors"></div>
 		        @if ($errors->has('fees[0][actual_front_end_fee]'))
 		            <span class="help-block">
@@ -28,7 +28,7 @@
 	<div class="col-md-2">
 		<div class="form-group{{ $errors->has('fees.*.back_end_fee') ? ' has-error' : '' }}">
 			{!! Form::label('fees[0][back_end_fee]', 'Back End Fee *', ['class' => 'control-label']) !!}
-		    {!! Form::text('fees[0][back_end_fee]', null,['class' => 'form-control required', 'pattern' => '^[0-9.]{1,}$']) !!}
+		    {!! Form::text('fees[0][back_end_fee]', null,['class' => 'form-control required', 'required' => 'required', 'pattern' => '^[0-9.]{1,}$']) !!}
 		    <div class="help-block with-errors"></div>
 		        @if ($errors->has('fees[0][back_end_fee]'))
 		            <span class="help-block">
@@ -40,7 +40,7 @@
 	<div class="col-md-2">
 		<div class="form-group{{ $errors->has('fees.*.actual_back_end_fee') ? ' has-error' : '' }}">
 			{!! Form::label('fees[0][actual_back_end_fee]', 'Actual Back End Fee *', ['class' => 'control-label']) !!}
-		    {!! Form::text('fees[0][actual_back_end_fee]', null,['class' => 'form-control required', 'pattern' => '^[0-9.]{1,}$']) !!}
+		    {!! Form::text('fees[0][actual_back_end_fee]', null,['class' => 'form-control required', 'required' => 'required', 'pattern' => '^[0-9.]{1,}$']) !!}
 		    <div class="help-block with-errors"></div>
 		        @if ($errors->has('fees[0][actual_back_end_fee]'))
 		            <span class="help-block">
@@ -52,7 +52,7 @@
 	<div class="col-md-2">
 		<div class="form-group{{ $errors->has('fees.*.switching_fee') ? ' has-error' : '' }}">
 			{!! Form::label('fees[0][switching_fee]', 'Switching Fee *', ['class' => 'control-label']) !!}
-		    {!! Form::text('fees[0][switching_fee]', null,['class' => 'form-control required', 'pattern' => '^[0-9.]{1,}$']) !!}
+		    {!! Form::text('fees[0][switching_fee]', null,['class' => 'form-control required', 'required' => 'required', 'pattern' => '^[0-9.]{1,}$']) !!}
 		    <div class="help-block with-errors"></div>
 		        @if ($errors->has('fees[0][switching_fee]'))
 		            <span class="help-block">
