@@ -1,5 +1,11 @@
-{!! Form::label('name', 'Company Name', ['class' => 'control-label']) !!}
-{!! Form::text('name', null, ['class' => 'form-control required']) !!}
+<div class="form-group">
+	{!! Form::label('name', 'Company Name', ['class' => 'control-label']) !!}
+	{!! Form::text('name', null, ['class' => 'form-control required', 'required' => 'required']) !!}
+	<div class="help-block with-errors"></div>
+</div>
 
-{!! Form::label('percentage', 'Percentage', ['class' => 'control-label']) !!}
-{!! Form::text('percentage', null, ['class' => 'form-control required']) !!}
+<div class="form-group">
+	{!! Form::label('percentage', 'Percentage', ['class' => 'control-label']) !!}
+	{!! Form::text('percentage', null, ['class' => 'form-control required', 'required' => 'required']) !!}
+	<div class="help-block with-errors"></div>
+</div>

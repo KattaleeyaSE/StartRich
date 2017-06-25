@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="container">
-		{!! Form::model($purchase_detail, ['route' => ['amc.fund.update_purchase_detail', $purchase_detail->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund']) !!}
+		{!! Form::model($purchase_detail, ['route' => ['amc.fund.update_purchase_detail', $purchase_detail->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund', 'data-toggle' => 'validator']) !!}
 
             <h3>Purchase Detail</h3>
             <section>

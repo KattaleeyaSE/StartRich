@@ -25,6 +25,10 @@
     border: 1px solid #fbc2c4 !important;
     color: #8a1f11 !important;
 }
+
+label.error {
+    display: none !important;
+}
     </style>
     <!-- Scripts -->
     <script>

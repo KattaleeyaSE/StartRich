@@ -3,9 +3,9 @@
 
 <div class="row">
 	<div class="container">
-		{!! Form::model($past_performance, ['route' => ['amc.fund.update_past_performance', $past_performance->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund']) !!}
+		{!! Form::model($past_performance, ['route' => ['amc.fund.update_past_performance', $past_performance->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund', 'data-toggle' => 'validator']) !!}
 
-            <h3>Fee</h3>
+            <h3>Past Performance</h3>
             <section>
 				@include('AMC.fund.past_performance.partials._form-edit')
             </section>

@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="container">
-		{!! Form::model($holding_company, ['route' => ['amc.fund.update_holding_company', $holding_company->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund']) !!}
+		{!! Form::model($holding_company, ['route' => ['amc.fund.update_holding_company', $holding_company->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund', 'data-toggle' => 'validator']) !!}
 
             <h3>Holding Company</h3>
             <section>

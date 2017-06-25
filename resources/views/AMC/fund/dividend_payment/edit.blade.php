@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="container">
-		{!! Form::model($dividend, ['route' => ['amc.fund.update_dividend', $dividend->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund']) !!}
+		{!! Form::model($dividend, ['route' => ['amc.fund.update_dividend', $dividend->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund', 'data-toggle' => 'validator']) !!}
 
             <h3>Dividend Payment</h3>
             <section>
