@@ -432,8 +432,10 @@ class FundController extends Controller
     public function editHoldingCompany($id)
     {
         $holding_company = HoldingCompany::find($id);
+        $fund = $holding_company->fund;
+        $qouta = $fund->holding_companies->sum('percentage');
 
-        return view('AMC.fund.holding_company.edit', ['holding_company' => $holding_company]);
+        return view('AMC.fund.holding_company.edit', ['holding_company' => $holding_company, 'qouta' => $qouta]);
     }
 
     public function updateHoldingCompany(Request $request, $id)

@@ -4,9 +4,12 @@
 <div class="row">
 	<div class="container">
 		{!! Form::model($holding_company, ['route' => ['amc.fund.update_holding_company', $holding_company->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund', 'data-toggle' => 'validator']) !!}
-
+            <input type="hidden" name="qouta" value="{{$qouta}}">
             <h3>Holding Company</h3>
             <section>
+                <div class="alert alert-danger exceed" style="display: none;">
+                  <strong>The sum of shares is greather than 100%. The maximum is {{$qouta}}%.</strong>
+                </div>
 				@include('AMC.fund.holding_company.partials._form')
             </section>
 			
@@ -56,6 +59,33 @@
             }
 		});
 	</script>
+
+    <script type="text/javascript">
+        $('.shares').change( function () {
+            var qouta = parseInt($('input[name="qouta"]').val());
+            var input = parseInt($(this).val());
+            if ( input > qouta ) {
+                alertSum();
+            } else {
+                hideSum();
+            }
+        });
+
+    function alertSum()
+    {
+        $('.exceed').show();
+        $('.assets').parent().addClass('has-error');
+        $('a[href="#finish"]').css('cursor', 'not-allowed');
+        $('a[href="#finish"]').attr('disabled', 'disabled');
+    }
+
+    function hideSum()
+    {
+        $('.exceed').hide();
+        $('.assets').parent().removeClass('has-error');
+        $('a[href="#finish"]').css('cursor', 'pointer');
+    }
+    </script>
 
 @endsection
 

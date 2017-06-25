@@ -6,6 +6,6 @@
 
 <div class="form-group">
 	{!! Form::label('percentage', 'Percentage', ['class' => 'control-label']) !!}
-	{!! Form::text('percentage', null, ['class' => 'form-control required', 'required' => 'required', 'maxlength' => '10', 'pattern' => '^[0-9.]{1,}$']) !!}
+	{!! Form::text('percentage', null, ['class' => 'form-control required shares', 'required' => 'required', 'maxlength' => '10', 'pattern' => '^[0-9.]{1,}$']) !!}
 	<div class="help-block with-errors"></div>
 </div>
