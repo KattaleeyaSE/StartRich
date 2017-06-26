@@ -8,7 +8,7 @@
                 <div class="panel-heading"> Member : Take Suitability Test</div> 
                 
                 <div class="panel-body"> 
-                     <form class="form-horizontal" action="{{url('suitabilitytest/member/storetest')}}" method="POST">
+                     <form class="form-horizontal" action="{{url('suitabilitytest/member/storetest')}}" method="POST" data-toggle="validator">
                         {{csrf_field()}}
                         <input type="hidden" name="test_id" value="{{$test->id}}">
                         <input type="hidden" name="test_member_id" value="{{Auth::user()->member->id}}">
@@ -72,6 +72,7 @@
                                                             <input type="radio" name="q_{{$question->id}}" value="{{$answer->id}}" required>{{$answer->answer}}
                                                         </label> 
                                                      @endforeach
+                                                    <div class="help-block with-errors"></div>
                                                 </div>  
                                             </div>
 
@@ -98,4 +99,20 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+@endsection
+@section('style')
+    <style>
+        input.ng-invalid, input.ng-invalid:focus {
+            border-color: #a94442;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        }
+
+        .error {
+            color: #a94442;
+        }
+    </style>
 @endsection

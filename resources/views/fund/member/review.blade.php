@@ -18,35 +18,27 @@
             <hr>
 
             @if (!$fund->reviewedByMember(Auth::user()->member->id))
-                {!! Form::open(['route' => ['member.fund.save_review', $fund->id]]) !!}
+                {!! Form::open(['route' => ['member.fund.save_review', $fund->id], 'data-toggle' => 'validator']) !!}
 
                     <div class="row">
                         <div class="col-md-9">
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                 {!! Form::label('description', 'Description', ['class' => 'control-label', 'for' => 'description']) !!}
                                 {!! Form::textarea('description', null,['class' => 'form-control']) !!}
-                                    @if ($errors->has('description'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('description') }}</strong>
-                                        </span>
-                                    @endif
+                                <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group{{ $errors->has('point') ? ' has-error' : '' }}">
                                 <p>{!! Form::label('point', 'Point', ['class' => 'control-label', 'for' => 'point']) !!}</p>
 
-                                {!! Form::radio('point', 0, false, []) !!} No point
-                                {!! Form::radio('point', 1, false, []) !!} 1
-                                {!! Form::radio('point', 2, false, []) !!} 2
-                                {!! Form::radio('point', 3, false, []) !!} 3
-                                {!! Form::radio('point', 4, false, []) !!} 4
-                                {!! Form::radio('point', 5, false, []) !!} 5
-                                    @if ($errors->has('point'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('point') }}</strong>
-                                        </span>
-                                    @endif
+                                {!! Form::radio('point', 0, false, ['required' => 'required']) !!} No point
+                                {!! Form::radio('point', 1, false, ['required' => 'required']) !!} 1
+                                {!! Form::radio('point', 2, false, ['required' => 'required']) !!} 2
+                                {!! Form::radio('point', 3, false, ['required' => 'required']) !!} 3
+                                {!! Form::radio('point', 4, false, ['required' => 'required']) !!} 4
+                                {!! Form::radio('point', 5, false, ['required' => 'required']) !!} 5
+                                <div class="help-block with-errors"></div>
                             </div>
                             <hr>
                             {!! Form::submit('Submit Review', ['class' => 'btn btn-block btn-primary']) !!}
@@ -61,4 +53,7 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 @endsection

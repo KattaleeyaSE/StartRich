@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="container">
-		{!! Form::model($fund, ['route' => ['amc.fund.update_investment_policy', $fund->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund']) !!}
+		{!! Form::model($fund, ['route' => ['amc.fund.update_investment_policy', $fund->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund', 'data-toggle' => 'validator']) !!}
 
 	        <h3>Investment Policy</h3>
 	        <section>

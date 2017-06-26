@@ -8,12 +8,16 @@
                 <div class="panel-heading">AMC : Edit Suitability Test</div> 
                 
                 <div class="panel-body"> 
-                    <form class="form-horizontal" name="updateform">
+                    <form class="form-horizontal" name="updateform" data-toggle="validator">
 
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="question_name">Question Name</label> 
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" name="question_name" ng-model="suitabilityTest.question_name" class="form-control col-md-7 col-xs-12" ng-required="true" /> 
+                                <input type="text" name="question_name" ng-model="suitabilityTest.question_name" class="form-control col-md-7 col-xs-12" ng-pattern="/^[a-zA-Z0-9 ]*$/" ng-required="true" maxlength="255" /> 
+                                <div role="alert">
+                                  <span class="error" ng-show="updateform.question_name.$error.required">This field is required.</span>
+                                  <span class="error" ng-show="updateform.question_name.$error.pattern">Wrong format</span>
+                                </div>
                             </div> 
                         </div>
 
@@ -45,7 +49,11 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Asset</label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="assets[]" ng-model="asset.name" class="form-control col-md-7 col-xs-12"  ng-required="true" /> 
+                                        <input type="text" name="assets<%$index%>" ng-model="asset.name" class="form-control col-md-7 col-xs-12" ng-pattern="/^[a-zA-Z0-9 ]*$/" ng-required="true" maxlength="255" />  
+                                        <div role="alert">
+                                          <span class="error" ng-show="updateform.assets<%$index%>.$error.required">This field is required.</span>
+                                          <span class="error" ng-show="updateform.assets<%$index%>.$error.pattern">Wrong format</span>
+                                        </div>
                                     </div> 
                                 </div>
                             </div> 
@@ -146,7 +154,11 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Question</label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="questions[]" ng-model="question.question" class="form-control col-md-7 col-xs-12" ng-required="true" /> 
+                                        <input type="text" name="questions<%$index%>" ng-model="question.question" class="form-control col-md-7 col-xs-12" ng-pattern="/^[a-zA-Z0-9 ]*$/" ng-required="true" maxlength="255" /> 
+                                        <div role="alert">
+                                          <span class="error" ng-show="updateform.questions<%$index%>.$error.required">This field is required.</span>
+                                          <span class="error" ng-show="updateform.questions<%$index%>.$error.pattern">Wrong format</span>
+                                        </div>
                                     </div> 
                                 </div>
                              <hr>  
@@ -176,7 +188,11 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Answer</label> 
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="answer[]" ng-model="answer.answer" class="form-control col-md-7 col-xs-12" ng-required="true" /> 
+                                        <input type="text" name="answer<%answer.id%>" ng-model="answer.answer" class="form-control col-md-7 col-xs-12" ng-pattern="/^[a-zA-Z0-9]*$/" ng-required="true" maxlength="10" /> 
+                                        <div role="alert">
+                                          <span class="error" ng-show="updateform.answer<%answer.id%>.$error.required">This field is required.</span>
+                                          <span class="error" ng-show="updateform.answer<%answer.id%>.$error.pattern">Wrong format</span>
+                                        </div>
                                     </div> 
                                 </div> 
                                 
@@ -213,11 +229,18 @@
 @section('script')
     <script src="/js/angular/suitability_test/resource.js"></script> 
     <script src="/js/angular/suitability_test/controller.js"></script> 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 @endsection
 @section('style')
     <style>
-        input.ng-invalid-required {
-            border-color: red;
+        input.ng-invalid, input.ng-invalid:focus {
+            border-color: #a94442;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        }
+
+        .error {
+            color: #a94442;
         }
     </style>
 @endsection

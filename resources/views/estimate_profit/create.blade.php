@@ -12,7 +12,7 @@
                     <div class="alert alert-danger" ng-show="errorMsg">
                         <%errorMsg%>
                     </div>
-                    <form method="post"  class="form-horizontal" name="createform">
+                    <form method="post"  class="form-horizontal" name="createform" data-toggle="validator">
                         
                         {!!csrf_field()!!}
                         <div class="form-group"> 
@@ -62,6 +62,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <input 
                             type="text" 
+                            name="buy_date" 
                             moment-picker="buyDate" 
                             format="YYYY-MM-DD" 
                             ng-model="buyDate" 
@@ -70,6 +71,10 @@
                             ng-required="true" 
                             disable="!selected.mutualFundType.id"
                         >
+                        <div role="alert">
+                          <span class="error" ng-show="createform.buy_date.$error.required">This field is required.</span>
+                          <span class="error" ng-show="createform.buy_date.$error.pattern">Wrong format</span>
+                        </div>
                     </div> 
                 </div>
  
@@ -91,12 +96,20 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="price_per_unit">Balance of investment</label> 
                     <div class="col-md-6 col-sm-6 col-xs-12">
                        <input 
-                            type="number"  
+                            type="text"  
+                            name="balance"
                             ng-model="balance_of_investment" 
                             class="form-control"  
                             ng-required="true" 
+                            ng-pattern="/^[0-9]*$/"
+                            maxlength="10"
                             min="<%selected.mutualFundType.purchasedetails[0].min_first_purchase > 0 ? selected.mutualFundType.purchasedetails[0].min_first_purchase : 1%>"
                         >
+                        <div role="alert">
+                          <span class="error" ng-show="createform.balance.$error.required">This field is required.</span>
+                          <span class="error" ng-show="createform.balance.$error.min">The minimum is <%selected.mutualFundType.purchasedetails[0].min_first_purchase > 0 ? selected.mutualFundType.purchasedetails[0].min_first_purchase : 1%></span>
+                          <span class="error" ng-show="createform.balance.$error.pattern">The balance of investment format allow only 0-9.</span>
+                        </div>
                     </div>  
 
                 </div>
@@ -123,14 +136,18 @@
 @section('script')
     <script src="/js/angular/estimate_profit/resource.js"></script> 
     <script src="/js/angular/estimate_profit/controller.js"></script> 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 @endsection
 @section('style')
     <style>
-        input.ng-invalid-required {
-            border-color: red;
+        input.ng-invalid, input.ng-invalid:focus {
+            border-color: #a94442;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
         }
-        input.ng-invalid-min {
-            border-color: red;
+
+        .error {
+            color: #a94442;
         }
     </style>
 @endsection

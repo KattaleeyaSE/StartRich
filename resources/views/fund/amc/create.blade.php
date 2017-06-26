@@ -7,7 +7,7 @@
             <div class="panel-heading">AMC : Create Fund</div>
             <div class="panel-body">
 
-				{!! Form::open(['route' => 'amc.fund.store', 'class' => 'form-horizontal', 'id' => 'form-fund']) !!}
+				{!! Form::open(['route' => 'amc.fund.store', 'class' => 'form-horizontal', 'id' => 'form-fund', 'data-toggle' => 'validator']) !!}
 
 				    <h3>Fund</h3>
 				    <section>
@@ -56,6 +56,9 @@
 
                     <h3>Portfolio</h3>
                     <section>
+                <div class="alert alert-danger exceed" style="display: none;">
+                  <strong>The sum of these inputs is greather than 100%.</strong>
+                </div>
                         @include('fund.amc.partials._form-asset-allocation')
                         @include('fund.amc.partials._form-holding')
                     </section>
@@ -78,6 +81,9 @@
 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
 	<script type="text/javascript">
         var form = $("#form-fund");
 
@@ -209,8 +215,59 @@
             next_performance_index++
         });
     </script>
+
+    <script type="text/javascript">
+
+    $('.assets').change( function () {
+        var sum = 0;
+        var val = 0;
+
+        $('.assets').each( function () {
+            val = parseInt($(this).val());
+            val = isNaN(val) ? 0 : val;
+            sum += val;
+        });
+
+        if (sum > 100) {
+            alertSum();
+        } else {
+            hideSum();
+        }
+    });
+
+    function alertSum()
+    {
+        $('.exceed').show();
+        $('.assets').parent().addClass('has-error');
+        $('a[href="#finish"]').css('cursor', 'not-allowed');
+        $('a[href="#finish"]').attr('disabled', 'disabled');
+    }
+
+    function hideSum()
+    {
+        $('.exceed').hide();
+        $('.assets').parent().removeClass('has-error');
+        $('a[href="#finish"]').css('cursor', 'pointer');
+    }
+    </script>
 @endsection
 
 @section('style')
     <link rel="stylesheet" type="text/css" href="/css/form.css">
+    <style>
+        input.ng-invalid, input.ng-invalid:focus {
+            border-color: #a94442 !;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        }
+
+        .error {
+            color: #a94442;
+        }
+
+        .has-error .form-control {
+            border-color: #a94442 !important;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        }
+    </style>
 @endsection

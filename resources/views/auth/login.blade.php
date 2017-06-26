@@ -8,27 +8,20 @@
                 <div class="panel-heading">Login</div>
 
                 <div class="panel-body"> 
-                    <form action="{{url('login')}}" method="post"  class="form-horizontal">
+                    <form action="{{url('login')}}" method="post"  class="form-horizontal" data-toggle="validator">
                         {!!csrf_field()!!}
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Username</label> 
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" name="username" value="{{old('username')}}" class="form-control col-md-7 col-xs-12" /> 
+                                <input type="text" name="username" value="{{old('username')}}" class="form-control col-md-7 col-xs-12" pattern="^[A-z0-9 ]{1,}$" required/> 
+                                <div class="help-block with-errors"></div>
                             </div>
-                            @if ($errors->has('username'))
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <span class="help-block text-center">
-                                            <strong>{{ $errors->first('username') }}</strong>
-                                        </span>
-                                    </div>
-                                </div>
-                            @endif
                         </div>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Password</label> 
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="password" name="password" class="form-control col-md-7 col-xs-12" /> 
+                                <input type="password" name="password" class="form-control col-md-7 col-xs-12" pattern="^[A-z0-9 ]{1,}$" required/> 
+                                <div class="help-block with-errors"></div>
                             </div>
                             @if ($errors->has('password'))
                                 <div class="row">
@@ -52,4 +45,7 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 @endsection

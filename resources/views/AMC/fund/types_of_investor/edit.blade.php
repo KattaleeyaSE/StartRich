@@ -3,9 +3,9 @@
 
 <div class="row">
 	<div class="container">
-		{!! Form::model($fund, ['route' => ['amc.fund.update_types_of_investor', $fund->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund']) !!}
+		{!! Form::model($fund, ['route' => ['amc.fund.update_types_of_investor', $fund->id], 'method' => 'PATCH', 'class' => 'form-horizontal', 'id' => 'form-fund', 'data-toggle' => 'validator']) !!}
 
-	        <h3>Investment Policy</h3>
+	        <h3>Types of Investor</h3>
 	        <section>
 				@include('fund.amc.partials._form-types-of-investor')
 	        </section>

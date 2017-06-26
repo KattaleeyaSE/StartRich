@@ -29,6 +29,7 @@ class MemberStoreCrudRequest extends \Backpack\CRUD\app\Http\Requests\CrudReques
             'lastname' => 'required',
             'username' => 'required|min:6|unique:users',
             'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required',
             'phone_number' => 'required|min:10',
             'email' => 'required|email|unique:users',
         ];
@@ -42,12 +43,13 @@ class MemberStoreCrudRequest extends \Backpack\CRUD\app\Http\Requests\CrudReques
     public function attributes()
     {
         return [
-            'firstname' => 'Firstname',
-            'lastname' => 'Lastname',
-            'username' => 'username',
-            'password' => 'password',
-            'phone_number' => 'phone number',
-            'email' => 'email',
+            'firstname' => 'First name',
+            'lastname' => 'Last name',
+            'username' => 'Username',
+            'password' => 'Password',
+            'password_confirmation' => 'Password confirmation',
+            'phone_number' => 'Phone number',
+            'email' => 'Email',
         ];
     }
 
@@ -59,9 +61,9 @@ class MemberStoreCrudRequest extends \Backpack\CRUD\app\Http\Requests\CrudReques
     public function messages()
     {
         return [
-            'required' => 'Text field is required.',
+            'required' => ':attribute can\'t be empty.',
             'min' => 'Please enter :attribute at least :min characteristic.',
-            'unique' => ':attribute is duplicate with the database.',
+            'unique' => ':attribute is already in the database.',
             'email' => 'Please enter a valid email address.',
         ];
     }

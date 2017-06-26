@@ -8,7 +8,7 @@
                 <div class="panel-heading">Register</div>
 
                 <div class="panel-body"> 
-                    <form action="{{url('register')}}" method="post"  class="form-horizontal">
+                    <form action="{{url('register')}}" method="post"  class="form-horizontal" data-toggle="validator">
                         {!!csrf_field()!!}
                         @include('member.partials.form', ['submit_text' => 'Register'])
                     </from> 
@@ -18,4 +18,7 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 @endsection
