@@ -153,9 +153,10 @@ class SimulatorService implements ISimulatorService
                             $dateString = $resultOfferFiltered[$i]['date'];
                             $offerVal = $resultOfferFiltered[$i]['value'];
                         }
+                        $offsetIndex =sizeof($resultBidFiltered)-1 >= 0  ? sizeof($resultBidFiltered)-1 : 0;
 
                         $bought_unit = $request->balance_of_investment / $offerVal;
-                        $bid_value = $bought_unit *  $resultBidFiltered[sizeof($resultBidFiltered)-1]; 
+                        $bid_value = $bought_unit *  $resultBidFiltered[$offsetIndex]; 
 
                         $return_profit_percent = ($bid_value - $request->balance_of_investment) /100;
 
@@ -174,7 +175,7 @@ class SimulatorService implements ISimulatorService
  
                     } 
                 } 
-                
+               
                 return $result;
 
         }
