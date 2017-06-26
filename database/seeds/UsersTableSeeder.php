@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
             ],                                          
             [ 
                 'id' => 3,
-                'username' => 'amcmebmer',
+                'username' => 'amcmember',
                 'email' => 'amc@example.com',
                 'password' => bcrypt('secret'), 
                 'created_at' => new DateTime, 
@@ -38,7 +38,7 @@ class UsersTableSeeder extends Seeder
             ],                                          
             [ 
                 'id' => 4,
-                'username' => 'amcmebmer2',
+                'username' => 'amcmember2',
                 'email' => 'amc2@example.com',
                 'password' => bcrypt('secret'), 
                 'created_at' => new DateTime, 
@@ -46,7 +46,7 @@ class UsersTableSeeder extends Seeder
             ],                                          
             [ 
                 'id' => 5,
-                'username' => 'amcmebmer3',
+                'username' => 'amcmember3',
                 'email' => 'amc3@example.com',
                 'password' => bcrypt('secret'), 
                 'created_at' => new DateTime, 
