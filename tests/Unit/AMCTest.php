@@ -18,7 +18,7 @@ class AMCTest extends TestCase
         $amc = \App\Models\AMC::first(); 
         $expected = [ 
                 'id' => 3,
-                'username' => 'amcmebmer',
+                'username' => 'amcmember',
                 'email' => 'amc@example.com',
             ];
 
