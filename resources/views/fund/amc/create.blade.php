@@ -60,6 +60,9 @@
                   <strong>The sum of these inputs is greather than 100%.</strong>
                 </div>
                         @include('fund.amc.partials._form-asset-allocation')
+                <div class="alert alert-danger exceedHolding" style="display: none;">
+                  <strong>The sum of these inputs is greather than 100%.</strong>
+                </div>
                         @include('fund.amc.partials._form-holding')
                     </section>
 
@@ -114,8 +117,25 @@
             },
             onFinished: function (event, currentIndex)
             {
-            	console.log($(this))
-                $(this).submit();
+                var sumHolding = 0;
+                $('.shares').each( function () {
+                    val = parseInt($(this).val());
+                    val = isNaN(val) ? 0 : val;
+                    sumHolding += val;
+                });
+
+                if (sumHolding > 100) {
+                    $('.exceedHolding').show();
+                    $('.shares').parent().addClass('has-error');
+                    // $('a[href="#finish"]').css('cursor', 'not-allowed');
+                    // $('a[href="#finish"]').attr('disabled', 'disabled');
+                } else {
+                    $('.exceedHolding').hide();
+                    $('.shares').parent().removeClass('has-error');
+                    // $('a[href="#finish"]').css('cursor', 'pointer');
+                    $(this).submit();
+                }
+
             }
 		});
 	</script>
