@@ -2,9 +2,9 @@
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username</label> 
     <div class="col-md-6 col-sm-6 col-xs-12">
         @if($submit_text !='Edit')
-        <input type="text" name="username" value="{{isset($member) ? $member->user->username : old('username')}}" class="form-control col-md-7 col-xs-12" required/> 
+        <input type="text" name="username" value="{{isset($member) ? $member->user->username : old('username')}}" class="form-control col-md-7 col-xs-12" required maxlength="15" minlength="6" /> 
         @else
-         <input type="text" name="username" value="{{isset($member) ? $member->user->username : old('username')}}" class="form-control col-md-7 col-xs-12" readonly/> 
+         <input type="text" name="username" value="{{isset($member) ? $member->user->username : old('username')}}" class="form-control col-md-7 col-xs-12" readonly maxlength="15" minlength="6" /> 
         @endif
         <div class="help-block with-errors"></div>
     </div>
