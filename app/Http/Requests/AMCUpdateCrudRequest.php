@@ -59,7 +59,7 @@ class AMCUpdateCrudRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
         return [
             'required' => 'Text field is required.',
             'min' => 'Please enter :attribute at least :min characteristic.',
-            'unique' => ':attribute is duplicate with the database.',
+            'unique' => ':attribute is already in the database.',
             'email' => 'Please enter a valid email address.',
         ];
     }

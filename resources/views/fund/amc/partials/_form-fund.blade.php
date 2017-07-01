@@ -14,7 +14,7 @@
 <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
     {!! Form::label('code', 'Code *', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12', 'for' => 'code']) !!}
     <div class="col-md-6 col-sm-6 col-xs-12">
-    {!! Form::text('code', null,['class' => 'form-control col-md-7 col-xs-12 required', 'required' => 'required', 'maxlength' => '50', 'pattern' => '^[_A-z0-9]{1,}$']) !!}
+    {!! Form::text('code', null,['class' => 'form-control col-md-7 col-xs-12 required', 'id' => 'create-fund-code', 'required' => 'required', 'maxlength' => '50', 'pattern' => '^[_A-z0-9]{1,}$']) !!}
     <div class="help-block with-errors"></div>
     </div>
         @if ($errors->has('code'))

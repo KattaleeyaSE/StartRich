@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\IRepositories\IMutualFundRepository;
 use App\Models\MutualFundType;
+use App\Models\MutualFund;
 use App\Models\AimcType;
 use App\Models\FundManager;
 use App\Models\NAV;
@@ -55,8 +56,10 @@ class FundController extends Controller
     {
         $fund_types = MutualFundType::all()->pluck('name', 'name');
         $aimc_types = AimcType::all()->pluck('name', 'name');
+        $funds = MutualFund::all()->pluck('name');
+        $codes = MutualFund::all()->pluck('code');
 
-        return view('fund.amc.create', ['fund_types' => $fund_types, 'aimc_types' => $aimc_types]);
+        return view('fund.amc.create', ['fund_types' => $fund_types, 'aimc_types' => $aimc_types, 'funds' => $funds, 'codes' => $codes]);
     }
 
     /**
@@ -214,8 +217,12 @@ class FundController extends Controller
         $fund = $this->mutualFundRepository->find($id);
         $fund_types = MutualFundType::all()->pluck('name', 'name');
         $aimc_types = AimcType::all()->pluck('name', 'name');
+        $funds = MutualFund::all();
+        $codes = MutualFund::all();
+        $funds = $funds->where('name', '!=', $fund->name);
+        $codes = $codes->where('code', '!=', $fund->code);
 
-        return view('fund.amc.edit', ['fund' => $fund, 'fund_types' => $fund_types, 'aimc_types' => $aimc_types]);
+        return view('fund.amc.edit', ['fund' => $fund, 'fund_types' => $fund_types, 'aimc_types' => $aimc_types, 'funds' => $funds->pluck('name'), 'codes' => $codes->pluck('code')]);
     }
 
     /**

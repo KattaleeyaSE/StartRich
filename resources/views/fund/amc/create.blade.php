@@ -270,6 +270,31 @@
         $('a[href="#finish"]').css('cursor', 'pointer');
     }
     </script>
+    <script type="text/javascript">
+        var funds = {!! json_encode($funds) !!}
+        $('#create-fund-name').change( function () {
+            if ($.inArray($(this).val(), funds) >= 0) {
+                $(this).parent().addClass('has-error');
+                $(this).parent().children('.with-errors').html('<span id="duplicate">Fund name is already in the database</span>');
+            } else {
+                $(this).parent().removeClass('has-error');
+                $(this).parent().children('.with-errors').children('#duplicate').remove();
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        var codes = {!! json_encode($codes) !!}
+        $('#create-fund-code').change( function () {
+            console.log(codes);
+            if ($.inArray($(this).val(), codes) >= 0) {
+                $(this).parent().addClass('has-error');
+                $(this).parent().children('.with-errors').html('<span id="duplicate">Fund code is already in the database</span>');
+            } else {
+                $(this).parent().removeClass('has-error');
+                $(this).parent().children('.with-errors').children('#duplicate').remove();
+            }
+        });
+    </script>
 @endsection
 
 @section('style')
