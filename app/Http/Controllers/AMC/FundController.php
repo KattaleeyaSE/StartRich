@@ -70,87 +70,6 @@ class FundController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = [
-            'name' => 'required',
-            'code' => 'required',
-            'type' => 'required',
-            'aimc_type' => 'required',
-            'management_company' => 'required',
-            'trustee' => 'required',
-            'payment_policy' => 'required',
-            'frequency' => 'required',
-            'approved_by' => 'required',
-            'supervision' => 'required',
-            'protected_fund' => 'required',
-            'name_of_guarantor' => 'required',
-            'fund_start' => 'required',
-            'fund_end' => 'required',
-            'risk_level' => 'required',
-            'net_asset_value' => 'required',
-            'investment_asset_detail' => 'required',
-            'strategy_detail' => 'required',
-            'factor_impact' => 'required',
-            'benchmark_detail' => 'required',
-            'type_of_investor' => 'required',
-            'major_risk_factor' => 'required',
-            'fees.*.front_end_fee' => 'required',
-            'fees.*.actual_front_end_fee' => 'required',
-            'fees.*.back_end_fee' => 'required',
-            'fees.*.actual_back_end_fee' => 'required',
-            'fees.*.switching_fee' => 'required',
-            'purchases.*.subscription_period' => 'required',
-            'purchases.*.min_first_purchase' => 'required',
-            'purchases.*.min_additional' => 'required',
-            'purchases.*.redemtion_period' => 'required',
-            'purchases.*.min_redemption' => 'required',
-            'purchases.*.min_balance' => 'required',
-            'purchases.*.settlement_period' => 'required',
-            'expenses.*.manager_fee' => 'required',
-            'expenses.*.actual_manager_fee' => 'required',
-            'expenses.*.total_expense_ratio' => 'required',
-            'expenses.*.trustee_fee' => 'required',
-            'expenses.*.actual_trustee_fee' => 'required',
-            'expenses.*.registrar_fee' => 'required',
-            'expenses.*.actual_registrar_fee' => 'required',
-            'expenses.*.other_fee' => 'required',
-            'stock' => 'required',
-            'cash' => 'required',
-            'bond' => 'required',
-            'other' => 'required',
-            'performance_date' => 'required',
-        ];        
-        foreach ($request->past_performances as $key => $value) {
-            $validate['past_performances.'.$key.'.name'] = 'required';
-            $validate['past_performances.'.$key.'.3month'] = 'required';
-            $validate['past_performances.'.$key.'.6month'] = 'required';
-            $validate['past_performances.'.$key.'.1year'] = 'required';
-            $validate['past_performances.'.$key.'.3year'] = 'required';
-            $validate['past_performances.'.$key.'.5year'] = 'required';
-            $validate['past_performances.'.$key.'.10year'] = 'required';
-            $validate['past_performances.'.$key.'.since_inception'] = 'required';
-        }       
-        foreach ($request->managers as $key => $value) {
-            $validate['managers.'.$key.'.name'] = 'required';
-            $validate['managers.'.$key.'.position'] = 'required';
-            $validate['managers.'.$key.'.management_date'] = 'required';
-        }     
-        foreach ($request->navs as $key => $value) {
-            $validate['navs.'.$key.'.modified_date'] = 'required';
-            $validate['navs.'.$key.'.standard'] = 'required';
-            $validate['navs.'.$key.'.bid'] = 'required';
-            $validate['navs.'.$key.'.offer'] = 'required';
-        }
-        foreach ($request->dividends as $key => $value) {
-            $validate['dividends.'.$key.'.payment_date'] = 'required';
-            $validate['dividends.'.$key.'.dividend_price'] = 'required';
-        }
-        foreach ($request->companies as $key => $value) {
-            $validate['companies.'.$key.'.name'] = 'required';
-            $validate['companies.'.$key.'.percentage'] = 'required';
-        }
-
-        $this->validate($request, $validate);
-
         $amc_id = Auth::user()->amc->id;
         $fund = $this->mutualFundRepository->create($request, $amc_id);
 
@@ -440,7 +359,9 @@ class FundController extends Controller
     {
         $holding_company = HoldingCompany::find($id);
         $fund = $holding_company->fund;
-        $qouta = $fund->holding_companies->sum('percentage');
+        
+        $holders = $fund->holding_companies->where('id', '!=', $id);
+        $qouta = $holders ? $holders->sum('percentage') : 0;
 
         return view('AMC.fund.holding_company.edit', ['holding_company' => $holding_company, 'qouta' => $qouta]);
     }

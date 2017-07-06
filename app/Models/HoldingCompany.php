@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class HoldingCompany extends Model
 {
-    protected $guarded = [];
+    protected $guarded = ['qouta'];
 
     public function fund()
     {

@@ -8,7 +8,7 @@
             <h3>Holding Company</h3>
             <section>
                 <div class="alert alert-danger exceed" style="display: none;">
-                  <strong>The sum of shares is greather than 100%. The maximum is {{$qouta}}%.</strong>
+                  <strong>The sum of shares is greather than 100%. The maximum is {{100 - $qouta}}%.</strong>
                 </div>
 				@include('AMC.fund.holding_company.partials._form')
             </section>
@@ -62,7 +62,7 @@
 
     <script type="text/javascript">
         $('.shares').change( function () {
-            var qouta = parseInt($('input[name="qouta"]').val());
+            var qouta = 100 - parseInt($('input[name="qouta"]').val());
             var input = parseInt($(this).val());
             if ( input > qouta ) {
                 alertSum();
