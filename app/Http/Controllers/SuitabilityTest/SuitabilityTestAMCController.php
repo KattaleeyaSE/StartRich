@@ -5,22 +5,13 @@ namespace App\Http\Controllers\SuitabilityTest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-//Service Container
-use App\IRepositories\ISuitabilityTestRepository;
-
 //Request Validation
 use App\Http\Requests\SuitablityTestStoreCrudRequest as StoreRequest;
 use App\Http\Requests\SuitablityTestUpdateCrudRequest as UpdateRequest;
 
 class SuitabilityTestAMCController extends Controller
 {
-    private $suitabilityTestRepository;
-
-    public function __construct(ISuitabilityTestRepository $suitabilityTestRepository)
-    {
-        $this->middleware('auth.amc');
-        $this->suitabilityTestRepository = $suitabilityTestRepository;
-    }
+   
 
     /**
      * Display all rows in the database for this entity.
@@ -29,7 +20,7 @@ class SuitabilityTestAMCController extends Controller
      */
     public function index()
     {
-        $suitabilityTests = $this->suitabilityTestRepository->all_by_amc_id_pagination(\Auth::user()->amc->id,15);
+        $suitabilityTests = SuitabilityTest::all_by_amc_id_pagination(\Auth::user()->amc->id,15);
 
         return view('suitability_test.amc.index', 
             [
@@ -136,7 +127,7 @@ class SuitabilityTestAMCController extends Controller
      */
     public function show($id)
     {
-        $test = $this->suitabilityTestRepository->find($id);
+        $test = SuitabilityTest::find($id);
 
         return view('suitability_test.amc.show', ["test" => $test]);
     }
@@ -150,7 +141,7 @@ class SuitabilityTestAMCController extends Controller
      */
     public function destroy($id)
     { 
-        $this->suitabilityTestRepository->delete($id);
+        SuitabilityTest::delete($id);
 
         return \Redirect('/suitabilitytest/amc/index'); 
     }

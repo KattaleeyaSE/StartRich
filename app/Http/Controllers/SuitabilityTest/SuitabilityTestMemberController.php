@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 //Service Container
-use App\IRepositories\ISuitabilityTestRepository;
-use App\IRepositories\ISuitabilityTestMemberRepository;
 use App\IServices\ISuitabilityTestService;
 
 //Request Validation
@@ -16,19 +14,13 @@ use App\Http\Requests\SuitablityTestUpdateCrudRequest as UpdateRequest;
 
 class SuitabilityTestMemberController extends Controller
 {
-    private $suitabilityTestRepository;
-    private $suitabilityTestMemberRepository;
     private $suitabilityTestService;
 
     public function __construct(
-            ISuitabilityTestRepository $suitabilityTestRepository,
-            ISuitabilityTestMemberRepository $suitabilityTestMemberRepository,
             ISuitabilityTestService $suitabilityTestService
         )
     {
         $this->middleware('auth.member');
-        $this->suitabilityTestRepository = $suitabilityTestRepository;
-        $this->suitabilityTestMemberRepository = $suitabilityTestMemberRepository;
         $this->suitabilityTestService = $suitabilityTestService;
     }
 
@@ -39,12 +31,12 @@ class SuitabilityTestMemberController extends Controller
      */
     public function index()
     {
-        $suitabilityTests = $this->suitabilityTestMemberRepository->all_by_member_id_pagination(\Auth::user()->member->id,15);
+        //$suitabilityTests = SuitabilityTestMember::all_by_member_id_pagination(\Auth::user()->member->id,15);
         if(!is_null($suitabilityTests) && sizeof($suitabilityTests) > 0)
         {
             foreach($suitabilityTests as $item)
             {
-                $test = $this->suitabilityTestRepository->find($item->suitability_test_id);
+                //$test = SuitabilityTestMember::find($item->suitability_test_id);
                 
                 $item->offsetSet('company_name',$test->amc->company_name);
                 $item->offsetSet('name',$test->name);
@@ -65,7 +57,7 @@ class SuitabilityTestMemberController extends Controller
      */
     public function all_test()
     {
-        $suitabilityTests = $this->suitabilityTestRepository->all_pagination(15);
+        //$suitabilityTests = SuitabilityTestMember::all_pagination(15);
 
         return view('suitability_test.member.alltest', 
             [
@@ -82,7 +74,7 @@ class SuitabilityTestMemberController extends Controller
      */
     public function show_record($id)
     {
-        $suitabilityTests = $this->suitabilityTestMemberRepository->find($id);
+        $suitabilityTests = SuitabilityTestMember::find($id);
         $result = $this->suitabilityTestService->get_test_result( $suitabilityTests->id);
         return view('suitability_test.member.result', 
             [
@@ -99,7 +91,7 @@ class SuitabilityTestMemberController extends Controller
      */
     public function take_test($id)
     {
-        $test = $this->suitabilityTestRepository->find($id);
+        $test = SuitabilityTestMember::find($id);
         return view('suitability_test.member.take_test', ["test" => $test]);
     }
 
@@ -163,7 +155,7 @@ class SuitabilityTestMemberController extends Controller
      */
     public function destroy($id)
     { 
-        $this->suitabilityTestMemberRepository->delete($id);
+        SuitabilityTestMember::delete($id);
 
         return \Redirect('/suitabilitytest/member/index'); 
     }       

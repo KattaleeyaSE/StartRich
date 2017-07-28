@@ -5,20 +5,11 @@ namespace App\Http\Controllers\Member;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-//Service Container
-use App\IRepositories\IMemberRepository;
-
 //Request Validation
 use App\Http\Requests\MemberStoreCrudRequest as StoreRequest;
 use App\Http\Requests\MemberUpdateCrudRequest as UpdateRequest;
 class MemberController extends Controller
 {
-    private $memberRepository;
-    public function __construct(IMemberRepository $memberRepository)
-    {
-        $this->middleware('auth.member');
-        $this->memberRepository = $memberRepository;
-    }
     
     /**
      * Show the form for editing the specified resource.
@@ -29,7 +20,7 @@ class MemberController extends Controller
      */
     public function edit()
     {
-        $member = $this->memberRepository->find(\Auth::user()->member->id);
+        $member = Member::find(\Auth::user()->member->id);
 
         return view('member.edit', 
             [
@@ -65,7 +56,7 @@ class MemberController extends Controller
         }
 
         // update the row in the db
-        $item = $this->memberRepository->update(\Auth::user()->member->id,$request);
+        $item = Member::update(\Auth::user()->member->id,$request);
         return \Redirect('member/profile');      
     }
 
@@ -77,7 +68,7 @@ class MemberController extends Controller
      */
     public function show()
     {
-        $member = $this->memberRepository->find(\Auth::user()->member->id);
+        $member = Member::find(\Auth::user()->member->id);
 
         return view('member.show', $member);
     }

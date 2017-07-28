@@ -9,19 +9,10 @@ use App\Http\Requests\UserStoreCrudRequest as StoreRequest;
 use App\Http\Requests\UserUpdateCrudRequest as UpdateRequest;
 use Illuminate\Http\Request;
 
-//Service Container
-use App\IRepositories\IUserRepository;
 
 class UserCrudController extends CrudController
-{
 
-    private $userRepository;
-    public function __construct(IUserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-        $this->middleware('admin');
-        parent::__construct();
-    }
+{
     
     public function setup()
     {

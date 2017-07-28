@@ -6,25 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 //Service Container
-use App\IRepositories\ISuitabilityTestRepository;
-use App\IRepositories\IMutualFundRepository;
 use App\IServices\ISuitabilityTestService;
  
 class SuitabilityTestAPIController extends Controller
 {
-    private $suitabilityTestRepository;
     private $suitabilityTestService;
-    private $mutualFundRepository;
 
     public function __construct(
-            ISuitabilityTestRepository $suitabilityTestRepository,
-            ISuitabilityTestService $suitabilityTestService,
-            IMutualFundRepository $mutualFundRepository
+            ISuitabilityTestService $suitabilityTestService
         )
     { 
-        $this->suitabilityTestRepository = $suitabilityTestRepository;
         $this->suitabilityTestService = $suitabilityTestService;
-        $this->mutualFundRepository = $mutualFundRepository;
     }    
 
 
@@ -96,7 +88,7 @@ class SuitabilityTestAPIController extends Controller
                 return \Response::Json("Fail",404);
             }
 
-            $test  = $this->suitabilityTestRepository->find($id);
+            $test  = SuitabilityTest::find($id);
 
             if(!is_null($test))
             { 
@@ -116,7 +108,7 @@ class SuitabilityTestAPIController extends Controller
                     $asset = []; 
                     foreach($test->suitability_test_assets as $item)
                     {   
-                        $assetItems = $this->suitabilityTestRepository->get_asset_test($item->id,$result->id);
+                        $assetItems = SuitabilityTest::get_asset_test($item->id,$result->id);
  
                         array_push($asset,
                                 [

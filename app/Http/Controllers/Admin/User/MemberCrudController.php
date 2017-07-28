@@ -8,19 +8,9 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\MemberStoreCrudRequest as StoreRequest;
 use App\Http\Requests\MemberUpdateCrudRequest as UpdateRequest;
 
-//Service Container
-use App\IRepositories\IMemberRepository;
 
 class MemberCrudController extends CrudController
 {
-
-    private $memberRepository;
-    public function __construct(IMemberRepository $memberRepository)
-    {
-        $this->memberRepository = $memberRepository;
-        $this->middleware('admin');
-        parent::__construct();
-    }
 
     public function setUp()
     {
@@ -84,7 +74,7 @@ class MemberCrudController extends CrudController
 
         // get all entries if AJAX is not enabled
         if (! $this->data['crud']->ajaxTable()) {
-            $this->data['entries'] = $this->memberRepository->all();
+            $this->data['entries'] = Member::all();
         }
 
         // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
@@ -103,7 +93,7 @@ class MemberCrudController extends CrudController
         $this->crud->hasAccessOrFail('show');
 
         // get the info for that entry
-        $this->data['entry'] = $this->memberRepository->find($id);
+        $this->data['entry'] = Member::find($id);
         $this->data['crud'] = $this->crud;
         $this->data['title'] = trans('backpack::crud.preview').' '.$this->crud->entity_name;
 
@@ -157,7 +147,7 @@ class MemberCrudController extends CrudController
     {
         $this->crud->hasAccessOrFail('delete');
 
-        return \Response::json($this->memberRepository->delete($id));
+        return \Response::json(Member::delete($id));
     }
 
 	// public function store(StoreRequest $request)

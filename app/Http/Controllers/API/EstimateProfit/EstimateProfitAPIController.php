@@ -5,31 +5,16 @@ namespace App\Http\Controllers\API\EstimateProfit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-//Service Container 
-use App\IRepositories\IMutualFundRepository; 
-use App\IRepositories\IEstimateProfitRepository; 
 
 class EstimateProfitAPIController extends Controller
 {
-    //
-    private $mutualFundRepository;
-    private $estimateProfitRepository;
-
-    public function __construct( 
-            IMutualFundRepository $mutualFundRepository,
-            IEstimateProfitRepository $estimateProfitRepository
-        )
-    {  
-        $this->mutualFundRepository = $mutualFundRepository;
-        $this->estimateProfitRepository = $estimateProfitRepository;
-    }  
 
     public function allFunds()
     {
         try
         { 
 
-            $funds  = $this->mutualFundRepository->all(); 
+            $funds  = MutualFund::all(); 
 
             foreach($funds as $key => $fund)
             {
@@ -54,7 +39,7 @@ class EstimateProfitAPIController extends Controller
         try
         { 
             
-            $funds  = $this->estimateProfitRepository->all_by_member_id($request->member_id); 
+            $funds  = EstimateProfit::all_by_member_id($request->member_id); 
             
             if(sizeof($funds) >= 5)
             {
@@ -66,7 +51,7 @@ class EstimateProfitAPIController extends Controller
 
             }else
             {
-                $this->estimateProfitRepository->create($request); 
+                EstimateProfit::create($request->all());
 
                 $msg= [
                     'msg' => 'Success', 
@@ -87,7 +72,7 @@ class EstimateProfitAPIController extends Controller
         try
         { 
            
-            $this->estimateProfitRepository->update($request->id,$request); 
+            EstimateProfit::update($request->id,$request); 
 
             $msg= [
                 'msg' => 'Success', 

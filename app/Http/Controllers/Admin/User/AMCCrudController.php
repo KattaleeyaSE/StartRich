@@ -8,20 +8,9 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\AMCStoreCrudRequest as StoreRequest;
 use App\Http\Requests\AMCUpdateCrudRequest as UpdateRequest;
 
-//Service Container
-use App\IRepositories\IAMCRepository;
-
 class AMCCrudController extends CrudController
 {
 
-    private $amcRepository;
-    public function __construct(IAMCRepository $amcRepository)
-    {
-        $this->amcRepository = $amcRepository;
-        $this->middleware('admin');
-        parent::__construct();
-    }
-    
     public function setUp()
     {
 
@@ -80,7 +69,7 @@ class AMCCrudController extends CrudController
 
         // get all entries if AJAX is not enabled
         if (! $this->data['crud']->ajaxTable()) {
-            $this->data['entries'] = $this->amcRepository->all();
+            $this->data['entries'] = AMC::all();
         }
         
         // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
@@ -166,7 +155,7 @@ class AMCCrudController extends CrudController
         $request->offsetSet('password',bcrypt($request->password));
 
         // insert item in the db
-        $item = $this->amcRepository->create($request);
+        $item = AMC::create($request->all());
 
         // show a success message
         \Alert::success(trans('backpack::crud.insert_success'))->flash();
@@ -188,7 +177,7 @@ class AMCCrudController extends CrudController
     {
         $this->crud->hasAccessOrFail('show');
 
-        $amc = $this->amcRepository->find($id);
+        $amc = AMC::find($id);
 
         //Set Field to Show
         $this->crud->addFields(
@@ -255,7 +244,7 @@ class AMCCrudController extends CrudController
     {
         $this->crud->hasAccessOrFail('delete');
 
-        return \Response::json($this->amcRepository->delete($id));
+        return \Response::json(AMC::delete($id));
     }
     
 }

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 //Service Container
-use App\IRepositories\IEstimateProfitRepository;
 use App\IServices\IEstimateProfitService;
 
 //Request Validation
@@ -14,23 +13,20 @@ use App\IServices\IEstimateProfitService;
 
 class EstimateProfitMemberController extends Controller
 {
-    private $estimateProfitRepository;
     private $estimateProfitService;
 
     public function __construct
         (
-            IEstimateProfitRepository $estimateProfitRepository,
             IEstimateProfitService $estimateProfitService
         )
     {
         $this->middleware('auth.member');
-        $this->estimateProfitRepository = $estimateProfitRepository;
         $this->estimateProfitService = $estimateProfitService;
     }
 
     public function index()
     {
-        $estimate_profits =  $this->estimateProfitRepository->all_by_member_id(\Auth::user()->member->id);
+        $estimate_profits =  EstimateProfit::all_by_member_id(\Auth::user()->member->id);
         return view('estimate_profit.index',[
             'estimate_profits' => $estimate_profits
         ]);
@@ -57,7 +53,7 @@ class EstimateProfitMemberController extends Controller
 
     public function edit($id)
     { 
-        $estimate_profit =  $this->estimateProfitRepository->find($id);
+        $estimate_profit =  EstimateProfit::find($id);
         return view('estimate_profit.edit',[
             'estimate_profit' => $estimate_profit
         ]);
@@ -65,7 +61,7 @@ class EstimateProfitMemberController extends Controller
  
     public function destroy($id)
     { 
-        $this->estimateProfitRepository->delete($id);
+        EstimateProfit::delete($id);
 
         return \Redirect('/estimateprofit/index'); 
     }       

@@ -4,23 +4,12 @@ namespace App\Http\Controllers\AMC;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
-//Service Container
-use App\IRepositories\IAMCRepository;
-
 //Request Validation
 use App\Http\Requests\AMCStoreCrudRequest as StoreRequest;
 use App\Http\Requests\AMCUpdateCrudRequest as UpdateRequest;
 
 class AMCController extends Controller
 { 
-    private $amcRepository;
-    public function __construct(IAMCRepository $amcRepository)
-    {
-        $this->middleware('auth.amc');        
-        $this->amcRepository = $amcRepository;
-    }
- 
 
     /**
      * Show the form for editing the specified resource.
@@ -31,7 +20,7 @@ class AMCController extends Controller
      */
     public function edit()
     {
-        $amc = $this->amcRepository->find(\Auth::user()->amc->id);
+        $amc = AMC::find(\Auth::user()->amc->id);
 
         return view('AMC.edit', 
             [
@@ -67,7 +56,7 @@ class AMCController extends Controller
         }
         
         // update the row in the db
-        $item = $this->amcRepository->update(\Auth::user()->amc->id,$request);
+        $item = AMC::update(\Auth::user()->amc->id,$request);
         return \Redirect('amc/profile');
     }
 
@@ -79,7 +68,7 @@ class AMCController extends Controller
      */
     public function show()
     {
-        $amc = $this->amcRepository->find(\Auth::user()->amc->id);
+        $amc = AMC::find(\Auth::user()->amc->id);
 
         return view('AMC.show', $amc);
     }
