@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Auth;
-use App\IRepositories\IMutualFundRepository;
 use App\Models\MutualFundType;
 use App\Models\MutualFund;
 use App\Models\AimcType;
@@ -25,14 +24,6 @@ use App\Mail\FundUpdated;
 
 class FundController extends Controller
 {
-    private $mutualFundRepository;
-
-    public function __construct(IMutualFundRepository $mutualFundRepository)
-    {
-        $this->middleware('auth.amc');
-
-        $this->mutualFundRepository = $mutualFundRepository;
-    }
 
     /**
      * Display a listing of the resource.
@@ -42,7 +33,7 @@ class FundController extends Controller
     public function index()
     {
         $amc = Auth::user()->amc;
-        $funds = $this->mutualFundRepository->by_amc_id($amc->id);
+        $funds = MutualFund::where('amc_id', $amc->id)->get();
 
         return view('fund.amc.index', ['funds' => $funds]);
     }
@@ -71,7 +62,12 @@ class FundController extends Controller
     public function store(Request $request)
     {
         $amc_id = Auth::user()->amc->id;
-        $fund = $this->mutualFundRepository->create($request, $amc_id);
+
+        $data = $request->all();
+        $amc_id = ['amc_id' => $amc_id];
+        $data = array_merge($data,$amc_id);
+
+        $fund = MutualFund::create($data);
 
         $asset_allocation = $fund->asset_allocation()->create(['stock' => $request->stock, 'bond' => $request->bond, 'cash' => $request->cash, 'other' => $request->other]);
 
@@ -120,7 +116,7 @@ class FundController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         return view('fund.amc.show', ['fund' => $fund, 'tab' => isset($request->tab) ? $request->tab : null]);
     }
@@ -133,7 +129,7 @@ class FundController extends Controller
      */
     public function edit($id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
         $fund_types = MutualFundType::all()->pluck('name', 'name');
         $aimc_types = AimcType::all()->pluck('name', 'name');
         $funds = MutualFund::all();
@@ -153,7 +149,7 @@ class FundController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
         $fund_returns = PastPerformanceRecord::where('name', $fund->name)->get();
 
         foreach ($fund_returns as $fund_return) {
@@ -175,7 +171,7 @@ class FundController extends Controller
      */
     public function destroy($id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
         $fund->delete();
 
         return redirect()->route('amc.fund.index');
@@ -184,14 +180,14 @@ class FundController extends Controller
     //NAV
     public function createNAV($id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         return view('AMC.fund.nav.create', ['fund' => $fund]);
     }
 
     public function storeNAV(Request $request, $id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         foreach ($request->navs as $nav) {
             $fund->navs()->create($nav);
@@ -228,14 +224,14 @@ class FundController extends Controller
     //Manager
     public function createManager($id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         return view('AMC.fund.manager.create', ['fund' => $fund]);
     }
 
     public function storeManager(Request $request, $id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         foreach ($request->managers as $manager) {
             $fund->fund_managers()->create($manager);
@@ -273,14 +269,14 @@ class FundController extends Controller
     //Dividend
     public function createDividend($id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         return view('AMC.fund.dividend_payment.create', ['fund' => $fund]);
     }
 
     public function storeDividend(Request $request, $id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         foreach ($request->dividends as $dividend) {
             $fund->dividend_payments()->create($dividend);
@@ -317,7 +313,7 @@ class FundController extends Controller
     // Asset Allocation
     public function editAssetAllocation($id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         $asset_allocation = $fund->asset_allocation;
 
@@ -339,14 +335,14 @@ class FundController extends Controller
     //Holding Company
     public function createHoldingCompany($id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         return view('AMC.fund.holding_company.create', ['fund' => $fund]);
     }
 
     public function storeHoldingCompany(Request $request, $id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         foreach ($request->companies as $company) {
             $fund->holding_companies()->create($company);
@@ -387,14 +383,14 @@ class FundController extends Controller
     //Fee
     public function createFee($id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         return view('AMC.fund.fee.create', ['fund' => $fund]);
     }
 
     public function storeFee(Request $request, $id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         foreach ($request->fees as $fee) {
             $fund->fees()->create($fee);
@@ -421,14 +417,14 @@ class FundController extends Controller
     //Expense
     public function createExpense($id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         return view('AMC.fund.expense.create', ['fund' => $fund]);
     }
 
     public function storeExpense(Request $request, $id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         foreach ($request->expenses as $expense) {
             $fund->expenses()->create($expense);
@@ -455,14 +451,14 @@ class FundController extends Controller
     //PurchaseDetail
     public function createPurchaseDetail($id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         return view('AMC.fund.purchase_detail.create', ['fund' => $fund]);
     }
 
     public function storePurchaseDetail(Request $request, $id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         foreach ($request->purchases as $purchase) {
             $fund->purchase_details()->create($purchase);
@@ -489,14 +485,14 @@ class FundController extends Controller
     //Past Performance
     public function createPastPerformance($id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         return view('AMC.fund.past_performance.create', ['fund' => $fund]);
     }
 
     public function storePastPerformance(Request $request, $id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         $past_performance = $fund->past_performances()->create(['date' => $request->performance_date]);
 
@@ -544,14 +540,14 @@ class FundController extends Controller
     // Types of investor
     public function editTypesOfInvestor($id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         return view('AMC.fund.types_of_investor.edit', ['fund' => $fund]);
     }
 
     public function updateTypesOfInvestor(Request $request, $id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
         $fund->type_of_investor = $request->type_of_investor;
         $fund->save();
 
@@ -561,14 +557,14 @@ class FundController extends Controller
     // Investment Policy
     public function editInvestmentPolicy($id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         return view('AMC.fund.investment_policy.edit', ['fund' => $fund]);
     }
 
     public function updateInvestmentPolicy(Request $request, $id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
         $fund->update($request->all());
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'investment-policy']);
@@ -577,14 +573,14 @@ class FundController extends Controller
     // Major Risk Factor
     public function editMajorRiskFactor($id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
 
         return view('AMC.fund.major_risk_factor.edit', ['fund' => $fund]);
     }
 
     public function updateMajorRiskFactor(Request $request, $id)
     {
-        $fund = $this->mutualFundRepository->find($id);
+        $fund = MutualFund::find($id);
         $fund->update($request->all());
 
         return redirect()->route('amc.fund.show', [$fund->id, 'tab' => 'major-risk-factor']);
