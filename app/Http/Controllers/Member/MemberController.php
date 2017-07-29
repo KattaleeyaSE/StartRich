@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 //Request Validation
 use App\Http\Requests\MemberStoreCrudRequest as StoreRequest;
 use App\Http\Requests\MemberUpdateCrudRequest as UpdateRequest;
+use App\Models\Member;
+
 class MemberController extends Controller
 {
     
@@ -56,7 +58,11 @@ class MemberController extends Controller
         }
 
         // update the row in the db
-        $item = Member::update(\Auth::user()->member->id,$request);
+        $member = AMC::find($id);
+        $user = $member->user;
+        $user->update($request->all());
+        $member->update($request->all());
+    
         return \Redirect('member/profile');      
     }
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 //Request Validation
 use App\Http\Requests\SuitablityTestStoreCrudRequest as StoreRequest;
 use App\Http\Requests\SuitablityTestUpdateCrudRequest as UpdateRequest;
+use App\Models\SuitabilityTest;
 
 class SuitabilityTestAMCController extends Controller
 {
@@ -20,7 +21,7 @@ class SuitabilityTestAMCController extends Controller
      */
     public function index()
     {
-        $suitabilityTests = SuitabilityTest::all_by_amc_id_pagination(\Auth::user()->amc->id,15);
+        $suitabilityTests = SuitabilityTest::where('amc_id', \Auth::user()->amc->id)->with('amc')->paginate(15);
 
         return view('suitability_test.amc.index', 
             [

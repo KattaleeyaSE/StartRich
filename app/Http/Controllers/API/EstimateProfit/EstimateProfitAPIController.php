@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API\EstimateProfit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
+use App\Models\EstimateProfit;
 class EstimateProfitAPIController extends Controller
 {
 
@@ -71,8 +71,8 @@ class EstimateProfitAPIController extends Controller
     {
         try
         { 
-           
-            EstimateProfit::update($request->id,$request); 
+            $estimateProfit = EstimateProfit::find($id);
+            $estimateProfit->update($request->all());
 
             $msg= [
                 'msg' => 'Success', 

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 //Request Validation
 use App\Http\Requests\AMCStoreCrudRequest as StoreRequest;
 use App\Http\Requests\AMCUpdateCrudRequest as UpdateRequest;
+use App\Models\AMC;
 
 class AMCController extends Controller
 { 
@@ -56,7 +57,11 @@ class AMCController extends Controller
         }
         
         // update the row in the db
-        $item = AMC::update(\Auth::user()->amc->id,$request);
+        $amc = AMC::find($id);
+        $user = $amc->user;
+        $user->update($request->all());
+        $amc->update($request->all());
+
         return \Redirect('amc/profile');
     }
 

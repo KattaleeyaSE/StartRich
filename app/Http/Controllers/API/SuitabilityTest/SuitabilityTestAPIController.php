@@ -108,7 +108,29 @@ class SuitabilityTestAPIController extends Controller
                     $asset = []; 
                     foreach($test->suitability_test_assets as $item)
                     {   
-                        $assetItems = SuitabilityTest::get_asset_test($item->id,$result->id);
+                        $asset_id = $item->id;
+                        $result_id = $result->id;
+
+                        if($asset_id == 0 &&$result_id == 0)
+                        {
+                            $assetItems = SuitabilityAssetTest::all();
+                        }
+                        else if($asset_id > 0 &&$result_id == 0)
+                        {
+                            $assetItems = SuitabilityAssetTest::where('suitability_asset_id','=',$asset_id) 
+                            ->get();
+                        }
+                        else if($asset_id == 0 &&$result_id > 0)
+                        {
+                            $assetItems = SuitabilityAssetTest::where('suitability_result_id','=',$result_id) 
+                            ->get();
+                        }
+                        else
+                        {
+                            $assetItems = SuitabilityAssetTest::where('suitability_asset_id','=',$asset_id)
+                            ->where('suitability_result_id','=',$result_id)
+                            ->get();
+                        }
  
                         array_push($asset,
                                 [

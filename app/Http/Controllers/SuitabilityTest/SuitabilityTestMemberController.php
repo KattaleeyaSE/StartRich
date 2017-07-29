@@ -31,7 +31,7 @@ class SuitabilityTestMemberController extends Controller
      */
     public function index()
     {
-        //$suitabilityTests = SuitabilityTestMember::all_by_member_id_pagination(\Auth::user()->member->id,15);
+        $suitabilityTests = SuitabilityTestMember::where('member_id', \Auth::user()->member->id)->with( 'member' )->paginate(15);
         if(!is_null($suitabilityTests) && sizeof($suitabilityTests) > 0)
         {
             foreach($suitabilityTests as $item)
@@ -57,7 +57,7 @@ class SuitabilityTestMemberController extends Controller
      */
     public function all_test()
     {
-        //$suitabilityTests = SuitabilityTestMember::all_pagination(15);
+        $suitabilityTests = SuitabilityTestMember::paginate(15);
 
         return view('suitability_test.member.alltest', 
             [
