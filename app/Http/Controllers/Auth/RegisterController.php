@@ -6,9 +6,10 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\Member;
+use App\Models\User;
 
 //Service Container
-use App\IRepositories\IMemberRepository;
 
 //Request Validation
 use App\Http\Requests\MemberStoreCrudRequest as StoreRequest;
@@ -35,16 +36,15 @@ class RegisterController extends Controller
      * @var string
      */
         protected $redirectTo = '/';
-        private $memberRepository;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(IMemberRepository $memberRepository)
+    public function __construct()
     { 
         $this->middleware('guest');
-        $this->memberRepository = $memberRepository;
+     
     }
 
     // /**
@@ -97,9 +97,14 @@ class RegisterController extends Controller
     {
         $request->offsetSet('password',bcrypt($request->password));
         
-        $member = $this->memberRepository->create($request);
-        
+        $user = User::create($request->all());
+
+        $request->offsetSet('user_id',$user->id);
+                
+        Member::create($request->all());
+
         return \Redirect('\login');
+    
     }
 
 }

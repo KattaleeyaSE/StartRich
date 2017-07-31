@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Member;
+use App\Models\AMC;
 
 //Request Validation
 use App\Http\Requests\MemberStoreCrudRequest as StoreRequest;
 use App\Http\Requests\MemberUpdateCrudRequest as UpdateRequest;
-use App\Models\Member;
+
 
 class MemberController extends Controller
 {

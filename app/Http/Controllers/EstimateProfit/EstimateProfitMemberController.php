@@ -4,7 +4,7 @@ namespace App\Http\Controllers\EstimateProfit;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\EstimateProfit;
 //Service Container
 use App\IServices\IEstimateProfitService;
 

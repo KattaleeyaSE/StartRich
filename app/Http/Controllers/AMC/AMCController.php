@@ -4,10 +4,11 @@ namespace App\Http\Controllers\AMC;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\AMC;
 //Request Validation
 use App\Http\Requests\AMCStoreCrudRequest as StoreRequest;
 use App\Http\Requests\AMCUpdateCrudRequest as UpdateRequest;
-use App\Models\AMC;
+
 
 class AMCController extends Controller
 { 
