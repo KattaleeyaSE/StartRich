@@ -3,26 +3,17 @@
 namespace App\Services;
 
 use Illuminate\Http\Request;
-use Carbon\Carbon; 
+use Carbon\Carbon;
+use App\Models\EstimateProfit;
+
 //Service Container 
 use App\IServices\IEstimateProfitService;
-use App\IRepositories\IEstimateProfitRepository; 
 class EstimateProfitService implements IEstimateProfitService
 {   
 
-
-    private $estimateProfitRepository; 
-
-    public function __construct(
-            IEstimateProfitRepository $estimateProfitRepository
-        )
-    { 
-        $this->estimateProfitRepository = $estimateProfitRepository;
-    }  
-
     public function calculation($id)
     {
-        $estimate_profit = $this->estimateProfitRepository->all_by_member_id($id);
+        $estimate_profit = EstimateProfit::where('member_id','=',$id)->get();
         
         $result = collect();
         

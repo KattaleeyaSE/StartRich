@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\EstimateProfit;
+use App\Models\MutualFund;
 class EstimateProfitAPIController extends Controller
 {
 

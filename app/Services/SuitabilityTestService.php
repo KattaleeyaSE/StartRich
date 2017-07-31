@@ -6,23 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\SuitabilityTest;
 //Service Container 
 use App\IServices\ISuitabilityTestService;
-use App\IRepositories\ISuitabilityTestRepository;
-use App\IRepositories\ISuitabilityTestMemberRepository;
 class SuitabilityTestService implements ISuitabilityTestService
 {
-
-    private $suitabilityTestRepository;
-    private $suitabilityTestMemberRepository;
-
-    public function __construct(
-            ISuitabilityTestRepository $suitabilityTestRepository,
-            ISuitabilityTestMemberRepository $suitabilityTestMemberRepository
-        )
-    { 
-        $this->suitabilityTestRepository = $suitabilityTestRepository;
-        $this->suitabilityTestMemberRepository = $suitabilityTestMemberRepository;
-    }    
-
     public function create_test(Request $request)
     {
         //Adjust Data
@@ -32,7 +17,7 @@ class SuitabilityTestService implements ISuitabilityTestService
         $newRequest->offsetSet('amc_id',$request->amc_id);
 
         // insert item in the db
-        $suitabilityTest = $this->suitabilityTestRepository->create($newRequest); 
+        $suitabilityTest = SuitabilityTest::create($newRequest->all()); 
 
 
         if(!is_null($suitabilityTest))
@@ -58,7 +43,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                     $newRequest = new Request(); 
                     $newRequest->offsetSet('name',$asset['name']);
                     $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);
-                    $this->suitabilityTestRepository->create_asset($newRequest);
+                    SuitabilityAsset::create($newRequest->all());
                 }
             } 
             foreach($request->results as $result)
@@ -75,7 +60,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                     $newRequest->offsetSet('mutual_fund_type_id',$result['funds']['id']);   
                 }          
 
-                $suitabilityTestResult = $this->suitabilityTestRepository->create_result($newRequest);     
+                $suitabilityTestResult = SuitabilityTestResult::create($newRequest->all());     
 
                 if(isset($result['asset']) && !is_null($result['asset']))
                 {
@@ -86,7 +71,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                         $newRequest->offsetSet('suitability_result_id',$suitabilityTestResult->id);
                         $newRequest->offsetSet('suitability_asset_id',$suit_test[$key]->id);
                         $newRequest->offsetSet('percent',$item['allocate']);
-                        $this->suitabilityTestRepository->create_asset_test($newRequest); 
+                        SuitabilityAssetTest::create($newRequest->all()); 
                     }
                 }    
             }
@@ -110,7 +95,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                 $newRequest->offsetSet('question',$question['question']);               
                 $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);            
 
-                $suitabilityTestQuestion = $this->suitabilityTestRepository->create_question($newRequest); 
+                $suitabilityTestQuestion = SuitabilityQuestion::create($newRequest->all()); 
 
                 if(!is_null($question['answers']) && !is_null($suitabilityTestQuestion))
                 {
@@ -123,7 +108,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                             $newRequest->offsetSet('score',$answer['score']);               
                             $newRequest->offsetSet('suitability_question_id', $suitabilityTestQuestion->id);            
 
-                            $suitabilityTestAnswer = $this->suitabilityTestRepository->create_answer($newRequest); 
+                            $suitabilityTestAnswer = SuitabilityQuestionAnswer::create($newRequest->all()); 
                         }
                 }
 
@@ -143,8 +128,10 @@ class SuitabilityTestService implements ISuitabilityTestService
         $newRequest->offsetSet('description',$request->description);
 
         // insert item in the db
-        $this->suitabilityTestRepository->update($request->id,$newRequest); 
-        $suitabilityTest = $this->suitabilityTestRepository->find($request->id);
+        $s = SuitabilityTest::find($request->id);
+
+        $s->update($newRequest->all()); 
+        $suitabilityTest = SuitabilityTest::find($request->id);
 
         if(!is_null($suitabilityTest))
         {
@@ -164,8 +151,9 @@ class SuitabilityTestService implements ISuitabilityTestService
         if(isset($request->removeAsset) && !is_null($request->removeAsset))
         {
             foreach($request->removeAsset as $asset)
-            {
-                 $this->suitabilityTestRepository->delete_asset($asset['id']); 
+            {   
+                $s = SuitabilityAsset::find($asset['id']);
+                $s->delete();
             }  
         }
 
@@ -173,7 +161,8 @@ class SuitabilityTestService implements ISuitabilityTestService
         {
             foreach($request->removeResult as $result)
             {
-                 $this->suitabilityTestRepository->delete_result($result['id']); 
+                $s = SuitabilityTestResult::find($result['id']);
+                $s->delete();
             }  
         }
 
@@ -186,13 +175,14 @@ class SuitabilityTestService implements ISuitabilityTestService
                     $newRequest = new Request(); 
                     $newRequest->offsetSet('name',$asset['name']);
                     $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);
-                    $this->suitabilityTestRepository->create_asset($newRequest);
+                    SuitabilityAsset::create($newRequest->all());
                 }
                 else{
                     
                     $newRequest = new Request();  
                     $newRequest->offsetSet('name',$asset['name']);
-                    $this->suitabilityTestRepository->update_asset($asset['id'],$newRequest);
+                    $s = SuitabilityAsset::find($asset['id']);
+                    $s->update($request->all());
                 }
             }
         }
@@ -216,8 +206,9 @@ class SuitabilityTestService implements ISuitabilityTestService
                     {
                         $newRequest->offsetSet('mutual_fund_type_id',$result['funds']['id']);   
                     }     
-                   $this->suitabilityTestRepository->update_result($result['id'],$newRequest); 
-                   $suitabilityTestResult = $this->suitabilityTestRepository->find_result($result['id']); 
+                    $s = SuitabilityTestResult::find($result['id']);
+                    $s->update($newRequest->all()); 
+                   $suitabilityTestResult = SuitabilityTestResult::find($result['id']); 
 
                 }
                 else
@@ -233,16 +224,35 @@ class SuitabilityTestService implements ISuitabilityTestService
                     {
                         $newRequest->offsetSet('mutual_fund_type_id',$result['funds']['id']);   
                     }  
-                    $suitabilityTestResult = $this->suitabilityTestRepository->create_result($newRequest); 
+                    $suitabilityTestResult = SuitabilityTestResult::create($newRequest->all()); 
 
                 }  
 
                 if(isset($result['asset']) && !is_null($result['asset']))
                 {   
-  
-                    foreach( $this->suitabilityTestRepository->get_asset_test(0,$suitabilityTestResult->id) as $item)
+                    $ss = array();
+
+                    $asset_id = 0;
+                    $result_id = $suitabilityTestResult->id;
+
+                    if($asset_id == 0 && $result_id == 0)
                     {
-                        $this->suitabilityTestRepository->delete_asset_test($item->id); 
+                        $ss = SuitabilityAssetTest::all();
+                    }
+                    else if($asset_id == 0 &&$result_id > 0)
+                    {
+                        $ss = SuitabilityAssetTest::where('suitability_result_id','=',$result_id)->get();
+                    }
+                    else
+                    {
+                        $ss = SuitabilityAssetTest::where('suitability_asset_id','=',$asset_id)->where('suitability_result_id','=',$result_id)->get();
+                    }
+
+
+                    foreach( $ss as $item)
+                    {
+                        $s = SuitabilityAssetTest::find($item->id); 
+                        $s->delete();
                     }
 
                     foreach($result['asset'] as  $key => $item)
@@ -252,7 +262,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                         $newRequest->offsetSet('suitability_result_id',$suitabilityTestResult->id);
                         $newRequest->offsetSet('suitability_asset_id',$suit_test[$key]->id);
                         $newRequest->offsetSet('percent',$item['allocate']); 
-                        $this->suitabilityTestRepository->create_asset_test($newRequest); 
+                        SuitabilityAssetTest::create($newRequest->all()); 
                     }
                 }
                
@@ -272,7 +282,8 @@ class SuitabilityTestService implements ISuitabilityTestService
         {
             foreach($request->removeQuestion as $question)
             {
-                 $this->suitabilityTestRepository->delete_question($question['id']); 
+                $s = SuitabilityQuestion::find($question['id']); 
+                $s->delete();
             }  
         }
 
@@ -280,7 +291,8 @@ class SuitabilityTestService implements ISuitabilityTestService
         {
             foreach($request->removeAnswer as $answer)
             {
-                 $this->suitabilityTestRepository->delete_answer($answer['id']); 
+                $s = SuitabilityQuestionAnswer::find($answer['id']);
+                $s->delete(); 
             }  
         }
 
@@ -294,9 +306,10 @@ class SuitabilityTestService implements ISuitabilityTestService
                     $newRequest = new Request(); 
                     $newRequest->offsetSet('question',$question['question']);            
 
-                    $suitabilityTestQuestion = $this->suitabilityTestRepository->find_question($question['id']);
+                    $suitabilityTestQuestion = SuitabilityQuestion::find($question['id']);
 
-                    $this->suitabilityTestRepository->update_question($question['id'],$newRequest); 
+                    $s = SuitabilityQuestion::find($question['id']); 
+                    $s->update($newRequest->all());
 
                     if(!is_null($question['answers']) && !is_null($suitabilityTestQuestion))
                     {
@@ -309,7 +322,8 @@ class SuitabilityTestService implements ISuitabilityTestService
                                     $newRequest->offsetSet('answer',$answer['answer']);               
                                     $newRequest->offsetSet('score',$answer['score']);
 
-                                    $this->suitabilityTestRepository->update_answer($answer['id'],$newRequest);
+                                    $s = SuitabilityQuestionAnswer::find($answer['id']);
+                                    $s->update($newRequest->all());
                                 }
                                 else
                                 {
@@ -319,7 +333,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                                     $newRequest->offsetSet('score',$answer['score']);
                                     $newRequest->offsetSet('suitability_question_id', $suitabilityTestQuestion->id);    
 
-                                    $suitabilityTestAnswer = $this->suitabilityTestRepository->create_answer($newRequest); 
+                                    $suitabilityTestAnswer = SuitabilityQuestionAnswer::create($newRequest->all()); 
                                 }
                             }
                     }                    
@@ -332,7 +346,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                     $newRequest->offsetSet('question',$question['question']);               
                     $newRequest->offsetSet('suitability_test_id',$suitabilityTest->id);            
 
-                    $suitabilityTestQuestion = $this->suitabilityTestRepository->create_question($newRequest); 
+                    $suitabilityTestQuestion = SuitabilityQuestion::create($newRequest->all()); 
 
                     if(!is_null($question['answers']) && !is_null($suitabilityTestQuestion))
                     {
@@ -345,7 +359,7 @@ class SuitabilityTestService implements ISuitabilityTestService
                                 $newRequest->offsetSet('score',$answer['score']);               
                                 $newRequest->offsetSet('suitability_question_id', $suitabilityTestQuestion->id);            
 
-                                $suitabilityTestAnswer = $this->suitabilityTestRepository->create_answer($newRequest); 
+                                $suitabilityTestAnswer = SuitabilityQuestionAnswer::create($newRequest->all()); 
                             }
                     }
                 }
@@ -359,7 +373,7 @@ class SuitabilityTestService implements ISuitabilityTestService
   
     public function create_take_test(array $data)
     {
-        $test = $this->suitabilityTestRepository->find($data['test_id']);
+        $test = SuitabilityTest::find($data['test_id']);
         $suit_member = null;
         if(!is_null($test))
         {
@@ -370,7 +384,7 @@ class SuitabilityTestService implements ISuitabilityTestService
             $suit_member_request->offsetSet('suitability_test_id', $data['test_id']);
             $suit_member_request->offsetSet('member_id', $data['test_member_id']);
 
-            $suit_member = $this->suitabilityTestMemberRepository->create($suit_member_request);
+            $suit_member = SuitabilityTestMember::create($suit_member_request->all());
 
             foreach($test->suitability_test_questions as $key => $question)
             {
@@ -379,18 +393,20 @@ class SuitabilityTestService implements ISuitabilityTestService
                 $suit_member_answer_request->offsetSet('suit_member_answer_id', $answer_id);
                 $suit_member_answer_request->offsetSet('suit_test_member_id', $suit_member->id);
 
-                $answer =  $this->suitabilityTestRepository->find_answer($answer_id); 
+                $answer =  SuitabilityQuestionAnswer::find($answer_id); 
              
                 $score  += $answer->score; 
 
-                $suit_member_answer = $this->suitabilityTestMemberRepository->create_answer($suit_member_answer_request);
+                $suit_member_answer = SuitabilityTestMemberAnswer::creaet($suit_member_answer_request->all());
             } 
 
             $suit_member_request = new Request();
             $suit_member_request->offsetSet('score',  $score); 
- 
-            $this->suitabilityTestMemberRepository->update($suit_member->id,$suit_member_request);
-            $suit_member =  $this->suitabilityTestMemberRepository->find($suit_member->id);
+    
+            $s = SuitabilityTestMember::find($suit_member->id);
+            $s->update($suit_member_request->all());
+
+            $suit_member =  SuitabilityTestMember::find($suit_member->id);
         }
 
         return $suit_member ;
@@ -398,8 +414,8 @@ class SuitabilityTestService implements ISuitabilityTestService
 
      public function get_test_result($id)
      {        
-         $suit_member = $this->suitabilityTestMemberRepository->find($id);
-         $suit_test = $this->suitabilityTestRepository->find($suit_member->suitability_test_id);
+         $suit_member = SuitabilityTestMember::find($id);
+         $suit_test = SuitabilityTest::find($suit_member->suitability_test_id);
          $result = null;
          
          if(
@@ -424,7 +440,7 @@ class SuitabilityTestService implements ISuitabilityTestService
 
      public function get_temporary_test_result(Request $request)
      {        
-        $test = $this->suitabilityTestRepository->find($request->test_id);
+        $test = SuitabilityTest::find($request->test_id);
         $suit_member = null;
         $result = null;
         if(!is_null($test))
@@ -435,7 +451,7 @@ class SuitabilityTestService implements ISuitabilityTestService
             {
                 $answer_id = $request['q_'.$question->id]; 
 
-                $answer =  $this->suitabilityTestRepository->find_answer($answer_id); 
+                $answer =  SuitabilityQuestionAnswer::find($answer_id); 
 
                 $score  += $answer->score;  
             }  

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\SuitabilityTest;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\SuitabilityTestMember;
 
 //Service Container
 use App\IServices\ISuitabilityTestService;
@@ -36,7 +37,7 @@ class SuitabilityTestMemberController extends Controller
         {
             foreach($suitabilityTests as $item)
             {
-                //$test = SuitabilityTestMember::find($item->suitability_test_id);
+                $test = SuitabilityTestMember::find($item->suitability_test_id);
                 
                 $item->offsetSet('company_name',$test->amc->company_name);
                 $item->offsetSet('name',$test->name);

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\API\SuitabilityTest;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\MutualFundType;
+use App\Models\SuitabilityTest;
+use App\Models\SuitabilityAssetTest;
 
 //Service Container
 use App\IServices\ISuitabilityTestService;

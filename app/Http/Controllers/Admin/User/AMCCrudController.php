@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\User;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use App\Models\AMC;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\AMCStoreCrudRequest as StoreRequest;

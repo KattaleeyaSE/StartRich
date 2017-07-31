@@ -4,11 +4,12 @@ namespace App\Http\Controllers\SuitabilityTest;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\SuitabilityTest;
 
 //Request Validation
 use App\Http\Requests\SuitablityTestStoreCrudRequest as StoreRequest;
 use App\Http\Requests\SuitablityTestUpdateCrudRequest as UpdateRequest;
-use App\Models\SuitabilityTest;
+
 
 class SuitabilityTestAMCController extends Controller
 {
