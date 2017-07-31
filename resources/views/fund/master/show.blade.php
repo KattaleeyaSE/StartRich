@@ -177,8 +177,8 @@
                 pointRadius: 1,
                 pointHitRadius: 10,
                 data: [
-                    @foreach($fund->navs->sortBy('modified_date') as $nav) 
-                         "{{$nav->standard}}",
+                    @foreach($fund->past_performances->sortBy('date') as $performance) 
+                         "{{$performance->fundReturn()->since_inception}}",
                     @endforeach
                 ], 
                 spanGaps: false,
